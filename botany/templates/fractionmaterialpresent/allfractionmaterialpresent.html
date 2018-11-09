@@ -1,0 +1,55 @@
+{% extends "fractionmaterialpresent/base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+{% include "menu1.html" %}
+{% include "fractionmaterialpresent/menu2.html" %}
+
+
+<h1>All Fraction Material Present</h1>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Material ID</th>
+      <th>Fraction ID</th>
+      <th>Material</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for fraction in fractionmaterialpresent.all %}
+    <tr>
+
+
+      <td>{{ fraction.material_id }}</td>
+      <td>{{ fraction.fraction_id }}</td>
+      <td>{{ fraction.material }}</td>
+
+      <td>
+        <div class="btn-group" role="group" aria-label="Basic example">
+
+          <a href="{% url 'create_fractionmaterialpresent' %}" class="btn btn-primary" role="button">Add Fraction</a>
+          <a href="{% url 'detailfractionmaterialpresent' fraction.material_id %}" class="btn btn-warning" role="button">detail</a>
+          <a href="% url 'editcontainersearch' pk=o.pk %" class="btn btn-secondary" role="button">request</a>
+        </div>
+      </td>
+
+
+    </tr>
+    {% endfor %}
+
+
+
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'fraction/base.html' %}
+{% load widget_tweaks %}
+
+
+
+{% block content %}
+{% include "menu1.html" %}
+{% include "fraction/menu2.html" %}
+<div class="container">
+    <h1>Fraction</h1>
+    <div class="col-sm-3">
+    <form method="POST" class="post-form">{% csrf_token %}
+        <!--  {{ form.as_p }}   -->
+        <!-- Fraction ID{{ form.fraction_id|add_class:"form-control"}}<br /> -->
+        Botany ID{{ form.botany_id|add_class:"form-control"}}<br />
+        Proportion Analysed{{ form.proportion_analysed|add_class:"form-control"}}<br />
+        Soil Volume{{ form.soil_volume|add_class:"form-control"}}<br />
+        Sample Volume{{ form.sample_volume|add_class:"form-control"}}<br />
+        Sample Weight{{ form.sample_weight|add_class:"form-control"}}<br />
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+
+
+<!--    |append_attr:"placeholder:Username"   -->
