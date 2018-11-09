@@ -1,0 +1,10 @@
+
+blog/__pycache__/
+
+jobs/__pycache__/
+
+kap/__pycache__/
+
+kap/settings\.py
+
+media/images/
