@@ -1,0 +1,344 @@
+
+
+
+
+{% extends 'photobatch/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<style>
+
+path {
+  fill: none;
+  stroke: #000;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+</style>
+
+{% include "menu1.html" %}
+{% include "photobatch/menu2.html" %}
+
+<div class="container">
+  <h1>Photobatch</h1>
+
+
+
+
+
+  <div class="row">
+    <div class="col-md-10 mx-auto ">
+      <form method="POST" class="post-form">{% csrf_token %}
+
+
+
+        <div class="form-group row float-left ">
+          <div class="col-sm-10 border border-dark rounded pb-2">
+
+            <div class="">
+              <label for="inputFirstname">Photobatch</label>
+              {% render_field form.photobatch_id class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Prefix</label>
+              {% render_field form.prefix class="form-control" %}
+            </div>
+
+			<div class="">
+              <label for="inputFirstname">Processed By</label>
+              {% render_field form.created_by class="form-control" %}
+            </div>
+
+          </div>
+        </div>
+
+        <div class="form-group row float-left">
+          <div class="col-sm-10 border border-dark rounded pb-2">
+            <div class="">
+              <label for="inputFirstname">Area Easting</label>
+              {% render_field form.area_easting class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Area Northing</label>
+              {% render_field form.area_northing class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Context Number</label>
+              {% render_field form.context_number class="form-control" %}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row float-left">
+          <div class="col-sm-10 border border-dark rounded pb-2">
+            <div class="">
+              <label for="inputFirstname">Number Photos</label>
+              {% render_field form.number_of_photos class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Number Targets</label>
+              {% render_field form.number_targets class="form-control" %}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row float-left">
+          <div class="col-sm-10 border border-dark rounded pb-2">
+            <div class="">
+              <label for="inputFirstname">Imported to Photoscan</label>
+              {% render_field form.imported_photoscan class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Processed on PC</label>
+              {% render_field form.processed_on class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Processed By</label>
+              {% render_field form.processed_by class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Camera Model</label>
+              {% render_field form.camera_model class="form-control" %}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row float-left">
+          <div class="col-sm-10 border border-dark rounded pb-2">
+            <div class="">
+              <label for="inputFirstname">Aligned</label>
+              {% render_field form.aligned class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Accuracy</label>
+              {% render_field form.align_accuracy class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Pair Selection</label>
+              {% render_field form.align_pair_selection class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Keypoint Limit</label>
+              {% render_field form.align_keypoint_limit class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Tiepoint Limit</label>
+              {% render_field form.align_tiepoint_limit class="form-control" %}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row float-left">
+          <div class="col-sm-10 border border-dark rounded pb-2">
+            <div class="">
+              <label for="inputFirstname">Targets Detected</label>
+              {% render_field form.detected_targets class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Target Type</label>
+              {% render_field form.target_type class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Target Tollerance</label>
+              {% render_field form.target_tolerance class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Origional Error</label>
+              {% render_field form.target_origional_error class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Optimised Error</label>
+              {% render_field form.target_optimised_error class="form-control" %}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row float-left">
+          <div class="col-sm-10 border border-dark rounded pb-2">
+            <div class="">
+              <label for="inputFirstname">Dense Point Cloud</label>
+              {% render_field form.dense_pointcloud  class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Mesh</label>
+              {% render_field form.mesh class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Type</label>
+              {% render_field form.mesh_type class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Face Count</label>
+              {% render_field form.mesh_face_count class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Interpolation</label>
+              {% render_field form.mesh_interpolation class="form-control" %}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row float-left">
+          <div class="col-sm-10 border border-dark rounded pb-2">
+            <div class="">
+              <label for="inputFirstname">Texture</label>
+              {% render_field form.texture  class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Texture Defaults</label>
+              {% render_field form.texture_defaults class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">DEM</label>
+              {% render_field form.dem class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Coordinate System</label>
+              {% render_field form.dem_coordinate_system class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Source Data</label>
+              {% render_field form.dem_source_data class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Interpolation</label>
+              {% render_field form.dem_interpolation class="form-control" %}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row float-left">
+          <div class="col-sm-10 border border-dark rounded pb-2">
+            <div class="">
+              <label for="inputFirstname">Orthomosaic</label>
+              {% render_field form.orthomosaic  class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Type</label>
+              {% render_field form.orthomosaic_type class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Pixel Size</label>
+              {% render_field form.orthomosaic_pixel_size class="form-control" %}
+            </div>
+          </div>
+        </div>
+        <div class="form-group row float-left">
+          <div class="col-sm-10 border border-dark rounded pb-2">
+            <div class="">
+              <label for="inputFirstname">Export Points</label>
+              {% render_field form.export_points class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Filename</label>
+              {% render_field form.export_points_filename class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Offsets</label>
+              {% render_field form.export_points_offsets class="form-control" %}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row float-left">
+          <div class="col-sm-10 border border-dark rounded pb-2">
+            <div class="">
+              <label for="inputFirstname">Export DEM</label>
+              {% render_field form.export_dem class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Pixel Size</label>
+              {% render_field form.export_dem_pixel_size class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Geodatabase</label>
+              {% render_field form.export_dem_geodatabase class="form-control" %}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row float-left">
+          <div class="col-sm-10 border border-dark rounded pb-2">
+            <div class="">
+              <label for="inputFirstname">PDF</label>
+              {% render_field form.export_report_pdf class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Orthophoto</label>
+              {% render_field form.export_orthophoto class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Processed</label>
+              {% render_field form.folder_processed class="form-control" %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-10 mx-auto ">
+        <div class="form-group row float-left">
+          <div class=" border border-dark rounded pb-2">
+            <div class="">
+              <label for="inputFirstname">Processing Notes</label>
+              {% render_field form.processing_notes class="form-control" %}
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="border border-dark ml-3 float-right ">
+          <svg width="500" height="500">
+            <rect fill="#fff" width="100%" height="100%"></rect>
+          </svg>
+        </div>
+
+        <button type="submit" class="save btn btn-default btn-success" style="position: fixed; top: 180px; right: 25%;">Save</button>
+
+      </form>
+    </div>
+
+
+  </div>
+
+
+
+
+  <script src="//d3js.org/d3.v4.min.js"></script>
+  <script>
+
+  var line = d3.line()
+      .curve(d3.curveBasis);
+
+  var svg = d3.select("svg")
+      .call(d3.drag()
+          .container(function() { return this; })
+          .subject(function() { var p = [d3.event.x, d3.event.y]; return [p, p]; })
+          .on("start", dragstarted));
+
+  function dragstarted() {
+    var d = d3.event.subject,
+        active = svg.append("path").datum(d),
+        x0 = d3.event.x,
+        y0 = d3.event.y;
+
+    d3.event.on("drag", function() {
+      var x1 = d3.event.x,
+          y1 = d3.event.y,
+          dx = x1 - x0,
+          dy = y1 - y0;
+
+      if (dx * dx + dy * dy > 100) d.push([x0 = x1, y0 = y1]);
+      else d[d.length - 1] = [x1, y1];
+      active.attr("d", line);
+
+    });
+  }
+  </script>
+
+
+
+
+  {% endblock %}<!--    |append_attr:"placeholder:Username"   -->

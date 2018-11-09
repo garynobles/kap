@@ -1,0 +1,14 @@
+{% extends "photobatch/base.html" %}
+
+{% block content %}
+
+<h1>Delete Photobatch</h1>
+
+<p>Are you sure you want to delete the photobatch: {{ photobatch }}?</p>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="submit" action="" value="Yes, delete." />
+</form>
+
+{% endblock %}
