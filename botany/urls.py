@@ -9,7 +9,7 @@ urlpatterns = [
     path('createbotany/', views.createbotany, name='create_botany'),
     #path('addfraction/(?P<pk>\d+)/', views.addfraction, name='addfraction'),
     url(r'^addfraction/(?P<pk>\d+)/$', views.addfraction, name='addfraction'),
-
+    path('botany/<int:botany_id>/', views.detailbotany, name='detailbotany'),
 
     #path('createfraction/(?P<pk>\d+)/', views.createfraction, name='createfraction'),
     # path('botany/(?P<pk>\d+)/', views.createfraction, name='createfraction'),
@@ -25,7 +25,7 @@ urlpatterns = [
     #
     #
     #
-    # path('botany/<int:botany_id>/', views.detailbotany, name='detailbotany'),
+
     # path('fraction/<int:fraction_id>/', views.detailfraction, name='detailfraction'),
     #
     #

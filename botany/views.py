@@ -181,13 +181,15 @@ class FractionForm(forms.ModelForm):
 #     #'joinsamplecontainer':joinsamplecontainer
 #     })
 #
-# def detailbotany(request, botany_id):
-#     detailbotany = get_object_or_404(Botany, pk=botany_id)
-#     #joinsamplecontainer = JoinSampleContainer.objects.filter(fraction_id__fraction_id=fraction_id)
-#     return render(request, 'botany/detailbotany.html',
-#     {'botany':detailbotany,
-#     #'joinsamplecontainer':joinsamplecontainer
-#     })
+def detailbotany(request, botany_id):
+    detailbotany = get_object_or_404(Botany, pk=botany_id)
+    #fraction = get_object_or_404(Fraction, botany_id=botany_id)
+    #fraction = Fraction.objects.all()
+    fraction = Fraction.objects.filter(botany_id__botany_id=botany_id)
+    #joinsamplecontainer = JoinSampleContainer.objects.filter(fraction_id__fraction_id=fraction_id)
+    return render(request, 'botany/detailbotany.html',
+    {'botany':detailbotany, 'fraction':fraction,
+    })
 #
 #
 #
