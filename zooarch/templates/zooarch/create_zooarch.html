@@ -1,0 +1,128 @@
+{% extends 'zooarch/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+{% include "menu1.html" %}
+{% include "zooarch/menu2.html" %}
+
+<div class="container">
+    <h1 class = "pb-3">Samples</h1>
+
+
+
+    <div class="row">
+<div class="col-md-12 ">
+    <form method="POST" class="post-form">{% csrf_token %}
+
+  <div class="row float-left">
+    <div class="border border-dark rounded pb-5 pl-3 pr-4 ml-5">
+      <div class="">
+        <label for="">Main</label><br />
+
+        Area Easting{{ form.area_easting|add_class:"form-control"|append_attr:"placeholder:Area Easting"}}<br />
+        Area Northing{{ form.area_northing|add_class:"form-control"|append_attr:"placeholder:Area Norting"}}<br />
+        Context Number{{ form.context_number|add_class:"form-control"|append_attr:"placeholder:Context Number"}}<br />
+        Sample Number{{ form.sample_number|add_class:"form-control"|append_attr:"placeholder:Sample Number"}}<br />
+        Recovery Type{{ form.recovery_type|add_class:"form-control"|append_attr:"placeholder:"}}<br />
+
+        sample_description{{ form.sample_description|add_class:"form-control"|append_attr:"placeholder:"}}<br />
+        detailed_sample_description{{ form.detailed_sample_description|add_class:"form-control"|append_attr:"placeholder:"}}<br />
+
+
+      </div>
+      </div>
+      </div>
+
+
+    <div class="row float-left">
+      <div class="border border-dark rounded pb-5 pl-3 pr-4 ml-5">
+        <div class="">
+          <label for="">Material</label><br />
+        Material{{ form.material|add_class:"form-control"|append_attr:"placeholder:"}}<br />
+        Specific Material {{ form.specific_material|add_class:"form-control"|append_attr:"placeholder:"}}<br />
+        category{{ form.category|add_class:"form-control"|append_attr:"placeholder:"}}<br />
+        subcategory{{ form.subcategory|add_class:"form-control"|append_attr:"placeholder:"}}<br />
+      </div>
+      </div>
+      </div>
+
+      <div class="row float-left">
+      <div class="border border-dark rounded pb-5 pl-3 pr-4 ml-5">
+        <div class="">
+          <label for="">Munsell</label><br />
+
+        exterior_color_hue{{ form.exterior_color_hue|add_class:"form-control"|append_attr:"placeholder:"}}<br />
+        exterior_color_lightness_value{{ form.exterior_color_lightness_value|add_class:"form-control"|append_attr:"placeholder:"}}<br />
+        exterior_color_chroma{{ form.exterior_color_chroma|add_class:"form-control"|append_attr:"placeholder:"}}<br />
+        interior_color_hue{{ form.interior_color_hue|add_class:"form-control"|append_attr:"placeholder:"}}<br />
+
+        interior_color_lightness_value{{ form.interior_color_lightness_value|add_class:"form-control"|append_attr:"placeholder:"}}<br />
+        interior_color_chroma{{ form.interior_color_chroma|add_class:"form-control"|append_attr:"placeholder:"}}<br />
+
+      </div>
+      </div>
+      </div>
+
+      <div class="row float-left">
+      <div class="border border-dark rounded pb-5 pl-3 pr-4 ml-5">
+        <div class="">
+          <label for="">Quantification</label><br />
+
+        weight_kilograms{{ form.weight_kilograms|add_class:"form-control"|append_attr:"placeholder:"}}<br />
+        count{{ form.count|add_class:"form-control"|append_attr:"placeholder:"}}<br />
+      </div>
+    </div>
+    </div>
+
+    <div class="row float-left">
+      <div class="border border-dark rounded pb-5 pl-3 pr-4 ml-5">
+        <div class="">
+          <label for="">Category</label><br />
+
+        current_location{{ form.current_location|add_class:"form-control"|append_attr:"placeholder:"}}<br />
+        problems{{ form.problems|add_class:"form-control"|append_attr:"placeholder:"}}<br />
+        Analysis Request{{ form.analysis_request|add_class:"form-control"|append_attr:"placeholder:"}}<br />
+      </div>
+    </div>
+    </div>
+
+    <div class="row float-left">
+      <div class="border border-dark rounded pb-5 pl-3 pr-4 ml-5">
+        <div class="">
+          <label for="">Multimedia</label><br />
+          Image Files{{ form.image_files|add_class:"form-control"|append_attr:"placeholder:"}}<br />
+          3D Files{{ form.number_3d_files|add_class:"form-control"|append_attr:"placeholder:"}}<br />
+
+        </div>
+      </div>
+      </div>
+
+      <div class="row float-left">
+        <div class="border border-dark rounded pb-5 pl-3 pr-4 ml-5">
+          <div class="">
+            <label for="">Interpretation</label><br />
+            Chronology{{ form.chronology|add_class:"form-control"|append_attr:"placeholder:"}}<br />
+
+          </div>
+        </div>
+        </div>
+      <div class="row float-left">
+      <div class="border border-dark rounded pb-5 pl-3 pr-4 ml-5">
+        <div class="">
+          <label for="">Category</label><br />
+        bureaucratic_status{{ form.bureaucratic_status|add_class:"form-control"|append_attr:"placeholder:"}}<br />
+        subjective_significance{{ form.subjective_significance|add_class:"form-control"|append_attr:"placeholder:"}}<br />
+        museum_inventory_number{{ form.museum_inventory_number|add_class:"form-control"|append_attr:"placeholder:"}}<br />
+        bureaucratic_status_identifier{{ form.bureaucratic_status_identifier|add_class:"form-control"|append_attr:"placeholder:"}}<br />
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="save btn btn-default btn-success" style="position: fixed; top: 180px; right: 25%;">Save</button>
+</div>
+</form>
+
+
+
+</div>
+{% endblock %}<!--    |append_attr:"placeholder:Username"   -->

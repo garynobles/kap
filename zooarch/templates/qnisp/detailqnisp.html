@@ -1,0 +1,176 @@
+{% extends 'qnisp/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+{% include "menu1.html" %}
+{% include "qnisp/menu2.html" %}
+
+
+<div class="container">
+  <h1>Quick NISP</h1>
+  <h5>(Number of Identifable Species)</h5>
+  <br />
+  <div class="row">
+    <div class="col-md-11 mx-auto ">
+      <form method="POST" class="post-form">{% csrf_token %}
+
+        <div class="row float-left ">
+          <div class="border border-dark rounded pb-5 pl-4 pr-5">
+            <div class="">
+              <label for="inputFirstname">Area Easting</label>
+              {% render_field form.area_easting class="form-control" %}
+            </div>
+          </div>
+        </div>
+        <div class="row float-left">
+          <div class="border border-dark rounded pb-5 pl-3 pr-4 ml-5">
+            <div class="">
+              <label for="inputFirstname">Area Northing</label>
+              {% render_field form.area_northing class="form-control" %}
+            </div>
+          </div>
+        </div>
+        <div class=" row float-left">
+          <div class="border border-dark rounded pb-5 pl-1 pr-1 ml-5">
+            <div class="">
+              <label for="inputFirstname">Context Number</label>
+              {% render_field form.context_number class="form-control" %}
+            </div>
+          </div>
+        </div>
+        <div class="row float-left">
+          <div class=" border border-dark rounded pb-5 pl-1 pr-1 ml-5">
+            <div class="">
+              <label for="inputFirstname">Sample Number</label>
+              {% render_field form.sample_number class="form-control" %}
+            </div>
+          </div>
+        </div>
+        <div class="form-group row float-left ">
+          <div class="col-sm-12 border border-dark rounded pb-1 pl-1 pr-1 ml-5">
+            <div class="">
+              <label for="inputFirstname">Method</label>
+              {% render_field form.collection_method class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">Mandible with Teeth</label>
+              {% render_field form.mandible_with_teeth class="form-control" %}
+            </div>
+          </div>
+        </div>
+  <div class="clearfix"></div>
+
+        <div class="form-group row float-left">
+          <div class="col-sm-10 border border-dark rounded pb-2">
+            <div class="">
+              <label for="inputFirstname">bt</label>
+              {% render_field form.bt class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">ss</label>
+              {% render_field form.ss class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">oc_tje</label>
+              {% render_field form.oc_tje class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">ch</label>
+              {% render_field form.ch class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">oa</label>
+              {% render_field form.oa class="form-control" %}
+            </div>
+
+          </div>
+          </div>
+            <div class="form-group row float-left">
+              <div class="col-sm-10 border border-dark rounded pb-2">
+
+            <div class="">
+              <label for="inputFirstname">equid</label>
+              {% render_field form.equid class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">cer</label>
+              {% render_field form.cer class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">lp</label>
+              {% render_field form.lp class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">meles</label>
+              {% render_field form.meles class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">pesc</label>
+              {% render_field form.pesc class="form-control" %}
+            </div>
+
+          </div>
+          </div>
+            <div class="form-group row float-left">
+              <div class="col-sm-10 border border-dark rounded pb-2">
+
+            <div class="">
+              <label for="inputFirstname">brd</label>
+              {% render_field form.brd class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">canis</label>
+              {% render_field form.canis class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">unio</label>
+              {% render_field form.unio class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">cerastoderma</label>
+              {% render_field form.cerastoderma class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">landsnail</label>
+              {% render_field form.landsnail class="form-control" %}
+            </div>
+
+          </div>
+          </div>
+            <div class="form-group row float-left">
+              <div class="col-sm-10 border border-dark rounded pb-2">
+
+            <div class="">
+              <label for="inputFirstname">shell_other</label>
+              {% render_field form.shell_other class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">rodent</label>
+              {% render_field form.rodent class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">ursus</label>
+              {% render_field form.ursus class="form-control" %}
+            </div>
+            <div class="">
+              <label for="inputFirstname">big_feline_lynx_size</label>
+              {% render_field form.big_feline_lynx_size class="form-control" %}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row float-left" style="width:100%;">
+          <div class=" border border-dark rounded pb-12" style="width:100%;">
+            <div class="">
+              <label for="inputFirstname">Comments</label>
+              {% render_field form.comments class="form-control " %}
+            </div>
+          </div>
+        </div>
+        </div>
+            </div>
+                </div>
+
+
+
+
+{% endblock %}
