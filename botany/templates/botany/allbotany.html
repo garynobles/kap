@@ -6,7 +6,8 @@
 {% include "botany/menu2.html" %}
 
 
-
+<div class="container">
+  <section>
 <h1>Botany</h1>
 
 <table class="table table-bordered">
@@ -97,7 +98,7 @@
       <td>
         <div class="btn-group" role="group" aria-label="Basic example">
 
-          <a href="{ url 'addfractioncomposition' pk=botany.botany_id }" class="btn btn-primary" role="button">+ Composition</a>
+          <a href="{ url 'addcomposition' pk=botany.botany_id }" class="btn btn-primary" role="button">+ Composition</a>
           <a href="{ url 'addfractionmaterialpresent' pk=botany.botany_id }" class="btn btn-primary" role="button">+ Material</a>
 
           <a href="{ url 'detailbotany' botany.botany_id }" class="btn btn-warning" role="button">detail</a>
@@ -165,7 +166,8 @@
 
 
 
-
+</section>
+</div>
 
 
 

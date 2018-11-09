@@ -4,12 +4,23 @@ from . import views
 
 urlpatterns = [
     path('', views.allbotany, name='allbotany'),
-    #path('<int:blog_id>/', views.detail, name='detail'),
 
-    path('createbotany/', views.createbotany, name='create_botany'),
-    #path('addfraction/(?P<pk>\d+)/', views.addfraction, name='addfraction'),
+    path('addbotany/', views.addbotany, name='create_botany'),
     url(r'^addfraction/(?P<pk>\d+)/$', views.addfraction, name='addfraction'),
-    path('botany/<int:botany_id>/', views.detailbotany, name='detailbotany'),
+
+
+    url(r'^(?P<fk>\d+)/addcomposition/(?P<pk>\d+)/$', views.addcomposition, name='addcomposition'),
+    url(r'^(?P<fk>\d+)/addmaterialpresent/(?P<pk>\d+)/$', views.addmaterialpresent, name='addmaterialpresent'),
+
+
+    path('<int:botany_id>/', views.detailbotany, name='detailbotany'),
+
+
+
+    path('fraction/<int:fraction_id>/', views.detailfraction, name='detailfraction'),
+    # url(r'^(?P<fk>\d+)/fraction/(?P<pk>\d+)/$', views.detailfraction, name='detailfraction'),
+    #url(r'^(?P<pk>\d+)/fraction/(?P<fk>\d+)/$', views.detailfraction, name='detailfraction'),
+
 
     #path('createfraction/(?P<pk>\d+)/', views.createfraction, name='createfraction'),
     # path('botany/(?P<pk>\d+)/', views.createfraction, name='createfraction'),
@@ -26,10 +37,10 @@ urlpatterns = [
     #
     #
 
-    # path('fraction/<int:fraction_id>/', views.detailfraction, name='detailfraction'),
     #
     #
-    # path('createfractioncomposition/', views.createfractioncomposition, name='create_fractioncomposition'),
+    #
+    # path('addcomposition/', views.addcomposition, name='create_fractioncomposition'),
     # path('createfractionmaterialpresent/', views.createfractionmaterialpresent, name='create_fractionmaterialpresent'),
     #
     # path('detailfractioncomposition/<int:fract_comp_id>/', views.detailfractioncomposition, name='detailfractioncomposition'),
