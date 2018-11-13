@@ -3,7 +3,8 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    path('', views.allflotation, name='allflotation'),
+    path('', views.allbotany, name='allbotany'),
+    path('flotation/', views.allflotation, name='allflotation'),
 
     path('addflotation/', views.addflotation, name='createflotation'),
     url(r'^addfraction/(?P<pk>\d+)/$', views.addfraction, name='addfraction'),

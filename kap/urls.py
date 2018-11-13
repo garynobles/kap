@@ -14,7 +14,7 @@ urlpatterns = [
     path('', jobs.views.home, name='home'),
     path('blog/', include('blog.urls')),
 
-    path('flotation/', include('botany.urls')),
+    path('botany/', include('botany.urls')),
     #path('zooarch/', include('zooarch.urls')),
     path('spatial3d/', include('spatial3d.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

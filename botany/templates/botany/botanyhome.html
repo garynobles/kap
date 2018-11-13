@@ -8,24 +8,10 @@
 
 <div class="container">
   <section>
-<h1>Flotation</h1>
+<h1>Flotation ({{ count }})</h1>
 
 <table class="table table-bordered">
-  <thead>
-    <tr>
 
-      <th>Sample ID</th>
-      <th>Key ENC</th>
-      <th>Botany ID</th>
-      <th>Sample Number</th>
-      <th>Entry Date</th>
-      <th>Analysis Date</th>
-      <th>Analyst</th>
-      <th>Notes</th>
-      <th>action</th>
-
-    </tr>
-  </thead>
   <tbody>
     {% for botany in botany.all %}
     <tr>

@@ -10,6 +10,8 @@
   <section>
 <h1>Flotation</h1>
 
+
+
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -46,7 +48,8 @@
       <td>
         <div class="btn-group" role="group" aria-label="Basic example">
 
-          <a href="{% url 'addfraction' pk=botany.botany_id %}" class="btn btn-primary" role="button">+ Fraction</a>
+          <a href="{% url 'addfraction' pk=botany.botany_id %}" class="btn btn-primary" role="button">+ Fraction
+            <span class="badge badge-light">{{ count }}</span></a>
 
           <a href="{% url 'detailbotany' botany.botany_id %}" class="btn btn-warning" role="button">detail</a>
           <a href="{ url 'editcontainersearch' pk=o.pk }" class="btn btn-secondary" role="button">request</a>

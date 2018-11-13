@@ -3,14 +3,32 @@ from botany.models import Botany, Fraction, FractionComposition, FractionMateria
 from django import forms
 
 # Create your views here.
-def allflotation(request):
-    botany = Botany.objects.all()
+def allbotany(request):
+    count = Botany.objects.all().count()
     fraction = Fraction.objects.all()
     fractioncomposition = FractionComposition.objects.all()
     fractionmaterialspresent = FractionMaterialsPresent.objects.all()
-    return render(request, 'botany/allflotation.html',
-    {'botany':botany,
+    return render(request, 'botany/botanyhome.html',
+    {
+    # 'botany':botany,
+    'count':count,
     'fraction':fraction,
+    'fractioncomposition':fractioncomposition,
+    'fractionmaterialspresent':fractionmaterialspresent,
+    })
+
+
+def allflotation(request):
+    botany = Botany.objects.all()
+    fraction = Fraction.objects.all()
+    count = Fraction.objects.all().count()
+    fractioncomposition = FractionComposition.objects.all()
+    fractionmaterialspresent = FractionMaterialsPresent.objects.all()
+    return render(request, 'botany/allflotation.html',
+    {
+    'botany':botany,
+    'fraction':fraction,
+    'count':count,
     'fractioncomposition':fractioncomposition,
     'fractionmaterialspresent':fractionmaterialspresent
     })
