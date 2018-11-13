@@ -67,14 +67,14 @@ class BotanyFilterForm(forms.ModelForm):
         'notes',
         )
 
-def detailbotany(request, botany_id):
-    detailbotany = get_object_or_404(Botany, pk=botany_id)
+def detailflotation(request, botany_id):
+    detailflotation = get_object_or_404(Botany, pk=botany_id)
     #fraction = get_object_or_404(Fraction, botany_id=botany_id)
     #fraction = Fraction.objects.all()
     fraction = Fraction.objects.filter(botany_id__botany_id=botany_id)
     #joinsamplecontainer = JoinSampleContainer.objects.filter(fraction_id__fraction_id=fraction_id)
-    return render(request, 'botany/detailbotany.html',
-    {'botany':detailbotany, 'fraction':fraction,
+    return render(request, 'botany/detailflotation.html',
+    {'botany':detailflotation, 'fraction':fraction,
     })
 
 ###########################################
@@ -201,10 +201,10 @@ def detailfraction(request, botany_id, fraction_id):
 
     detailfraction = get_object_or_404(Fraction, pk=fraction_id)
     fractionmaterialspresent = get_object_or_404(Fraction, pk=fraction_id)
-    # detailbotany = get_object_or_404(Botany, pk=botany_id)
+    # detailflotation = get_object_or_404(Botany, pk=botany_id)
     fractioncomposition = FractionComposition.objects.filter(fraction_id__fraction_id=fraction_id)
     fractionmaterialspresent = FractionMaterialsPresent.objects.filter(fraction_id__fraction_id=fraction_id)
-    # detailbotany = Botany.objects.filter(botany_id__botany_id=botany_id)
+    # detailflotation = Botany.objects.filter(botany_id__botany_id=botany_id)
     #fractionmaterialspresent = FractionMaterialsPresent.objects.filter(fraction_id__fraction_id=fraction_id)
     #joinsamplecontainer = JoinSampleContainer.objects.filter(fraction_id__fraction_id=fraction_id)
     return render(request, 'fraction/detailfraction.html',

@@ -14,7 +14,7 @@ urlpatterns = [
     url(r'^(?P<fk>\d+)/addmaterialpresent/(?P<pk>\d+)/$', views.addmaterialpresent, name='addmaterialpresent'),
 
 
-    path('<int:botany_id>/', views.detailbotany, name='detailbotany'),
+    path('<int:botany_id>/', views.detailflotation, name='detailflotation'),
 
 
 
