@@ -8,3 +8,5 @@ kap/__pycache__/
 kap/settings\.py
 
 media/images/
+
+botany/__pycache__/
