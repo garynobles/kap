@@ -1,33 +1,37 @@
 <div class="navbar navbar-custom navbar-inverse navbar-static-top navbar-dark bg-dark" id="nav2">
-  <div class="navbar-inner">
-    <a href="{ url 'create_botany' }">
-      <button  type="button" class="btn btn-success">Add new Botany</button>
+  <!-- <div class="navbar-inner"> -->
+
+    <a  href="{% url 'allbotany' %}">
+      <button  type="button" class="btn btn-outline-info float-left">Botany</button>
     </a>
+    <a href="{% url 'create_botany' %}">
+      <button  type="button" class="btn btn-success float-right">Add new Botany</button>
+    </a>
+
+<!-- <a href="{ url 'addfraction' pk=botany.botany_id %}" class="btn btn-primary" role="button">+ Fraction</a> -->
+
     <!-- <a href="{ url 'addfraction' }">
       <button  type="button" class="btn btn-success">Add new Fraction</button>
     </a> -->
 
-    <a href="{ url 'create_fractioncomposition' }">
+    <!-- <a href="{ url 'create_fractioncomposition' }">
       <button  type="button" class="btn btn-success">Add new Fraction Composition</button>
     </a>
 
     <a href="{ url 'create_fractionmaterialpresent' }">
       <button  type="button" class="btn btn-success">Add new Fraction Material</button>
-    </a>
+    </a> -->
 
-    <a href="{ url 'allbotany' }">
-      <button  type="button" class="btn btn-info">Botany</button>
-    </a>
-    <a href="{ url 'allfraction' }">
-      <button  type="button" class="btn btn-outline-info">Fractions</button>
+    <!-- <a href="{ url 'allfraction' }">
+      <button  type="button" class="btn btn-info">Fractions</button>
     </a>
     <a href="{ url 'allfractioncomposition' }">
       <button  type="button" class="btn btn-info">Fraction Composition</button>
     </a>
     <a href="{ url 'allfractionmaterialpresent' }">
       <button  type="button" class="btn btn-info">Fraction Material Present</button>
-    </a>
-  </div>
+    </a> -->
+  <!-- </div> -->
 </div>
 </div>
 <div class="clearfix"></div>

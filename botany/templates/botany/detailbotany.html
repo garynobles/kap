@@ -47,9 +47,9 @@
                   <td>{{ fraction.sample_weight }}</td>
                   <td>
                   <div class="btn-group" role="group" aria-label="Basic example">
-                  <a href="{% url 'addcomposition' fk=botany.botany_id pk=fraction.fraction_id %}" class="btn btn-primary" role="button">+ Composition +</a>
-                  <a href="{% url 'addmaterialpresent' fk=botany.botany_id pk=fraction.fraction_id %}" class="btn btn-primary" role="button">+ Material</a>
-                  <a href="{% url 'detailfraction' fraction.fraction_id %}" class="btn btn-warning" role="button">detail++</a>
+                  <a href="{% url 'addcomposition' fk=botany.botany_id pk=fraction.fraction_id %}" class="btn btn-primary" role="button">Composition</a>
+                  <a href="{% url 'addmaterialpresent' fk=botany.botany_id pk=fraction.fraction_id %}" class="btn btn-primary" role="button">Material</a>
+                  <a href="{% url 'detailfraction' botany.botany_id fraction.fraction_id %}" class="btn btn-warning" role="button">Composition & Material</a>
                     <!-- <a href="{ url 'detailfraction' pk=botany_id }" class="btn btn-warning" role="button">detail++</a> -->
                   <a href="{ url 'editcontainersearch' pk=o.pk }" class="btn btn-secondary" role="button">request</a>
                   </div>

@@ -179,17 +179,23 @@ class FractionMaterialPresentForm(forms.ModelForm):
         'material',
         )
 
-def detailfraction(request, fraction_id):
+def detailfraction(request, botany_id, fraction_id):
 
-    detailfraction = get_object_or_404(Fraction, pk=fraction_id, fk=botany_id)
-    #fractioncomposition = FractionComposition.objects.filter(fraction_id__fraction_id=fraction_id)
+    detailfraction = get_object_or_404(Fraction, pk=fraction_id)
+    fractionmaterialspresent = get_object_or_404(Fraction, pk=fraction_id)
+    # detailbotany = get_object_or_404(Botany, pk=botany_id)
+    fractioncomposition = FractionComposition.objects.filter(fraction_id__fraction_id=fraction_id)
+    fractionmaterialspresent = FractionMaterialsPresent.objects.filter(fraction_id__fraction_id=fraction_id)
+    # detailbotany = Botany.objects.filter(botany_id__botany_id=botany_id)
     #fractionmaterialspresent = FractionMaterialsPresent.objects.filter(fraction_id__fraction_id=fraction_id)
     #joinsamplecontainer = JoinSampleContainer.objects.filter(fraction_id__fraction_id=fraction_id)
     return render(request, 'fraction/detailfraction.html',
     {'fraction':detailfraction,
-    #'fractioncomposition':fractioncomposition,
-    #'fractionmaterialspresent':fractionmaterialspresent,
-    #'joinsamplecontainer':joinsamplecontainer
+    'fractioncomposition':fractioncomposition,
+    # 'botany':botany,
+    'fractionmaterialspresent':fractionmaterialspresent,
+    #'joinsamplecontainer':joinsamplecontainer,
+    # 'botany':botany,
     })
 
 # def editbotany(request):

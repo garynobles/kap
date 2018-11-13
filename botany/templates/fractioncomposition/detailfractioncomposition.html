@@ -29,24 +29,7 @@
                   detailfractioncomposition
                 </h4>
               </div>
-              <table class="table table-fixed">
 
-                <tbody style="height: 350px; overflow-y: auto; display: block; width:100%;">
-                  {% for joinsamplecontainer in joinsamplecontainer.all %}
-                  <tr>
-                    <td class="col-xs-2 pt-3 pb-3">
-                      <a href="% url 'edit_join_sample_container' pk=joinsamplecontainer.id %">
-                      #{{ joinsamplecontainer.id }} - {{ joinsamplecontainer.area_easting }}.{{ joinsamplecontainer.area_northing }}.{{ joinsamplecontainer.context_number }}.{{ joinsamplecontainer.sample_number }}
-                      </a>
-                    </td>
-
-
-                  </tr>
-
-
-                {% endfor %}
-                </tbody>
-              </table>
             </div>
         </div>
       </div>

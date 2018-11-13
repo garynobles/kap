@@ -17,8 +17,8 @@ urlpatterns = [
 
 
 
-    path('fraction/<int:fraction_id>/', views.detailfraction, name='detailfraction'),
-    # url(r'^(?P<fk>\d+)/fraction/(?P<pk>\d+)/$', views.detailfraction, name='detailfraction'),
+    path('botany/<int:botany_id>/fraction/<int:fraction_id>/', views.detailfraction, name='detailfraction'),
+    #url(r'^(?P<fk>\d+)/fraction/(?P<pk>\d+)/$', views.detailfraction, name='detailfraction'),
     #url(r'^(?P<pk>\d+)/fraction/(?P<fk>\d+)/$', views.detailfraction, name='detailfraction'),
 
 
