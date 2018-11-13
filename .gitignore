@@ -8,3 +8,9 @@ kap/__pycache__/
 kap/settings\.py
 
 media/images/
+
+botany/__pycache__/
+
+spatial3d/migrations/
+
+zooarch/migrations/
