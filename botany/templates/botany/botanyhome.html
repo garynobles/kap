@@ -1,0 +1,175 @@
+{% extends "botany/base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+{% include "menu1.html" %}
+{% include "botany/menu2.html" %}
+
+
+<div class="container">
+  <section>
+<h1>Flotation</h1>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+
+      <th>Sample ID</th>
+      <th>Key ENC</th>
+      <th>Botany ID</th>
+      <th>Sample Number</th>
+      <th>Entry Date</th>
+      <th>Analysis Date</th>
+      <th>Analyst</th>
+      <th>Notes</th>
+      <th>action</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for botany in botany.all %}
+    <tr>
+
+
+
+      <td>{{ botany.sample_id }}</td>
+      <td>{{ botany.area_easting }}.{{ botany.area_northing }}.{{ botany.context_number }}</td>
+      <td>{{ botany.botany_id }}</td>
+      <td>{{ botany.sample_number }}</td>
+      <td>{{ botany.entry_date }}</td>
+      <td>{{ botany.analysis_date }}</td>
+      <td>{{ botany.analyst }}</td>
+      <td>{{ botany.notes }}</td>
+
+      <!-- <td>{{ botany.botany_id.proportion_analysed }}</td> -->
+
+      <td>
+        <div class="btn-group" role="group" aria-label="Basic example">
+
+          <a href="{% url 'addfraction' pk=botany.botany_id %}" class="btn btn-primary" role="button">+ Fraction</a>
+
+          <a href="{% url 'detailbotany' botany.botany_id %}" class="btn btn-warning" role="button">detail</a>
+          <a href="{ url 'editcontainersearch' pk=o.pk }" class="btn btn-secondary" role="button">request</a>
+
+
+        </div>
+      </td>
+
+<!--
+'editcontainer' pk=o.pk -->
+
+    </tr>
+    {% endfor %}
+
+
+      </tbody>
+    </table>
+
+<!--
+  </tbody>
+</table>
+
+<h1>Fraction</h1>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Fraction ID</th>
+      <th>Botany ID</th>
+      <th>Proportion Analysed</th>
+      <th>Soil Volume</th>
+      <th>Sample Volume</th>
+      <th>Sample Weight</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for fraction in fraction.all %}
+    <tr>
+
+
+      <td>{{ fraction.fraction_id }}</td>
+      <td>{{ fraction.botany_id }}</td>
+      <td>{{ fraction.proportion_analysed }}</td>
+      <td>{{ fraction.soil_volume }}</td>
+
+      <td>{{ fraction.sample_volume }}</td>
+      <td>{{ fraction.sample_weight }}</td>
+
+      <td>
+        <div class="btn-group" role="group" aria-label="Basic example">
+
+          <a href="{ url 'addcomposition' pk=botany.botany_id }" class="btn btn-primary" role="button">+ Composition</a>
+          <a href="{ url 'addfractionmaterialpresent' pk=botany.botany_id }" class="btn btn-primary" role="button">+ Material</a>
+
+          <a href="{ url 'detailbotany' botany.botany_id }" class="btn btn-warning" role="button">detail</a>
+          <a href="{ url 'editcontainersearch' pk=o.pk }" class="btn btn-secondary" role="button">request</a>
+
+
+        </div>
+      </td>
+
+
+    </tr>
+    {% endfor %}
+
+
+
+  </tbody>
+</table>
+<h1>Fraction Composition</h1>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Fraction ID</th>
+      <th>Botany ID</th>
+      <th>Proportion Analysed</th>
+      <th>Soil Volume</th>
+      <th>Sample Volume</th>
+      <th>Sample Weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for fractioncomposition in fractioncomposition.all %}
+    <tr>
+      <td>{{ fractioncomposition.fract_comp_id }}</td>
+      <td>{{ fractioncomposition.fraction_id }}</td>
+      <td>{{ fractioncomposition.material_type }}</td>
+      <td>{{ fractioncomposition.fraction }}</td>
+      <td>{{ fractioncomposition.type_count }}</td>
+      <td>{{ fractioncomposition.whole_weight }}</td>
+      <td>{{ fractioncomposition.fragment_weight }}</td>
+  </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<h1>Fraction Material Present</h1>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Fraction ID</th>
+      <th>Botany ID</th>
+      <th>Proportion Analysed</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for fractionmaterialspresent in fractionmaterialspresent.all %}
+    <tr>
+      <td>{{ fractionmaterialspresent.material_id }}</td>
+      <td>{{ fractionmaterialspresent.fraction_id }}</td>
+      <td>{{ fractionmaterialspresent.material }}</td>
+  </tr>
+    {% endfor %}
+  </tbody>
+</table>
+ -->
+
+
+
+</section>
+</div>
+
+
+
+
+{% endblock %}

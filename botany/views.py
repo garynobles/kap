@@ -3,12 +3,12 @@ from botany.models import Botany, Fraction, FractionComposition, FractionMateria
 from django import forms
 
 # Create your views here.
-def allbotany(request):
+def allflotation(request):
     botany = Botany.objects.all()
     fraction = Fraction.objects.all()
     fractioncomposition = FractionComposition.objects.all()
     fractionmaterialspresent = FractionMaterialsPresent.objects.all()
-    return render(request, 'botany/allbotany.html',
+    return render(request, 'botany/allflotation.html',
     {'botany':botany,
     'fraction':fraction,
     'fractioncomposition':fractioncomposition,
@@ -18,7 +18,7 @@ def allbotany(request):
 # def detail(request, blog_id):
 #     detailblog = get_object_or_404(Blog, pk=blog_id)
 #     return render(request, 'blog/detail.html', {'blog':detailblog})
-def addbotany(request):
+def addflotation(request):
         if request.method == "POST":
             form = BotanyFilterForm(request.POST)
             if form.is_valid():
@@ -28,10 +28,10 @@ def addbotany(request):
                 #post.datetime = datetime.datetime.now()
 
                 post.save()
-                return redirect('allbotany')
+                return redirect('allflotation')
         else:
             form = BotanyFilterForm()
-        return render(request, 'botany/create_botany.html', {'form': form})
+        return render(request, 'botany/createflotation.html', {'form': form})
 
 class BotanyFilterForm(forms.ModelForm):
     class Meta:
@@ -83,7 +83,7 @@ def addfraction(request, pk):
 
             post.save()
             #return redirect('allfraction')
-            return redirect('allbotany')
+            return redirect('allflotation')
     else:
         #import pdb; pdb.set_trace()
         form = FractionForm()
@@ -117,7 +117,7 @@ def addcomposition(request, pk, fk):
 
             post.save()
             #return redirect('allfraction')
-            return redirect('allbotany')
+            return redirect('allflotation')
     else:
         #import pdb; pdb.set_trace()
         form = FractionCompositionForm()
@@ -164,7 +164,7 @@ def addmaterialpresent(request, pk, fk):
             #post.datetime = datetime.datetime.now()
 
             post.save()
-            return redirect('allbotany')
+            return redirect('allflotation')
     else:
         form = FractionMaterialPresentForm()
     return render(request, 'fractionmaterialpresent/create_fractionmateralpresent.html', {'form': form})

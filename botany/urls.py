@@ -3,9 +3,9 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    path('', views.allbotany, name='allbotany'),
+    path('', views.allflotation, name='allflotation'),
 
-    path('addbotany/', views.addbotany, name='create_botany'),
+    path('addflotation/', views.addflotation, name='createflotation'),
     url(r'^addfraction/(?P<pk>\d+)/$', views.addfraction, name='addfraction'),
 
 
@@ -17,7 +17,7 @@ urlpatterns = [
 
 
 
-    path('botany/<int:botany_id>/fraction/<int:fraction_id>/', views.detailfraction, name='detailfraction'),
+    path('<int:botany_id>/fraction/<int:fraction_id>/', views.detailfraction, name='detailfraction'),
     #url(r'^(?P<fk>\d+)/fraction/(?P<pk>\d+)/$', views.detailfraction, name='detailfraction'),
     #url(r'^(?P<pk>\d+)/fraction/(?P<fk>\d+)/$', views.detailfraction, name='detailfraction'),
 
