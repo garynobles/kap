@@ -16,3 +16,11 @@ botany/__pycache__/
 spatial3d/migrations/
 
 zooarch/migrations/
+
+zooarch/__pycache__/
+
+botany/migrations/__pycache__/
+
+botany/migrations/
+
+jobs/migrations/

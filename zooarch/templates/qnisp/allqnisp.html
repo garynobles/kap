@@ -48,7 +48,7 @@ $(document).ready(function() {
       <button type="submit" class="btn btn-primary">
         <span class="glyphicon glyphicon-search"></span> Search
       </button>
-      <a href="{% url 'containersearch' %}">
+      <a href="{ url 'containersearch' }">
         <button type="submit" class="btn btn-secondary">
           <span class="glyphicon glyphicon-search"></span> Reset
         </button>
@@ -123,49 +123,52 @@ $(document).ready(function() {
       </tr>
     </thead>
     <tbody>
-      {% for o in object_list %}
+      <!-- { for qnisp in allqnisp %} -->
+      {% for qnisp in qnisp.all %}
 
       <tr>
-        <td>  <a href="{% url 'editqnisp' pk=o.pk %}">{{ o.qnisp_id }}</a></td>
+        <td>  <a href="{% url 'editqnisp' pk=qnisp.pk %}">{{ qnisp.qnisp_id }}</a></td>
 
-        <td>{{ o.area_easting }}.{{ o.area_northing }}.{{ o.context_number }}.{{ o.sample_number }}</td>
-        <td>{{ o.collection_method }}</td>
-        <td>{{ o.mandible_with_teeth }}</td>
+        <td>{{ qnisp.area_easting }}.{{ qnisp.area_northing }}.{{ qnisp.context_number }}.{{ qnisp.sample_number }}</td>
+        <td>{{ qnisp.collection_method }}</td>
+        <td>{{ qnisp.mandible_with_teeth }}</td>
 
-        <td>{{ o.bt|default:"" }}</td>
-        <td>{{ o.ss|default:""}}</td>
-        <td>{{ o.oc_tje|default:""}}</td>
-        <td>{{ o.ch|default:""}}</td>
-        <td>{{ o.oa|default:""}}</td>
-        <td>{{ o.equid|default:""}}</td>
-        <td>{{ o.cer|default:""}}</td>
-        <td>{{ o.lp|default:""}}</td>
-        <td>{{ o.meles|default:""}}</td>
-        <td>{{ o.pesc|default:""}}</td>
-        <td>{{ o.brd|default:""}}</td>
-        <td>{{ o.canis|default:""}}</td>
-        <td>{{ o.unio|default:""}}</td>
-        <td>{{ o.cerastoderma|default:""}}</td>
-        <td>{{ o.landsnail|default:""}}</td>
-        <td>{{ o.shell_other|default:""}}</td>
-        <td>{{ o.rodent|default:""}}</td>
-        <td>{{ o.ursus|default:""}}</td>
-        <td>{{ o.big_feline_lynx_size|default:""}}</td>
-        <td>{{ o.comments|default:""}}</td>
+        <td>{{ qnisp.bt|default:"" }}</td>
+        <td>{{ qnisp.ss|default:""}}</td>
+        <td>{{ qnisp.oc_tje|default:""}}</td>
+        <td>{{ qnisp.ch|default:""}}</td>
+        <td>{{ qnisp.oa|default:""}}</td>
+        <td>{{ qnisp.equid|default:""}}</td>
+        <td>{{ qnisp.cer|default:""}}</td>
+        <td>{{ qnisp.lp|default:""}}</td>
+        <td>{{ qnisp.meles|default:""}}</td>
+        <td>{{ qnisp.pesc|default:""}}</td>
+        <td>{{ qnisp.brd|default:""}}</td>
+        <td>{{ qnisp.canis|default:""}}</td>
+        <td>{{ qnisp.unio|default:""}}</td>
+        <td>{{ qnisp.cerastoderma|default:""}}</td>
+        <td>{{ qnisp.landsnail|default:""}}</td>
+        <td>{{ qnisp.shell_other|default:""}}</td>
+        <td>{{ qnisp.rodent|default:""}}</td>
+        <td>{{ qnisp.ursus|default:""}}</td>
+        <td>{{ qnisp.big_feline_lynx_size|default:""}}</td>
+        <td>{{ qnisp.comments|default:""}}</td>
 
 
         <td>
           <div class="btn-group" role="group" aria-label="Basic example">
 
-            <a href="{% url 'editqnisp' pk=o.pk %}" class="btn btn-primary" role="button">edit</a>
-            <a href="{% url 'detailqnisp' o.qnisp_id %}" class="btn btn-info" role="button">detail</a>
+            <a href="{% url 'editqnisp' pk=qnisp.pk %}" class="btn btn-primary" role="button">edit</a>
+            <a href="{% url 'detailqnisp' qnisp.qnisp_id %}" class="btn btn-info" role="button">detail</a>
 
 
 
 
 
             {% if request.user|has_group:"admin_zooarchaeology"%}
-            <a onclick="return confirm('Are you sure you want to delete this?\n This is a one time action which CANNOT be recovered!\n If you are unsure see/contact the database manager.')"href="{% url 'removeqnisp' pk=o.pk %}" class="btn btn-danger" role="button">delete</a>
+            <a
+              onclick="return confirm('Are you sure you want to delete this?\n This is a one time action which CANNOT be recovered!\n If you are unsure see/contact the database manager.')"
+              href="{% url 'removeqnisp' pk=qnisp.pk %}" class="btn btn-danger" role="button">delete</a>
                   {% else %}
             <a href="#" class="btn btn-secondary" role="button">delete</a>
             {% endif %}
@@ -173,8 +176,8 @@ $(document).ready(function() {
 
 
           </div>
-          <br /><span style = "font-size:0.7em;">{{ o.created_by }}</span>
-          <span style = "font-size:0.7em;">{{ o.created_timestamp }}</span>
+          <br /><span style = "font-size:0.7em;">{{ qnisp.created_by }}</span>
+          <span style = "font-size:0.7em;">{{ qnisp.created_timestamp }}</span>
         </td>
 
       </tr>

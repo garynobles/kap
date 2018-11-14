@@ -17,16 +17,19 @@ urlpatterns = [
 #
 #     path('zooarch/<int:sample_id>/', views.detailzooarch, name='detailzooarch'),
 #
-# #qnisp
+    #qnisp
+    path('qnisp/', views.allqnisp, name='allqnisp'),
+    url(r'^qnisp/createqnisp/$', views.createqnisp, name='createqnisp'),
+
     #path('qnisp/', QnispListView.as_view(template_name="qnisp/allqnisp.html"), name='allqnisp'),
 #path('fractioncomposition/', views.allfractioncomposition, name='allfractioncomposition'),
-    path('qnisp/', views.allqnisp, name='allqnisp'),
-    # path('qnisp/<int:qnisp_id>/', views.detailqnisp, name='detailqnisp'),
-    #
-     url(r'^qnisp/createqnisp/$', views.createqnisp, name='createqnisp'),
-     url(r'^qnisp/edit/(?P<pk>\d+)/edit/$', views.editqnisp, name='editqnisp'),
-    #
-     url(r'^qnisp/(?P<pk>\d+)$', views.removeqnisp, name='removeqnisp'),
+
+    path('qnisp/<int:qnisp_id>/', views.detailqnisp, name='detailqnisp'),
+    # #
+
+    url(r'^qnisp/edit/(?P<pk>\d+)/edit/$', views.editqnisp, name='editqnisp'),
+    # #
+    url(r'^qnisp/(?P<pk>\d+)$', views.removeqnisp, name='removeqnisp'),
 
 
 

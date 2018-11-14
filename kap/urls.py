@@ -15,6 +15,10 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
 
     path('botany/', include('botany.urls')),
+
+    #Zooarch
+    path('zooarch/',include('zooarch.urls')),
     #path('zooarch/', include('zooarch.urls')),
+
     path('spatial3d/', include('spatial3d.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
