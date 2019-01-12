@@ -2,7 +2,12 @@ from django.urls import path
 from django.conf.urls import url
 from . import views
 
+
 urlpatterns = [
+
+
+
+
     #Botany
     path('', views.allbotany, name='allbotany'),
     path('flotation/', views.allflotation, name='allflotation'),
@@ -26,7 +31,7 @@ urlpatterns = [
     #path('fraction/edit/(?P<pk>\d+)/edit/', views.editfraction, name='editfraction'),
 
 
-    
+
 
 
 ]

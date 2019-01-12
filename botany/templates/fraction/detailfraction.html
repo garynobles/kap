@@ -120,6 +120,10 @@
                 </tbody>
               </table>
 
+              <div class="container">
+                  <div id="pie1" style="min-width: 310px; height: 200px; margin: 0 auto; border-style:solid;"></div>
+              </div>
+
               <table class="table table-fixed">
                 <tbody style="height: 350px; overflow-y: auto; display: block; width:100%;">
                 {% for joinsamplecontainer in joinsamplecontainer.all %}
@@ -137,6 +141,7 @@
           </div>
         </div>
       </div>
+
     </section>
 
 
@@ -240,5 +245,38 @@
 
 
 </main>
+
+
+
+  <script>
+    Highcharts.chart('container4', {
+      chart: {type: 'pie'},
+      title: {text: 'Botany per context number'},
+      credits: {enabled: false},
+      xAxis: {
+        categories: [
+        {% for entry in dataset %}'C {{ entry.context_number }}'{% if not forloop.last %}, {% endif %}{% endfor %}
+        ]
+      },
+      series: [{
+        name: 'Botany Records',
+        data: [
+        {% for entry in dataset %}
+        {{ entry.context_number }}
+        {% if not forloop.last %},
+        {% endif %}
+        {% endfor %}
+        ],
+        color: 'green'
+        // }, {
+        //     name: 'Not survived',
+        //     data: [
+        //       {% for entry in dataset %}{{ entry.context_number }}{% if not forloop.last %}, {% endif %}{% endfor %}
+        //     ],
+        //     color: 'red'
+      }]
+    });
+  </script>
+
 
 {% endblock %}

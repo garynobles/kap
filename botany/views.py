@@ -2,19 +2,45 @@ from django.shortcuts import render, get_object_or_404, render_to_response, redi
 from botany.models import Botany, Fraction, FractionComposition, FractionMaterialsPresent
 from django import forms
 
+from django.db.models import Count, Q
+from django.shortcuts import render
+
+
+# def ticket_class_view(request):
+#     dataset = Passenger.objects \
+#         .values('ticket_class') \
+#         .annotate(survived_count=Count('ticket_class', filter=Q(survived=True)),
+#                   not_survived_count=Count('ticket_class', filter=Q(survived=False))) \
+#         .order_by('ticket_class')
+#     return render(request, 'ticket_class.html', {'dataset': dataset})
+
 # Create your views here.
+
+
+
+
 def allbotany(request):
+    dataset = Botany.objects \
+        .values('context_number') \
+        .order_by('context_number')
+
+    # dataset2 = Botany.objects \
+    #     .values('entry_date')\
+    #     .order_by('entry_date')
+
     count = Botany.objects.all().count()
     fraction = Fraction.objects.all()
     fractioncomposition = FractionComposition.objects.all()
     fractionmaterialspresent = FractionMaterialsPresent.objects.all()
-    return render(request, 'botany/botanyhome.html',
+    return render(request, 'dashboard/botanyhome.html',
     {
     # 'botany':botany,
     'count':count,
     'fraction':fraction,
     'fractioncomposition':fractioncomposition,
     'fractionmaterialspresent':fractionmaterialspresent,
+
+    'dataset': dataset,
     })
 
 
@@ -42,7 +68,7 @@ def addflotation(request):
             if form.is_valid():
                 post = form.save(commit=False)
                 #botany_id = pk
-                #post.user = request.user
+                post.analyst = request.user
                 #post.datetime = datetime.datetime.now()
 
                 post.save()

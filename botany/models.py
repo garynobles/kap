@@ -78,8 +78,8 @@ class Botany(models.Model):
     sample_number = models.IntegerField(blank=True, null=True)
     entry_date = models.DateTimeField(auto_now_add=True)
     analysis_date = models.DateTimeField(auto_now=True)
-    analyst = models.CharField(max_length=200, default='')
-    notes = models.CharField(max_length=600, default='')
+    analyst = models.CharField(max_length=200, default='', blank=True, null=True)
+    notes = models.CharField(max_length=600, default='', blank=True, null=True)
 
     def __str__(self):
         return str(self.botany_id)
