@@ -1,7 +1,14 @@
+<!-- <script src="https://code.highcharts.com/highcharts.src.js"></script> -->
+
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+
+
 <header>
   <div  class="fixed-top">
       <div class="navbar navbar-inverse navbar-static-top navbar-expand-lg navbar-dark bg-dark" id="topNav">
-          <a class="navbar-brand" href="{% url 'home' %}">Gygaia V 0.1.4</a>
+          <a class="navbar-brand" href="{% url 'home' %}">Gygaia V 0.1.5</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -153,5 +160,23 @@
               {% endif %}
 
             </div>
+
+
+            <div class="dropdown show">
+              <a class="btn btn-secondary dropdown-toggle mr-2" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Experimental</a>
+              <div class="dropdown-menu " aria-labelledby="samplesdropdown">
+                <a class="dropdown-item" href="{% url 'webviewer3d' %}">webviewer3d</a>
+                <hr />
+                <a class="dropdown-item" href="{ url 'allzooarch' }">Faunal</a>
+                <!-- <a class="dropdown-item" href="#">Conservation</a>
+                <a class="dropdown-item" href="#">Ceramics</a>
+                <a class="dropdown-item" href="#">Small Finds</a> -->
+              </div>
+            </div>
+
+
+
           </div>
+
+
         </div>
