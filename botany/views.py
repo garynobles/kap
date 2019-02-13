@@ -1,11 +1,35 @@
 from django.shortcuts import render, get_object_or_404, render_to_response, redirect
-from botany.models import Botany, Fraction, FractionComposition
+from botany.models import Botany, Fraction, FractionComposition, Sample
 from django import forms
 
 from django.db.models import Count, Q
 from django.shortcuts import render
 
 from itertools import chain
+
+def allbotanysample(request):
+    botanysample = Sample.objects.all()
+    return render(request, 'sample/sample.html',
+    {
+    'botanysample':botanysample,
+    })
+
+def addbotanysample(request):
+        if request.method == "POST":
+            form = BotanySampleFilterForm(request.POST)
+            if form.is_valid():
+                post = form.save(commit=False)
+                #botany_id = pk
+                # post.analyst = request.user
+                #post.datetime = datetime.datetime.now()
+
+                post.save()
+                return redirect('allbotanysample')
+        else:
+            form = BotanySampleFilterForm()
+        return render(request, 'sample/createsample.html', {'form': form})
+
+
 
 def allbotany(request):
     # number = Botany.objects..count()
@@ -89,7 +113,7 @@ def allflotation(request):
 #     return render(request, 'blog/detail.html', {'blog':detailblog})
 def addflotation(request):
         if request.method == "POST":
-            form = BotanyFilterForm(request.POST)
+            form = FlotationFilterForm(request.POST)
             if form.is_valid():
                 post = form.save(commit=False)
                 #botany_id = pk
@@ -99,13 +123,13 @@ def addflotation(request):
                 post.save()
                 return redirect('allflotation')
         else:
-            form = BotanyFilterForm()
+            form = FlotationFilterForm()
         return render(request, 'flotation/createflotation.html', {'form': form})
 
 class DateInput(forms.DateInput):
     input_type = 'date'
 
-class BotanyFilterForm(forms.ModelForm):
+class FlotationFilterForm(forms.ModelForm):
     class Meta:
         model = Botany
         fields = (
@@ -120,6 +144,24 @@ class BotanyFilterForm(forms.ModelForm):
         'analyst',
         # 'analyst_id',
         'notes',
+        )
+
+        widgets = {
+            'entry_date': DateInput(attrs={'type': 'date'}),
+        }
+
+class BotanySampleFilterForm(forms.ModelForm):
+    class Meta:
+        model = Sample
+        fields = (
+        # 'botany_id',
+        'sample_id',
+        'area_easting',
+        'area_northing',
+        'context_number',
+        'sample_number',
+        'taken_by',
+
         )
 
         widgets = {
@@ -250,7 +292,7 @@ def editfraction(request, pk):
 def editflotation(request, pk):
         post = get_object_or_404(Botany, pk=pk)
         if request.method == "POST":
-            form = BotanyFilterForm(request.POST, instance=post)
+            form = FlotationFilterForm(request.POST, instance=post)
             if form.is_valid():
                 post = form.save(commit=False)
                 #post.user = request.user
@@ -259,5 +301,5 @@ def editflotation(request, pk):
                 return redirect('allflotation')
                 #, pk=post.pk)
         else:
-            form = BotanyFilterForm(instance=post)
+            form = FlotationFilterForm(instance=post)
         return render(request, 'flotation/createflotation.html', {'form': form})

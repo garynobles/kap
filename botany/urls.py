@@ -6,7 +6,12 @@ urlpatterns = [
     #Botany
     path('', views.allbotany, name='allbotany'),
     path('flotation/', views.allflotation, name='allflotation'),
-    path('addflotation/', views.addflotation, name='createflotation'),
+
+    path('sample/', views.allbotanysample, name='allbotanysample'),
+
+    path('addbotanysample/', views.addbotanysample, name='addbotanysample'),
+
+    path('addflotation/', views.addflotation, name='addflotation'),
     url(r'^addfraction/(?P<pk>\d+)/$', views.addfraction, name='addfraction'),
     url(r'^(?P<fk>\d+)/addcomposition/(?P<pk>\d+)/$', views.addcomposition, name='addcomposition'),
     # url(r'^(?P<fk>\d+)/addmaterialpresent/(?P<pk>\d+)/$', views.addmaterialpresent, name='addmaterialpresent'),

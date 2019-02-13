@@ -25,10 +25,10 @@ class Sample(models.Model):
     context_number = models.IntegerField()
     sample_number = models.IntegerField()
     taken_by = models.IntegerField()
-    # taken_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.PROTECT)
-
+    taken_by = models.ForeignKey(settings.AUTH_USER_MODEL, db_column='taken_by', on_delete = models.PROTECT)
+# taken_by = models.ForeignKey(settings.AUTH_USER_MODEL, db_column='taken_by', on_delete=models.
     def __str__(self):
-        return str(self.sample_number)
+        return str(self.sample_id)
 
     class Meta:
         db_table = 'samples\".\"sample'
