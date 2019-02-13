@@ -18,7 +18,7 @@ import psycopg2
 
 from datetime import datetime
 from timeit import default_timer as timer
-import scipy.spatial.distance
+# import scipy.spatial.distance
 
 # class Pointcloud2Volume():
     # def top(self):
