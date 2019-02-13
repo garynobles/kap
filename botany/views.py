@@ -160,7 +160,12 @@ class BotanySampleFilterForm(forms.ModelForm):
         'area_northing',
         'context_number',
         'sample_number',
+        'material_type',
+        'weight',
+        'description',
+        'recovery_method',
         'taken_by',
+        'comments'
 
         )
 

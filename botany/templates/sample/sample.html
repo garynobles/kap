@@ -13,12 +13,13 @@
         <tr>
           <th>Sample ID</th>
           <th>Key ENC</th>
-          <!-- <th>Botany ID</th> -->
           <th>Sample Number</th>
-          <!-- <th>Entry Date</th>
-          <th>Flotation Date</th> -->
+          <th>Material Type</th>
+          <th>Weight</th>
+          <th>Description</th>
+          <th>Recovery Method</th>
           <th>Taken by</th>
-          <th>Notes</th>
+          <th>Comments</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -29,10 +30,14 @@
           <td>{{ botany.area_easting }}.{{ botany.area_northing }}.{{ botany.context_number }}</td>
           <!-- <td>{{ botany.botany_id }}</td> -->
           <td>{{ botany.sample_number }}</td>
+          <td>{{ botany.material_type }}</td>
+          <td>{{ botany.weight }}</td>
+          <td>{{ botany.description }}</td>
+          <td>{{ botany.recovery_method }}</td>
           <!-- <td>{{ botany.entry_date }}</td>
           <td>{{ botany.flotation_date }}</td> -->
           <td>{{ botany.taken_by }}</td>
-          <td>{{ botany.notes }}</td>
+          <td>{{ botany.comments }}</td>
           <td>
             <div class="btn-group" role="group" aria-label="Basic example">
               <a href="{ url 'addflotation' pk=botany.botany_id }">

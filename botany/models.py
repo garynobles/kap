@@ -24,9 +24,13 @@ class Sample(models.Model):
     area_northing = models.IntegerField()
     context_number = models.IntegerField()
     sample_number = models.IntegerField()
-    taken_by = models.IntegerField()
+    material_type = models.CharField(max_length=200, default='', blank=True, null=True)
+    weight = models.DecimalField(max_digits=6, decimal_places=2)
+    description = models.CharField(max_length=500, default='', blank=True, null=True)
+    recovery_method = models.CharField(max_length=200, default='', blank=True, null=True)
     taken_by = models.ForeignKey(settings.AUTH_USER_MODEL, db_column='taken_by', on_delete = models.PROTECT)
-# taken_by = models.ForeignKey(settings.AUTH_USER_MODEL, db_column='taken_by', on_delete=models.
+    comments = models.CharField(max_length=1000, default='', blank=True, null=True)
+
     def __str__(self):
         return str(self.sample_id)
 
