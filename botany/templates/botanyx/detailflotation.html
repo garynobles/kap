@@ -1,0 +1,129 @@
+{% extends 'botany/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+{% include "menu1.html" %}
+{% include "botany/menu2.html" %}
+<section>
+  <div class="float-right col-sm-1">
+    <div class="pt-3">
+      <a class="btn btn-default" href="% url 'editbotany' pk=botany.pk %"><span class="glyphicon glyphicon-pencil">
+        <button type="button" class="btn btn-primary">edit botany</button>
+      </span></a>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<div class="container">
+
+  <section>
+    <h4>
+      Flotation details
+    </h4>
+    <!-- <form class="col-sm-4" action=""> -->
+
+
+    <div class="">
+      <p>Botany id: {{ botany.botany_id }}
+      Sample id: {{ botany.sample_id }}
+      Context Key: {{ botany.area_easting }}.{{ botany.area_northing }}.{{ botany.context_number }}.{{ botany.sample_number }}
+      Entry Date: {{ botany.entry_date }}
+      Analysis Date: {{ botany.analysis_date }}
+      Analyst: {{ botany.analyst }}</p>
+      <p>Notes: {{ botany.notes }}</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="float-left col-sm-9">
+
+        <div class="row">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4>
+                Fractions
+              </h4>
+            </div>
+            <table class="table table-fixed">
+            <!-- <table class="table table-bordered"> -->
+              <thead>
+                <tr>
+                  <th>Fraction ID</th>
+                  <th>Botany ID</th>
+                  <th>Proportion Analysed</th>
+                  <th>Soil Volume</th>
+                  <th>Sample Volume</th>
+                  <th>Sample Weight</th>
+                  <th>Sediment</th>
+                  <th>Stone</th>
+                  <th>Roots</th>
+                  <th>Leaves</th>
+                  <th>Insect Parts</th>
+                  <th>Charred Dung</th>
+                  <th>Bone</th>
+                  <th>Shell</th>
+
+                </tr>
+              </thead>
+              <tbody>
+              {% for fraction in fraction.all %}
+                <tr>
+                  <td>{{ fraction.fraction_id }}</td>
+                  <td>{{ fraction.botany_id }}</td>
+                  <td>{{ fraction.proportion_analysed }}</td>
+                  <td>{{ fraction.soil_volume }}</td>
+                  <td>{{ fraction.sample_volume }}</td>
+                  <td>{{ fraction.sample_weight }}</td>
+                  <td>{{ fraction.sediment}}</td>
+                  <td>{{ fraction.stone }}</td>
+                  <td>{{ fraction.roots }}</td>
+                  <td>{{ fraction.leaves }}</td>
+                  <td>{{ fraction.insect_parts }}</td>
+                  <td>{{ fraction.charred_dung }}</td>
+                  <td>{{ fraction.bone }}</td>
+                  <td>{{ fraction.shell }}</td>
+                  <td>
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                  <a href="{% url 'addcomposition' fk=botany.botany_id pk=fraction.fraction_id %}" class="btn btn-primary" role="button">Composition</a>
+                  <!-- <a href="{ url 'addmaterialpresent' fk=botany.botany_id pk=fraction.fraction_id }" class="btn btn-primary" role="button">Material</a> -->
+                  <a href="{% url 'detailfraction' botany.botany_id fraction.fraction_id %}" class="btn btn-warning" role="button">Composition</a>
+                    <!-- <a href="{ url 'detailfraction' pk=botany_id }" class="btn btn-warning" role="button">detail++</a> -->
+                  <a href="{ url 'editfraction' pk=o.pk }" class="btn btn-secondary" role="button">edit fraction</a>
+                  </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
+            <table class="table table-fixed">
+              <tbody style="height: 350px; overflow-y: auto; display: block; width:100%;">
+              {% for joinsamplecontainer in joinsamplecontainer.all %}
+                <tr>
+                  <td class="col-xs-2 pt-3 pb-3">
+                  <a href="% url 'edit_join_sample_container' pk=joinsamplecontainer.id %">
+                  #{{ joinsamplecontainer.id }} - {{ joinsamplecontainer.area_easting }}.{{ joinsamplecontainer.area_northing }}.{{ joinsamplecontainer.context_number }}.{{ joinsamplecontainer.sample_number }}
+                  </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+  </section>
+
+
+</div>
+
+
+
+</div>
+</main>
+{% endblock %}

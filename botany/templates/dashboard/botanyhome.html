@@ -215,7 +215,7 @@
   <section>
     <a href="{% url 'allflotation' %}">
       <h3>
-        <span class="badge badge-dark float-left mr-1">Flotation<span class="badge badge-light ml-1">{{ count }}</span></span>
+        <span class="badge badge-dark float-left mr-1">Flotation<span class="badge badge-light ml-1">{{ number }}</span></span>
       </h3>
     </a>
   </section>
@@ -223,7 +223,7 @@
   <section>
     <a href="{% url 'allflotation' %}">
       <h3>
-        <span class="badge badge-dark float-left mr-1">Flotation<span class="badge badge-light ml-1">{{ count }}</span></span>
+        <span class="badge badge-dark float-left mr-1">Flotation<span class="badge badge-light ml-1">{{ number }}</span></span>
       </h3>
     </a>
   </section>
@@ -535,26 +535,32 @@ yAxis: {
     },
     xAxis: {
       categories: [
-      {% for entry in dataset %}'C {{ entry.context_number }}'{% if not forloop.last %}, {% endif %}{% endfor %}
+      {% for entry in dataset2 %}'C {{ entry.soil_volume }}'{% if not forloop.last %}, {% endif %}{% endfor %}
       ]
     },
-    series: [{
+    series: [
+    {
       name: 'Botany Records',
       data: [
-      {% for entry in dataset %}
-      {{ entry.context_number }}
+      {% for entry in dataset2 %}
+      {{ entry.soil_volume }}
       {% if not forloop.last %},
       {% endif %}
       {% endfor %}
       ],
-      color: 'green'
-      // }, {
-      //     name: 'Not survived',
-      //     data: [
-      //       {% for entry in dataset %}{{ entry.context_number }}{% if not forloop.last %}, {% endif %}{% endfor %}
-      //     ],
-      //     color: 'red'
-    }]
+      color: 'green'},
+      {
+      name: 'Botany Records2',
+      data: [
+      {% for entry in dataset3 %}
+      {{ entry.sample_volume }}
+      {% if not forloop.last %},
+      {% endif %}
+      {% endfor %}
+      ],
+      color: 'red'}
+
+      ]
   });
 </script>
 
@@ -563,22 +569,37 @@ yAxis: {
   <script>
     Highcharts.chart('container4', {
       chart: {type: 'pie'},
-      title: {text: 'Botany per context number'},
+      title: {text: 'Sample Remaians'},
       credits: {enabled: false},
       xAxis: {
         categories: [
-        {% for entry in dataset %}'C {{ entry.context_number }}'{% if not forloop.last %}, {% endif %}{% endfor %}
+        {% for entry in dataset3 %}'C {{ entry.sample_volume }}'{% if not forloop.last %}, {% endif %}{% endfor %}
         ]
       },
       series: [{
         name: 'Botany Records',
         data: [
-        {% for entry in dataset %}
-        {{ entry.context_number }}
+        {% for entry in dataset3 %}
+        {{ entry.sample_volume }}
         {% if not forloop.last %},
         {% endif %}
         {% endfor %}
         ],
+        // [
+        // {% for entry in dataset2 %}
+        // {{ entry.sample_volume }}
+        // {% if not forloop.last %},
+        // {% endif %}
+        // {% endfor %}
+        // ],
+        // [
+        // {% for o in query1.all %}
+        // {{ o.sample_volume }}
+        // {% if not forloop.last %},
+        // {% endif %}
+        //
+        // {% endfor %}
+        // ],
         color: 'green'
         // }, {
         //     name: 'Not survived',

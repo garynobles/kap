@@ -1,83 +1,51 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 
-# Create your models here.
+EASTING_CHOICES = (
+    ("",""),
+    (99, 99),
+    (108, 108),
+    (109, 109),
+    (81,81),
+    (84,84),
+    (93,93),
+    (95,95),
+    (97,97),
+    (98,98),
+    (987,987),
 
-class Samples(models.Model):
+)
 
-    #container_id = models.ForeignKey(Container, db_column='container_id', on_delete = models.PROTECT)
-    sample_id = models.IntegerField(blank=True, null=True)
-    #sample_id = models.AutoField(primary_key=True)
 
-    #container_id = models.IntegerField()
-
+class Sample(models.Model):
+    sample_id = models.AutoField(primary_key=True)
     area_easting = models.IntegerField()
     area_northing = models.IntegerField()
     context_number = models.IntegerField()
-    sample_number = models.AutoField(primary_key=True)
-
-    material = models.CharField(max_length=25)
-    specific_material = models.CharField(max_length=50, blank=True, null=True)
-    exterior_color_hue = models.CharField(max_length=6, blank=True, null=True)
-    exterior_color_lightness_value = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True)
-    exterior_color_chroma = models.IntegerField(blank=True, null=True)
-    interior_color_hue = models.CharField(max_length=6, blank=True, null=True)
-    interior_color_lightness_value = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True)
-    interior_color_chroma = models.IntegerField(blank=True, null=True)
-    weight_kilograms = models.DecimalField(max_digits=6, decimal_places=4, blank=True, null=True)
-    sample_description = models.TextField(blank=True, null=True)
-    category = models.CharField(max_length=25, blank=True, null=True)
-    subcategory = models.CharField(max_length=50, blank=True, null=True)
-    count = models.IntegerField(blank=True, null=True)
-    current_location = models.CharField(max_length=50)
-    recovery_type = models.CharField(max_length=25)
-    problems = models.CharField(max_length=300, blank=True, null=True)
-    image_files = models.CharField(max_length=50, blank=True, null=True)
-    number_3d_files = models.CharField(db_column='3d_files', max_length=50, blank=True, null=True)  # Field renamed because it wasn't a valid Python identifier.
-    chronology = models.CharField(max_length=100, blank=True, null=True)
-    analysis_request = models.CharField(max_length=50, blank=True, null=True)
-    detailed_sample_description = models.TextField(blank=True, null=True)
-    bureaucratic_status = models.CharField(max_length=25, blank=True, null=True)
-    subjective_significance = models.NullBooleanField()
-    museum_inventory_number = models.IntegerField(blank=True, null=True)
-    bureaucratic_status_identifier = models.CharField(max_length=100, blank=True, null=True)
-
-    #VirtualField
-    # necs = CompositeForeignKey(
-    # #necs = CompositeOneToOneField(
-    #     Container,
-    #     on_delete=DO_NOTHING,
-    #     #related_name='containers',
-    #     related_name='samples',
-    #     to_fields={
-    #         "area_easting": "area_easting",
-    #         "area_northing": "area_northing",
-    #         "context_number": "context_number",
-    #         "sample_number": "sample_number" })
-
-    #sample_id = models.AutoField(unique=True)
+    sample_number = models.IntegerField()
+    taken_by = models.IntegerField()
+    # taken_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.PROTECT)
 
     def __str__(self):
         return str(self.sample_number)
 
     class Meta:
-        db_table = 'samples\".\"samples'
+        db_table = 'samples\".\"sample'
         #ordering = ["sample_id"]
         managed = False
         #verbose_name_plural = "samples"
-        #unique_together = (('area_easting', 'area_northing', 'context_number', 'sample_number'),)
 
 
 class Botany(models.Model):
     botany_id = models.AutoField(primary_key=True)
-    sample_id = models.IntegerField(blank=True, null=True)
-    #sample_id = models.ForeignKey(Samples, db_column='sample_id', on_delete = models.PROTECT)
+    sample_id = models.ForeignKey(Sample, db_column='sample_id', on_delete = models.PROTECT)
     area_easting = models.IntegerField(blank=True, null=True)
     area_northing = models.IntegerField(blank=True, null=True)
     context_number = models.IntegerField(blank=True, null=True)
     sample_number = models.IntegerField(blank=True, null=True)
-    entry_date = models.DateTimeField(auto_now_add=True)
-    analysis_date = models.DateTimeField(auto_now=True)
+    entry_date = models.DateTimeField(auto_now_add=False)
+    flotation_date = models.DateTimeField(auto_now=False)
     analyst = models.CharField(max_length=200, default='', blank=True, null=True)
     notes = models.CharField(max_length=600, default='', blank=True, null=True)
 
@@ -98,7 +66,14 @@ class Fraction(models.Model):
     soil_volume = models.DecimalField(max_digits=15, decimal_places=4)
     sample_volume = models.DecimalField(max_digits=15, decimal_places=4)
     sample_weight = models.DecimalField(max_digits=15, decimal_places=4)
-
+    sediment = models.BooleanField()
+    stone = models.BooleanField()
+    roots = models.BooleanField()
+    leaves = models.BooleanField()
+    insect_parts = models.BooleanField()
+    charred_dung = models.BooleanField()
+    bone = models.BooleanField()
+    shell = models.BooleanField()
 
     def __str__(self):
         return str(self.fraction_id)
@@ -110,7 +85,6 @@ class Fraction(models.Model):
         verbose_name_plural = "Fraction"
 
 class FractionComposition(models.Model):
-
     fract_comp_id = models.AutoField(primary_key=True)
     fraction_id = models.ForeignKey(Fraction, db_column='fraction_id', on_delete = models.PROTECT)
     material_type = models.CharField(max_length=50, default='')
@@ -129,16 +103,26 @@ class FractionComposition(models.Model):
         verbose_name_plural = "Composition"
 
 class FractionMaterialsPresent(models.Model):
-
-    material_id = models.AutoField(primary_key=True)
-    fraction_id = models.ForeignKey(Fraction, db_column='fraction_id', on_delete = models.PROTECT)
-    material = models.CharField(max_length=200, default='')
-
-    def __str__(self):
-        return str(self.material_id)
-
-    class Meta():
-        managed=False
-        db_table = 'samples\".\"materials_present'
-        #ordering = ["orderby"]
-        verbose_name_plural = "Materials Present"
+    pass
+#
+#     material_id = models.AutoField(primary_key=True)
+#     fraction_id = models.ForeignKey(Fraction, db_column='fraction_id', on_delete = models.PROTECT)
+#     # material = models.CharField(max_length=200, default='')
+#
+#     sediment = models.BooleanField()
+#     stone = models.BooleanField()
+#     roots = models.BooleanField()
+#     leaves = models.BooleanField()
+#     insect_parts = models.BooleanField()
+#     charred_dung = models.BooleanField()
+#     bone = models.BooleanField()
+#     shell = models.BooleanField()
+#
+#     def __str__(self):
+#         return str(self.material_id)
+#
+#     class Meta():
+#         managed=False
+#         db_table = 'samples\".\"materials_present'
+#         #ordering = ["orderby"]
+#         verbose_name_plural = "Materials Present"

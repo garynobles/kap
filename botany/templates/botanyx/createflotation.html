@@ -1,8 +1,6 @@
 {% extends 'botany/base.html' %}
 {% load widget_tweaks %}
 
-
-
 {% block content %}
 {% include "menu1.html" %}
 {% include "botany/menu2.html" %}
@@ -19,7 +17,9 @@
         Context Number{{ form.context_number|add_class:"form-control"}}<br />
         Sample Number{{ form.sample_number|add_class:"form-control"}}<br />
 
-        <!-- Analyst{{ form.analyst|add_class:"form-control"}}<br /> -->
+        Analysis Date{{ form.entry_date|add_class:"form-control"}}<br />
+
+        Sample by{{ form.analyst_id|add_class:"form-control"}}<br />
         Notes{{ form.notes|add_class:"form-control"}}<br />
         <button type="submit" class="save btn btn-default">Save</button>
     </form>

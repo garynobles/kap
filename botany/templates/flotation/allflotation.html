@@ -1,0 +1,90 @@
+{% extends "flotation/base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+{% include "menu1.html" %}
+{% include "flotation/menu2.html" %}
+
+<div class="container">
+  <section>
+    <h4>
+      Sample details
+    </h4>
+    <div class="">
+      <p>Botany id: {{ botany.botany_id }}
+      Sample id: {{ botany.sample_id }}
+      Context Key: {{ botany.area_easting }}.{{ botany.area_northing }}.{{ botany.context_number }}.{{ botany.sample_number }}
+      Entry Date: {{ botany.entry_date }}
+      Analysis Date: {{ botany.analysis_date }}
+      Analyst: {{ botany.analyst }}</p>
+      <p>Notes: {{ botany.notes }}</p>
+    </div>
+  </section>
+
+  <section>
+    <h1>Flotation</h1>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Sample ID</th>
+          <th>Key ENC</th>
+          <th>Botany ID</th>
+          <th>Sample Number</th>
+          <th>Entry Date</th>
+          <th>Flotation Date</th>
+          <th>Analyst</th>
+          <th>Notes</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for botany in botany.all %}
+        <tr>
+          <td>{{ botany.sample_id }}</td>
+          <td>{{ botany.area_easting }}.{{ botany.area_northing }}.{{ botany.context_number }}</td>
+          <td>{{ botany.botany_id }}</td>
+          <td>{{ botany.sample_number }}</td>
+          <td>{{ botany.entry_date }}</td>
+          <td>{{ botany.flotation_date }}</td>
+          <td>{{ botany.analyst }}</td>
+          <td>{{ botany.notes }}</td>
+          <td>
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <a href="{% url 'addfraction' pk=botany.botany_id %}">
+                <span class="badge badge-primary">
+                    Add Fraction
+                  <br />
+                  <span class="badge badge-light">
+
+                    {{ count }}
+
+                  </span>
+                </span>
+              </a>
+
+              <a href="{% url 'detailflotation' botany.botany_id %}"
+              style="padding: 0px 0px 0px 10px;">
+                <span class="badge badge-warning">
+                Detail<br/ > View
+                </span></a>
+
+              <a href="{ url 'flotationrequest' botany.botany_id }"
+              style="padding: 0px 0px 0px 10px;">
+                <span class="badge badge-secondary">
+                Send<br/ > Request
+                </span></a>
+
+              <a href="{% url 'editflotation' pk=botany.pk %}"
+              style="padding: 0px 0px 0px 10px;">
+                <span class="badge badge-secondary">
+                edit here <br />
+                </span></a>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+</div>
+{% endblock %}

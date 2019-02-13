@@ -1,62 +1,87 @@
 from django.shortcuts import render, get_object_or_404, render_to_response, redirect
-from botany.models import Botany, Fraction, FractionComposition, FractionMaterialsPresent
+from botany.models import Botany, Fraction, FractionComposition
 from django import forms
 
 from django.db.models import Count, Q
 from django.shortcuts import render
 
-
-# def ticket_class_view(request):
-#     dataset = Passenger.objects \
-#         .values('ticket_class') \
-#         .annotate(survived_count=Count('ticket_class', filter=Q(survived=True)),
-#                   not_survived_count=Count('ticket_class', filter=Q(survived=False))) \
-#         .order_by('ticket_class')
-#     return render(request, 'ticket_class.html', {'dataset': dataset})
-
-# Create your views here.
-
-
-
+from itertools import chain
 
 def allbotany(request):
+    # number = Botany.objects..count()
+    number = Botany.objects.all().count()
+    fraction = Fraction.objects.all()
+    fractioncomposition = FractionComposition.objects.all()
+    # fractionmaterialspresent = FractionMaterialsPresent.objects.all()
+
     dataset = Botany.objects \
         .values('context_number') \
         .order_by('context_number')
 
-    # dataset2 = Botany.objects \
-    #     .values('entry_date')\
-    #     .order_by('entry_date')
+    query1 = Fraction.objects \
+        .values('soil_volume')
 
-    count = Botany.objects.all().count()
-    fraction = Fraction.objects.all()
-    fractioncomposition = FractionComposition.objects.all()
-    fractionmaterialspresent = FractionMaterialsPresent.objects.all()
+    query2 = Fraction.objects.values('soil_volume')
+    query3 = Fraction.objects.values('sample_volume')
+
+    # query2 = Fraction.objects \
+    #     .values('sample_volume')
+    dataset2 = Fraction.objects.values('soil_volume')
+    dataset3 = query3
+
+    a = Fraction.objects.values('roots').filter(roots=True)
+    b = Fraction.objects.values('bone').filter(bone=True)
+    c = Fraction.objects.values('sediment').filter(sediment=True)
+    dataset4 = {"roots": a, "bone": b, "sediment": c}
+
+    dataset5 = query2
+
+    # dataset5 = a.filter(roots=True)| b.filter(bone=True)
+    dataset6 = b.count()
+    # dataset3 = Fraction.objects.values('soil_volume')
+    # matches = pages | articles | posts
+
+
+        # query2 = Fraction.objects.count('bone')
+        #
+        # sumquery = query1 + query2
+
+            # .values('soil_volume') \
+            # .annotate(num_values=Count('value'), average=Avg('value'))\
+            # .order_by('soil_volume')
+
+
     return render(request, 'dashboard/botanyhome.html',
     {
     # 'botany':botany,
-    'count':count,
+    'number':number,
     'fraction':fraction,
     'fractioncomposition':fractioncomposition,
-    'fractionmaterialspresent':fractionmaterialspresent,
+    # 'fractionmaterialspresent':fractionmaterialspresent,
 
     'dataset': dataset,
+    'dataset2': dataset2,
+    'dataset3': dataset3,
+    'dataset4': dataset4,
+    'dataset5': dataset5,
+    'dataset6': dataset6,
+
     })
 
 
 def allflotation(request):
     botany = Botany.objects.all()
     fraction = Fraction.objects.all()
-    count = Fraction.objects.all().count()
+    count = Fraction.objects.all().filter(botany_id=13).count()
     fractioncomposition = FractionComposition.objects.all()
-    fractionmaterialspresent = FractionMaterialsPresent.objects.all()
-    return render(request, 'botany/allflotation.html',
+    # fractionmaterialspresent = FractionMaterialsPresent.objects.all()
+    return render(request, 'flotation/allflotation.html',
     {
     'botany':botany,
     'fraction':fraction,
     'count':count,
     'fractioncomposition':fractioncomposition,
-    'fractionmaterialspresent':fractionmaterialspresent
+    # 'fractionmaterialspresent':fractionmaterialspresent
     })
 
 # def detail(request, blog_id):
@@ -68,14 +93,17 @@ def addflotation(request):
             if form.is_valid():
                 post = form.save(commit=False)
                 #botany_id = pk
-                post.analyst = request.user
+                # post.analyst = request.user
                 #post.datetime = datetime.datetime.now()
 
                 post.save()
                 return redirect('allflotation')
         else:
             form = BotanyFilterForm()
-        return render(request, 'botany/createflotation.html', {'form': form})
+        return render(request, 'flotation/createflotation.html', {'form': form})
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
 class BotanyFilterForm(forms.ModelForm):
     class Meta:
@@ -87,11 +115,16 @@ class BotanyFilterForm(forms.ModelForm):
         'area_northing',
         'context_number',
         'sample_number',
-        # 'entry_date',
-        # 'analysis_date',
+        'entry_date',
+
         'analyst',
+        # 'analyst_id',
         'notes',
         )
+
+        widgets = {
+            'entry_date': DateInput(attrs={'type': 'date'}),
+        }
 
 def detailflotation(request, botany_id):
     detailflotation = get_object_or_404(Botany, pk=botany_id)
@@ -99,20 +132,10 @@ def detailflotation(request, botany_id):
     #fraction = Fraction.objects.all()
     fraction = Fraction.objects.filter(botany_id__botany_id=botany_id)
     #joinsamplecontainer = JoinSampleContainer.objects.filter(fraction_id__fraction_id=fraction_id)
-    return render(request, 'botany/detailflotation.html',
+    return render(request, 'flotation/detailflotation.html',
     {'botany':detailflotation, 'fraction':fraction,
     })
 
-###########################################
-#
-# def allfraction(request):
-#     fraction = Fraction.objects
-#     return render(request, 'fraction/allfraction.html', {'fraction':fraction})
-#
-# #def createfraction(request, pk):
-#
-#def addfraction(request, pk):
-#def addfraction(request, *args, **kwargs):
 def addfraction(request, pk):
     if request.method == "POST":
     #if request.method == "GET":
@@ -143,10 +166,16 @@ class FractionForm(forms.ModelForm):
         'soil_volume',
         'sample_volume',
         'sample_weight',
+        'sediment',
+        'stone',
+        'roots',
+        'leaves',
+        'insect_parts',
+        'charred_dung',
+        'bone',
+        'shell'
         )
 
-######################################
-#
 def addcomposition(request, pk, fk):
     if request.method == "POST":
     #if request.method == "GET":
@@ -167,22 +196,6 @@ def addcomposition(request, pk, fk):
         form = FractionCompositionForm()
     return render(request, 'fractioncomposition/create_fractioncomposition.html', {'form': form})
 
-# def addcomposition(request, pk):
-#     if request.method == "POST":
-#         form = FractionCompositionForm(request.POST)
-#         if form.is_valid():
-#             post = form.save(commit=False)
-#             fraction = get_object_or_404(Fraction, pk=pk)
-#             post.fraction_id = fraction
-#             #post.user = request.user
-#             #post.datetime = datetime.datetime.now()
-#
-#             post.save()
-#             return redirect('allfractioncomposition')
-#     else:
-#         form = FractionCompositionForm()
-#     return render(request, 'fractioncomposition/create_fractioncomposition.html', {'form': form})
-
 class FractionCompositionForm(forms.ModelForm):
     class Meta:
         model = FractionComposition
@@ -196,40 +209,14 @@ class FractionCompositionForm(forms.ModelForm):
         'fragment_weight',
         )
 
-
-def addmaterialpresent(request, pk, fk):
-    if request.method == "POST":
-        form = FractionMaterialPresentForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            fraction = get_object_or_404(Fraction, pk=pk)
-            post.fraction_id = fraction
-            #post.user = request.user
-            #post.datetime = datetime.datetime.now()
-
-            post.save()
-            return redirect('allflotation')
-    else:
-        form = FractionMaterialPresentForm()
-    return render(request, 'fractionmaterialpresent/create_fractionmateralpresent.html', {'form': form})
-
-
-class FractionMaterialPresentForm(forms.ModelForm):
-    class Meta:
-        model = FractionMaterialsPresent
-        fields = (
-        # 'material_id',
-        # 'fraction_id',
-        'material',
-        )
-
 def detailfraction(request, botany_id, fraction_id):
+
 
     detailfraction = get_object_or_404(Fraction, pk=fraction_id)
     fractionmaterialspresent = get_object_or_404(Fraction, pk=fraction_id)
     # detailflotation = get_object_or_404(Botany, pk=botany_id)
     fractioncomposition = FractionComposition.objects.filter(fraction_id__fraction_id=fraction_id)
-    fractionmaterialspresent = FractionMaterialsPresent.objects.filter(fraction_id__fraction_id=fraction_id)
+    # fractionmaterialspresent = FractionMaterialsPresent.objects.filter(fraction_id__fraction_id=fraction_id)
     # detailflotation = Botany.objects.filter(botany_id__botany_id=botany_id)
     #fractionmaterialspresent = FractionMaterialsPresent.objects.filter(fraction_id__fraction_id=fraction_id)
     #joinsamplecontainer = JoinSampleContainer.objects.filter(fraction_id__fraction_id=fraction_id)
@@ -242,60 +229,35 @@ def detailfraction(request, botany_id, fraction_id):
     # 'botany':botany,
     })
 
-# def editbotany(request):
-#     pass
-#
-#
-#
-# def allfractioncomposition(request):
-#     fractioncomposition = FractionComposition.objects
-#     return render(request, 'fractioncomposition/allfractioncomposition.html', {'fractioncomposition':fractioncomposition})
-#
-# def editfractioncomposition(request):
-#     pass
-#
-# def allfractionmaterialpresent(request):
-#     fractionmaterialpresent = FractionMaterialsPresent.objects
-#     return render(request, 'fractionmaterialpresent/allfractionmaterialpresent.html', {'fractionmaterialpresent':fractionmaterialpresent})
-#
-# def editfractionmaterialpresent(request):
-#     pass
-#
-#
-#
-# def detailfractioncomposition(request, fract_comp_id):
-#     detailfractioncomposition = get_object_or_404(FractionComposition, pk=fract_comp_id)
-#     #joinsamplecontainer = JoinSampleContainer.objects.filter(fraction_id__fraction_id=fraction_id)
-#     return render(request, 'fractioncomposition/detailfractioncomposition.html',
-#     {'fractioncomposition':detailfractioncomposition,
-#     #'joinsamplecontainer':joinsamplecontainer
-#     })
-#
-# def detailfractionmaterialpresent(request, material_id):
-#     detailfractionmaterialpresent = get_object_or_404(FractionMaterialsPresent, pk=material_id)
-#     #joinsamplecontainer = JoinSampleContainer.objects.filter(fraction_id__fraction_id=fraction_id)
-#     return render(request, 'fractionmaterialpresent/detailfractionmaterialpresent.html',
-#     {'fractionmaterialpresent':detailfractionmaterialpresent,
-#     #'joinsamplecontainer':joinsamplecontainer
-#     })
-#
+def editfraction(request, pk):
+        post = get_object_or_404(Fraction, pk=pk)
+        # pk=pk
+        if request.method == "POST":
+            form = FractionForm(request.POST, instance=post)
+            if form.is_valid():
+                post = form.save(commit=False)
+                #post.user = request.user
+                #post.datetime = datetime.datetime.now()
+                post.save()
+                return redirect('allflotation')
 
-#
-#
-#
+                # return redirect('allfraction')
+                #, pk=post.pk)
+        else:
+            form = FractionForm(instance=post)
+        return render(request, 'fraction/create_fraction.html', {'form': form})
 
-#
-# def editfraction(request, fraction_id):
-#         post = get_object_or_404(Fraction, pk=fraction_id)
-#         if request.method == "POST":
-#             form = FractionFilterForm(request.POST, instance=post)
-#             if form.is_valid():
-#                 post = form.save(commit=False)
-#                 #post.user = request.user
-#                 #post.datetime = datetime.datetime.now()
-#                 post.save()
-#                 return redirect('allfraction')
-#                 #, pk=post.pk)
-#         else:
-#             form = FractionFilterForm(instance=post)
-#         return render(request, 'fraction/create_fraction.html', {'form': form})
+def editflotation(request, pk):
+        post = get_object_or_404(Botany, pk=pk)
+        if request.method == "POST":
+            form = BotanyFilterForm(request.POST, instance=post)
+            if form.is_valid():
+                post = form.save(commit=False)
+                #post.user = request.user
+                #post.datetime = datetime.datetime.now()
+                post.save()
+                return redirect('allflotation')
+                #, pk=post.pk)
+        else:
+            form = BotanyFilterForm(instance=post)
+        return render(request, 'flotation/createflotation.html', {'form': form})

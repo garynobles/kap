@@ -4,14 +4,7 @@
 {% block content %}
 {% include "menu1.html" %}
 {% include "fraction/menu2.html" %}
-
-
-
-
-
-
-
-<h1>Fraction</h1>
+<h1>Fraction allfraction</h1>
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -21,7 +14,13 @@
       <th>Soil Volume</th>
       <th>Sample Volume</th>
       <th>Sample Weight</th>
-
+      <th>Sediment</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -33,15 +32,17 @@
       <td>{{ fraction.botany_id }}</td>
       <td>{{ fraction.proportion_analysed }}</td>
       <td>{{ fraction.soil_volume }}</td>
-
       <td>{{ fraction.sample_volume }}</td>
       <td>{{ fraction.sample_weight }}</td>
+      <td>{{ fraction.sediment }}</td>
+
+
       <td>
         <div class="btn-group" role="group" aria-label="Basic example">
 
-          <a href="{% url 'addfraction' %}" class="btn btn-primary" role="button">Add Fraction</a>
-          <a href="{% url 'detailfraction' fraction.fraction_id %}" class="btn btn-warning" role="button">detail</a>
-          <a href="% url 'editcontainersearch' pk=o.pk %" class="btn btn-secondary" role="button">request</a>
+          <a href="{% url 'addfraction' %}" class="badge badge-primary" role="button">Add Fraction</a>
+          <a href="{% url 'detailfraction' fraction.fraction_id %}" class="badge badge-warning" role="button">detail</a>
+          <a href="% url 'editcontainersearch' pk=o.pk %" class="badge badge-secondary" role="button">request</a>
         </div>
       </td>
 

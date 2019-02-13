@@ -1,0 +1,34 @@
+{% extends 'flotation/base.html' %}
+{% load widget_tweaks %}
+
+
+
+{% block content %}
+{% include "menu1.html" %}
+{% include "flotation/menu2.html" %}
+<div class="container">
+    <h1>Flotation</h1>
+    <div class="col-sm-3">
+    <form method="POST" class="post-form">{% csrf_token %}
+        <!--  {{ form.as_p }}   -->
+        <!-- Fraction ID{{ form.fraction_id|add_class:"form-control"}}<br /> -->
+        <!-- Botany ID{{ form.botany_id|add_class:"form-control"}}<br /> -->
+        Sample ID{{ form.sample_id|add_class:"form-control"}}<br />
+        Area Easting{{ form.area_easting|add_class:"form-control"}}<br />
+        Area Northing{{ form.area_northing|add_class:"form-control"}}<br />
+        Context Number{{ form.context_number|add_class:"form-control"}}<br />
+        Sample Number{{ form.sample_number|add_class:"form-control"}}<br />
+
+        Analysis Date{{ form.entry_date|add_class:"form-control"}}<br />
+
+        Sample by{{ form.analyst_id|add_class:"form-control"}}<br />
+        Notes{{ form.notes|add_class:"form-control"}}<br />
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+
+
+<!--    |append_attr:"placeholder:Username"   -->
