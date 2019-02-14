@@ -5,17 +5,21 @@ from . import views
 urlpatterns = [
     #Botany
     path('', views.allbotany, name='allbotany'),
+
     path('flotation/', views.allflotation, name='allflotation'),
+    path('addflotation/', views.addflotation, name='addflotation'),
+    path('<int:botany_id>/', views.detailflotation, name='detailflotation'),
 
     path('sample/', views.allbotanysample, name='allbotanysample'),
-
     path('addbotanysample/', views.addbotanysample, name='addbotanysample'),
+    path('<int:sample_id>/', views.detailsample, name='detailsample'),
 
-    path('addflotation/', views.addflotation, name='addflotation'),
+
+
     url(r'^addfraction/(?P<pk>\d+)/$', views.addfraction, name='addfraction'),
     url(r'^(?P<fk>\d+)/addcomposition/(?P<pk>\d+)/$', views.addcomposition, name='addcomposition'),
     # url(r'^(?P<fk>\d+)/addmaterialpresent/(?P<pk>\d+)/$', views.addmaterialpresent, name='addmaterialpresent'),
-    path('<int:botany_id>/', views.detailflotation, name='detailflotation'),
+
     path('<int:botany_id>/fraction/<int:fraction_id>/', views.detailfraction, name='detailfraction'),
     #url(r'^(?P<fk>\d+)/fraction/(?P<pk>\d+)/$', views.detailfraction, name='detailfraction'),
     #url(r'^(?P<pk>\d+)/fraction/(?P<fk>\d+)/$', views.detailfraction, name='detailfraction'),

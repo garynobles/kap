@@ -5,22 +5,26 @@
 {% include "menu1.html" %}
 {% include "sample/menu2.html" %}
 <div class="container">
-    <h1>Sample</h1>
-    <div class="col-sm-3">
-    <form method="POST" class="post-form">{% csrf_token %}
-        Area Easting{{ form.area_easting|add_class:"form-control"}}<br />
-        Area Northing{{ form.area_northing|add_class:"form-control"}}<br />
-        Context Number{{ form.context_number|add_class:"form-control"}}<br />
-        Sample Number{{ form.sample_number|add_class:"form-control"}}<br />
-        Material Type {{ form.material_type|add_class:"form-control"}}<br />
-        Weight  {{ form.weight|add_class:"form-control"}} (Kg)<br />
-        Description {{ form.description|add_class:"form-control"}}<br />
-        Recovery Method {{ form.recovery_method|add_class:"form-control"}}<br />
-        Taken by{{ form.taken_by|add_class:"form-control"}}<br />
-        Comments {{ form.comments|add_class:"form-control"}}<br />
-        <button type="submit" class="save btn btn-default">Save</button>
-    </form>
-  </div>
+  <h1>Sample</h1>
+  <form method="POST" class="post-form">{% csrf_token %}
+    <div class="row mt-1">
+      <div class="col">Area Easting{{ form.area_easting|add_class:"form-control"}}</div>
+      <div class="col">Area Northing{{ form.area_northing|add_class:"form-control"}}</div>
+      <div class="col">Context Number{{ form.context_number|add_class:"form-control"}}</div>
+      <div class="col">Sample Number{{ form.sample_number|add_class:"form-control"}}</div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-3">Material Type {{ form.material_type|add_class:"form-control"}}</div>
+      <div class="col-3">Weight (Kg) {{ form.weight|add_class:"form-control"}}</div>
+      <div class="col-6">Description {{ form.description|add_class:"form-control"}}</div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-3">Recovery Method {{ form.recovery_method|add_class:"form-control"}}</div>
+      <div class="col-3">Taken by{{ form.taken_by|add_class:"form-control"}}</div>
+      <div class="col-6">Comments {{ form.comments|add_class:"form-control"}}</div>
+    </div>
+    <button type="submit" class="save btn btn-default mt-3">Save</button>
+  </form>
 </div>
 
 {% endblock %}

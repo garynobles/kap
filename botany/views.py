@@ -7,6 +7,8 @@ from django.shortcuts import render
 
 from itertools import chain
 
+from dal import autocomplete
+
 def allbotanysample(request):
     botanysample = Sample.objects.all()
     return render(request, 'sample/sample.html',
@@ -29,7 +31,11 @@ def addbotanysample(request):
             form = BotanySampleFilterForm()
         return render(request, 'sample/createsample.html', {'form': form})
 
-
+def detailsample(request, sample_id):
+    detailsample = get_object_or_404(Botany, pk=sample_id)
+    return render(request, 'sample/detailsample.html',
+    {'detailsample':detailsample,
+    })
 
 def allbotany(request):
     # number = Botany.objects..count()
@@ -172,6 +178,8 @@ class BotanySampleFilterForm(forms.ModelForm):
         widgets = {
             'entry_date': DateInput(attrs={'type': 'date'}),
         }
+
+
 
 def detailflotation(request, botany_id):
     detailflotation = get_object_or_404(Botany, pk=botany_id)

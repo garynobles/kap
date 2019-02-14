@@ -6,24 +6,50 @@
 {% include "fraction/menu2.html" %}
 <div class="container">
     <h1>Fraction</h1>
-    <div class="col-sm-3">
+
     <form method="POST" class="post-form">{% csrf_token %}
-        Botany ID{{ form.botany_id|add_class:"form-control"}}<br />
-        Proportion Analysed{{ form.proportion_analysed|add_class:"form-control"}}<br />
-        Soil Volume (Ltrs){{ form.soil_volume|add_class:"form-control"}}<br />
-        Sample Volume (ml){{ form.sample_volume|add_class:"form-control"}}<br />
-        Sample Weight (grams){{ form.sample_weight|add_class:"form-control"}}<br />
-        sediment {{ form.sediment|add_class:"form-control" }}<br />
-        stone {{ form.stone|add_class:"form-control" }}<br />
-        roots {{ form.roots|add_class:"form-control" }}<br />
-        leaves {{ form.leaves|add_class:"form-control" }}<br />
-        insect_parts {{ form.insect_parts|add_class:"form-control" }}<br />
-        charred_dung {{ form.charred_dung|add_class:"form-control" }}<br />
-        bone {{ form.bone|add_class:"form-control" }}<br />
-        shell {{ form.shell|add_class:"form-control" }}<br />
-        <button type="submit" class="save btn btn-default">Save</button>
+      <div class="row mt-1">
+        <div class="col">Proportion Analysed{{ form.proportion_analysed|add_class:"form-control"}}</div>
+        <div class="col">Soil Volume (Ltrs){{ form.soil_volume|add_class:"form-control"}}</div>
+        <div class="col"></div>
+        <div class="col"></div>
+      </div>
+      <div class="row mt-1">
+        <div class="col">Sample Volume (ml){{ form.sample_volume|add_class:"form-control"}}</div>
+        <div class="col">Sample Weight (grams){{ form.sample_weight|add_class:"form-control"}}</div>
+        <div class="col"></div>
+        <div class="col"></div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-1">
+
+          <div class="">{{ form.stone|add_class:"" }} Stone</div>
+          <div class="">{{ form.roots|add_class:"" }} Roots</div>
+          <div class="">{{ form.bone|add_class:"" }} Bone </div>
+          <div class="">{{ form.shell|add_class:"" }} Shell </div>
+
+          </div>
+          <div class="col-11">
+            <div class=""> {{ form.sediment|add_class:"" }} Sediment </div>
+            <div class="">{{ form.leaves|add_class:"" }} Leaves</div>
+          <div class="">{{ form.insect_parts|add_class:"" }} Insect Parts</div>
+          <div class="">{{ form.charred_dung|add_class:"" }} Charred Dung</div>
+
+
+
+
+        </div>
+
+</div>
+
+
+
+
+
+
+        <button type="submit" class="save btn btn-default mt-3">Save</button>
     </form>
-  </div>
+
 </div>
 {% endblock %}
 

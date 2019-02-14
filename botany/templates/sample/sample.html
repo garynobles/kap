@@ -52,22 +52,22 @@
                 </span>
               </a>
 
-              <a href="{ url 'detailflotation' botany.botany_id }"
+              <a href="{% url 'detailsample' botany.sample_id %}"
               style="padding: 0px 0px 0px 10px;">
                 <span class="badge badge-warning">
                 Detail<br/ > View
                 </span></a>
 
-              <a href="{ url 'flotationrequest' botany.botany_id }"
+              <!-- <a href="{ url 'flotationrequest' botany.botany_id }"
               style="padding: 0px 0px 0px 10px;">
                 <span class="badge badge-secondary">
                 Send<br/ > Request
-                </span></a>
+                </span></a> -->
 
-              <a href="{ url 'editflotation' pk=botany.pk }"
+              <a href="{ url 'editsample' pk=sample.pk }"
               style="padding: 0px 0px 0px 10px;">
                 <span class="badge badge-secondary">
-                edit here <br />
+                edit <br /> here <br />
                 </span></a>
             </div>
           </td>

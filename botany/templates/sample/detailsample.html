@@ -1,0 +1,133 @@
+{% extends 'sample/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+{% include "menu1.html" %}
+{% include "sample/menu2.html" %}
+<section>
+  <div class="float-right col-sm-1">
+    <div class="pt-3">
+      <a class="btn btn-default" href=" url 'editbotany' pk=botany.botany_id "><span class="glyphicon glyphicon-pencil">
+        <button type="button" class="btn btn-primary">edit botany</button>
+      </span></a>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <section>
+    <div class="">
+      <div>
+      <div class="btn-group">
+        <span class = "badge badge-info">Botany id:</span> <span class = "badge badge-light"> {{ botany.botany_id }} </span>
+      </div>
+      <div class="btn-group">
+        <span class = "badge badge-info">Sample id:</span> <span class = "badge badge-light"> {{ sample.sample_id }} </span>
+      </div>
+      <div class="btn-group">
+        <span class = "badge badge-info">Context Key:</span> <span class = "badge badge-light"> {{ botany.area_easting }} </span>.<span class = "badge"> {{ botany.area_northing }} </span>.<span class = "badge"> {{ botany.context_number }} </span>.<span class = "badge"> {{ botany.sample_number }} </span>
+      </div>
+      <div class="btn-group">
+        <span class = "badge badge-info">Entry Date:</span> <span class = "badge badge-light"> {{ botany.entry_date }} </span>
+      </div>
+      <div class="btn-group">
+        <span class = "badge badge-info">Analysis Date:</span> <span class = "badge badge-light"> {{ botany.analysis_date }} </span>
+      </div>
+      <div class="btn-group">
+        <span class = "badge badge-info">Analyst:</span> <span class = "badge badge-light"> {{ botany.analyst }} </span>
+      </div>
+      </div>
+      <div class="btn-group">
+        <span class = "badge badge-info">Notes:</span> <span class = "badge badge-light"> {{ botany.notes }} </span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="float-left col-sm-9">
+        <div class="row">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4>
+                Fractions
+              </h4>
+            </div>
+            <table class="table table-fixed">
+              <thead>
+                <tr>
+                  <th>Fraction ID</th>
+                  <th>Botany ID</th>
+                  <th>Proportion Analysed</th>
+                  <th>Soil Volume</th>
+                  <th>Sample Volume</th>
+                  <th>Sample Weight</th>
+                  <th>Sediment</th>
+                  <th>Stone</th>
+                  <th>Roots</th>
+                  <th>Leaves</th>
+                  <th>Insect Parts</th>
+                  <th>Charred Dung</th>
+                  <th>Bone</th>
+                  <th>Shell</th>
+
+                </tr>
+              </thead>
+              <tbody>
+              {% for fraction in fraction.all %}
+                <tr>
+                  <td>{{ fraction.fraction_id }}</td>
+                  <td>{{ fraction.botany_id }}</td>
+                  <td>{{ fraction.proportion_analysed }}</td>
+                  <td>{{ fraction.soil_volume }}</td>
+                  <td>{{ fraction.sample_volume }}</td>
+                  <td>{{ fraction.sample_weight }}</td>
+                  <td>{{ fraction.sediment|yesno:"yes,no" }}</td>
+                  <td>{{ fraction.stone|yesno:"yes,no" }}</td>
+                  <td>{{ fraction.roots|yesno:"yes,no"  }}</td>
+                  <td>{{ fraction.leaves|yesno:"yes,no"  }}</td>
+                  <td>{{ fraction.insect_parts|yesno:"yes,no"  }}</td>
+                  <td>{{ fraction.charred_dung|yesno:"yes,no"  }}</td>
+                  <td>{{ fraction.bone|yesno:"yes,no"  }}</td>
+                  <td>{{ fraction.shell|yesno:"yes,no"  }}</td>
+                  <td>
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                  <a href="{% url 'addcomposition' fk=botany.botany_id pk=fraction.fraction_id %}" class="badge badge-primary" role="button">+ Composition</a>
+                  <!-- <a href="{ url 'addmaterialpresent' fk=botany.botany_id pk=fraction.fraction_id }" class="badge badge-primary" role="button">Material</a> -->
+                  <a href="{% url 'detailfraction' botany.botany_id fraction.fraction_id %}" class="badge badge-warning" role="button">detail</a>
+                    <!-- <a href="{ url 'detailfraction' pk=botany_id }" class="badge badge-warning" role="button">detail++</a> -->
+                  <a href="{% url 'editfraction' pk=fraction.pk %}"
+                   class="badge badge-secondary" role="button">
+                   edit fraction here
+                 </a>
+                 <!-- <a href="{ url 'editfraction' pk=o.pk }" -->
+                  </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
+            <table class="table table-fixed">
+              <tbody style="height: 350px; overflow-y: auto; display: block; width:100%;">
+              {% for joinsamplecontainer in joinsamplecontainer.all %}
+                <tr>
+                  <td class="col-xs-2 pt-3 pb-3">
+                  <a href="% url 'edit_join_sample_container' pk=joinsamplecontainer.id %">
+                  #{{ joinsamplecontainer.id }} - {{ joinsamplecontainer.area_easting }}.{{ joinsamplecontainer.area_northing }}.{{ joinsamplecontainer.context_number }}.{{ joinsamplecontainer.sample_number }}
+                  </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+  </section>
+</div>
+</div>
+</main>
+<div class="clearfix">
+
+</div>
+{% endblock %}
