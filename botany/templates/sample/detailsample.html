@@ -7,8 +7,8 @@
 <section>
   <div class="float-right col-sm-1">
     <div class="pt-3">
-      <a class="btn btn-default" href=" url 'editbotany' pk=botany.botany_id "><span class="glyphicon glyphicon-pencil">
-        <button type="button" class="btn btn-primary">edit botany</button>
+      <a class="btn btn-default" href="{ url 'addflotation' pk=sample.sample_id }"><span class="glyphicon glyphicon-pencil">
+        <button type="button" class="btn btn-primary">edit sample add</button>
       </span></a>
     </div>
   </div>
@@ -19,26 +19,32 @@
     <div class="">
       <div>
       <div class="btn-group">
-        <span class = "badge badge-info">Botany id:</span> <span class = "badge badge-light"> {{ botany.botany_id }} </span>
+        <span class = "badge badge-info">Botany id:</span> <span class = "badge badge-light"> {{ sample.sample_id }} </span>
       </div>
       <div class="btn-group">
-        <span class = "badge badge-info">Sample id:</span> <span class = "badge badge-light"> {{ sample.sample_id }} </span>
+        <span class = "badge badge-info">Context Key:</span> <span class = "badge badge-light"> {{ sample.area_easting }} </span>.<span class = "badge badge-light"> {{ sample.area_northing }} </span>.<span class = "badge badge-light"> {{ sample.context_number }} </span>.<span class = "badge badge-light"> {{ sample.sample_number }} </span>
       </div>
       <div class="btn-group">
-        <span class = "badge badge-info">Context Key:</span> <span class = "badge badge-light"> {{ botany.area_easting }} </span>.<span class = "badge"> {{ botany.area_northing }} </span>.<span class = "badge"> {{ botany.context_number }} </span>.<span class = "badge"> {{ botany.sample_number }} </span>
+        <span class = "badge badge-info">Material Type:</span> <span class = "badge badge-light"> {{ sample.material_type }} </span>
       </div>
       <div class="btn-group">
-        <span class = "badge badge-info">Entry Date:</span> <span class = "badge badge-light"> {{ botany.entry_date }} </span>
+        <span class = "badge badge-info">Weight:</span> <span class = "badge badge-light"> {{ sample.weight }} </span>
       </div>
       <div class="btn-group">
-        <span class = "badge badge-info">Analysis Date:</span> <span class = "badge badge-light"> {{ botany.analysis_date }} </span>
+        <span class = "badge badge-info">Description:</span> <span class = "badge badge-light"> {{ sample.description }} </span>
+      </div>
+
+      <div class="btn-group">
+        <span class = "badge badge-info">Recovery Method:</span> <span class = "badge badge-light"> {{ sample.recovery_method }} </span>
+      </div>
+
+      <div class="btn-group">
+        <span class = "badge badge-info">Taken By:</span> <span class = "badge badge-light"> {{ sample.taken_by }} </span>
+      </div>
+
       </div>
       <div class="btn-group">
-        <span class = "badge badge-info">Analyst:</span> <span class = "badge badge-light"> {{ botany.analyst }} </span>
-      </div>
-      </div>
-      <div class="btn-group">
-        <span class = "badge badge-info">Notes:</span> <span class = "badge badge-light"> {{ botany.notes }} </span>
+        <span class = "badge badge-info">Comments:</span> <span class = "badge badge-light"> {{ sample.comments }} </span>
       </div>
     </div>
   </section>
@@ -49,55 +55,47 @@
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4>
-                Fractions
+                Flotation
               </h4>
             </div>
             <table class="table table-fixed">
               <thead>
                 <tr>
-                  <th>Fraction ID</th>
-                  <th>Botany ID</th>
-                  <th>Proportion Analysed</th>
-                  <th>Soil Volume</th>
-                  <th>Sample Volume</th>
-                  <th>Sample Weight</th>
-                  <th>Sediment</th>
-                  <th>Stone</th>
-                  <th>Roots</th>
-                  <th>Leaves</th>
-                  <th>Insect Parts</th>
-                  <th>Charred Dung</th>
-                  <th>Bone</th>
-                  <th>Shell</th>
+                  <th>Flotation ID</th>
+                  <th>Sample ID</th>
+                  <th>Key ENC</th>
+                  <th>Sample Number</th>
+                  <th>Entry Date</th>
+                  <th>Flotation Date</th>
+                  <th>Analyst</th>
+                  <th>Notes</th>
+
 
                 </tr>
               </thead>
               <tbody>
-              {% for fraction in fraction.all %}
+              {% for flotation in flotation.all %}
                 <tr>
-                  <td>{{ fraction.fraction_id }}</td>
-                  <td>{{ fraction.botany_id }}</td>
-                  <td>{{ fraction.proportion_analysed }}</td>
-                  <td>{{ fraction.soil_volume }}</td>
-                  <td>{{ fraction.sample_volume }}</td>
-                  <td>{{ fraction.sample_weight }}</td>
-                  <td>{{ fraction.sediment|yesno:"yes,no" }}</td>
-                  <td>{{ fraction.stone|yesno:"yes,no" }}</td>
-                  <td>{{ fraction.roots|yesno:"yes,no"  }}</td>
-                  <td>{{ fraction.leaves|yesno:"yes,no"  }}</td>
-                  <td>{{ fraction.insect_parts|yesno:"yes,no"  }}</td>
-                  <td>{{ fraction.charred_dung|yesno:"yes,no"  }}</td>
-                  <td>{{ fraction.bone|yesno:"yes,no"  }}</td>
-                  <td>{{ fraction.shell|yesno:"yes,no"  }}</td>
+
+                  <td>{{ flotation.botany_id }}</td>
+                  <td>{{ flotation.sample_id }}</td>
+                  <td>{{ flotation.area_easting }}.{{ flotation.area_northing }}.{{ flotation.context_number}}</td>
+                  <td>{{ flotation.sample_number }}</td>
+                  <td>{{ flotation.entry_date }}</td>
+                  <td>{{ flotation.flotation_date }}</td>
+                  <td>{{ flotation.analyst }}</td>
+                  <td>{{ flotation.notes  }}</td>
+
                   <td>
                   <div class="btn-group" role="group" aria-label="Basic example">
-                  <a href="{% url 'addcomposition' fk=botany.botany_id pk=fraction.fraction_id %}" class="badge badge-primary" role="button">+ Composition</a>
+                  <!-- <a href="{% url 'addfraction' fk=sample.sample_id pk=flotation.botany_id %}" class="badge badge-primary" role="button">+ Fraction A</a> -->
+                  <a href="{% url 'addfraction' fk=sample.sample_id pk=flotation.botany_id %}" class="badge badge-primary" role="button">+ Fraction A</a>
                   <!-- <a href="{ url 'addmaterialpresent' fk=botany.botany_id pk=fraction.fraction_id }" class="badge badge-primary" role="button">Material</a> -->
-                  <a href="{% url 'detailfraction' botany.botany_id fraction.fraction_id %}" class="badge badge-warning" role="button">detail</a>
+                  <a href="{% url 'detailflotation' flotation.botany_id %}" class="badge badge-warning" role="button">detail</a>
                     <!-- <a href="{ url 'detailfraction' pk=botany_id }" class="badge badge-warning" role="button">detail++</a> -->
-                  <a href="{% url 'editfraction' pk=fraction.pk %}"
+                  <a href="{% url 'editflotation' pk=flotation.pk %}"
                    class="badge badge-secondary" role="button">
-                   edit fraction here
+                   edit flotation
                  </a>
                  <!-- <a href="{ url 'editfraction' pk=o.pk }" -->
                   </div>

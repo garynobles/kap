@@ -18,8 +18,8 @@ class Sample(models.Model):
     comments = models.CharField(max_length=1000, default='', blank=True, null=True)
 
     def __str__(self):
-        return self.taken_by.first_name
-        # return str(self.sample_id)
+        # return self.taken_by.first_name
+        return str(self.sample_id)
         # return str(self.firstname)+ '-' +str(self.lastname)
         # return u'%s %s' % (self.first_name, self.last_name)
 
@@ -31,7 +31,7 @@ class Sample(models.Model):
         #verbose_name_plural = "samples"
 
 
-class Botany(models.Model):
+class Flotation(models.Model):
     botany_id = models.AutoField(primary_key=True)
     sample_id = models.ForeignKey(Sample, db_column='sample_id', on_delete = models.PROTECT)
     area_easting = models.IntegerField(blank=True, null=True)
@@ -50,12 +50,12 @@ class Botany(models.Model):
         managed=False
         db_table = 'samples\".\"botany'
         #ordering = ["orderby"]
-        verbose_name_plural = "Botany"
+        verbose_name_plural = "Flotation"
 
 
 class Fraction(models.Model):
     fraction_id = models.AutoField(primary_key=True)
-    botany_id = models.ForeignKey(Botany, db_column='botany_id', on_delete = models.PROTECT)
+    botany_id = models.ForeignKey(Flotation, db_column='botany_id', on_delete = models.PROTECT)
     proportion_analysed = models.DecimalField(max_digits=5, decimal_places=3)
     soil_volume = models.DecimalField(max_digits=15, decimal_places=4)
     sample_volume = models.DecimalField(max_digits=15, decimal_places=4)

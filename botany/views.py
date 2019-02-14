@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, render_to_response, redirect
-from botany.models import Botany, Fraction, FractionComposition, Sample
+from botany.models import Flotation, Fraction, FractionComposition, Sample
 from django import forms
 
 from django.db.models import Count, Q
@@ -9,42 +9,46 @@ from itertools import chain
 
 from dal import autocomplete
 
-def allbotanysample(request):
-    botanysample = Sample.objects.all()
+def allsample(request):
+    allsample = Sample.objects.all()
     return render(request, 'sample/sample.html',
     {
-    'botanysample':botanysample,
+    'allsample':allsample,
     })
 
-def addbotanysample(request):
-        if request.method == "POST":
-            form = BotanySampleFilterForm(request.POST)
-            if form.is_valid():
-                post = form.save(commit=False)
-                #botany_id = pk
-                # post.analyst = request.user
-                #post.datetime = datetime.datetime.now()
+def addsample(request):
+    if request.method == "POST":
+        form = SampleForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            #botany_id = pk
+            # post.analyst = request.user
+            #post.datetime = datetime.datetime.now()
 
-                post.save()
-                return redirect('allbotanysample')
-        else:
-            form = BotanySampleFilterForm()
-        return render(request, 'sample/createsample.html', {'form': form})
+            post.save()
+            return redirect('allsample')
+    else:
+        form = SampleForm()
+    return render(request, 'sample/createsample.html', {'form': form})
 
-def detailsample(request, sample_id):
-    detailsample = get_object_or_404(Botany, pk=sample_id)
-    return render(request, 'sample/detailsample.html',
-    {'detailsample':detailsample,
-    })
+# def detailsample(request, sample_id):
+#     detailsample = get_object_or_404(Sample, pk=sample_id)
+#     return render(request, 'sample/detailsample.html',
+#     {'detailsample':detailsample,
+#     })
 
-def allbotany(request):
+
+
+
+
+def allbotany(request, sample_id=''):
     # number = Botany.objects..count()
-    number = Botany.objects.all().count()
+    number = Flotation.objects.all().count()
     fraction = Fraction.objects.all()
     fractioncomposition = FractionComposition.objects.all()
     # fractionmaterialspresent = FractionMaterialsPresent.objects.all()
 
-    dataset = Botany.objects \
+    dataset = Flotation.objects \
         .values('context_number') \
         .order_by('context_number')
 
@@ -99,27 +103,28 @@ def allbotany(request):
     })
 
 
-def allflotation(request):
-    botany = Botany.objects.all()
+def allflotation(request, sample_id='', botany_id='', fraction_id=''):
+    flotation = Flotation.objects.all()
     fraction = Fraction.objects.all()
     count = Fraction.objects.all().filter(botany_id=13).count()
     fractioncomposition = FractionComposition.objects.all()
     # fractionmaterialspresent = FractionMaterialsPresent.objects.all()
     return render(request, 'flotation/allflotation.html',
     {
-    'botany':botany,
+    'flotation':flotation,
     'fraction':fraction,
     'count':count,
     'fractioncomposition':fractioncomposition,
     # 'fractionmaterialspresent':fractionmaterialspresent
     })
 
-# def detail(request, blog_id):
-#     detailblog = get_object_or_404(Blog, pk=blog_id)
-#     return render(request, 'blog/detail.html', {'blog':detailblog})
-def addflotation(request):
+
+
+
+
+def addflotation(request, pk='', sample_id='', botany_id=''):
         if request.method == "POST":
-            form = FlotationFilterForm(request.POST)
+            form = FlotationForm(request.POST)
             if form.is_valid():
                 post = form.save(commit=False)
                 #botany_id = pk
@@ -129,15 +134,15 @@ def addflotation(request):
                 post.save()
                 return redirect('allflotation')
         else:
-            form = FlotationFilterForm()
+            form = FlotationForm()
         return render(request, 'flotation/createflotation.html', {'form': form})
 
 class DateInput(forms.DateInput):
     input_type = 'date'
 
-class FlotationFilterForm(forms.ModelForm):
+class FlotationForm(forms.ModelForm):
     class Meta:
-        model = Botany
+        model = Flotation
         fields = (
         # 'botany_id',
         'sample_id',
@@ -156,7 +161,7 @@ class FlotationFilterForm(forms.ModelForm):
             'entry_date': DateInput(attrs={'type': 'date'}),
         }
 
-class BotanySampleFilterForm(forms.ModelForm):
+class SampleForm(forms.ModelForm):
     class Meta:
         model = Sample
         fields = (
@@ -179,26 +184,35 @@ class BotanySampleFilterForm(forms.ModelForm):
             'entry_date': DateInput(attrs={'type': 'date'}),
         }
 
+def detailsample(request, sample_id):
+    sample = get_object_or_404(Sample, pk=sample_id)
+    # fraction = get_object_or_404(Fraction, botany_id=botany_id)
+    #fraction = Fraction.objects.all()
+    flotation = Flotation.objects.filter(sample_id__sample_id=sample_id)
+    #joinsamplecontainer = JoinSampleContainer.objects.filter(fraction_id__fraction_id=fraction_id)
+    return render(request, 'sample/detailsample.html',
+    {'sample':sample, 'flotation':flotation,
+    })
 
 
 def detailflotation(request, botany_id):
-    detailflotation = get_object_or_404(Botany, pk=botany_id)
+    flotation = get_object_or_404(Flotation, pk=botany_id)
     #fraction = get_object_or_404(Fraction, botany_id=botany_id)
     #fraction = Fraction.objects.all()
     fraction = Fraction.objects.filter(botany_id__botany_id=botany_id)
     #joinsamplecontainer = JoinSampleContainer.objects.filter(fraction_id__fraction_id=fraction_id)
     return render(request, 'flotation/detailflotation.html',
-    {'botany':detailflotation, 'fraction':fraction,
+    {'flotation':flotation, 'fraction':fraction,
     })
 
-def addfraction(request, pk):
+def addfraction(request, pk, fk=''):
     if request.method == "POST":
     #if request.method == "GET":
         form = FractionForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            botany = get_object_or_404(Botany, pk=pk)
-            post.botany_id = botany
+            flotation = get_object_or_404(Flotation, pk=pk)
+            post.botany_id = flotation
             #post.botany_id = pk
             #post.user = request.user
             #post.datetime = datetime.datetime.now()
@@ -265,8 +279,6 @@ class FractionCompositionForm(forms.ModelForm):
         )
 
 def detailfraction(request, botany_id, fraction_id):
-
-
     detailfraction = get_object_or_404(Fraction, pk=fraction_id)
     fractionmaterialspresent = get_object_or_404(Fraction, pk=fraction_id)
     # detailflotation = get_object_or_404(Botany, pk=botany_id)
@@ -284,7 +296,7 @@ def detailfraction(request, botany_id, fraction_id):
     # 'botany':botany,
     })
 
-def editfraction(request, pk):
+def editfraction(request, pk, fk=''):
         post = get_object_or_404(Fraction, pk=pk)
         # pk=pk
         if request.method == "POST":
@@ -303,9 +315,9 @@ def editfraction(request, pk):
         return render(request, 'fraction/create_fraction.html', {'form': form})
 
 def editflotation(request, pk):
-        post = get_object_or_404(Botany, pk=pk)
+        post = get_object_or_404(Flotation, pk=pk)
         if request.method == "POST":
-            form = FlotationFilterForm(request.POST, instance=post)
+            form = FlotationForm(request.POST, instance=post)
             if form.is_valid():
                 post = form.save(commit=False)
                 #post.user = request.user
@@ -314,5 +326,21 @@ def editflotation(request, pk):
                 return redirect('allflotation')
                 #, pk=post.pk)
         else:
-            form = FlotationFilterForm(instance=post)
+            form = FlotationForm(instance=post)
         return render(request, 'flotation/createflotation.html', {'form': form})
+
+
+def editsample(request, pk):
+        post = get_object_or_404(Sample, pk=pk)
+        if request.method == "POST":
+            form = SampleForm(request.POST, instance=post)
+            if form.is_valid():
+                post = form.save(commit=False)
+                #post.user = request.user
+                #post.datetime = datetime.datetime.now()
+                post.save()
+                return redirect('allsample')
+                #, pk=post.pk)
+        else:
+            form = SampleForm(instance=post)
+        return render(request, 'sample/createsample.html', {'form': form})

@@ -7,8 +7,8 @@
 <section>
   <div class="float-right col-sm-1">
     <div class="pt-3">
-      <a class="btn btn-default" href="% url 'editbotany' pk=botany.botany_id %"><span class="glyphicon glyphicon-pencil">
-        <button type="button" class="btn btn-primary">edit botany</button>
+      <a class="btn btn-default" href="% url 'editflotation' pk=flotation.botany_id %"><span class="glyphicon glyphicon-pencil">
+        <button type="button" class="btn btn-primary">edit flotation</button>
       </span></a>
     </div>
   </div>
@@ -19,26 +19,26 @@
     <div class="">
       <div>
       <div class="btn-group">
-        <span class = "badge badge-info">Botany id:</span> <span class = "badge badge-light"> {{ botany.botany_id }} </span>
+        <span class = "badge badge-info">Botany id:</span> <span class = "badge badge-light"> {{ flotation.botany_id }} </span>
       </div>
       <div class="btn-group">
-        <span class = "badge badge-info">Sample id:</span> <span class = "badge badge-light"> {{ botany.sample_id }} </span>
+        <span class = "badge badge-info">Sample id:</span> <span class = "badge badge-light"> {{ flotation.sample_id }} </span>
       </div>
       <div class="btn-group">
-        <span class = "badge badge-info">Context Key:</span> <span class = "badge badge-light"> {{ botany.area_easting }} </span>.<span class = "badge"> {{ botany.area_northing }} </span>.<span class = "badge"> {{ botany.context_number }} </span>.<span class = "badge"> {{ botany.sample_number }} </span>
+        <span class = "badge badge-info">Context Key:</span> <span class = "badge badge-light"> {{ flotation.area_easting }} </span>.<span class = "badge"> {{ flotation.area_northing }} </span>.<span class = "badge"> {{ flotation.context_number }} </span>.<span class = "badge"> {{ flotation.sample_number }} </span>
       </div>
       <div class="btn-group">
-        <span class = "badge badge-info">Entry Date:</span> <span class = "badge badge-light"> {{ botany.entry_date }} </span>
+        <span class = "badge badge-info">Entry Date:</span> <span class = "badge badge-light"> {{ flotation.entry_date }} </span>
       </div>
       <div class="btn-group">
-        <span class = "badge badge-info">Analysis Date:</span> <span class = "badge badge-light"> {{ botany.analysis_date }} </span>
+        <span class = "badge badge-info">Analysis Date:</span> <span class = "badge badge-light"> {{ flotation.analysis_date }} </span>
       </div>
       <div class="btn-group">
-        <span class = "badge badge-info">Analyst:</span> <span class = "badge badge-light"> {{ botany.analyst }} </span>
+        <span class = "badge badge-info">Analyst:</span> <span class = "badge badge-light"> {{ flotation.analyst }} </span>
       </div>
       </div>
       <div class="btn-group">
-        <span class = "badge badge-info">Notes:</span> <span class = "badge badge-light"> {{ botany.notes }} </span>
+        <span class = "badge badge-info">Notes:</span> <span class = "badge badge-light"> {{ flotation.notes }} </span>
       </div>
     </div>
   </section>
@@ -91,13 +91,13 @@
                   <td>{{ fraction.shell|yesno:"yes,no"  }}</td>
                   <td>
                   <div class="btn-group" role="group" aria-label="Basic example">
-                  <a href="{% url 'addcomposition' fk=botany.botany_id pk=fraction.fraction_id %}" class="badge badge-primary" role="button">+ Composition</a>
+                  <a href="{% url 'addcomposition' fk=flotation.botany_id pk=fraction.fraction_id %}" class="badge badge-primary" role="button">+ Composition</a>
                   <!-- <a href="{ url 'addmaterialpresent' fk=botany.botany_id pk=fraction.fraction_id }" class="badge badge-primary" role="button">Material</a> -->
-                  <a href="{% url 'detailfraction' botany.botany_id fraction.fraction_id %}" class="badge badge-warning" role="button">detail</a>
+                  <a href="{% url 'detailfraction' flotation.botany_id fraction.fraction_id %}" class="badge badge-warning" role="button">detail</a>
                     <!-- <a href="{ url 'detailfraction' pk=botany_id }" class="badge badge-warning" role="button">detail++</a> -->
-                  <a href="{% url 'editfraction' pk=fraction.pk %}"
+                  <a href="{% url 'editfraction' fk=flotation.botany_id pk=fraction.pk %}"
                    class="badge badge-secondary" role="button">
-                   edit fraction here
+                   edit fraction
                  </a>
                  <!-- <a href="{ url 'editfraction' pk=o.pk }" -->
                   </div>

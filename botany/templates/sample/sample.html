@@ -24,23 +24,23 @@
         </tr>
       </thead>
       <tbody>
-        {% for botany in botanysample.all %}
+        {% for sample in allsample.all %}
         <tr>
-          <td>{{ botany.sample_id }}</td>
-          <td>{{ botany.area_easting }}.{{ botany.area_northing }}.{{ botany.context_number }}</td>
-          <!-- <td>{{ botany.botany_id }}</td> -->
-          <td>{{ botany.sample_number }}</td>
-          <td>{{ botany.material_type }}</td>
-          <td>{{ botany.weight }}</td>
-          <td>{{ botany.description }}</td>
-          <td>{{ botany.recovery_method }}</td>
-          <!-- <td>{{ botany.entry_date }}</td>
-          <td>{{ botany.flotation_date }}</td> -->
-          <td>{{ botany.taken_by }}</td>
-          <td>{{ botany.comments }}</td>
+          <td>{{ sample.sample_id }}</td>
+          <td>{{ sample.area_easting }}.{{ sample.area_northing }}.{{ sample.context_number }}</td>
+          <!-- <td>{{ sample.sample_id }}</td> -->
+          <td>{{ sample.sample_number }}</td>
+          <td>{{ sample.material_type }}</td>
+          <td>{{ sample.weight }}</td>
+          <td>{{ sample.description }}</td>
+          <td>{{ sample.recovery_method }}</td>
+          <!-- <td>{{ sample.entry_date }}</td>
+          <td>{{ sample.flotation_date }}</td> -->
+          <td>{{ sample.taken_by }}</td>
+          <td>{{ sample.comments }}</td>
           <td>
             <div class="btn-group" role="group" aria-label="Basic example">
-              <a href="{ url 'addflotation' pk=botany.botany_id }">
+              <a href="{% url 'addflotation' pk=sample.sample_id %}">
                 <span class="badge badge-primary">
                     Add Flotation
                   <br />
@@ -52,22 +52,22 @@
                 </span>
               </a>
 
-              <a href="{% url 'detailsample' botany.sample_id %}"
+              <a href="{% url 'detailsample' sample.sample_id %}"
               style="padding: 0px 0px 0px 10px;">
                 <span class="badge badge-warning">
                 Detail<br/ > View
                 </span></a>
 
-              <!-- <a href="{ url 'flotationrequest' botany.botany_id }"
+              <!-- <a href="{ url 'flotationrequest' sample.sample_id }"
               style="padding: 0px 0px 0px 10px;">
                 <span class="badge badge-secondary">
                 Send<br/ > Request
                 </span></a> -->
 
-              <a href="{ url 'editsample' pk=sample.pk }"
+              <a href="{% url 'editsample' pk=sample.pk %}"
               style="padding: 0px 0px 0px 10px;">
                 <span class="badge badge-secondary">
-                edit <br /> here <br />
+                edit <br /> here samples <br />
                 </span></a>
             </div>
           </td>

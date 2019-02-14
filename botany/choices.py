@@ -33,5 +33,6 @@ RECOVERY_METHODS = (
 
 MATERIALS = (
     ("",""),
+    ("Botanical","Botanical"),
     ("Ceramic","Ceramic"),
 )
