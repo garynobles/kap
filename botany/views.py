@@ -213,7 +213,7 @@ class SampleForm(forms.ModelForm):
         'area_northing',
         'context_number',
         'sample_number',
-        'material_type',
+        'sample_type',
         'weight',
         'description',
         'recovery_method',
