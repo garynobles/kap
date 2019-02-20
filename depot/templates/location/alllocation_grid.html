@@ -1,0 +1,40 @@
+{% extends 'location/base.html' %}
+
+
+
+{% block content%}
+{% include "menu1.html" %}
+{% include "location/menu2.html" %}
+<div class="container">
+
+    <div class="row">
+      {% for location in location.all %}
+      {{form}}
+      <a class="text-light" href="{% url 'detaillocation' location.location_id %}">
+      <div class="col-md-4">
+        <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+          <!--div class="card-header">{{ location.store_name }}</div-->
+          <div class="card-body"  style="height: 230px;">
+            <h5 class="card-title text-center">{{ location.location_name }}</h5>
+            <img class="card-img-top p-3" src="{{ location.icon_desc.icon.url }}" /></a>
+            <p class="card-text" style = "font-size:0.7em;">{{ location.address_1 }} {{ location.address_2 }} {{ location.city }} {{ location.region }} {{ location.zip }} {{ location.country }}</p>
+          </div>
+        </div>
+      </div>
+    </a>
+      {% endfor %}
+    </div>
+
+  {% endblock %}
+</div>
+
+
+
+<!-- location_id = models.AutoField(primary_key=True)
+location_identifier = models.IntegerField(blank=True, null=True)
+#store_id = models.IntegerField(blank=True, null=True)
+location_type = models.CharField(max_length=100, blank=True, null=True)
+location_name = models.CharField(max_length=100, blank=True, null=True)
+#icon_desc = models.ForeignKey(Icon, db_column='icon_desc', on_delete = models.PROTECT, null=True, blank=True)
+ #these should become an individual table outside of the main db
+orderby = models.IntegerField(blank=True, null=True) -->

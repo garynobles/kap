@@ -1,0 +1,26 @@
+{% extends 'container/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="container">
+    <h1>container</h1>
+    <div class="col-sm-3">
+    <form method="POST" class="post-form">{% csrf_token %}
+        <!--  {{ form.as_p }}   -->
+
+        container Identifier{{ form.container_identifier|add_class:"form-control"}}<br />
+        Store ID{{ form.store_id|add_class:"form-control"}}<br />
+
+        container Type{{ form.container_type|add_class:"form-control"}}<br />
+
+        Current container TMP{{ form.current_container_tmp|add_class:"form-control"}}<br />
+        container Name{{ form.container_name|add_class:"form-control"}}<br />
+        Icon ID{{ form.icon_desc|add_class:"form-control"}}<br />
+
+
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+  </div>
+
+
+</div>
+{% endblock %}<!--    |append_attr:"placeholder:Username"   -->

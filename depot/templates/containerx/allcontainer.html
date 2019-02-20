@@ -1,0 +1,41 @@
+
+{% extends 'container/base.html' %}
+{% block content%}
+{% include "menu1.html" %}
+{% include "container/menu2.html" %}
+<div class="container">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>container ID</th>
+
+        <th>container_type</th>
+
+        <th>container_name</th>
+
+        <th>action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for container in allcontainer %}
+      <tr>
+        <td>{{ container.container_id }}</td>
+        <td>{{ container.container_type}}</td>
+        <td>{{ container.container_name}}</td>
+        <td>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="{% url 'editcontainer' pk=container.pk %}" class="btn btn-primary" role="button">edit</a>
+            <a href="{  url 'editcontainer' pk=o.pk  }" class="btn btn-secondary" role="button">take out</a>
+            <a href="{  url 'editcontainer' pk=o.pk  }" class="btn btn-secondary" role="button">request</a>
+          </div>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="5">No data</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+  {% endblock %}

@@ -1,0 +1,110 @@
+{% extends 'storage/base.html' %}
+{% load widget_tweaks %}
+
+
+
+{% block content %}
+{% include "menu1.html" %}
+{% include "storage/menu2.html" %}
+    <div class="container">
+      <section>
+        <div class="float-right col-sm-1">
+          <div>
+              <a href="{% url 'createstorage' %}">
+              <button  type="button" class="btn btn-primary">Add new storage</button>
+            </a>
+              </div>
+          <div class="pt-3">
+            <a class="btn btn-default" href="{% url 'editstorage' pk=storage.pk %}">
+            <button type="button" class="btn btn-primary">edit</button>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <form class="form-inline" action="">
+          <div class="col-sm-10">
+            <div class="form-group">
+              <label for="store_id" class="col-sm-3 control-label">Store Id</label>
+              <div class="col-sm-10">
+                <input class="form-control" id="store_id" type="text" placeholder="{{ storage.store_id }}" disabled>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="store_name" class="col-sm-3 control-label">Store Name</label>
+              <div class="col-sm-10">
+                <input class="form-control" id="store_name" type="text" placeholder="{{ storage.store_name }}" disabled>
+              </div>
+              <div class="col-sm-5">
+                <hr class=""/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="area_northing" class="col-sm-3 control-label">Address line 1</label>
+              <div class="col-sm-10">
+                <input class="form-control" id="area_northing" type="text" placeholder="{{ storage.address_1 }}" disabled>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="store_id" class="col-sm-3 control-label">Address line 2</label>
+              <div class="col-sm-10">
+                <input class="form-control" id="store_id" type="text" placeholder="{{ storage.address_2 }}" disabled>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="store_name" class="col-sm-3 control-label">City/Town</label>
+              <div class="col-sm-10">
+                <input class="form-control" id="store_name" type="text" placeholder="{{ storage.city }}" disabled>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="area_northing" class="col-sm-3 control-label">State/Province/Region</label>
+              <div class="col-sm-10">
+                <input class="form-control" id="area_northing" type="text" placeholder="{{ storage.region }}" disabled>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="area_northing" class="col-sm-3 control-label">ZIP/Post Code</label>
+              <div class="col-sm-10">
+                <input class="form-control" id="area_northing" type="text" placeholder="{{ storage.zip }}" disabled>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="country" class="col-sm-3 control-label">Country</label>
+              <div class="col-sm-10">
+                <input class="form-control" id="country" type="text" placeholder="{{ storage.country }}" disabled>
+              </div>
+            </div>
+
+              <div class="form-group">
+                <label for="country" class="col-sm-3 control-label">created by</label>
+                <div class="col-sm-10">
+                  <input class="form-control" id="country" type="text" placeholder="{{ storage.created_by }}" disabled>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="country" class="col-sm-3 control-label">create date</label>
+                <div class="col-sm-10">
+                  <input class="form-control" id="country" type="text" placeholder="{{ storage.created_timestamp }}" disabled>
+                </div>
+              </div>
+
+              <div class="col-sm-5">
+                <p>Created by {{ storage.created_by }}  {{ storage.created_timestamp }}</p>
+                <hr class=""/>
+              </div>
+            </div>
+          </div>
+        </form>
+      </section>
+
+
+
+    </div>
+  </div>
+</main>
+
+{% endblock %}

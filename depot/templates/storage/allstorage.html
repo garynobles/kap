@@ -1,0 +1,26 @@
+
+{% extends 'storage/base.html' %}
+
+{% block content%}
+{% include "menu1.html" %}
+{% include "storage/menu2.html" %}
+<div class="container">
+    <div class="row">
+      {% for storage in storage.all %}
+      <a class="text-light" href="{% url 'detailstorage' storage.store_id %}">
+      <div class="col-md-4">
+        <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+          <!--div class="card-header">{{ storage.store_name }}</div-->
+          <div class="card-body"  style="height: 230px;">
+            <h5 class="card-title text-center">{{ storage.store_name }}</h5>
+            <img class="card-img-top p-3" src="{{ storage.icon_desc.icon.url }}" /></a>
+            <p class="card-text" style = "font-size:0.7em;">{{ storage.address_1 }} {{ storage.address_2 }} {{ storage.city }} {{ storage.region }} {{ storage.zip }} {{ storage.country }}</p>
+          </div>
+        </div>
+      </div>
+    </a>
+      {% endfor %}
+    </div>
+
+  {% endblock %}
+</div>

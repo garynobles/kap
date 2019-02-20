@@ -1,0 +1,54 @@
+
+{% extends 'location/base.html' %}
+{% block content%}
+{% include "menu1.html" %}
+{% include "location/menu2.html" %}
+<div class="container">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Location ID</th>
+
+        <th>location_type</th>
+
+        <th>location_name</th>
+
+        <th>action</th>
+      </tr>
+    </thead>
+    <tbody>
+
+
+      {% for location in location %}
+
+
+      <tr>
+
+        <td>{{ location.location_id }}</td>
+        <!-- <td>{{ o.location_identifier}}</td> -->
+        <td>{{ location.location_type}}</td>
+
+        <!-- <td>{{ o.current_location_tmp}}</td> -->
+        <td>{{ location.location_name}}</td>
+
+
+
+        <td>
+          <div class="btn-group" role="group" aria-label="Basic example">
+
+            <a href="{% url 'editlocation' pk=location.pk %}" class="btn btn-primary" role="button">edit</a>
+            <a href="{  url 'editlocation' pk=o.pk  }" class="btn btn-secondary" role="button">take out</a>
+            <a href="{  url 'editlocation' pk=o.pk  }" class="btn btn-secondary" role="button">request</a>
+          </div>
+        </td>
+
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="5">No data</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+  {% endblock %}

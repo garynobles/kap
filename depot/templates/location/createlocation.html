@@ -1,0 +1,26 @@
+{% extends 'location/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+{% include "menu1.html" %}
+{% include "location/menu2.html" %}
+<div class="container">
+    <h1>Location</h1>
+    <div class="col-sm-3">
+    <form method="POST" class="post-form">{% csrf_token %}
+
+
+        <!-- Location Identifier{{ form.location_identifier|add_class:"form-control"}}<br /> -->
+        Store ID{{ form.store_id|add_class:"form-control"}}<br />
+
+        Location Type{{ form.location_type|add_class:"form-control"}}<br />
+
+        <!-- Current Location TMP{{ form.current_location_tmp|add_class:"form-control"}}<br /> -->
+        Location Name{{ form.location_name|add_class:"form-control"}}<br />
+        Icon ID{{ form.icon_desc|add_class:"form-control"}}<br />
+
+
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

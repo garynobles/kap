@@ -1,0 +1,52 @@
+{% extends 'location/base.html' %}
+{% load widget_tweaks %}
+
+
+{% block content%}
+{% include "menu1.html" %}
+{% include "container/menu2.html" %}
+
+<div class="container">
+
+
+<div class="album py-5 ">
+
+  <section>
+    <div class="float-right col-sm-1">
+      <div>
+        <a href="{% url 'createlocation' %}">
+          <button  type="button" class="btn btn-primary">Add new location</button>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="row">
+    {% for location in location.all %}
+
+<a class="text-light" href="{% url 'detaillocation' location.location_id %}">
+  <div class="col-md-4">
+    <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+      <div class="card-header">{{ location.location_name }}</div>
+      <div class="card-body align-content-lg-center"  style="height: 250px;">
+        <h5 class="card-title text-center"></h5>
+        <img class="card-img-top p-3" style="margin-left: auto; margin-right: auto; width: 75%; display: block;" src="{{ location.icon.url }}" />
+      </a>
+        <ul class="list-unstyled">
+        <li class="card-text list-inline-item" style = "font-size:0.7em;">Location Type: {{ location.location_type }}, <a href="{% url 'detailstore' location.store_id.store_id %}">{{ location.store_id.store_name }}</a> {{ store.city }} {{ store.region }} {{ store.zip }} {{ store.country }}</li>
+      </ul>
+      </div>
+    </div>
+  </div>
+</a>
+      {% endfor %}
+
+  </div>
+</div>
+</div>
+
+
+
+
+
+{% endblock %}

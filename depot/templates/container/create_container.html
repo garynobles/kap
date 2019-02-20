@@ -1,0 +1,29 @@
+{% extends 'container/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+{% include "menu1.html" %}
+{% include "container/menu2.html" %}
+<div class="container">
+    <h1>Container</h1>
+    <div class="col-sm-3">
+
+       {{ form.as_p }}
+    <form method="POST" class="post-form">{% csrf_token %}
+
+        Container Name{{ form.container_name|add_class:"form-control"}}<br />
+        Container Type{{ form.container_type|add_class:"form-control"}}<br />
+        Location ID{{ form.location_id|add_class:"form-control"}}<br />
+        Icon ID{{ form.icon_desc|add_class:"form-control"}}<br />
+
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+  </div>
+</div>
+
+
+
+{% endblock %}
+
+
+<!--    |append_attr:"placeholder:Username"   -->

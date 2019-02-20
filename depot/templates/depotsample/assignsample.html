@@ -1,0 +1,77 @@
+{% extends 'depotsample/base.html' %}
+{% load widget_tweaks %}
+
+
+
+{% block content %}
+{% include "menu1.html" %}
+{% include "depotsample/menu2.html" %}
+<div class="container">
+    <!-- <h1>Assign a Sample with a Container</h1>
+    <div class="">
+    <form method="POST" class="post-form">{% csrf_token %}
+        <!--  {{ form.as_p }}   -->
+
+<!-- <div class="float-left">
+  Area Northing{{ form.area_northing|add_class:"form-control"}}<br />
+  Area Easting{{ form.area_easting|add_class:"form-control"}}<br />
+  Context Number{{ form.context_number|add_class:"form-control"}}<br />
+  Sample Number{{ form.sample_number|add_class:"form-control"}}<br />
+  Container{{ form.container_id|add_class:"form-control"}}<br />
+  Area Easting{{ form.area_easting|add_class:"form-control"}}<br />
+</div>
+<div class="float-left">
+      {{ form.containers}}
+</div> -->
+
+
+<!--
+
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+  </div> -->
+
+
+</div> -->
+<div class="clearfix">
+
+<div class="container">
+
+  <script type="text/javascript" src="/jsi18n/"></script>
+  <script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+
+  {{ form }}<br />
+
+  <div class="float-left">
+    <!-- Samples -->
+    chosen sample
+    {{ media }}
+  </div>
+
+<form method='POST' action='' enctype='multipart/form-data'>{% csrf_token %}
+
+
+<div class="float-right">
+  Containers
+  {{ form }}<br />
+
+</div>
+<div class="clearfix">
+
+</div>
+<input type='submit' value='Save' />
+</form>
+
+
+
+
+
+</div>
+
+<div class="clearfix">
+
+</div>
+
+</div>
+{% endblock %}<!--    |append_attr:"placeholder:Username"   -->

@@ -1,0 +1,131 @@
+{% extends 'sample/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+{% include "menu1.html" %}
+{% include "sample/menu2.html" %}
+<section>
+  <div class="float-right col-sm-1">
+    <div class="pt-3">
+      <a class="btn btn-default" href="{ url 'addflotation' pk=sample.sample_id }"><span class="glyphicon glyphicon-pencil">
+        <button type="button" class="btn btn-primary">edit sample add</button>
+      </span></a>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <section>
+    <div class="">
+      <div>
+      <div class="btn-group">
+        <span class = "badge badge-info">Botany id:</span> <span class = "badge badge-light"> {{ sample.sample_id }} </span>
+      </div>
+      <div class="btn-group">
+        <span class = "badge badge-info">Context Key:</span> <span class = "badge badge-light"> {{ sample.area_easting }} </span>.<span class = "badge badge-light"> {{ sample.area_northing }} </span>.<span class = "badge badge-light"> {{ sample.context_number }} </span>.<span class = "badge badge-light"> {{ sample.sample_number }} </span>
+      </div>
+      <div class="btn-group">
+        <span class = "badge badge-info">Sample Type:</span> <span class = "badge badge-light"> {{ sample.sample_type }} </span>
+      </div>
+      <div class="btn-group">
+        <span class = "badge badge-info">Weight:</span> <span class = "badge badge-light"> {{ sample.weight }} </span>
+      </div>
+      <div class="btn-group">
+        <span class = "badge badge-info">Description:</span> <span class = "badge badge-light"> {{ sample.description }} </span>
+      </div>
+
+      <div class="btn-group">
+        <span class = "badge badge-info">Recovery Method:</span> <span class = "badge badge-light"> {{ sample.recovery_method }} </span>
+      </div>
+
+      <div class="btn-group">
+        <span class = "badge badge-info">Taken By:</span> <span class = "badge badge-light"> {{ sample.taken_by }} </span>
+      </div>
+
+      </div>
+      <div class="btn-group">
+        <span class = "badge badge-info">Comments:</span> <span class = "badge badge-light"> {{ sample.comments }} </span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="float-left col-sm-9">
+        <div class="row">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4>
+                Flotation
+              </h4>
+            </div>
+            <table class="table table-fixed">
+              <thead>
+                <tr>
+                  <th>Flotation ID</th>
+                  <th>Sample ID</th>
+                  <th>Key ENC</th>
+                  <th>Sample Number</th>
+                  <th>Entry Date</th>
+                  <th>Flotation Date</th>
+                  <th>Analyst</th>
+                  <th>Notes</th>
+
+
+                </tr>
+              </thead>
+              <tbody>
+              {% for flotation in flotation.all %}
+                <tr>
+
+                  <td>{{ flotation.botany_id }}</td>
+                  <td>{{ flotation.sample_id }}</td>
+                  <td>{{ flotation.area_easting }}.{{ flotation.area_northing }}.{{ flotation.context_number}}</td>
+                  <td>{{ flotation.sample_number }}</td>
+                  <td>{{ flotation.entry_date }}</td>
+                  <td>{{ flotation.flotation_date }}</td>
+                  <td>{{ flotation.analyst }}</td>
+                  <td>{{ flotation.notes  }}</td>
+
+                  <td>
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                  <!-- <a href="{% url 'addfraction' fk=sample.sample_id pk=flotation.botany_id %}" class="badge badge-primary" role="button">+ Fraction A</a> -->
+                  <a href="{% url 'addfraction' fk=sample.sample_id pk=flotation.botany_id %}" class="badge badge-primary" role="button">+ Fraction A</a>
+                  <!-- <a href="{ url 'addmaterialpresent' fk=botany.botany_id pk=fraction.fraction_id }" class="badge badge-primary" role="button">Material</a> -->
+                  <a href="{% url 'detailflotation' flotation.botany_id %}" class="badge badge-warning" role="button">detail</a>
+                    <!-- <a href="{ url 'detailfraction' pk=botany_id }" class="badge badge-warning" role="button">detail++</a> -->
+                  <a href="{% url 'editflotation' pk=flotation.pk %}"
+                   class="badge badge-secondary" role="button">
+                   edit flotation
+                 </a>
+                 <!-- <a href="{ url 'editfraction' pk=o.pk }" -->
+                  </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
+            <table class="table table-fixed">
+              <tbody style="height: 350px; overflow-y: auto; display: block; width:100%;">
+              {% for joinsamplecontainer in joinsamplecontainer.all %}
+                <tr>
+                  <td class="col-xs-2 pt-3 pb-3">
+                  <a href="% url 'edit_join_sample_container' pk=joinsamplecontainer.id %">
+                  #{{ joinsamplecontainer.id }} - {{ joinsamplecontainer.area_easting }}.{{ joinsamplecontainer.area_northing }}.{{ joinsamplecontainer.context_number }}.{{ joinsamplecontainer.sample_number }}
+                  </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+  </section>
+</div>
+</div>
+</main>
+<div class="clearfix">
+
+</div>
+{% endblock %}
