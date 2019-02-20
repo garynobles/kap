@@ -25,7 +25,7 @@ class Sample(models.Model):
 
 
     class Meta:
-        db_table = 'samples\".\"sample'
+        db_table = 'kap\".\"sample'
         #ordering = ["sample_id"]
         managed = False
         #verbose_name_plural = "samples"
@@ -38,9 +38,9 @@ class Flotation(models.Model):
     area_northing = models.IntegerField(blank=True, null=True)
     context_number = models.IntegerField(blank=True, null=True)
     sample_number = models.IntegerField(blank=True, null=True)
-    entry_date = models.DateTimeField(auto_now_add=False)
     flotation_date = models.DateTimeField(auto_now=False)
-    analyst = models.CharField(max_length=200, default='', blank=True, null=True)
+    entry_date = models.DateTimeField(auto_now_add=False)
+    analyst_id = models.ForeignKey(settings.AUTH_USER_MODEL, db_column='analyst_id', on_delete = models.PROTECT)
     notes = models.CharField(max_length=600, default='', blank=True, null=True)
 
     def __str__(self):
@@ -48,7 +48,7 @@ class Flotation(models.Model):
 
     class Meta():
         managed=False
-        db_table = 'samples\".\"botany'
+        db_table = 'kap\".\"flotation'
         #ordering = ["orderby"]
         verbose_name_plural = "Flotation"
 
@@ -74,7 +74,7 @@ class Fraction(models.Model):
 
     class Meta():
         managed=False
-        db_table = 'samples\".\"fraction'
+        db_table = 'kap\".\"fraction'
         #ordering = ["orderby"]
         verbose_name_plural = "Fraction"
 
@@ -92,7 +92,7 @@ class FractionComposition(models.Model):
 
     class Meta():
         managed=False
-        db_table = 'samples\".\"fraction_composition'
+        db_table = 'kap\".\"fraction_composition'
         #ordering = ["orderby"]
         verbose_name_plural = "Composition"
 
@@ -117,6 +117,6 @@ class FractionMaterialsPresent(models.Model):
 #
 #     class Meta():
 #         managed=False
-#         db_table = 'samples\".\"materials_present'
+#         db_table = 'kap\".\"materials_present'
 #         #ordering = ["orderby"]
 #         verbose_name_plural = "Materials Present"

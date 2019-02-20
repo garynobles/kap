@@ -1,0 +1,105 @@
+<div id="botany_graph" style="width:50%; min-width: 100px; height: 400px; margin: 0 auto; float: left; border-style:solid;"></div>
+
+
+
+<script type="text/javascript">
+
+  // Add the nodes option through an event call. We want to start with the parent
+  // item and apply separate colors to each child element, then the same color to
+  // grandchildren.
+  Highcharts.addEvent(
+      Highcharts.seriesTypes.networkgraph,
+      'afterSetOptions',
+      function (e) {
+          var colors = Highcharts.getOptions().colors,
+              i = 0,
+              nodes = {};
+          e.options.data.forEach(function (link) {
+
+              if (link[0] === 'Trench 99.526') {
+                  nodes['Trench 99.526'] = {
+                      id: 'Trench 99.526',
+                      marker: {
+                          radius: 20
+                      }
+                  };
+                  nodes[link[1]] = {
+                      id: link[1],
+                      marker: {
+                          radius: 10
+                      },
+                      color: colors[i++]
+                  };
+              } else if (nodes[link[0]] && nodes[link[0]].color) {
+                  nodes[link[1]] = {
+                      id: link[1],
+                      color: nodes[link[0]].color
+                  };
+              }
+          });
+
+          e.options.nodes = Object.keys(nodes).map(function (id) {
+              return nodes[id];
+          });
+      }
+  );
+
+  Highcharts.chart('botany_graph', {
+      chart: {
+          type: 'networkgraph',
+          height: '100%'
+      },
+      title: {
+          text: 'Relationships'
+      },
+      subtitle: {
+          text: 'Botany'
+      },
+      plotOptions: {
+          networkgraph: {
+              keys: ['from', 'to'],
+              layoutAlgorithm: {
+                  enableSimulation: true
+              }
+          }
+      },
+      series: [{
+          dataLabels: {
+              enabled: true
+          },
+          data: [
+              ['Trench 99.526', 'Sample 7'],
+              ['Trench 99.526', 'Sample 8'],
+              ['Trench 99.526', 'Sample 9'],
+              ['Trench 99.526', 'Sample 10'],
+              ['Sample 7', 'Flotation 16'],
+              ['Sample 7', 'Flotation 18'],
+              ['Sample 8', 'Flotation 17'],
+              ['Sample 10', 'Flotation 19'],
+
+              ['Flotation 16', 'Fraction 26'],
+              ['Flotation 16', 'Fraction 27'],
+              ['Flotation 16', 'Fraction 28'],
+
+              ['Flotation 17', 'Fraction 29'],
+              ['Flotation 17', 'Fraction 30'],
+
+              ['Flotation 19', 'Fraction 31'],
+
+
+
+
+
+
+              // Leaves:
+              // ['Trench 99.526', 'Sample 7'],
+              // ['Trench 99.526', 'Armenian'],
+              // ['Trench 99.526', 'Albanian'],
+              // ['Trench 99.526', 'Thracian'],
+
+          ]
+      }]
+  });
+
+
+</script>

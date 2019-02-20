@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from django.conf.urls import url
 from . import views
 
@@ -14,20 +14,20 @@ urlpatterns = [
     # ulr(r'^project_config/(?P<product>\w+)/(?P<project_id>\w+)/$', views.foo),
     # path('flotation/', views.allflotationfilter, name='allflotationfilter'),
     path('addflotation/', views.addflotation, name='addflotation'),
-    path('addflotation/(?P<pk>\d+)/', views.addflotation, name='addflotation'),
+    re_path('addflotation/(?P<pk>\d+)/', views.addflotation, name='addflotation'),
 
 
 
 
 
     path('sample/flotation/<int:botany_id>/', views.detailflotation, name='detailflotation'),
-    path('flotation/edit/(?P<pk>\d+)/edit/', views.editflotation, name='editflotation'),
+    re_path('flotation/edit/(?P<pk>\d+)/edit/', views.editflotation, name='editflotation'),
 
     ##
     path('sample/', views.allsample, name='allsample'),
     path('addsample/', views.addsample, name='addsample'),
     path('sample/<int:sample_id>/', views.detailsample, name='detailsample'),
-    path('sample/edit/(?P<pk>\d+)/edit/', views.editsample, name='editsample'),
+    re_path('sample/edit/(?P<pk>\d+)/edit/', views.editsample, name='editsample'),
 
     ##
     # url(r'^sample/$', views.addfraction, name='addfraction'),
@@ -35,13 +35,16 @@ urlpatterns = [
     # url(r'^sample/(?P<sample_id>\w+)/flotation/$', views.addfraction, name='addfraction'),
     # url(r'^sample/(?P<sample_id>\w+)/flotation/(?P<pk>\d+)/$', views.addfraction, name='addfraction'),
 
-    url(r'^flotation/(?P<pk>\d+)/$', views.addfraction, name='addfraction'),
-    url(r'^sample/(?P<fk>\d+)/flotation/(?P<pk>\d+)/$', views.addfraction, name='addfraction'),
+    re_path(r'^flotation/(?P<pk>\d+)/$', views.addfraction, name='addfraction'),
 
-    url(r'^flotation/(?P<fk>\d+)/addcomposition/(?P<pk>\d+)/$', views.addcomposition, name='addcomposition'),
+# url(r'^flotation/(?P<pk>\d+)/$', views.addfraction, name='addfraction'),
+
+    re_path(r'^sample/(?P<fk>\d+)/flotation/(?P<pk>\d+)/$', views.addfraction, name='addfraction'),
+
+    re_path(r'^flotation/(?P<fk>\d+)/addcomposition/(?P<pk>\d+)/$', views.addcomposition, name='addcomposition'),
 
     path('flotation/<int:botany_id>/fraction/<int:fraction_id>/', views.detailfraction, name='detailfraction'),
-    path('flotation/(?P<fk>\d+)/fraction/edit/(?P<pk>\d+)/edit/', views.editfraction, name='editfraction'),
+    re_path('flotation/(?P<fk>\d+)/fraction/edit/(?P<pk>\d+)/edit/', views.editfraction, name='editfraction'),
 
     # url(r'^(?P<fk>\d+)/addmaterialpresent/(?P<pk>\d+)/$', views.addmaterialpresent, name='addmaterialpresent'),
     #url(r'^(?P<fk>\d+)/fraction/(?P<pk>\d+)/$', views.detailfraction, name='detailfraction'),

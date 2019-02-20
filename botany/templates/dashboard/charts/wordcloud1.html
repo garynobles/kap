@@ -1,0 +1,33 @@
+<div id="wordcloud1" style="width:50%; min-width: 100px; height: 400px; margin: 0 auto; float: left; border-style:solid;"></div>
+
+<script type="text/javascript">
+  var text ='{% for word in text %}{{ word.notes }}{% if not forloop.last %},{% endif %} {% endfor %}';
+
+var lines = text.split(/[,\. ]+/g),
+    data = Highcharts.reduce(lines, function (arr, word) {
+        var obj = Highcharts.find(arr, function (obj) {
+            return obj.name === word;
+        });
+        if (obj) {
+            obj.weight += 1;
+        } else {
+            obj = {
+                name: word,
+                weight: 1
+            };
+            arr.push(obj);
+        }
+        return arr;
+    }, []);
+
+Highcharts.chart('wordcloud1', {
+    series: [{
+        type: 'wordcloud',
+        data: data,
+        name: 'Occurrences'
+    }],
+    title: {
+        text: 'Wordcloud of Notes: Live'
+    }
+});
+</script>

@@ -63,15 +63,50 @@ def allbotany(request, sample_id=''):
     dataset2 = Fraction.objects.values('soil_volume')
     dataset3 = query3
 
-    a = Fraction.objects.values('roots').filter(roots=True)
-    b = Fraction.objects.values('bone').filter(bone=True)
-    c = Fraction.objects.values('sediment').filter(sediment=True)
-    dataset4 = {"roots": a, "bone": b, "sediment": c}
+    # a = Fraction.objects.values('roots').filter(roots=True)
+    # b = Fraction.objects.values('bone').filter(bone=True)
+    # c = Fraction.objects.values('sediment').filter(sediment=True)
+    # dataset4 = {"roots": a, "bone": b, "sediment": c}
+    text = Flotation.objects.values('notes')
 
-    dataset5 = query2
+
+
+    roots = Fraction.objects.filter(roots=True).count()
+    bone = Fraction.objects.filter(bone=True).count()
+    sediment = Fraction.objects.filter(sediment=True).count()
+    shell = Fraction.objects.filter(shell=True).count()
+    stone = Fraction.objects.filter(stone=True).count()
+    leaves = Fraction.objects.filter(leaves=True).count()
+    insect_parts = Fraction.objects.filter(insect_parts=True).count()
+    charred_dung = Fraction.objects.filter(charred_dung=True).count()
+    dataset4 ={
+        "roots": roots,
+        "bone": bone,
+        "sediment": sediment,
+        "shell": shell,
+        "stone": stone,
+        "leaves": leaves,
+        "insect parts": insect_parts,
+        "charred dung": charred_dung}
+
+    # import datetime
+    timeseries = Flotation.objects.values('flotation_date')
+
+    # .strftime("%Y-%m-%dT%H:%M:%S.%f")
+
+
+
+# date = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f")
+
+    # roots = Fraction.objects \
+    #     .values('roots').filter(roots=True)
+    # bone = Fraction.objects \
+    #     .values('bone').filter(bone=True).count()
+    bone=5
+
 
     # dataset5 = a.filter(roots=True)| b.filter(bone=True)
-    dataset6 = b.count()
+    # dataset6 = b.count()
     # dataset3 = Fraction.objects.values('soil_volume')
     # matches = pages | articles | posts
 
@@ -97,8 +132,13 @@ def allbotany(request, sample_id=''):
     'dataset2': dataset2,
     'dataset3': dataset3,
     'dataset4': dataset4,
-    'dataset5': dataset5,
-    'dataset6': dataset6,
+    # 'dataset5': dataset5,
+    # 'dataset6': dataset6,
+    'text': text,
+
+    'roots': roots,
+    'timeseries': timeseries,
+    # 'bone': bone,
 
     })
 
@@ -106,7 +146,8 @@ def allbotany(request, sample_id=''):
 def allflotation(request, sample_id='', botany_id='', fraction_id=''):
     flotation = Flotation.objects.all()
     fraction = Fraction.objects.all()
-    count = Fraction.objects.all().filter(botany_id=13).count()
+    count = Fraction.objects.all().count()
+    # .filter(botany_id=6).count()
     fractioncomposition = FractionComposition.objects.all()
     # fractionmaterialspresent = FractionMaterialsPresent.objects.all()
     return render(request, 'flotation/allflotation.html',
@@ -150,15 +191,16 @@ class FlotationForm(forms.ModelForm):
         'area_northing',
         'context_number',
         'sample_number',
+        'flotation_date',
         'entry_date',
-
-        'analyst',
+        'analyst_id',
         # 'analyst_id',
         'notes',
         )
 
         widgets = {
             'entry_date': DateInput(attrs={'type': 'date'}),
+            'flotation_date': DateInput(attrs={'type': 'date'}),
         }
 
 class SampleForm(forms.ModelForm):

@@ -1,0 +1,57 @@
+<div id="botany_fraction_pie" style="width:50%; min-width: 100px; height: 400px; margin: 0 auto; float: left; border-style:solid;"></div>
+
+<script type="text/javascript">
+
+  Highcharts.chart('botany_fraction_pie', {
+      chart: {
+          plotBackgroundColor: null,
+          plotBorderWidth: null,
+          plotShadow: false,
+          type: 'pie'
+      },
+      title: {
+          text: 'Botany Fractions: Live'
+      },
+      credits: {
+          enabled: false
+      },
+      tooltip: {
+          pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      },
+      plotOptions: {
+          pie: {
+              allowPointSelect: true,
+              cursor: 'pointer',
+              dataLabels: {
+                  enabled: true,
+                  format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                  style: {
+                      color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                  }
+              }
+          }
+      },
+      // xAxis: {
+      //   categories: [
+      //   {% for entry in dataset4 %}
+      //   'C {{ entry.roots }}'
+      //   {% if not forloop.last %},
+      //   {% endif %}
+      //   {% endfor %}
+      //   ]
+      // },
+      series: [{
+          name: '',
+          colorByPoint: true,
+            data: [
+            {% for name, count in dataset4.items %}
+            {name: '{{ name }}', y: {{ count }} }
+            {% if not forloop.last %},
+            {% endif %}
+            {% endfor %}
+            ],
+
+      }]
+  });
+
+</script>
