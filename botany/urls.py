@@ -7,7 +7,7 @@ urlpatterns = [
     path('', views.allbotany, name='allbotany'),
 
     path('flotation/', views.allflotation, name='allflotation'),
-    path('flotation/<int:botany_id>', views.allflotation, name='allflotation'),
+    path('flotation/<int:flotation_id>', views.allflotation, name='allflotation'),
 
     # url(r'^project_config/$', views.foo),
     # url(r'^project_config/(?P<product>\w+)/$', views.foo),
@@ -20,7 +20,7 @@ urlpatterns = [
 
 
 
-    path('sample/flotation/<int:botany_id>/', views.detailflotation, name='detailflotation'),
+    path('sample/flotation/<int:flotation_id>/', views.detailflotation, name='detailflotation'),
     re_path('flotation/edit/(?P<pk>\d+)/edit/', views.editflotation, name='editflotation'),
 
     ##
@@ -43,7 +43,7 @@ urlpatterns = [
 
     re_path(r'^flotation/(?P<fk>\d+)/addcomposition/(?P<pk>\d+)/$', views.addcomposition, name='addcomposition'),
 
-    path('flotation/<int:botany_id>/fraction/<int:fraction_id>/', views.detailfraction, name='detailfraction'),
+    path('flotation/<int:flotation_id>/fraction/<int:fraction_id>/', views.detailfraction, name='detailfraction'),
     re_path('flotation/(?P<fk>\d+)/fraction/edit/(?P<pk>\d+)/edit/', views.editfraction, name='editfraction'),
 
     # url(r'^(?P<fk>\d+)/addmaterialpresent/(?P<pk>\d+)/$', views.addmaterialpresent, name='addmaterialpresent'),

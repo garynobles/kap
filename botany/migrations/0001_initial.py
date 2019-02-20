@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Flotation',
             fields=[
-                ('botany_id', models.AutoField(primary_key=True, serialize=False)),
+                ('flotation_id', models.AutoField(primary_key=True, serialize=False)),
                 ('area_easting', models.IntegerField(blank=True, null=True)),
                 ('area_northing', models.IntegerField(blank=True, null=True)),
                 ('context_number', models.IntegerField(blank=True, null=True)),

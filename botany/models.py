@@ -32,7 +32,7 @@ class Sample(models.Model):
 
 
 class Flotation(models.Model):
-    botany_id = models.AutoField(primary_key=True)
+    flotation_id = models.AutoField(primary_key=True)
     sample_id = models.ForeignKey(Sample, db_column='sample_id', on_delete = models.PROTECT)
     area_easting = models.IntegerField(blank=True, null=True)
     area_northing = models.IntegerField(blank=True, null=True)
@@ -44,7 +44,7 @@ class Flotation(models.Model):
     notes = models.CharField(max_length=600, default='', blank=True, null=True)
 
     def __str__(self):
-        return str(self.botany_id)
+        return str(self.flotation_id)
 
     class Meta():
         managed=False
@@ -55,7 +55,7 @@ class Flotation(models.Model):
 
 class Fraction(models.Model):
     fraction_id = models.AutoField(primary_key=True)
-    botany_id = models.ForeignKey(Flotation, db_column='botany_id', on_delete = models.PROTECT)
+    flotation_id = models.ForeignKey(Flotation, db_column='flotation_id', on_delete = models.PROTECT)
     proportion_analysed = models.DecimalField(max_digits=5, decimal_places=3)
     soil_volume = models.DecimalField(max_digits=15, decimal_places=4)
     sample_volume = models.DecimalField(max_digits=15, decimal_places=4)

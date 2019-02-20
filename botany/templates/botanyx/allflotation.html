@@ -16,7 +16,7 @@
 
 
       <div class="">
-        <p>Botany id: {{ botany.botany_id }}
+        <p>Botany id: {{ botany.flotation_id }}
         Sample id: {{ botany.sample_id }}
         Context Key: {{ botany.area_easting }}.{{ botany.area_northing }}.{{ botany.context_number }}.{{ botany.sample_number }}
         Entry Date: {{ botany.entry_date }}
@@ -57,18 +57,18 @@
 
       <td>{{ botany.sample_id }}</td>
       <td>{{ botany.area_easting }}.{{ botany.area_northing }}.{{ botany.context_number }}</td>
-      <td>{{ botany.botany_id }}</td>
+      <td>{{ botany.flotation_id }}</td>
       <td>{{ botany.sample_number }}</td>
       <td>{{ botany.entry_date }}</td>
       <td>{{ botany.flotation_date }}</td>
       <td>{{ botany.analyst }}</td>
       <td>{{ botany.notes }}</td>
 
-      <!-- <td>{{ botany.botany_id.proportion_analysed }}</td> -->
+      <!-- <td>{{ botany.flotation_id.proportion_analysed }}</td> -->
 
       <td>
         <div class="btn-group" role="group" aria-label="Basic example">
-          <a href="{% url 'addfraction' pk=botany.botany_id %}">
+          <a href="{% url 'addfraction' pk=botany.flotation_id %}">
             <span class="badge badge-primary">
                 Add Fraction
               <br />
@@ -78,19 +78,19 @@
             </span>
           </a>
 
-          <a href="{% url 'detailflotation' botany.botany_id %}"
+          <a href="{% url 'detailflotation' botany.flotation_id %}"
           style="padding: 0px 0px 0px 10px;">
             <span class="badge badge-warning">
             Detail<br/ > View
             </span></a>
 
-          <a href="{ url 'flotationrequest' botany.botany_id }"
+          <a href="{ url 'flotationrequest' botany.flotation_id }"
           style="padding: 0px 0px 0px 10px;">
             <span class="badge badge-secondary">
             Send<br/ > Request
             </span></a>
 
-          <a href="{ url 'flotationrequest' botany.botany_id }"
+          <a href="{ url 'flotationrequest' botany.flotation_id }"
           style="padding: 0px 0px 0px 10px;">
             <span class="badge badge-secondary">
             edit <br />
@@ -134,7 +134,7 @@
 
 
       <td>{{ fraction.fraction_id }}</td>
-      <td>{{ fraction.botany_id }}</td>
+      <td>{{ fraction.flotation_id }}</td>
       <td>{{ fraction.proportion_analysed }}</td>
       <td>{{ fraction.soil_volume }}</td>
 
@@ -144,10 +144,10 @@
       <td>
         <div class="btn-group" role="group" aria-label="Basic example">
 
-          <a href="{ url 'addcomposition' pk=botany.botany_id }" class="btn btn-primary" role="button">+ Composition</a>
-          <a href="{ url 'addfractionmaterialpresent' pk=botany.botany_id }" class="btn btn-primary" role="button">+ Material</a>
+          <a href="{ url 'addcomposition' pk=botany.flotation_id }" class="btn btn-primary" role="button">+ Composition</a>
+          <a href="{ url 'addfractionmaterialpresent' pk=botany.flotation_id }" class="btn btn-primary" role="button">+ Material</a>
 
-          <a href="{ url 'detailflotation' botany.botany_id }" class="btn btn-warning" role="button">detail</a>
+          <a href="{ url 'detailflotation' botany.flotation_id }" class="btn btn-warning" role="button">detail</a>
           <a href="{ url 'editcontainersearch' pk=o.pk }" class="btn btn-secondary" role="button">request</a>
 
 

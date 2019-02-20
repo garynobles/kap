@@ -77,7 +77,7 @@
               {% for flotation in flotation.all %}
                 <tr>
 
-                  <td>{{ flotation.botany_id }}</td>
+                  <td>{{ flotation.flotation_id }}</td>
                   <td>{{ flotation.sample_id }}</td>
                   <td>{{ flotation.area_easting }}.{{ flotation.area_northing }}.{{ flotation.context_number}}</td>
                   <td>{{ flotation.sample_number }}</td>
@@ -88,11 +88,11 @@
 
                   <td>
                   <div class="btn-group" role="group" aria-label="Basic example">
-                  <!-- <a href="{% url 'addfraction' fk=sample.sample_id pk=flotation.botany_id %}" class="badge badge-primary" role="button">+ Fraction A</a> -->
-                  <a href="{% url 'addfraction' fk=sample.sample_id pk=flotation.botany_id %}" class="badge badge-primary" role="button">+ Fraction A</a>
-                  <!-- <a href="{ url 'addmaterialpresent' fk=botany.botany_id pk=fraction.fraction_id }" class="badge badge-primary" role="button">Material</a> -->
-                  <a href="{% url 'detailflotation' flotation.botany_id %}" class="badge badge-warning" role="button">detail</a>
-                    <!-- <a href="{ url 'detailfraction' pk=botany_id }" class="badge badge-warning" role="button">detail++</a> -->
+                  <!-- <a href="{% url 'addfraction' fk=sample.sample_id pk=flotation.flotation_id %}" class="badge badge-primary" role="button">+ Fraction A</a> -->
+                  <a href="{% url 'addfraction' fk=sample.sample_id pk=flotation.flotation_id %}" class="badge badge-primary" role="button">+ Fraction A</a>
+                  <!-- <a href="{ url 'addmaterialpresent' fk=botany.flotation_id pk=fraction.fraction_id }" class="badge badge-primary" role="button">Material</a> -->
+                  <a href="{% url 'detailflotation' flotation.flotation_id %}" class="badge badge-warning" role="button">detail</a>
+                    <!-- <a href="{ url 'detailfraction' pk=flotation_id }" class="badge badge-warning" role="button">detail++</a> -->
                   <a href="{% url 'editflotation' pk=flotation.pk %}"
                    class="badge badge-secondary" role="button">
                    edit flotation

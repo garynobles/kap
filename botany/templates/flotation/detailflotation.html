@@ -7,7 +7,7 @@
 <section>
   <div class="float-right col-sm-1">
     <div class="pt-3">
-      <a class="btn btn-default" href="% url 'editflotation' pk=flotation.botany_id %"><span class="glyphicon glyphicon-pencil">
+      <a class="btn btn-default" href="% url 'editflotation' pk=flotation.flotation_id %"><span class="glyphicon glyphicon-pencil">
         <button type="button" class="btn btn-primary">edit flotation</button>
       </span></a>
     </div>
@@ -19,7 +19,7 @@
     <div class="">
       <div>
       <div class="btn-group">
-        <span class = "badge badge-info">Botany id:</span> <span class = "badge badge-light"> {{ flotation.botany_id }} </span>
+        <span class = "badge badge-info">Botany id:</span> <span class = "badge badge-light"> {{ flotation.flotation_id }} </span>
       </div>
       <div class="btn-group">
         <span class = "badge badge-info">Sample id:</span> <span class = "badge badge-light"> {{ flotation.sample_id }} </span>
@@ -76,7 +76,7 @@
               {% for fraction in fraction.all %}
                 <tr>
                   <td>{{ fraction.fraction_id }}</td>
-                  <td>{{ fraction.botany_id }}</td>
+                  <td>{{ fraction.flotation_id }}</td>
                   <td>{{ fraction.proportion_analysed }}</td>
                   <td>{{ fraction.soil_volume }}</td>
                   <td>{{ fraction.sample_volume }}</td>
@@ -91,11 +91,11 @@
                   <td>{{ fraction.shell|yesno:"yes,no"  }}</td>
                   <td>
                   <div class="btn-group" role="group" aria-label="Basic example">
-                  <a href="{% url 'addcomposition' fk=flotation.botany_id pk=fraction.fraction_id %}" class="badge badge-primary" role="button">+ Composition</a>
-                  <!-- <a href="{ url 'addmaterialpresent' fk=botany.botany_id pk=fraction.fraction_id }" class="badge badge-primary" role="button">Material</a> -->
-                  <a href="{% url 'detailfraction' flotation.botany_id fraction.fraction_id %}" class="badge badge-warning" role="button">detail</a>
-                    <!-- <a href="{ url 'detailfraction' pk=botany_id }" class="badge badge-warning" role="button">detail++</a> -->
-                  <a href="{% url 'editfraction' fk=flotation.botany_id pk=fraction.pk %}"
+                  <a href="{% url 'addcomposition' fk=flotation.flotation_id pk=fraction.fraction_id %}" class="badge badge-primary" role="button">+ Composition</a>
+                  <!-- <a href="{ url 'addmaterialpresent' fk=botany.flotation_id pk=fraction.fraction_id }" class="badge badge-primary" role="button">Material</a> -->
+                  <a href="{% url 'detailfraction' flotation.flotation_id fraction.fraction_id %}" class="badge badge-warning" role="button">detail</a>
+                    <!-- <a href="{ url 'detailfraction' pk=flotation_id }" class="badge badge-warning" role="button">detail++</a> -->
+                  <a href="{% url 'editfraction' fk=flotation.flotation_id pk=fraction.pk %}"
                    class="badge badge-secondary" role="button">
                    edit fraction
                  </a>

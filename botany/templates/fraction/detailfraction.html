@@ -57,8 +57,8 @@
                   <td>{{ fractioncomposition.fragment_weight }}</td>
                   <td>
                   <div class="btn-group" role="group" aria-label="Basic example">
-                  <!-- <a href="{ url 'detailfraction' botany.botany_id fraction.fraction_id %}" class="btn btn-warning" role="button">detail++</a> -->
-                    <!-- <a href="{ url 'detailfraction' pk=botany_id }" class="btn btn-warning" role="button">detail++</a> -->
+                  <!-- <a href="{ url 'detailfraction' botany.flotation_id fraction.fraction_id %}" class="btn btn-warning" role="button">detail++</a> -->
+                    <!-- <a href="{ url 'detailfraction' pk=flotation_id }" class="btn btn-warning" role="button">detail++</a> -->
                   <a href="{ url 'editcontainersearch' pk=o.pk }" class="btn btn-secondary" role="button">request</a>
                   </div>
                   </td>
@@ -126,8 +126,8 @@
 
                     <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                    <!-- <a href="{ url 'detailfraction' botany.botany_id fraction.fraction_id %}" class="btn btn-warning" role="button">detail++</a> -->
-                      <!-- <a href="{ url 'detailfraction' pk=botany_id }" class="btn btn-warning" role="button">detail++</a> -->
+                    <!-- <a href="{ url 'detailfraction' botany.flotation_id fraction.fraction_id %}" class="btn btn-warning" role="button">detail++</a> -->
+                      <!-- <a href="{ url 'detailfraction' pk=flotation_id }" class="btn btn-warning" role="button">detail++</a> -->
                     <a href="{ url 'editcontainersearch' pk=o.pk }" class="btn btn-secondary" role="button">request</a>
                     </div>
                     </td>
@@ -188,7 +188,7 @@
         <div class="form-group">
           <label for="store_name" class="col-sm-3 control-label">Botany ID</label>
           <div class="col-sm-10">
-            <input class="form-control" id="store_name" type="text" placeholder="{{ fraction.botany_id }}" disabled>
+            <input class="form-control" id="store_name" type="text" placeholder="{{ fraction.flotation_id }}" disabled>
           </div>
           <div class="col-sm-5">
             <hr class=""/>
