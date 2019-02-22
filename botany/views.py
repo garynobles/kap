@@ -10,7 +10,7 @@ from itertools import chain
 from dal import autocomplete
 
 def allsample(request):
-    allsample = Sample.objects.filter(sample_type='Botanical')
+    allsample = Sample.objects.filter(sample_type='Soil')
     return render(request, 'sample/sample.html',
     {
     'allsample':allsample,
