@@ -20,7 +20,7 @@ class Sample(models.Model):
 
     def __str__(self):
         # return self.taken_by.first_name
-        return str(self.sample_number)
+        return str(self.sample_id)
         # return str(self.firstname)+ '-' +str(self.lastname)
         # return u'%s %s' % (self.first_name, self.last_name)
 
@@ -75,7 +75,7 @@ class Fraction(models.Model):
 
     class Meta():
         managed=False
-        db_table = 'kap\".\"fraction'
+        db_table = 'kap\".\"lightfraction'
         #ordering = ["orderby"]
         verbose_name_plural = "Fraction"
 
