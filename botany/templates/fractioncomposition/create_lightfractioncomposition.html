@@ -7,15 +7,15 @@
 {% include "menu1.html" %}
 {% include "fractioncomposition/menu2.html" %}
 <div class="container">
-    <h1>Fraction Composition</h1>
+    <h1>LightFraction Composition</h1>
     <div class="col-sm-3">
     <form method="POST" class="post-form">{% csrf_token %}
         <!--  {{ form.as_p }}   -->
-        <!-- Fraction ID{{ form.fraction_id|add_class:"form-control"}}<br /> -->
+        <!-- LightFraction ID{{ form.fraction_id|add_class:"form-control"}}<br /> -->
         Botany ID{{ form.fract_comp_id|add_class:"form-control"}}<br />
-        Fraction ID{{ form.fraction_id|add_class:"form-control"}}<br />
+        LightFraction ID{{ form.fraction_id|add_class:"form-control"}}<br />
         Material Type{{ form.material_type|add_class:"form-control"}}<br />
-        Fraction{{ form.fraction|add_class:"form-control"}}<br />
+        LightFraction{{ form.lightfraction|add_class:"form-control"}}<br />
         Type Count{{ form.type_count|add_class:"form-control"}}<br />
         Whole Weight{{ form.whole_weight|add_class:"form-control"}}<br />
         Fragment Weight{{ form.fragment_weight|add_class:"form-control"}}<br />

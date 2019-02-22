@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name='Fraction',
+            name='LightFraction',
             fields=[
                 ('fraction_id', models.AutoField(primary_key=True, serialize=False)),
                 ('proportion_analysed', models.DecimalField(decimal_places=3, max_digits=5)),
@@ -47,7 +47,7 @@ class Migration(migrations.Migration):
                 ('shell', models.BooleanField()),
             ],
             options={
-                'verbose_name_plural': 'Fraction',
+                'verbose_name_plural': 'LightFraction',
                 'db_table': 'kap"."lightfraction',
                 'managed': False,
             },
@@ -57,7 +57,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('fract_comp_id', models.AutoField(primary_key=True, serialize=False)),
                 ('material_type', models.CharField(default='', max_length=50)),
-                ('fraction', models.CharField(default='', max_length=50)),
+                ('lightfraction', models.CharField(default='', max_length=50)),
                 ('type_count', models.DecimalField(decimal_places=4, max_digits=15)),
                 ('whole_weight', models.DecimalField(decimal_places=4, max_digits=15)),
                 ('fragment_weight', models.DecimalField(decimal_places=4, max_digits=15)),

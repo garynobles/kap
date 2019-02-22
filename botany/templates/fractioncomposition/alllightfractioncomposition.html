@@ -11,11 +11,11 @@
 
 
 
-<h1>All Fraction Composition</h1>
+<h1>All LightFraction Composition</h1>
 <table class="table table-bordered">
   <thead>
     <tr>
-      <th>Fraction ID</th>
+      <th>LightFraction ID</th>
       <th>Botany ID</th>
       <th>Proportion Analysed</th>
       <th>Soil Volume</th>
@@ -32,7 +32,7 @@
       <td>{{ fractioncomposition.fract_comp_id }}</td>
       <td>{{ fractioncomposition.fraction_id }}</td>
       <td>{{ fractioncomposition.material_type }}</td>
-      <td>{{ fractioncomposition.fraction }}</td>
+      <td>{{ fractioncomposition.lightfraction }}</td>
 
       <td>{{ fractioncomposition.type_count }}</td>
       <td>{{ fractioncomposition.whole_weight }}</td>
@@ -40,8 +40,8 @@
       <td>
         <div class="btn-group" role="group" aria-label="Basic example">
 
-          <a href="{% url 'createfraction' %}" class="btn btn-primary" role="button">Add Fraction</a>
-          <a href="{% url 'detailfractioncomposition' fractioncomposition.fract_comp_id %}" class="btn btn-warning" role="button">detail</a>
+          <a href="{% url 'createfraction' %}" class="btn btn-primary" role="button">Add LightFraction</a>
+          <a href="{% url 'detaillightfractioncomposition' fractioncomposition.fract_comp_id %}" class="btn btn-warning" role="button">detail</a>
           <a href="% url 'editcontainersearch' pk=o.pk %" class="btn btn-secondary" role="button">request</a>
         </div>
       </td>

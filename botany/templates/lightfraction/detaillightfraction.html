@@ -1,15 +1,15 @@
-{% extends 'fraction/base.html' %}
+{% extends 'lightfraction/base.html' %}
 {% load widget_tweaks %}
 
 
 
 {% block content %}
 {% include "menu1.html" %}
-{% include "fraction/menu2.html" %}
+{% include "lightfraction/menu2.html" %}
 <section>
   <div class="float-right col-sm-1">
     <div class="pt-3">
-      <a class="btn btn-default" href="{ url 'editfraction' pk=fraction.pk }"><span class="glyphicon glyphicon-pencil">
+      <a class="btn btn-default" href="{ url 'editfraction' pk=lightfraction.pk }"><span class="glyphicon glyphicon-pencil">
         <button type="button" class="btn btn-primary">edit</button>
       </span></a>
     </div>
@@ -36,9 +36,9 @@
               <thead>
                 <tr>
                   <th>Composition ID</th>
-                  <th>Fraction ID</th>
+                  <th>LightFraction ID</th>
                   <th>Material Type</th>
-                  <th>Fraction</th>
+                  <th>LightFraction</th>
                   <th>Type Count</th>
                   <th>Whole Weight</th>
                   <th>Fragment Weight</th>
@@ -51,14 +51,14 @@
                   <td>{{ fractioncomposition.fract_comp_id }}</td>
                   <td>{{ fractioncomposition.fraction_id }}</td>
                   <td>{{ fractioncomposition.material_type }}</td>
-                  <td>{{ fractioncomposition.fraction }}</td>
+                  <td>{{ fractioncomposition.lightfraction }}</td>
                   <td>{{ fractioncomposition.type_count }}</td>
                   <td>{{ fractioncomposition.whole_weight }}</td>
                   <td>{{ fractioncomposition.fragment_weight }}</td>
                   <td>
                   <div class="btn-group" role="group" aria-label="Basic example">
-                  <!-- <a href="{ url 'detailfraction' botany.flotation_id fraction.fraction_id %}" class="btn btn-warning" role="button">detail++</a> -->
-                    <!-- <a href="{ url 'detailfraction' pk=flotation_id }" class="btn btn-warning" role="button">detail++</a> -->
+                  <!-- <a href="{ url 'detaillightfraction' botany.flotation_id lightfraction.fraction_id %}" class="btn btn-warning" role="button">detail++</a> -->
+                    <!-- <a href="{ url 'detaillightfraction' pk=flotation_id }" class="btn btn-warning" role="button">detail++</a> -->
                   <a href="{ url 'editcontainersearch' pk=o.pk }" class="btn btn-secondary" role="button">request</a>
                   </div>
                   </td>
@@ -95,7 +95,7 @@
                 <thead>
                   <tr>
                     <th>Material ID</th>
-                    <th>Fraction ID</th>
+                    <th>LightFraction ID</th>
                     <th>Material</th>
                     <th>sediment</th>
                     <th>stone</th>
@@ -126,8 +126,8 @@
 
                     <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                    <!-- <a href="{ url 'detailfraction' botany.flotation_id fraction.fraction_id %}" class="btn btn-warning" role="button">detail++</a> -->
-                      <!-- <a href="{ url 'detailfraction' pk=flotation_id }" class="btn btn-warning" role="button">detail++</a> -->
+                    <!-- <a href="{ url 'detaillightfraction' botany.flotation_id lightfraction.fraction_id %}" class="btn btn-warning" role="button">detail++</a> -->
+                      <!-- <a href="{ url 'detaillightfraction' pk=flotation_id }" class="btn btn-warning" role="button">detail++</a> -->
                     <a href="{ url 'editcontainersearch' pk=o.pk }" class="btn btn-secondary" role="button">request</a>
                     </div>
                     </td>
@@ -175,20 +175,20 @@
 
   <section>
     <h4>
-      Fraction details here
+      LightFraction details here
     </h4>
     <form class="form-inline" action="">
       <div >
         <div class="form-group">
-          <label for="store_id" class="col-sm-3 control-label">Fraction Id</label>
+          <label for="store_id" class="col-sm-3 control-label">LightFraction Id</label>
           <div class="col-sm-10">
-            <input class="form-control" id="store_id" type="text" placeholder="{{ fraction.fraction_id }}" disabled>
+            <input class="form-control" id="store_id" type="text" placeholder="{{ lightfraction.fraction_id }}" disabled>
           </div>
         </div>
         <div class="form-group">
           <label for="store_name" class="col-sm-3 control-label">Botany ID</label>
           <div class="col-sm-10">
-            <input class="form-control" id="store_name" type="text" placeholder="{{ fraction.flotation_id }}" disabled>
+            <input class="form-control" id="store_name" type="text" placeholder="{{ lightfraction.flotation_id }}" disabled>
           </div>
           <div class="col-sm-5">
             <hr class=""/>
@@ -203,26 +203,26 @@
         <div class="form-group">
           <label for="store_id" class="col-sm-3 control-label">Entry Date</label>
           <div class="col-sm-10">
-            <input class="form-control" id="store_id" type="text" placeholder="{{ fraction.proportion_analysed }}" disabled>
+            <input class="form-control" id="store_id" type="text" placeholder="{{ lightfraction.proportion_analysed }}" disabled>
           </div>
         </div>
 
         <div class="form-group">
           <label for="store_id" class="col-sm-3 control-label">Date of Analysis</label>
           <div class="col-sm-10">
-            <input class="form-control" id="store_id" type="text" placeholder="{{ fraction.soil_volume }}" disabled>
+            <input class="form-control" id="store_id" type="text" placeholder="{{ lightfraction.soil_volume }}" disabled>
           </div>
         </div>
         <div class="form-group">
           <label for="store_id" class="col-sm-3 control-label">Analyst</label>
           <div class="col-sm-10">
-            <input class="form-control" id="store_id" type="text" placeholder="{{ fraction.sample_volume }}" disabled>
+            <input class="form-control" id="store_id" type="text" placeholder="{{ lightfraction.sample_volume }}" disabled>
           </div>
         </div>
         <div class="form-group">
           <label for="store_id" class="col-sm-3 control-label">Notes</label>
           <div class="col-sm-10">
-            <input class="form-control" id="store_id" type="text" placeholder="{{ fraction.sample_weight }}" disabled>
+            <input class="form-control" id="store_id" type="text" placeholder="{{ lightfraction.sample_weight }}" disabled>
           </div>
         </div>
 
