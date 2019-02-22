@@ -18,6 +18,11 @@ urlpatterns = [
 
 
 
+    # listview test
+    path('samplelistview/', views.SampleListView.as_view(), name='samples'),
+    path('books/', views.BookListView.as_view(), name='books'),
+
+
 
 
     path('sample/flotation/<int:flotation_id>/', views.detailflotation, name='detailflotation'),

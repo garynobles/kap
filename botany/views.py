@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, render_to_response, redirect
-from botany.models import Flotation, LightResidue, Composition, Sample
+from botany.models import Flotation, LightResidue, Composition, Sample, Book
 from django import forms
 
 from django.db.models import Count, Q
@@ -386,3 +386,23 @@ def editsample(request, pk):
         else:
             form = SampleForm(instance=post)
         return render(request, 'sample/createsample.html', {'form': form})
+
+
+
+
+from django.views import generic
+import django_filters
+
+class SampleListView(generic.ListView):
+    model = Sample
+    template_name = 'sample_list.html'
+    # context_object_name = 'my_book_list'   # your own name for the list as a template variable
+    # queryset = Book.objects.filter(title__icontains='war')[:5] # Get 5 books containing the title war
+      # Specify your own template name/location
+
+class BookListView(generic.ListView):
+    template_name = 'sample/book_list.html'
+    model = Book
+
+    # context_object_name = 'books'
+	# paginate_by = 10

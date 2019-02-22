@@ -1,0 +1,23 @@
+{% extends "sample/base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+{% include "menu1.html" %}
+{% include "sample/menu2.html" %}
+
+
+
+
+  <h1>Book List</h1>
+  {% if sample_list %}
+  <ul>
+    {% for sample in sample_list %}
+      <li>
+        <a href="{{ sample.get_absolute_url }}">{{ sample.sample_number }}</a> ({{sample.author}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no books in the library.</p>
+  {% endif %}
+{% endblock %}

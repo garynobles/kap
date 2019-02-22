@@ -3,6 +3,10 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from botany.choices import EASTING_CHOICES, NORTHING_CHOICES, RECOVERY_METHODS, MATERIALS
 
+class Book(models.Model):
+    name = models.CharField(max_length=100)
+    author_name = models.CharField(max_length=100)
+
 class Sample(models.Model):
     sample_id = models.AutoField(primary_key=True)
     area_easting = models.IntegerField(choices = EASTING_CHOICES)
