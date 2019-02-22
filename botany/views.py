@@ -393,16 +393,11 @@ def editsample(request, pk):
 from django.views import generic
 import django_filters
 
-class SampleListView(generic.ListView):
-    model = Sample
-    template_name = 'sample_list.html'
-    # context_object_name = 'my_book_list'   # your own name for the list as a template variable
-    # queryset = Book.objects.filter(title__icontains='war')[:5] # Get 5 books containing the title war
-      # Specify your own template name/location
 
-class BookListView(generic.ListView):
-    template_name = 'sample/book_list.html'
-    model = Book
+class SampleListView(generic.ListView):
+    template_name = 'sample/sample_list.html'
+    model = Sample
+    paginate_by = 50
 
     # context_object_name = 'books'
 	# paginate_by = 10

@@ -6,18 +6,88 @@
 {% include "sample/menu2.html" %}
 
 
+  <div class="container">
+      <section>
+      <h1>Botanical Samples</h1>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Sample ID</th>
+            <th>Key ENC</th>
+            <th>Sample Number</th>
+            <th>Sample Type</th>
+            <th>Weight</th>
+            <th>Description</th>
+            <th>Recovery Method</th>
+            <th>Taken by</th>
+            <th>Comments</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          {% if sample_list %}
+
+            {% for sample in sample_list %}
+<tr>
+  <td>{{ sample.sample_id }}</td>
+  <td>{{ sample.area_easting }}.{{ sample.area_northing }}.{{ sample.context_number }}</td>
+  <!-- <td>{{ sample.sample_id }}</td> -->
+  <td>{{ sample.sample_number }}</td>
+  <td>{{ sample.sample_type }}</td>
+  <td>{{ sample.weight }}</td>
+  <td>{{ sample.description }}</td>
+  <td>{{ sample.recovery_method }}</td>
+  <!-- <td>{{ sample.entry_date }}</td>
+  <td>{{ sample.flotation_date }}</td> -->
+  <td>{{ sample.taken_by }}</td>
+  <td>{{ sample.comments }}</td>
+
+  <td>
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <a href="{% url 'addflotation' pk=sample.sample_id %}">
+        <span class="badge badge-primary">
+            Add Flotation
+          <br />
+          <span class="badge badge-light">
+
+            {{ count }}
+
+          </span>
+        </span>
+      </a>
+
+      <a href="{% url 'detailsample' sample.sample_id %}"
+      style="padding: 0px 0px 0px 10px;">
+        <span class="badge badge-warning">
+        Detail<br/ > View
+        </span></a>
+
+      <!-- <a href="{ url 'flotationrequest' sample.sample_id }"
+      style="padding: 0px 0px 0px 10px;">
+        <span class="badge badge-secondary">
+        Send<br/ > Request
+        </span></a> -->
+
+      <a href="{% url 'editsample' pk=sample.pk %}"
+      style="padding: 0px 0px 0px 10px;">
+        <span class="badge badge-secondary">
+        edit <br /> here samples <br />
+        </span></a>
+    </div>
+  </td>
 
 
-  <h1>Book List</h1>
-  {% if sample_list %}
-  <ul>
-    {% for sample in sample_list %}
-      <li>
-        <a href="{{ sample.get_absolute_url }}">{{ sample.sample_number }}</a> ({{sample.author}})
-      </li>
-    {% endfor %}
-  </ul>
-  {% else %}
-    <p>There are no books in the library.</p>
-  {% endif %}
+
+            {% endfor %}
+
+          {% else %}
+            <p>There are no books in the library.</p>
+          {% endif %}
+
+
+        </tbody>
+      </table>
+    </section>
+  </div>
 {% endblock %}

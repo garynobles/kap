@@ -13,7 +13,7 @@
   <ul>
     {% for sample in sample_list %}
       <li>
-        <a href="{{ sample.get_absolute_url }}">{{ sample.sample_number }}</a> ({{sample.author}})
+        <a href="{{ sample.get_absolute_url }}">{{ sample.sample_number }}</a> {{sample.sample_type}}
       </li>
     {% endfor %}
   </ul>

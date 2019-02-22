@@ -19,8 +19,7 @@ urlpatterns = [
 
 
     # listview test
-    path('samplelistview/', views.SampleListView.as_view(), name='samples'),
-    path('books/', views.BookListView.as_view(), name='books'),
+    path('samplelist/', views.SampleListView.as_view(), name='samples'),
 
 
 
