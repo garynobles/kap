@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, render_to_response, redirect
-from botany.models import Flotation, LightFraction, FractionComposition, Sample
+from botany.models import Flotation, LightResidue, Composition, Sample
 from django import forms
 
 from django.db.models import Count, Q
@@ -44,41 +44,41 @@ def addsample(request):
 def allbotany(request, sample_id=''):
     # number = Botany.objects..count()
     number = Flotation.objects.all().count()
-    lightfraction = LightFraction.objects.all()
-    fractioncomposition = FractionComposition.objects.all()
+    lightresidue = LightResidue.objects.all()
+    composition = Composition.objects.all()
     # fractionmaterialspresent = FractionMaterialsPresent.objects.all()
 
     dataset = Flotation.objects \
         .values('context_number') \
         .order_by('context_number')
 
-    query1 = LightFraction.objects \
+    query1 = LightResidue.objects \
         .values('soil_volume')
 
-    query2 = LightFraction.objects.values('soil_volume')
-    query3 = LightFraction.objects.values('sample_volume')
+    query2 = LightResidue.objects.values('soil_volume')
+    query3 = LightResidue.objects.values('sample_volume')
 
-    # query2 = LightFraction.objects \
+    # query2 = LightResidue.objects \
     #     .values('sample_volume')
-    dataset2 = LightFraction.objects.values('soil_volume')
+    dataset2 = LightResidue.objects.values('soil_volume')
     dataset3 = query3
 
-    # a = LightFraction.objects.values('roots').filter(roots=True)
-    # b = LightFraction.objects.values('bone').filter(bone=True)
-    # c = LightFraction.objects.values('sediment').filter(sediment=True)
+    # a = LightResidue.objects.values('roots').filter(roots=True)
+    # b = LightResidue.objects.values('bone').filter(bone=True)
+    # c = LightResidue.objects.values('sediment').filter(sediment=True)
     # dataset4 = {"roots": a, "bone": b, "sediment": c}
     text = Flotation.objects.values('notes')
 
 
 
-    roots = LightFraction.objects.filter(roots=True).count()
-    bone = LightFraction.objects.filter(bone=True).count()
-    sediment = LightFraction.objects.filter(sediment=True).count()
-    shell = LightFraction.objects.filter(shell=True).count()
-    stone = LightFraction.objects.filter(stone=True).count()
-    leaves = LightFraction.objects.filter(leaves=True).count()
-    insect_parts = LightFraction.objects.filter(insect_parts=True).count()
-    charred_dung = LightFraction.objects.filter(charred_dung=True).count()
+    roots = LightResidue.objects.filter(roots=True).count()
+    bone = LightResidue.objects.filter(bone=True).count()
+    sediment = LightResidue.objects.filter(sediment=True).count()
+    shell = LightResidue.objects.filter(shell=True).count()
+    stone = LightResidue.objects.filter(stone=True).count()
+    leaves = LightResidue.objects.filter(leaves=True).count()
+    insect_parts = LightResidue.objects.filter(insect_parts=True).count()
+    charred_dung = LightResidue.objects.filter(charred_dung=True).count()
     dataset4 ={
         "roots": roots,
         "bone": bone,
@@ -98,20 +98,20 @@ def allbotany(request, sample_id=''):
 
 # date = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f")
 
-    # roots = LightFraction.objects \
+    # roots = LightResidue.objects \
     #     .values('roots').filter(roots=True)
-    # bone = LightFraction.objects \
+    # bone = LightResidue.objects \
     #     .values('bone').filter(bone=True).count()
     bone=5
 
 
     # dataset5 = a.filter(roots=True)| b.filter(bone=True)
     # dataset6 = b.count()
-    # dataset3 = LightFraction.objects.values('soil_volume')
+    # dataset3 = LightResidue.objects.values('soil_volume')
     # matches = pages | articles | posts
 
 
-        # query2 = LightFraction.objects.count('bone')
+        # query2 = LightResidue.objects.count('bone')
         #
         # sumquery = query1 + query2
 
@@ -124,8 +124,8 @@ def allbotany(request, sample_id=''):
     {
     # 'botany':botany,
     'number':number,
-    'lightfraction':lightfraction,
-    'fractioncomposition':fractioncomposition,
+    'lightresidue':lightresidue,
+    'composition':composition,
     # 'fractionmaterialspresent':fractionmaterialspresent,
 
     'dataset': dataset,
@@ -145,17 +145,17 @@ def allbotany(request, sample_id=''):
 
 def allflotation(request, sample_id='', flotation_id='', fraction_id=''):
     flotation = Flotation.objects.all()
-    lightfraction = LightFraction.objects.all()
-    count = LightFraction.objects.all().count()
+    lightresidue = LightResidue.objects.all()
+    count = LightResidue.objects.all().count()
     # .filter(flotation_id=6).count()
-    fractioncomposition = FractionComposition.objects.all()
+    composition = Composition.objects.all()
     # fractionmaterialspresent = FractionMaterialsPresent.objects.all()
     return render(request, 'flotation/allflotation.html',
     {
     'flotation':flotation,
-    'lightfraction':lightfraction,
+    'lightresidue':lightresidue,
     'count':count,
-    'fractioncomposition':fractioncomposition,
+    'composition':composition,
     # 'fractionmaterialspresent':fractionmaterialspresent
     })
 
@@ -228,8 +228,8 @@ class SampleForm(forms.ModelForm):
 
 def detailsample(request, sample_id):
     sample = get_object_or_404(Sample, pk=sample_id)
-    # lightfraction = get_object_or_404(LightFraction, flotation_id=flotation_id)
-    #lightfraction = LightFraction.objects.all()
+    # lightresidue = get_object_or_404(LightResidue, flotation_id=flotation_id)
+    #lightresidue = LightResidue.objects.all()
     flotation = Flotation.objects.filter(sample_id__sample_id=sample_id)
     #joinsamplecontainer = JoinSampleContainer.objects.filter(fraction_id__fraction_id=fraction_id)
     return render(request, 'sample/detailsample.html',
@@ -239,15 +239,15 @@ def detailsample(request, sample_id):
 
 def detailflotation(request, flotation_id):
     flotation = get_object_or_404(Flotation, pk=flotation_id)
-    #lightfraction = get_object_or_404(LightFraction, flotation_id=flotation_id)
-    #lightfraction = LightFraction.objects.all()
-    lightfraction = LightFraction.objects.filter(flotation_id__flotation_id=flotation_id)
+    #lightresidue = get_object_or_404(LightResidue, flotation_id=flotation_id)
+    #lightresidue = LightResidue.objects.all()
+    lightresidue = LightResidue.objects.filter(flotation_id__flotation_id=flotation_id)
     #joinsamplecontainer = JoinSampleContainer.objects.filter(fraction_id__fraction_id=fraction_id)
     return render(request, 'flotation/detailflotation.html',
-    {'flotation':flotation, 'lightfraction':lightfraction,
+    {'flotation':flotation, 'lightresidue':lightresidue,
     })
 
-def addlightfraction(request, pk, fk=''):
+def addlightresidue(request, pk, fk=''):
     if request.method == "POST":
     #if request.method == "GET":
         form = FractionForm(request.POST)
@@ -265,11 +265,11 @@ def addlightfraction(request, pk, fk=''):
     else:
         #import pdb; pdb.set_trace()
         form = FractionForm()
-    return render(request, 'lightfraction/create_lightfraction.html', {'form': form})
+    return render(request, 'lightresidue/create_lightresidue.html', {'form': form})
 
 class FractionForm(forms.ModelForm):
     class Meta:
-        model = LightFraction
+        model = LightResidue
         fields = (
         #'fraction_id',
         #'flotation_id',
@@ -290,11 +290,11 @@ class FractionForm(forms.ModelForm):
 def addcomposition(request, pk, fk):
     if request.method == "POST":
     #if request.method == "GET":
-        form = FractionCompositionForm(request.POST)
+        form = CompositionForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            lightfraction = get_object_or_404(LightFraction, pk=pk)
-            post.fraction_id = lightfraction
+            lightresidue = get_object_or_404(LightResidue, pk=pk)
+            post.fraction_id = lightresidue
             #post.flotation_id = pk
             #post.user = request.user
             #post.datetime = datetime.datetime.now()
@@ -304,34 +304,34 @@ def addcomposition(request, pk, fk):
             return redirect('allflotation')
     else:
         #import pdb; pdb.set_trace()
-        form = FractionCompositionForm()
-    return render(request, 'fractioncomposition/create_lightfractioncomposition.html', {'form': form})
+        form = CompositionForm()
+    return render(request, 'composition/create_composition.html', {'form': form})
 
-class FractionCompositionForm(forms.ModelForm):
+class CompositionForm(forms.ModelForm):
     class Meta:
-        model = FractionComposition
+        model = Composition
         fields = (
         # 'fract_comp_id',
         # 'fraction_id',
         'material_type',
-        'lightfraction',
+        'lightresidue',
         'type_count',
         'whole_weight',
         'fragment_weight',
         )
 
-def detaillightfraction(request, flotation_id, fraction_id):
-    detaillightfraction = get_object_or_404(LightFraction, pk=fraction_id)
-    fractionmaterialspresent = get_object_or_404(LightFraction, pk=fraction_id)
+def detaillightresidue(request, flotation_id, fraction_id):
+    detaillightresidue = get_object_or_404(LightResidue, pk=fraction_id)
+    fractionmaterialspresent = get_object_or_404(LightResidue, pk=fraction_id)
     # detailflotation = get_object_or_404(Botany, pk=flotation_id)
-    fractioncomposition = FractionComposition.objects.filter(fraction_id__fraction_id=fraction_id)
+    composition = Composition.objects.filter(fraction_id__fraction_id=fraction_id)
     # fractionmaterialspresent = FractionMaterialsPresent.objects.filter(fraction_id__fraction_id=fraction_id)
     # detailflotation = Botany.objects.filter(flotation_id__flotation_id=flotation_id)
     #fractionmaterialspresent = FractionMaterialsPresent.objects.filter(fraction_id__fraction_id=fraction_id)
     #joinsamplecontainer = JoinSampleContainer.objects.filter(fraction_id__fraction_id=fraction_id)
-    return render(request, 'lightfraction/detaillightfraction.html',
-    {'lightfraction':detaillightfraction,
-    'fractioncomposition':fractioncomposition,
+    return render(request, 'lightresidue/detaillightresidue.html',
+    {'lightresidue':detaillightresidue,
+    'composition':composition,
     # 'botany':botany,
     'fractionmaterialspresent':fractionmaterialspresent,
     #'joinsamplecontainer':joinsamplecontainer,
@@ -339,7 +339,7 @@ def detaillightfraction(request, flotation_id, fraction_id):
     })
 
 def editfraction(request, pk, fk=''):
-        post = get_object_or_404(LightFraction, pk=pk)
+        post = get_object_or_404(LightResidue, pk=pk)
         # pk=pk
         if request.method == "POST":
             form = FractionForm(request.POST, instance=post)
@@ -354,7 +354,7 @@ def editfraction(request, pk, fk=''):
                 #, pk=post.pk)
         else:
             form = FractionForm(instance=post)
-        return render(request, 'lightfraction/create_lightfraction.html', {'form': form})
+        return render(request, 'lightresidue/create_lightresidue.html', {'form': form})
 
 def editflotation(request, pk):
         post = get_object_or_404(Flotation, pk=pk)

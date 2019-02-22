@@ -1,9 +1,9 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Flotation, LightFraction, FractionComposition, FractionMaterialsPresent
+from .models import Flotation, LightResidue, Composition, FractionMaterialsPresent
 
 admin.site.register(Flotation)
-admin.site.register(LightFraction)
-admin.site.register(FractionComposition)
+admin.site.register(LightResidue)
+admin.site.register(Composition)
 admin.site.register(FractionMaterialsPresent)

@@ -1,0 +1,68 @@
+{% extends "lightresidue/base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+{% include "menu1.html" %}
+{% include "lightresidue/menu2.html" %}
+<h1>LightResidue allfraction</h1>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>LightResidue ID</th>
+      <th>Botany ID</th>
+      <th>Proportion Analysed</th>
+      <th>Soil Volume</th>
+      <th>Sample Volume</th>
+      <th>Sample Weight</th>
+      <th>Sediment</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for lightresidue in lightresidue.all %}
+    <tr>
+
+
+      <td>{{ lightresidue.fraction_id }}</td>
+      <td>{{ lightresidue.flotation_id }}</td>
+      <td>{{ lightresidue.proportion_analysed }}</td>
+      <td>{{ lightresidue.soil_volume }}</td>
+      <td>{{ lightresidue.sample_volume }}</td>
+      <td>{{ lightresidue.sample_weight }}</td>
+      <td>{{ lightresidue.sediment }}</td>
+
+
+      <td>
+        <div class="btn-group" role="group" aria-label="Basic example">
+
+          <a href="{% url 'addlightresidue' %}" class="badge badge-primary" role="button">Add LightResidue</a>
+          <a href="{% url 'detaillightresidue' lightresidue.fraction_id %}" class="badge badge-warning" role="button">detail</a>
+          <a href="% url 'editcontainersearch' pk=o.pk %" class="badge badge-secondary" role="button">request</a>
+        </div>
+      </td>
+
+
+    </tr>
+    {% endfor %}
+
+
+
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

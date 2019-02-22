@@ -52,7 +52,7 @@
             <!-- <table class="table table-bordered"> -->
               <thead>
                 <tr>
-                  <th>LightFraction ID</th>
+                  <th>LightResidue ID</th>
                   <th>Botany ID</th>
                   <th>Proportion Analysed</th>
                   <th>Soil Volume</th>
@@ -70,29 +70,29 @@
                 </tr>
               </thead>
               <tbody>
-              {% for lightfraction in lightfraction.all %}
+              {% for lightresidue in lightresidue.all %}
                 <tr>
-                  <td>{{ lightfraction.fraction_id }}</td>
-                  <td>{{ lightfraction.flotation_id }}</td>
-                  <td>{{ lightfraction.proportion_analysed }}</td>
-                  <td>{{ lightfraction.soil_volume }}</td>
-                  <td>{{ lightfraction.sample_volume }}</td>
-                  <td>{{ lightfraction.sample_weight }}</td>
-                  <td>{{ lightfraction.sediment}}</td>
-                  <td>{{ lightfraction.stone }}</td>
-                  <td>{{ lightfraction.roots }}</td>
-                  <td>{{ lightfraction.leaves }}</td>
-                  <td>{{ lightfraction.insect_parts }}</td>
-                  <td>{{ lightfraction.charred_dung }}</td>
-                  <td>{{ lightfraction.bone }}</td>
-                  <td>{{ lightfraction.shell }}</td>
+                  <td>{{ lightresidue.fraction_id }}</td>
+                  <td>{{ lightresidue.flotation_id }}</td>
+                  <td>{{ lightresidue.proportion_analysed }}</td>
+                  <td>{{ lightresidue.soil_volume }}</td>
+                  <td>{{ lightresidue.sample_volume }}</td>
+                  <td>{{ lightresidue.sample_weight }}</td>
+                  <td>{{ lightresidue.sediment}}</td>
+                  <td>{{ lightresidue.stone }}</td>
+                  <td>{{ lightresidue.roots }}</td>
+                  <td>{{ lightresidue.leaves }}</td>
+                  <td>{{ lightresidue.insect_parts }}</td>
+                  <td>{{ lightresidue.charred_dung }}</td>
+                  <td>{{ lightresidue.bone }}</td>
+                  <td>{{ lightresidue.shell }}</td>
                   <td>
                   <div class="btn-group" role="group" aria-label="Basic example">
-                  <a href="{% url 'addcomposition' fk=botany.flotation_id pk=lightfraction.fraction_id %}" class="btn btn-primary" role="button">Composition</a>
-                  <!-- <a href="{ url 'addmaterialpresent' fk=botany.flotation_id pk=lightfraction.fraction_id }" class="btn btn-primary" role="button">Material</a> -->
-                  <a href="{% url 'detaillightfraction' botany.flotation_id lightfraction.fraction_id %}" class="btn btn-warning" role="button">Composition</a>
-                    <!-- <a href="{ url 'detaillightfraction' pk=flotation_id }" class="btn btn-warning" role="button">detail++</a> -->
-                  <a href="{ url 'editfraction' pk=o.pk }" class="btn btn-secondary" role="button">edit lightfraction</a>
+                  <a href="{% url 'addcomposition' fk=botany.flotation_id pk=lightresidue.fraction_id %}" class="btn btn-primary" role="button">Composition</a>
+                  <!-- <a href="{ url 'addmaterialpresent' fk=botany.flotation_id pk=lightresidue.fraction_id }" class="btn btn-primary" role="button">Material</a> -->
+                  <a href="{% url 'detaillightresidue' botany.flotation_id lightresidue.fraction_id %}" class="btn btn-warning" role="button">Composition</a>
+                    <!-- <a href="{ url 'detaillightresidue' pk=flotation_id }" class="btn btn-warning" role="button">detail++</a> -->
+                  <a href="{ url 'editfraction' pk=o.pk }" class="btn btn-secondary" role="button">edit lightresidue</a>
                   </div>
                   </td>
                 </tr>

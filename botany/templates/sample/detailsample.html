@@ -88,11 +88,11 @@
 
                   <td>
                   <div class="btn-group" role="group" aria-label="Basic example">
-                  <!-- <a href="{% url 'addlightfraction' fk=sample.sample_id pk=flotation.flotation_id %}" class="badge badge-primary" role="button">+ LightFraction A</a> -->
-                  <a href="{% url 'addlightfraction' fk=sample.sample_id pk=flotation.flotation_id %}" class="badge badge-primary" role="button">+ LightFraction A</a>
-                  <!-- <a href="{ url 'addmaterialpresent' fk=botany.flotation_id pk=lightfraction.fraction_id }" class="badge badge-primary" role="button">Material</a> -->
+                  <!-- <a href="{% url 'addlightresidue' fk=sample.sample_id pk=flotation.flotation_id %}" class="badge badge-primary" role="button">+ LightResidue A</a> -->
+                  <a href="{% url 'addlightresidue' fk=sample.sample_id pk=flotation.flotation_id %}" class="badge badge-primary" role="button">+ LightResidue A</a>
+                  <!-- <a href="{ url 'addmaterialpresent' fk=botany.flotation_id pk=lightresidue.fraction_id }" class="badge badge-primary" role="button">Material</a> -->
                   <a href="{% url 'detailflotation' flotation.flotation_id %}" class="badge badge-warning" role="button">detail</a>
-                    <!-- <a href="{ url 'detaillightfraction' pk=flotation_id }" class="badge badge-warning" role="button">detail++</a> -->
+                    <!-- <a href="{ url 'detaillightresidue' pk=flotation_id }" class="badge badge-warning" role="button">detail++</a> -->
                   <a href="{% url 'editflotation' pk=flotation.pk %}"
                    class="badge badge-secondary" role="button">
                    edit flotation

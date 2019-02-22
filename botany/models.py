@@ -54,7 +54,7 @@ class Flotation(models.Model):
         verbose_name_plural = "Flotation"
 
 
-class LightFraction(models.Model):
+class LightResidue(models.Model):
     fraction_id = models.AutoField(primary_key=True)
     flotation_id = models.ForeignKey(Flotation, db_column='flotation_id', on_delete = models.PROTECT)
     proportion_analysed = models.DecimalField(max_digits=5, decimal_places=3)
@@ -75,15 +75,15 @@ class LightFraction(models.Model):
 
     class Meta():
         managed=False
-        db_table = 'kap\".\"lightfraction'
+        db_table = 'kap\".\"lightresidue'
         #ordering = ["orderby"]
-        verbose_name_plural = "LightFraction"
+        verbose_name_plural = "LightResidue"
 
-class FractionComposition(models.Model):
+class Composition(models.Model):
     fract_comp_id = models.AutoField(primary_key=True)
-    fraction_id = models.ForeignKey(LightFraction, db_column='fraction_id', on_delete = models.PROTECT)
+    fraction_id = models.ForeignKey(LightResidue, db_column='fraction_id', on_delete = models.PROTECT)
     material_type = models.CharField(max_length=50, default='')
-    lightfraction = models.CharField(max_length=50, default='')
+    lightresidue = models.CharField(max_length=50, default='')
     type_count = models.DecimalField(max_digits=15, decimal_places=4)
     whole_weight = models.DecimalField(max_digits=15, decimal_places=4)
     fragment_weight = models.DecimalField(max_digits=15, decimal_places=4)
@@ -93,7 +93,7 @@ class FractionComposition(models.Model):
 
     class Meta():
         managed=False
-        db_table = 'kap\".\"fraction_composition'
+        db_table = 'kap\".\"composition'
         #ordering = ["orderby"]
         verbose_name_plural = "Composition"
 
@@ -101,7 +101,7 @@ class FractionMaterialsPresent(models.Model):
     pass
 #
 #     material_id = models.AutoField(primary_key=True)
-#     fraction_id = models.ForeignKey(LightFraction, db_column='fraction_id', on_delete = models.PROTECT)
+#     fraction_id = models.ForeignKey(LightResidue, db_column='fraction_id', on_delete = models.PROTECT)
 #     # material = models.CharField(max_length=200, default='')
 #
 #     sediment = models.BooleanField()

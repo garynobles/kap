@@ -30,34 +30,34 @@ urlpatterns = [
     re_path('sample/edit/(?P<pk>\d+)/edit/', views.editsample, name='editsample'),
 
     ##
-    # url(r'^sample/$', views.addlightfraction, name='addlightfraction'),
-    # url(r'^sample/(?P<sample_id>\w+)/$', views.addlightfraction, name='addlightfraction'),
-    # url(r'^sample/(?P<sample_id>\w+)/flotation/$', views.addlightfraction, name='addlightfraction'),
-    # url(r'^sample/(?P<sample_id>\w+)/flotation/(?P<pk>\d+)/$', views.addlightfraction, name='addlightfraction'),
+    # url(r'^sample/$', views.addlightresidue, name='addlightresidue'),
+    # url(r'^sample/(?P<sample_id>\w+)/$', views.addlightresidue, name='addlightresidue'),
+    # url(r'^sample/(?P<sample_id>\w+)/flotation/$', views.addlightresidue, name='addlightresidue'),
+    # url(r'^sample/(?P<sample_id>\w+)/flotation/(?P<pk>\d+)/$', views.addlightresidue, name='addlightresidue'),
 
-    re_path(r'^flotation/(?P<pk>\d+)/$', views.addlightfraction, name='addlightfraction'),
+    re_path(r'^flotation/(?P<pk>\d+)/$', views.addlightresidue, name='addlightresidue'),
 
-# url(r'^flotation/(?P<pk>\d+)/$', views.addlightfraction, name='addlightfraction'),
+# url(r'^flotation/(?P<pk>\d+)/$', views.addlightresidue, name='addlightresidue'),
 
-    re_path(r'^sample/(?P<fk>\d+)/flotation/(?P<pk>\d+)/$', views.addlightfraction, name='addlightfraction'),
+    re_path(r'^sample/(?P<fk>\d+)/flotation/(?P<pk>\d+)/$', views.addlightresidue, name='addlightresidue'),
 
     re_path(r'^flotation/(?P<fk>\d+)/addcomposition/(?P<pk>\d+)/$', views.addcomposition, name='addcomposition'),
 
-    path('flotation/<int:flotation_id>/lightfraction/<int:fraction_id>/', views.detaillightfraction, name='detaillightfraction'),
-    re_path('flotation/(?P<fk>\d+)/lightfraction/edit/(?P<pk>\d+)/edit/', views.editfraction, name='editfraction'),
+    path('flotation/<int:flotation_id>/lightresidue/<int:fraction_id>/', views.detaillightresidue, name='detaillightresidue'),
+    re_path('flotation/(?P<fk>\d+)/lightresidue/edit/(?P<pk>\d+)/edit/', views.editfraction, name='editfraction'),
 
     # url(r'^(?P<fk>\d+)/addmaterialpresent/(?P<pk>\d+)/$', views.addmaterialpresent, name='addmaterialpresent'),
-    #url(r'^(?P<fk>\d+)/lightfraction/(?P<pk>\d+)/$', views.detaillightfraction, name='detaillightfraction'),
-    #url(r'^(?P<pk>\d+)/lightfraction/(?P<fk>\d+)/$', views.detaillightfraction, name='detaillightfraction'),
+    #url(r'^(?P<fk>\d+)/lightresidue/(?P<pk>\d+)/$', views.detaillightresidue, name='detaillightresidue'),
+    #url(r'^(?P<pk>\d+)/lightresidue/(?P<fk>\d+)/$', views.detaillightresidue, name='detaillightresidue'),
     #path('createfraction/(?P<pk>\d+)/', views.createfraction, name='createfraction'),
     #path('botany/(?P<pk>\d+)/', views.createfraction, name='createfraction'),
-    # path('lightfraction/', views.allfraction, name='allfraction'),
-    #path('fractioncomposition/', views.allfractioncomposition, name='allfractioncomposition'),
+    # path('lightresidue/', views.allfraction, name='allfraction'),
+    #path('composition/', views.allcomposition, name='allcomposition'),
     #path('fractionmaterialpresent/', views.allfractionmaterialpresent, name='allfractionmaterialpresent'),
-    #path('addcomposition/', views.addcomposition, name='create_lightfractioncomposition'),
-    #path('createfractionmaterialpresent/', views.createfractionmaterialpresent, name='create_lightfractionmaterialpresent'),
-    #path('detaillightfractioncomposition/<int:fract_comp_id>/', views.detaillightfractioncomposition, name='detaillightfractioncomposition'),
-    #path('detaillightfractionmaterialpresent/<int:material_id>/', views.detaillightfractionmaterialpresent, name='detaillightfractionmaterialpresent'),
+    #path('addcomposition/', views.addcomposition, name='create_composition'),
+    #path('createfractionmaterialpresent/', views.createfractionmaterialpresent, name='create_lightresiduematerialpresent'),
+    #path('detailcomposition/<int:fract_comp_id>/', views.detailcomposition, name='detailcomposition'),
+    #path('detaillightresiduematerialpresent/<int:material_id>/', views.detaillightresiduematerialpresent, name='detaillightresiduematerialpresent'),
 
 
 
