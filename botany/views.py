@@ -399,6 +399,7 @@ class SampleListView(generic.ListView):
     template_name = 'sample/sample_list.html'
     model = Sample
     paginate_by = 50
+    queryset = Sample.objects.filter(sample_type='Organic')
 
 
     # context_object_name = 'sample'  # Default: object_list
