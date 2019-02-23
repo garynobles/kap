@@ -28,7 +28,9 @@ urlpatterns = [
     re_path('flotation/edit/(?P<pk>\d+)/edit/', views.editflotation, name='editflotation'),
 
     ##
+
     path('sample/', views.allsample, name='allsample'),
+
     path('addsample/', views.addsample, name='addsample'),
     path('sample/<int:sample_id>/', views.detailsample, name='detailsample'),
     re_path('sample/edit/(?P<pk>\d+)/edit/', views.editsample, name='editsample'),

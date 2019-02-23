@@ -10,7 +10,8 @@ from itertools import chain
 from dal import autocomplete
 
 def allsample(request):
-    allsample = Sample.objects.filter(sample_type='Botanical')
+    allsample = Sample.objects.all()
+    # filter(sample_type='Botanical')
     return render(request, 'sample/sample.html',
     {
     'allsample':allsample,
@@ -399,5 +400,29 @@ class SampleListView(generic.ListView):
     model = Sample
     paginate_by = 50
 
-    # context_object_name = 'books'
-	# paginate_by = 10
+
+    # context_object_name = 'sample'  # Default: object_list
+    #
+    # queryset = sample.objects.all()  # Default: Model.objects.all()
+
+
+    #
+    # def get_queryset(self):
+    #     return LightResidue.objects.all().count()
+        # return LightResidue.objects.filter().count()
+
+    # def allflotation(request, sample_id='', flotation_id='', fraction_id=''):
+    #     flotation = Flotation.objects.all()
+    #     lightresidue = LightResidue.objects.all()
+    #     count = LightResidue.objects.all().count()
+    #     # .filter(flotation_id=6).count()
+    #     composition = Composition.objects.all()
+    #     # fractionmaterialspresent = FractionMaterialsPresent.objects.all()
+    #     return render(request, 'flotation/allflotation.html',
+    #     {
+    #     'flotation':flotation,
+    #     'lightresidue':lightresidue,
+    #     'count':count,
+    #     'composition':composition,
+    #     # 'fractionmaterialspresent':fractionmaterialspresent
+    #     })
