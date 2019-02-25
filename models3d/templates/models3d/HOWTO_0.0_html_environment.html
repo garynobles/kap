@@ -1,0 +1,57 @@
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block content %}
+{% include "menu1.html" %}
+{% include "flotation/menu2.html" %}
+<!-- <!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+
+
+
+<meta content="charset=UTF-8"/>
+<title>3DHOP - 3D Heritage Online Presenter</title>
+
+<link type="text/css" rel="stylesheet" href="{% static 'stylesheet\3dhop.css' %}""/>
+
+</head>
+
+
+
+
+<body> -->
+
+<div id="3dhop" class="tdhop" onmousedown="if (event.preventDefault) event.preventDefault()"><div id="tdhlg"></div>
+ <canvas id="draw-canvas" style="background-image: url({% static 'skins/backgrounds/dark.jpg' %} )"/>
+</div>
+
+<!-- </body> -->
+
+
+
+<script type="text/javascript">
+var presenter = null;
+
+function setup3dhop() {
+	presenter = new Presenter("draw-canvas");
+
+	presenter.setScene({
+		meshes: {
+			"Gargoyle" : { url: "{% static 'models/singleres/gargo.ply' %}" }
+		},
+		modelInstances : {
+			"Model1" : { mesh : "Gargoyle" }
+		}
+	});
+}
+
+$(document).ready(function(){
+	init3dhop();
+
+	setup3dhop();
+});
+</script>
+
+
+{% endblock %}

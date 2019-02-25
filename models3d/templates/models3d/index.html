@@ -1,0 +1,69 @@
+{% extends "models3d/base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+
+{% include "models3d/menu2.html" %}
+
+
+
+<div class="container">
+  <br />
+  <h2>3D Models: Demo</h2>
+  <section>
+    <div class="float-left" style="height:500px; width:500px;">
+      This is a generic view for all te 3D models, this will be incorporated with the specilist views through the sample_id.
+
+      <h3>List of 3D Models</h3>
+      {% for model in models3d %}
+
+        {{ model.path }}{{ model.filename }}
+
+      {% endfor %}
+    </div>
+  </section>
+  <section >
+
+    <div class="float-right" style="height:500px; width:500px;">
+      <div id="3dhop" class="tdhop" onmousedown="if (event.preventDefault) event.preventDefault()"><div id="tdhlg"></div>
+      <canvas id="draw-canvas" style="background-image: url({% static '3DHOP/skins/backgrounds/dark.jpg' %} )"/>
+    </div>
+    </div>
+
+</section>
+</div>
+
+<div class="clearfix">
+
+</div>
+
+
+<script type="text/javascript">
+  var presenter = null;
+  function setup3dhop() {
+    presenter = new Presenter("draw-canvas");
+    presenter.setScene({
+      meshes: {
+
+
+
+       "Gargoyle" : { url: "{% static '3DHOP/models/2013/a.nxs' %}" }
+
+
+
+
+      },
+      modelInstances : {
+        "Model1" : { mesh : "Gargoyle" }
+      }
+    });
+  }
+
+  $(document).ready(function(){
+    init3dhop();
+
+    setup3dhop();
+  });
+</script>
+
+{% endblock %}
