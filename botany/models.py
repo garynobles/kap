@@ -24,7 +24,7 @@ class Sample(models.Model):
 
     def __str__(self):
         # return self.taken_by.first_name
-        return str(self.sample_id)
+        return str(self.sample_number)
         # return str(self.firstname)+ '-' +str(self.lastname)
         # return u'%s %s' % (self.first_name, self.last_name)
 
@@ -39,8 +39,8 @@ class Sample(models.Model):
 class Flotation(models.Model):
     flotation_id = models.AutoField(primary_key=True)
     sample_id = models.ForeignKey(Sample, db_column='sample_id', on_delete = models.PROTECT)
-    area_easting = models.IntegerField(blank=True, null=True)
-    area_northing = models.IntegerField(blank=True, null=True)
+    area_easting = models.IntegerField(choices = EASTING_CHOICES)
+    area_northing = models.IntegerField(choices = NORTHING_CHOICES)
     context_number = models.IntegerField(blank=True, null=True)
     sample_number = models.IntegerField(blank=True, null=True)
     flotation_date = models.DateTimeField(auto_now=False)

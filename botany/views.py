@@ -195,7 +195,6 @@ class FlotationForm(forms.ModelForm):
         'flotation_date',
         'entry_date',
         'analyst_id',
-        # 'analyst_id',
         'notes',
         )
 

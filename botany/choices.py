@@ -35,4 +35,6 @@ MATERIALS = (
     ("",""),
     ("Botanical","Botanical"),
     ("Ceramic","Ceramic"),
+    ("Organic","Organic"),
+
 )

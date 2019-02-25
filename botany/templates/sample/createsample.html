@@ -2,26 +2,26 @@
 {% load widget_tweaks %}
 
 {% block content %}
-{% include "menu1.html" %}
+
 {% include "sample/menu2.html" %}
-<div class="container">
-  <h1>Sample</h1>
+<div class="container" style="margin-top:150px; margin-botton:200px;">
+  <h1 style="color:white;">Sample</h1>
   <form method="POST" class="post-form">{% csrf_token %}
     <div class="row mt-1">
-      <div class="col">Area Easting{{ form.area_easting|add_class:"form-control"}}</div>
-      <div class="col">Area Northing{{ form.area_northing|add_class:"form-control"}}</div>
-      <div class="col">Context Number{{ form.context_number|add_class:"form-control"}}</div>
-      <div class="col">Sample Number{{ form.sample_number|add_class:"form-control"}}</div>
+      <div class="col" style="color:white;">Area Easting{{ form.area_easting|add_class:"form-control"}}</div>
+      <div class="col" style="color:white;">Area Northing{{ form.area_northing|add_class:"form-control"}}</div>
+      <div class="col" style="color:white;">Context Number{{ form.context_number|add_class:"form-control"}}</div>
+      <div class="col" style="color:white;">Sample Number{{ form.sample_number|add_class:"form-control"}}</div>
     </div>
     <div class="row mt-1">
-      <div class="col-3">Sample Type {{ form.sample_type|add_class:"form-control"}}</div>
-      <div class="col-3">Weight (Kg) {{ form.weight|add_class:"form-control"}}</div>
-      <div class="col-6">Description {{ form.description|add_class:"form-control"}}</div>
+      <div class="col-3" style="color:white;">Sample Type {{ form.sample_type|add_class:"form-control"}}</div>
+      <div class="col-3" style="color:white;">Weight (Kg) {{ form.weight|add_class:"form-control"}}</div>
+      <div class="col-6" style="color:white;">Description {{ form.description|add_class:"form-control"}}</div>
     </div>
     <div class="row mt-1">
-      <div class="col-3">Recovery Method {{ form.recovery_method|add_class:"form-control"}}</div>
-      <div class="col-3">Taken by{{ form.taken_by|add_class:"form-control"}}</div>
-      <div class="col-6">Comments {{ form.comments|add_class:"form-control"}}</div>
+      <div class="col-3" style="color:white;">Recovery Method {{ form.recovery_method|add_class:"form-control"}}</div>
+      <div class="col-3" style="color:white;">Taken by{{ form.taken_by|add_class:"form-control"}}</div>
+      <div class="col-6" style="color:white;">Comments {{ form.comments|add_class:"form-control"}}</div>
     </div>
     <button type="submit" class="save btn btn-default mt-3">Save</button>
   </form>
