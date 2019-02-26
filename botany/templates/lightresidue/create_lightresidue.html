@@ -1,39 +1,37 @@
 {% extends 'lightresidue/base.html' %}
 {% load widget_tweaks %}
-
 {% block content %}
-{% include "menu1.html" %}
 {% include "lightresidue/menu2.html" %}
-<div class="container">
-    <h1>LightResidue</h1>
+  <div class="container top">
+    <h1 style="color:white;">LightResidue</h1>
 
     <form method="POST" class="post-form">{% csrf_token %}
       <div class="row mt-1">
-        <div class="col">Proportion Analysed{{ form.proportion_analysed|add_class:"form-control"}}</div>
-        <div class="col">Soil Volume (Ltrs){{ form.soil_volume|add_class:"form-control"}}</div>
-        <div class="col"></div>
-        <div class="col"></div>
+        <div class="col" style="color:white;">Proportion Analysed{{ form.proportion_analysed|add_class:"form-control"}}</div>
+        <div class="col" style="color:white;">Soil Volume (Ltrs){{ form.soil_volume|add_class:"form-control"}}</div>
+        <div class="col" style="color:white;"></div>
+        <div class="col" style="color:white;"></div>
       </div>
       <div class="row mt-1">
-        <div class="col">Sample Volume (ml){{ form.sample_volume|add_class:"form-control"}}</div>
-        <div class="col">Sample Weight (grams){{ form.sample_weight|add_class:"form-control"}}</div>
-        <div class="col"></div>
-        <div class="col"></div>
+        <div class="col" style="color:white;">Sample Volume (ml){{ form.sample_volume|add_class:"form-control"}}</div>
+        <div class="col" style="color:white;">Sample Weight (grams){{ form.sample_weight|add_class:"form-control"}}</div>
+        <div class="col" style="color:white;"></div>
+        <div class="col" style="color:white;"></div>
       </div>
       <div class="row mt-2">
         <div class="col-1">
 
-          <div class="">{{ form.stone|add_class:"" }} Stone</div>
-          <div class="">{{ form.roots|add_class:"" }} Roots</div>
-          <div class="">{{ form.bone|add_class:"" }} Bone </div>
-          <div class="">{{ form.shell|add_class:"" }} Shell </div>
+          <div class="" style="color:white;">{{ form.stone|add_class:"" }} Stone</div>
+          <div class="" style="color:white;">{{ form.roots|add_class:"" }} Roots</div>
+          <div class="" style="color:white;">{{ form.bone|add_class:"" }} Bone </div>
+          <div class="" style="color:white;">{{ form.shell|add_class:"" }} Shell </div>
 
           </div>
           <div class="col-11">
-            <div class=""> {{ form.sediment|add_class:"" }} Sediment </div>
-            <div class="">{{ form.leaves|add_class:"" }} Leaves</div>
-          <div class="">{{ form.insect_parts|add_class:"" }} Insect Parts</div>
-          <div class="">{{ form.charred_dung|add_class:"" }} Charred Dung</div>
+            <div class="" style="color:white;"> {{ form.sediment|add_class:"" }} Sediment </div>
+            <div class="" style="color:white;">{{ form.leaves|add_class:"" }} Leaves</div>
+          <div class="" style="color:white;">{{ form.insect_parts|add_class:"" }} Insect Parts</div>
+          <div class="" style="color:white;">{{ form.charred_dung|add_class:"" }} Charred Dung</div>
 
 
 

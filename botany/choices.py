@@ -1,5 +1,5 @@
 EASTING_CHOICES = (
-    ("",""),
+    ("","Area Easting"),
     (99, 99),
     (108, 108),
     (109, 109),
@@ -14,7 +14,7 @@ EASTING_CHOICES = (
 )
 
 NORTHING_CHOICES = (
-    ("",""),
+    ("","Area Northing"),
     (523, 523),
     (526, 526),
     (551,551),
@@ -27,12 +27,12 @@ NORTHING_CHOICES = (
 )
 
 RECOVERY_METHODS = (
-    ("",""),
+    ("","Recovery Method"),
     ("Hand","Hand"),
 )
 
 MATERIALS = (
-    ("",""),
+    ("","Material"),
     ("Botanical","Botanical"),
     ("Ceramic","Ceramic"),
     ("Organic","Organic"),

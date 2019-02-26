@@ -1,53 +1,162 @@
+{% load staticfiles %}
+
+<header>
+  <div  class="fixed-top">
+    <div class="navbar navbar-inverse navbar-static-top navbar-expand-lg navbar-dark bg-dark" id="topNav">
+      <a class="navbar-brand" href="{% url 'home' %}">Gygaia V 0.1.6</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ml-auto">
+          <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
+          {% if user.is_authenticated %}
+          <a class="nav-item nav-link" href="{% url 'allblogs' %}">Blog</a>
+          <div class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle mr-2" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Depot</a>
+            <div class="dropdown-menu " aria-labelledby="storage">
+              <a class="dropdown-item" href="{% url 'alldepotsample' %}">Samples</a>
+              <a class="dropdown-item" href="{% url 'allcontainer' %}">Containers</a>
+              <a class="dropdown-item" href="{% url 'alllocation' %}">Locations</a>
+              <a class="dropdown-item" href="{% url 'allstorage' %}">Depots</a>
+              <!-- <a class="dropdown-item" href="#">Faunal</a>
+              <a class="dropdown-item" href="#">Conservation</a>
+              <a class="dropdown-item" href="#">Ceramics</a>
+              <a class="dropdown-item" href="#">Small Finds</a> -->
+            </div>
+          </div>
+          <a class="nav-item nav-link" href="{ url 'contextpage' }">Excavation</a>
+          <div class="dropdown show">
+            <a style="color:grey;" class="btn btn-secondary dropdown-toggle mr-2" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Photo Gallery</a>
+            <div class="dropdown-menu " aria-labelledby="gallery">
+              <a class="dropdown-item" href="{ url 'allimages' }">Photos_1</a>
+              <hr />
+              <!-- <a class="dropdown-item" href="#">Faunal</a>
+              <a class="dropdown-item" href="#">Conservation</a>
+              <a class="dropdown-item" href="#">Ceramics</a>
+              <a class="dropdown-item" href="#">Small Finds</a> -->
+            </div>
+          </div>
+          <div class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle mr-2" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">3D Spatial</a>
+            <div class="dropdown-menu " aria-labelledby="spatial3d">
+              <a class="dropdown-item" href="{% url 'allphotobatch' %}">Photobatch</a>
+              <hr />
+              <!-- <a class="dropdown-item" href="#">Faunal</a>
+              <a class="dropdown-item" href="#">Conservation</a>
+              <a class="dropdown-item" href="#">Ceramics</a>
+              <a class="dropdown-item" href="#">Small Finds</a> -->
+            </div>
+          </div>
+          <div class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle mr-2" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Botany</a>
+            <div class="dropdown-menu " aria-labelledby="botany">
+              <a class="dropdown-item" href="{% url 'allflotation' %}">Flotation</a>
+              <hr />
+              <!-- <a class="dropdown-item" href="#">Faunal</a>
+              <a class="dropdown-item" href="#">Conservation</a>
+              <a class="dropdown-item" href="#">Ceramics</a>
+              <a class="dropdown-item" href="#">Small Finds</a> -->
+            </div>
+          </div>
+          <div class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle mr-2" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Zooarch</a>
+            <div class="dropdown-menu " aria-labelledby="samplesdropdown">
+              <a class="dropdown-item" href="{ url 'allzooarch' }">Samples</a>
+              <hr />
+              <a class="dropdown-item" href="{% url 'allqnisp' %}">Qnisp</a>
+              <!-- <a class="dropdown-item" href="{ url 'allzooarch' }">All Zooarch</a> -->
+              <!-- <a class="dropdown-item" href="#">Conservation</a>
+              <a class="dropdown-item" href="#">Ceramics</a>
+              <a class="dropdown-item" href="#">Small Finds</a> -->
+            </div>
+          </div>
+          <div class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle mr-2" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Samples</a>
+            <div class="dropdown-menu " aria-labelledby="samplesdropdown">
+              <a class="dropdown-item" href="{ url 'allsamples' }">Samples</a>
+              <hr />
+              <a class="dropdown-item" href="{ url 'allzooarch' }">Faunal</a>
+              <!-- <a class="dropdown-item" href="#">Conservation</a>
+              <a class="dropdown-item" href="#">Ceramics</a>
+              <a class="dropdown-item" href="#">Small Finds</a> -->
+            </div>
+          </div>
+          <div class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle mr-2" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-comments" style="color:grey;"></i> <span style="color:grey;">[0]</span></a>
+            <div class="dropdown-menu " aria-labelledby="messagedropdown">
+              <a class="dropdown-item" href="% url '' %">Chat</a>
+              <hr />
+              <a class="dropdown-item" href="% url '' %">Alerts</a>
+              <a class="dropdown-item" href="% url '' %">Questions</a>
+            </div>
+          </div>
+
+          <div class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle mr-2" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-envelope" style="color:grey;"></i> <span style="color:grey;">[0]</span></a>
+
+            <div class="dropdown-menu " aria-labelledby="alertdropdown">
+              <a class="dropdown-item" href="% url '' %">Messages</a>
+              <hr />
+              <a class="dropdown-item" href="% url '' %">Alerts</a>
+              <a class="dropdown-item" href="% url '' %">Questions</a>
+
+            </div>
+          </div>
+          <div class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle mr-2" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-user pr-2"></i>
+              <!-- {{ user.get_username }} -->
+              {{ user.get_full_name|default:user.username }}
+            </a>
+            <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+              <!-- <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a> -->
+              <a class="dropdown-item" href="{% url 'logout'%}?next={{request.path}}">Logout</a>
+            </div>
+          </div>
+          {% else %}
+          <a href="{% url 'login'%}?next={{request.path}}">Login</a>
+          <a class="nav-item nav-link " href="#">next</a>
+          {% endif %}
+        </div>
+        <div class="dropdown show">
+          <a class="btn btn-secondary dropdown-toggle mr-2" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Experimental</a>
+          <div class="dropdown-menu " aria-labelledby="samplesdropdown">
+            <a class="dropdown-item" href="{% url 'webviewer3d' %}">webviewer3d</a>
+            <hr />
+            <a class="dropdown-item" href="{ url 'allzooarch' }">Faunal</a>
+            <a class="dropdown-item" href="{% url 'models3d' %}">3d models</a>
+            <!-- <a class="dropdown-item" href="#">Conservation</a>
+            <a class="dropdown-item" href="#">Ceramics</a>
+            <a class="dropdown-item" href="#">Small Finds</a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 <div class="navbar navbar-custom navbar-inverse navbar-static-top navbar-dark bg-dark" id="nav2">
   <!-- <div class="navbar-inner"> -->
-
 <div class="float-left">
   <a href="{% url 'allbotany' %}">
     <button  type="button" class="btn btn-info float-left mr-1">Botany</button>
   </a>
-
     <a  href="{% url 'allflotation' %}">
       <button  type="button" class="btn btn-outline-info float-left mr-1">Flotation</button>
     </a>
-
     <a  href="{% url 'samplelist' %}">
       <button  type="button" class="btn btn-info float-left mr-1">Sample</button>
     </a>
 
 </div>
-
 <div>
-
-
-
     <a href="{% url 'addflotation' %}">
       <button  type="button" class="btn btn-success float-right mr-1">Add Flotation</button>
     </a>
-    <!-- <a href="{ url 'addlightresidue' }">
-      <button  type="button" class="btn btn-success">Add new LightResidue</button>
-    </a> -->
-
-    <!-- <a href="{ url 'create_composition' }">
-      <button  type="button" class="btn btn-success">Add new LightResidue Composition</button>
-    </a>
-
-    <a href="{ url 'create_lightresiduematerialpresent' }">
-      <button  type="button" class="btn btn-success">Add new LightResidue Material</button>
-    </a> -->
-
-    <!-- <a href="{ url 'allfraction' }">
-      <button  type="button" class="btn btn-info">Fractions</button>
-    </a>
-    <a href="{ url 'allcomposition' }">
-      <button  type="button" class="btn btn-info">LightResidue Composition</button>
-    </a>
-    <a href="{ url 'allfractionmaterialpresent' }">
-      <button  type="button" class="btn btn-info">LightResidue Material Present</button>
-    </a> -->
-  <!-- </div> -->
 </div>
 </div>
 <div class="clearfix"></div>
-
-<div id="lifeline" style="min-width: 310px; height: 50px; margin: 0 auto; border-style:solid;"></div>
+<!-- <div id="lifeline" style="min-width: 310px; height: 50px; margin: 0 auto; border-style:solid;"></div> -->
 </header>
