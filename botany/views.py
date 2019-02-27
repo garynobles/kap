@@ -27,7 +27,7 @@ def addsample(request):
             #post.datetime = datetime.datetime.now()
 
             post.save()
-            return redirect('allsample')
+            return redirect('samplelist')
     else:
         form = SampleForm()
     return render(request, 'sample/createsample.html', {'form': form})

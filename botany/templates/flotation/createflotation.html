@@ -7,7 +7,7 @@
 
     <form method="POST" class="post-form">{% csrf_token %}
       <div class="row mt-1">
-        <!-- <div class="col" style="color:white;">Sample ID {{ form.sample_id|add_class:""}}</div> -->
+        <div class="col" style="color:white;">Sample ID {{ form.sample_id|add_class:""}}</div>
       </div>
       <div class="row mt-1">
         <div class="" style="color:white; width:150px;">{{ form.area_easting|add_class:""|append_attr:"placeholder:Area Easting"}}</div>

@@ -17,7 +17,7 @@
             <th>Flotation Date</th>
             <th>Analyst</th>
             <th>Notes</th>
-            <th class="">Action</th>
+            <th class="borderless">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -33,16 +33,16 @@
             <td>{{ flotation.notes }}</td>
             <td class=" action">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <a href="{% url 'addlightresidue' pk=flotation.flotation_id %}" class="add">
+                <a href="{% url 'addlightresidue' pk=flotation.flotation_id %}" class="add" title="add light residue">
                   <i class="fas fa-plus add" ></i>
                 </a>
-                <a href="{% url 'detailflotation' flotation.flotation_id %}" class="detail">
+                <a href="{% url 'detailflotation' flotation.flotation_id %}" class="detail" title="more detail">
                   <i class="far fa-address-card detail"></i>
                 </a>
-                <a href="{% url 'editflotation' pk=flotation.pk %}" class="edit">
+                <a href="{% url 'editflotation' pk=flotation.pk %}" class="edit" title="edit">
                   <i class="far fa-edit edit"></i>
                 </a>
-                <a href="{% url 'editflotation' pk=flotation.pk %}" class="delete">
+                <a href="{% url 'editflotation' pk=flotation.pk %}" class="delete" title="delete">
                   <i class="fas fa-trash-alt delete"></i>
                 </a>
               </div>
@@ -52,7 +52,6 @@
         </tbody>
       </table>
     </div>
-
 </section>
 
 {% endblock %}

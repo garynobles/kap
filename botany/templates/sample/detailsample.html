@@ -1,20 +1,9 @@
 {% extends 'sample/base.html' %}
 {% load widget_tweaks %}
-
 {% block content %}
 { include "menu1.html" }
 {% include "sample/menu2.html" %}
-<!-- <section>
-  <div class="float-right col-sm-1">
-    <div class="pt-3">
-      <a class="btn btn-default" href="{ url 'addflotation' pk=sample.sample_id }"><span class="glyphicon glyphicon-pencil">
-        <button type="button" class="btn btn-primary">edit sample add</button>
-      </span></a>
-    </div>
-  </div>
-</section> -->
-
-<div class="container" style="margin-top:150px;">
+<div class="container top">
   <section>
     <div class="">
       <div>
@@ -51,38 +40,34 @@
   </section>
 
   <section>
-    <div class="float-left col-sm-9">
-        <div class="row">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 style="color:white;">
-                Flotation
-              </h4>
-            </div>
-            <table class="table table-fixed">
-              <thead>
+    <h4 class="kap">
+      Flotation
+    </h4>
+    <div class="table-responsive">
+      <table class="table-striped">
+        <thead>
                 <tr>
-                  <th class="table">Flotation ID</th>
-                  <th class="table">Sample ID</th>
-                  <th class="table">Key ENC</th>
-                  <th class="table">Sample Number</th>
-                  <th class="table">Entry Date</th>
-                  <th class="table">Flotation Date</th>
-                  <th class="table">Analyst</th>
-                  <th class="table">Notes</th>
+                  <th>Flotation ID</th>
+                  <th>Sample ID</th>
+                  <th>Key ENC</th>
+                  <th>Sample Number</th>
+                  <th>Entry Date</th>
+                  <th>Flotation Date</th>
+                  <th>Analyst</th>
+                  <th>Notes</th>
                 </tr>
               </thead>
               <tbody>
               {% for flotation in flotation.all %}
                 <tr>
-                  <td class="table">{{ flotation.flotation_id }}</td>
-                  <td class="table">{{ flotation.sample_id }}</td>
-                  <td class="table">{{ flotation.area_easting }}.{{ flotation.area_northing }}.{{ flotation.context_number}}</td>
-                  <td class="table">{{ flotation.sample_number }}</td>
-                  <td class="table">{{ flotation.entry_date }}</td>
-                  <td class="table">{{ flotation.flotation_date }}</td>
-                  <td class="table">{{ flotation.analyst_id }}</td>
-                  <td class="table">{{ flotation.notes  }}</td>
+                  <td>{{ flotation.flotation_id }}</td>
+                  <td>{{ flotation.sample_id }}</td>
+                  <td>{{ flotation.area_easting }}.{{ flotation.area_northing }}.{{ flotation.context_number}}</td>
+                  <td>{{ flotation.sample_number }}</td>
+                  <td>{{ flotation.entry_date }}</td>
+                  <td>{{ flotation.flotation_date }}</td>
+                  <td>{{ flotation.analyst_id }}</td>
+                  <td>{{ flotation.notes  }}</td>
 
                   <td class="borderless">
                   <div class="btn-group" role="group" aria-label="Basic example">
@@ -90,7 +75,7 @@
                   <a href="{% url 'addlightresidue' fk=sample.sample_id pk=flotation.flotation_id %}" class="badge badge-primary" role="button">+ LightResidue A</a>
 
 
-    
+
 
                   <!-- <a href="{ url 'addmaterialpresent' fk=botany.flotation_id pk=lightresidue.fraction_id }" class="badge badge-primary" role="button">Material</a> -->
                   <a href="{% url 'detailflotation' flotation.flotation_id %}" class="badge badge-warning" role="button">detail</a>
