@@ -101,27 +101,40 @@ class Composition(models.Model):
         #ordering = ["orderby"]
         verbose_name_plural = "Composition"
 
-class FractionMaterialsPresent(models.Model):
-    pass
-#
-#     material_id = models.AutoField(primary_key=True)
-#     fraction_id = models.ForeignKey(LightResidue, db_column='fraction_id', on_delete = models.PROTECT)
-#     # material = models.CharField(max_length=200, default='')
-#
-#     sediment = models.BooleanField()
-#     stone = models.BooleanField()
-#     roots = models.BooleanField()
-#     leaves = models.BooleanField()
-#     insect_parts = models.BooleanField()
-#     charred_dung = models.BooleanField()
-#     bone = models.BooleanField()
-#     shell = models.BooleanField()
-#
-#     def __str__(self):
-#         return str(self.material_id)
-#
-#     class Meta():
-#         managed=False
-#         db_table = 'kap\".\"materials_present'
-#         #ordering = ["orderby"]
-#         verbose_name_plural = "Materials Present"
+class Fraction(models.Model):
+    id = models.AutoField(primary_key=True)
+    fraction = models.ForeignKey(LightResidue, db_column='fraction_id', on_delete = models.PROTECT)
+    whole_count = models.DecimalField(max_digits=10, decimal_places=3)
+    weight_whole = models.DecimalField(max_digits=10, decimal_places=3)
+    weight_fragment = models.DecimalField(max_digits=10, decimal_places=3)
+    fragment_count = models.DecimalField(max_digits=10, decimal_places=3)
+    seed = models.BooleanField()
+    plant_part = models.BooleanField()
+    composition_id = models.IntegerField()
+
+    def __str__(self):
+        return str(self.fraction)
+
+    class Meta():
+        managed=False
+        db_table = 'kap\".\"fraction'
+        #ordering = ["orderby"]
+        verbose_name_plural = "Fraction"
+
+
+class PlantPart(models.Model):
+    id = models.AutoField(primary_key=True)
+
+    plant_part = models.CharField(max_length=50)
+    part_count = models.DecimalField(max_digits=10, decimal_places=3)
+    part_weight = models.DecimalField(max_digits=10, decimal_places=3)
+    fraction_id = models.IntegerField()
+
+    def __str__(self):
+        return str(self.plant_part)
+
+    class Meta():
+        managed=False
+        db_table = 'kap\".\"plantpart'
+        #ordering = ["orderby"]
+        verbose_name_plural = "plant parts"

@@ -322,7 +322,7 @@ class CompositionForm(forms.ModelForm):
 
 def detaillightresidue(request, flotation_id, fraction_id):
     detaillightresidue = get_object_or_404(LightResidue, pk=fraction_id)
-    fractionmaterialspresent = get_object_or_404(LightResidue, pk=fraction_id)
+    # fractionmaterialspresent = get_object_or_404(LightResidue, pk=fraction_id)
     # detailflotation = get_object_or_404(Botany, pk=flotation_id)
     composition = Composition.objects.filter(fraction_id__fraction_id=fraction_id)
     # fractionmaterialspresent = FractionMaterialsPresent.objects.filter(fraction_id__fraction_id=fraction_id)
