@@ -164,11 +164,13 @@ def allflotation(request, sample_id='', flotation_id='', fraction_id=''):
 
 
 
-def addflotation(request, pk='', sample_id='', flotation_id=''):
+def addflotation(request, pk, fk=''):
         if request.method == "POST":
             form = FlotationForm(request.POST)
             if form.is_valid():
                 post = form.save(commit=False)
+                sample = get_object_or_404(Sample, pk=pk)
+                post.sample_id = sample
                 #flotation_id = pk
                 # post.analyst = request.user
                 #post.datetime = datetime.datetime.now()
@@ -177,7 +179,10 @@ def addflotation(request, pk='', sample_id='', flotation_id=''):
                 return redirect('allflotation')
         else:
             form = FlotationForm()
-        return render(request, 'flotation/createflotation.html', {'form': form})
+        return render(request, 'flotation/createflotation.html',
+        {
+            'form': form
+        })
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -187,7 +192,7 @@ class FlotationForm(forms.ModelForm):
         model = Flotation
         fields = (
         # 'flotation_id',
-        'sample_id',
+        # 'sample_id',
         'area_easting',
         'area_northing',
         'context_number',
@@ -249,8 +254,7 @@ def detailflotation(request, flotation_id):
 
 def addlightresidue(request, pk, fk=''):
     if request.method == "POST":
-    #if request.method == "GET":
-        form = FractionForm(request.POST)
+        form = LightResidueForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             flotation = get_object_or_404(Flotation, pk=pk)
@@ -263,11 +267,11 @@ def addlightresidue(request, pk, fk=''):
             #return redirect('allfraction')
             return redirect('allflotation')
     else:
-        #import pdb; pdb.set_trace()
-        form = FractionForm()
-    return render(request, 'lightresidue/create_lightresidue.html', {'form': form})
+        form = LightResidueForm()
+    return render(request, 'lightresidue/create_lightresidue.html',
+    {'form': form})
 
-class FractionForm(forms.ModelForm):
+class LightResidueForm(forms.ModelForm):
     class Meta:
         model = LightResidue
         fields = (
@@ -342,7 +346,7 @@ def editfraction(request, pk, fk=''):
         post = get_object_or_404(LightResidue, pk=pk)
         # pk=pk
         if request.method == "POST":
-            form = FractionForm(request.POST, instance=post)
+            form = LightResidueForm(request.POST, instance=post)
             if form.is_valid():
                 post = form.save(commit=False)
                 #post.user = request.user
@@ -353,7 +357,7 @@ def editfraction(request, pk, fk=''):
                 # return redirect('allfraction')
                 #, pk=post.pk)
         else:
-            form = FractionForm(instance=post)
+            form = LightResidueForm(instance=post)
         return render(request, 'lightresidue/create_lightresidue.html', {'form': form})
 
 def editflotation(request, pk):

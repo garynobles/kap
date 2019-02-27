@@ -39,7 +39,9 @@
           <td class="table">{{ sample.comments }}</td>
           <td class="borderless" style="border: 1px solid transparent">
             <div class="btn-group" role="group" aria-label="Basic example">
-              <a href="{% url 'addflotation' pk=sample.sample_id %}">
+
+              <a href="{% url 'addflotation' pk=sample.sample_id %}" class="detail">
+
                 <span class="badge badge-primary">
                   Add Flotation
                   <br />
