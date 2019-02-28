@@ -9,35 +9,162 @@ from itertools import chain
 
 from dal import autocomplete
 
+
 def allsample(request):
     allsample = Sample.objects.all()
-    # filter(sample_type='Botanical')
     return render(request, 'sample/sample.html',
     {
     'allsample':allsample,
     })
 
+def allflotation(request, sample_id='', flotation_id=''):
+    flotation = Flotation.objects.all()
+    lightresidue = LightResidue.objects.all()
+    count = LightResidue.objects.all().count()
+    composition = Composition.objects.all()
+    return render(request, 'flotation/allflotation.html',
+    {
+    'flotation':flotation,
+    'lightresidue':lightresidue,
+    'count':count,
+    'composition':composition,
+    })
+
+
+#### add ####
+
+            #post.flotation_id = pk
+            #post.user = request.user
+            #post.datetime = datetime.datetime.now()
 def addsample(request):
     if request.method == "POST":
         form = SampleForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            #flotation_id = pk
-            # post.analyst = request.user
-            #post.datetime = datetime.datetime.now()
-
             post.save()
             return redirect('samplelist')
     else:
         form = SampleForm()
     return render(request, 'sample/createsample.html', {'form': form})
 
-# def detailsample(request, sample_id):
-#     detailsample = get_object_or_404(Sample, pk=sample_id)
-#     return render(request, 'sample/detailsample.html',
-#     {'detailsample':detailsample,
-#     })
+def addflotation(request, pk, fk=''):
+        if request.method == "POST":
+            form = FlotationForm(request.POST)
+            if form.is_valid():
+                post = form.save(commit=False)
+                sample = get_object_or_404(Sample, pk=pk)
+                post.sample_id = sample
+                post.save()
+                return redirect('allflotation')
+        else:
+            form = FlotationForm()
+        return render(request, 'flotation/createflotation.html',
+        {
+            'form': form
+        })
 
+def addlightresidue(request, pk, fk=''):
+    if request.method == "POST":
+        form = LightResidueForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            flotation = get_object_or_404(Flotation, pk=pk)
+            post.flotation_id = flotation
+            post.save()
+            #return redirect('allfraction')
+            return redirect('allflotation')
+    else:
+        form = LightResidueForm()
+    return render(request, 'lightresidue/create_lightresidue.html',
+    {'form': form})
+
+def addcomposition(request, pk, fk):
+    if request.method == "POST":
+    #if request.method == "GET":
+        form = CompositionForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            lightresidue = get_object_or_404(LightResidue, pk=pk)
+            post.lightresidue_id = lightresidue
+            post.save()
+            #return redirect('allfraction')
+            return redirect('allflotation')
+    else:
+        #import pdb; pdb.set_trace()
+        form = CompositionForm()
+    return render(request, 'composition/create_composition.html', {'form': form})
+
+#### EDIT ####
+def editlightresidue(request, pk, fk=''):
+        post = get_object_or_404(LightResidue, pk=pk)
+        if request.method == "POST":
+            form = LightResidueForm(request.POST, instance=post)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.save()
+                return redirect('allflotation')
+        else:
+            form = LightResidueForm(instance=post)
+        return render(request, 'lightresidue/create_lightresidue.html', {'form': form})
+
+def editfraction(request):
+    pass
+
+def editflotation(request, pk):
+        post = get_object_or_404(Flotation, pk=pk)
+        if request.method == "POST":
+            form = FlotationForm(request.POST, instance=post)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.save()
+                return redirect('allflotation')
+        else:
+            form = FlotationForm(instance=post)
+        return render(request, 'flotation/createflotation.html', {'form': form})
+
+
+def editsample(request, pk):
+        post = get_object_or_404(Sample, pk=pk)
+        if request.method == "POST":
+            form = SampleForm(request.POST, instance=post)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.save()
+                return redirect('allsample')
+        else:
+            form = SampleForm(instance=post)
+        return render(request, 'sample/createsample.html', {'form': form})
+
+
+
+#### DETAIL ####
+
+def detailsample(request, sample_id):
+    sample = get_object_or_404(Sample, pk=sample_id)
+    flotation = Flotation.objects.filter(sample_id__sample_id=sample_id)
+    return render(request, 'sample/detailsample.html',
+    {
+        'sample':sample,
+        'flotation':flotation,
+    })
+
+def detailflotation(request, flotation_id):
+    flotation = get_object_or_404(Flotation, pk=flotation_id)
+    lightresidue = LightResidue.objects.filter(flotation_id__flotation_id=flotation_id)
+    return render(request, 'flotation/detailflotation.html',
+    {
+        'flotation':flotation,
+        'lightresidue':lightresidue,
+    })
+
+def detaillightresidue(request, lightresidue_id):
+    detaillightresidue = get_object_or_404(LightResidue, pk=lightresidue_id)
+    composition = Composition.objects.filter(lightresidue_id__lightresidue_id=lightresidue_id)
+    return render(request, 'lightresidue/detaillightresidue.html',
+    {
+        'lightresidue':detaillightresidue,
+        'composition':composition,
+    })
 
 
 
@@ -144,45 +271,10 @@ def allbotany(request, sample_id=''):
     })
 
 
-def allflotation(request, sample_id='', flotation_id='', fraction_id=''):
-    flotation = Flotation.objects.all()
-    lightresidue = LightResidue.objects.all()
-    count = LightResidue.objects.all().count()
-    # .filter(flotation_id=6).count()
-    composition = Composition.objects.all()
-    # fractionmaterialspresent = FractionMaterialsPresent.objects.all()
-    return render(request, 'flotation/allflotation.html',
-    {
-    'flotation':flotation,
-    'lightresidue':lightresidue,
-    'count':count,
-    'composition':composition,
-    # 'fractionmaterialspresent':fractionmaterialspresent
-    })
 
 
 
 
-
-def addflotation(request, pk, fk=''):
-        if request.method == "POST":
-            form = FlotationForm(request.POST)
-            if form.is_valid():
-                post = form.save(commit=False)
-                sample = get_object_or_404(Sample, pk=pk)
-                post.sample_id = sample
-                #flotation_id = pk
-                # post.analyst = request.user
-                #post.datetime = datetime.datetime.now()
-
-                post.save()
-                return redirect('allflotation')
-        else:
-            form = FlotationForm()
-        return render(request, 'flotation/createflotation.html',
-        {
-            'form': form
-        })
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -191,8 +283,7 @@ class FlotationForm(forms.ModelForm):
     class Meta:
         model = Flotation
         fields = (
-        # 'flotation_id',
-        # 'sample_id',
+
         'area_easting',
         'area_northing',
         'context_number',
@@ -212,7 +303,7 @@ class SampleForm(forms.ModelForm):
     class Meta:
         model = Sample
         fields = (
-        # 'flotation_id',
+
         'sample_id',
         'area_easting',
         'area_northing',
@@ -231,53 +322,13 @@ class SampleForm(forms.ModelForm):
             'entry_date': DateInput(attrs={'type': 'date'}),
         }
 
-def detailsample(request, sample_id):
-    sample = get_object_or_404(Sample, pk=sample_id)
-    # lightresidue = get_object_or_404(LightResidue, flotation_id=flotation_id)
-    #lightresidue = LightResidue.objects.all()
-    flotation = Flotation.objects.filter(sample_id__sample_id=sample_id)
-    #joinsamplecontainer = JoinSampleContainer.objects.filter(fraction_id__fraction_id=fraction_id)
-    return render(request, 'sample/detailsample.html',
-    {'sample':sample, 'flotation':flotation,
-    })
 
-
-def detailflotation(request, flotation_id):
-    flotation = get_object_or_404(Flotation, pk=flotation_id)
-    #lightresidue = get_object_or_404(LightResidue, flotation_id=flotation_id)
-    #lightresidue = LightResidue.objects.all()
-    lightresidue = LightResidue.objects.filter(flotation_id__flotation_id=flotation_id)
-    #joinsamplecontainer = JoinSampleContainer.objects.filter(fraction_id__fraction_id=fraction_id)
-    return render(request, 'flotation/detailflotation.html',
-    {'flotation':flotation, 'lightresidue':lightresidue,
-    })
-
-def addlightresidue(request, pk, fk=''):
-    if request.method == "POST":
-        form = LightResidueForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            flotation = get_object_or_404(Flotation, pk=pk)
-            post.flotation_id = flotation
-            #post.flotation_id = pk
-            #post.user = request.user
-            #post.datetime = datetime.datetime.now()
-
-            post.save()
-            #return redirect('allfraction')
-            return redirect('allflotation')
-    else:
-        form = LightResidueForm()
-    return render(request, 'lightresidue/create_lightresidue.html',
-    {'form': form})
 
 class LightResidueForm(forms.ModelForm):
     class Meta:
         model = LightResidue
         fields = (
-        #'fraction_id',
-        #'flotation_id',
-        'proportion_analysed',
+    'proportion_analysed',
         'soil_volume',
         'sample_volume',
         'sample_weight',
@@ -291,105 +342,18 @@ class LightResidueForm(forms.ModelForm):
         'shell'
         )
 
-def addcomposition(request, pk, fk):
-    if request.method == "POST":
-    #if request.method == "GET":
-        form = CompositionForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            lightresidue = get_object_or_404(LightResidue, pk=pk)
-            post.fraction_id = lightresidue
-            #post.flotation_id = pk
-            #post.user = request.user
-            #post.datetime = datetime.datetime.now()
 
-            post.save()
-            #return redirect('allfraction')
-            return redirect('allflotation')
-    else:
-        #import pdb; pdb.set_trace()
-        form = CompositionForm()
-    return render(request, 'composition/create_composition.html', {'form': form})
 
 class CompositionForm(forms.ModelForm):
     class Meta:
         model = Composition
         fields = (
-        # 'fract_comp_id',
-        # 'fraction_id',
         'material_type',
-        'lightresidue',
         'type_count',
         'whole_weight',
         'fragment_weight',
         )
 
-def detaillightresidue(request, flotation_id, fraction_id):
-    detaillightresidue = get_object_or_404(LightResidue, pk=fraction_id)
-    # fractionmaterialspresent = get_object_or_404(LightResidue, pk=fraction_id)
-    # detailflotation = get_object_or_404(Botany, pk=flotation_id)
-    composition = Composition.objects.filter(fraction_id__fraction_id=fraction_id)
-    # fractionmaterialspresent = FractionMaterialsPresent.objects.filter(fraction_id__fraction_id=fraction_id)
-    # detailflotation = Botany.objects.filter(flotation_id__flotation_id=flotation_id)
-    #fractionmaterialspresent = FractionMaterialsPresent.objects.filter(fraction_id__fraction_id=fraction_id)
-    #joinsamplecontainer = JoinSampleContainer.objects.filter(fraction_id__fraction_id=fraction_id)
-    return render(request, 'lightresidue/detaillightresidue.html',
-    {'lightresidue':detaillightresidue,
-    'composition':composition,
-    # 'botany':botany,
-    'fractionmaterialspresent':fractionmaterialspresent,
-    #'joinsamplecontainer':joinsamplecontainer,
-    # 'botany':botany,
-    })
-
-def editfraction(request, pk, fk=''):
-        post = get_object_or_404(LightResidue, pk=pk)
-        # pk=pk
-        if request.method == "POST":
-            form = LightResidueForm(request.POST, instance=post)
-            if form.is_valid():
-                post = form.save(commit=False)
-                #post.user = request.user
-                #post.datetime = datetime.datetime.now()
-                post.save()
-                return redirect('allflotation')
-
-                # return redirect('allfraction')
-                #, pk=post.pk)
-        else:
-            form = LightResidueForm(instance=post)
-        return render(request, 'lightresidue/create_lightresidue.html', {'form': form})
-
-def editflotation(request, pk):
-        post = get_object_or_404(Flotation, pk=pk)
-        if request.method == "POST":
-            form = FlotationForm(request.POST, instance=post)
-            if form.is_valid():
-                post = form.save(commit=False)
-                #post.user = request.user
-                #post.datetime = datetime.datetime.now()
-                post.save()
-                return redirect('allflotation')
-                #, pk=post.pk)
-        else:
-            form = FlotationForm(instance=post)
-        return render(request, 'flotation/createflotation.html', {'form': form})
-
-
-def editsample(request, pk):
-        post = get_object_or_404(Sample, pk=pk)
-        if request.method == "POST":
-            form = SampleForm(request.POST, instance=post)
-            if form.is_valid():
-                post = form.save(commit=False)
-                #post.user = request.user
-                #post.datetime = datetime.datetime.now()
-                post.save()
-                return redirect('allsample')
-                #, pk=post.pk)
-        else:
-            form = SampleForm(instance=post)
-        return render(request, 'sample/createsample.html', {'form': form})
 
 
 
@@ -414,19 +378,3 @@ class SampleListView(generic.ListView):
     # def get_queryset(self):
     #     return LightResidue.objects.all().count()
         # return LightResidue.objects.filter().count()
-
-    # def allflotation(request, sample_id='', flotation_id='', fraction_id=''):
-    #     flotation = Flotation.objects.all()
-    #     lightresidue = LightResidue.objects.all()
-    #     count = LightResidue.objects.all().count()
-    #     # .filter(flotation_id=6).count()
-    #     composition = Composition.objects.all()
-    #     # fractionmaterialspresent = FractionMaterialsPresent.objects.all()
-    #     return render(request, 'flotation/allflotation.html',
-    #     {
-    #     'flotation':flotation,
-    #     'lightresidue':lightresidue,
-    #     'count':count,
-    #     'composition':composition,
-    #     # 'fractionmaterialspresent':fractionmaterialspresent
-    #     })

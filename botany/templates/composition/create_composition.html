@@ -3,7 +3,7 @@
 {% block content %}
 {% include "composition/menu2.html" %}
 <div class="container top">
-    <h4 class="kap" >Light Residue Composition</h4>
+    <h4 class="kap" >Composition</h4>
     <div class="col-sm-3">
     <form method="POST" class="post-form">{% csrf_token %}
         <!--  {{ form.as_p }}   -->
@@ -11,7 +11,6 @@
         <!-- Botany ID{{ form.fract_comp_id|add_class:""}}<br />
         LightResidue ID{{ form.fraction_id|add_class:""}}<br /> -->
         Material Type{{ form.material_type|add_class:""}}<br />
-        LightResidue{{ form.lightresidue|add_class:""}}<br />
         Type Count{{ form.type_count|add_class:""}}<br />
         Whole Weight{{ form.whole_weight|add_class:""}}<br />
         Fragment Weight{{ form.fragment_weight|add_class:""}}<br />

@@ -42,7 +42,7 @@
         <div class="btn-group" role="group" aria-label="Basic example">
 
           <a href="{% url 'addlightresidue' %}" class="badge badge-primary" role="button">Add LightResidue</a>
-          <a href="{% url 'detaillightresidue' lightresidue.fraction_id %}" class="badge badge-warning" role="button">detail</a>
+          <a href="{% url 'detaillightresidue' lightresidue.lightresidue_id composition.composition_id %}" class="badge badge-warning" role="button">detail</a>
           <a href="% url 'editcontainersearch' pk=o.pk %" class="badge badge-secondary" role="button">request</a>
         </div>
       </td>

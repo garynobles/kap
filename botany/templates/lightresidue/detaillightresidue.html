@@ -7,7 +7,7 @@
     <div class="">
       <div>
         <div class="btn-group">
-          <span class = "badge badge-info">Light Residue id:</span> <span class = "badge badge-light"> {{ lightresidue.fraction_id }} </span>
+          <span class = "badge badge-info">Light Residue id:</span> <span class = "badge badge-light"> {{ lightresidue.lightresidue_id }} </span>
         </div>
         <div class="btn-group">
           <span class = "badge badge-info">Flotation id:</span> <span class = "badge badge-light"> {{ lightresidue.flotation_id }} </span>
@@ -63,8 +63,8 @@
             <tbody>
               {% for composition in composition.all %}
               <tr>
-                <td>{{ composition.fract_comp_id }}</td>
-                <td>{{ composition.fraction_id }}</td>
+                <td>{{ composition.composition_id }}</td>
+                <td>{{ composition.lightresidue_id }}</td>
                 <td>{{ composition.material_type }}</td>
                 <td>{{ composition.lightresidue }}</td>
                 <td>{{ composition.type_count }}</td>
@@ -72,15 +72,11 @@
                 <td>{{ composition.fragment_weight }}</td>
                 <td>
                   <div class="btn-group" role="group" aria-label="Basic example">
-                  <a href="{ url 'addcomposition' fk=flotation.flotation_id pk=lightresidue.fraction_id }" class="badge badge-primary" role="button">+ Fraction</a>
-                  <!-- <a href="{ url 'addmaterialpresent' fk=botany.flotation_id pk=lightresidue.fraction_id }" class="badge badge-primary" role="button">Material</a> -->
-                  <a href="{ url 'detaillightresidue' flotation.flotation_id lightresidue.fraction_id }" class="badge badge-warning" role="button">detail</a>
-                    <!-- <a href="{ url 'detaillightresidue' pk=flotation_id }" class="badge badge-warning" role="button">detail++</a> -->
-                  <a href="{ url 'editfraction' fk=flotation.flotation_id pk=lightresidue.pk }"
-                   class="badge badge-secondary" role="button">
+                  <a href="{ url 'addfraction' fk=lightresidue.lightresidue_id pk=composition.composition_id }" class="badge badge-primary" role="button">+ Fraction</a>
+                  <a href="{ url 'detaillightresidue' lightresidue.lightresidue_id lightresidue.lightresidue_id }" class="badge badge-warning" role="button">detail</a>
+                  <a href="{ url 'editlightresidue' fk=lightresidue.lightresidue_id pk=lightresidue.pk }" class="badge badge-secondary" role="button">
                    edit lightresidue
                  </a>
-                 <!-- <a href="{ url 'editfraction' pk=o.pk }" -->
                   </div>
                   </td>
                 </tr>

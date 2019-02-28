@@ -6,17 +6,12 @@
 {% include "composition/menu2.html" %}
 
 
-
-
-
-
-
-<h1>All LightResidue Composition</h1>
+<h1>Composition</h1>
 <table class="table table-bordered">
   <thead>
     <tr>
-      <th>LightResidue ID</th>
-      <th>Botany ID</th>
+      <th>Composition ID</th>
+      <th>Flotation ID</th>
       <th>Proportion Analysed</th>
       <th>Soil Volume</th>
       <th>Sample Volume</th>
@@ -29,11 +24,9 @@
     <tr>
 
 
-      <td>{{ composition.fract_comp_id }}</td>
-      <td>{{ composition.fraction_id }}</td>
+      <td>{{ composition.composition_id }}</td>
+      <td>{{ composition.flotation_id }}</td>
       <td>{{ composition.material_type }}</td>
-      <td>{{ composition.lightresidue }}</td>
-
       <td>{{ composition.type_count }}</td>
       <td>{{ composition.whole_weight }}</td>
       <td>{{ composition.fragment_weight }}</td>

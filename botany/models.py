@@ -59,7 +59,7 @@ class Flotation(models.Model):
 
 
 class LightResidue(models.Model):
-    fraction_id = models.AutoField(primary_key=True)
+    lightresidue_id = models.AutoField(primary_key=True)
     flotation_id = models.ForeignKey(Flotation, db_column='flotation_id', on_delete = models.PROTECT)
     proportion_analysed = models.DecimalField(max_digits=5, decimal_places=3)
     soil_volume = models.DecimalField(max_digits=15, decimal_places=4)
@@ -75,7 +75,7 @@ class LightResidue(models.Model):
     shell = models.BooleanField()
 
     def __str__(self):
-        return str(self.fraction_id)
+        return str(self.lightresidue_id)
 
     class Meta():
         managed=False
@@ -128,7 +128,7 @@ class PlantPart(models.Model):
     plant_part = models.CharField(max_length=50)
     part_count = models.DecimalField(max_digits=10, decimal_places=3)
     part_weight = models.DecimalField(max_digits=10, decimal_places=3)
-    fraction_id = models.IntegerField()
+
 
     def __str__(self):
         return str(self.plant_part)

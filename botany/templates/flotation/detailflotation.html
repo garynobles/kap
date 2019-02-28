@@ -7,7 +7,7 @@
     <div class="">
       <div>
         <div class="btn-group">
-          <span class = "badge badge-info">Botany id:</span> <span class = "badge badge-light"> {{ flotation.flotation_id }} </span>
+          <span class = "badge badge-info">Flotation id:</span> <span class = "badge badge-light"> {{ flotation.flotation_id }} </span>
         </div>
         <div class="btn-group">
           <span class = "badge badge-info">Sample id:</span> <span class = "badge badge-light"> {{ flotation.sample_id }} </span>
@@ -40,7 +40,7 @@
         <thead>
           <tr>
             <th>LightResidue ID</th>
-            <th>Botany ID</th>
+            <th>Flotation ID</th>
             <th>Proportion Analysed</th>
             <th>Soil Volume</th>
             <th>Sample Volume</th>
@@ -59,7 +59,7 @@
         <tbody>
           {% for lightresidue in lightresidue.all %}
           <tr>
-            <td>{{ lightresidue.fraction_id }}</td>
+            <td>{{ lightresidue.lightresidue_id }}</td>
             <td>{{ lightresidue.flotation_id }}</td>
             <td>{{ lightresidue.proportion_analysed }}</td>
             <td>{{ lightresidue.soil_volume }}</td>
@@ -75,9 +75,9 @@
             <td>{{ lightresidue.shell|yesno:"yes,no"  }}</td>
             <td class="">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <a href="{% url 'addcomposition' fk=flotation.flotation_id pk=lightresidue.fraction_id %}" class="badge badge-primary" role="button">+ Composition</a>
-                <a href="{% url 'detaillightresidue' flotation.flotation_id lightresidue.fraction_id %}" class="badge badge-warning" role="button">detail</a>
-                <a href="{% url 'editfraction' fk=flotation.flotation_id pk=lightresidue.pk %}" class="badge badge-secondary" role="button">
+                <a href="{% url 'addcomposition' fk=flotation.flotation_id pk=lightresidue.lightresidue_id %}" class="badge badge-primary" role="button">+ Composition</a>
+                <a href="{% url 'detaillightresidue' lightresidue.lightresidue_id  %}" class="badge badge-warning" role="button">detail</a>
+                <a href="{% url 'editlightresidue' fk=flotation.flotation_id pk=lightresidue.pk %}" class="badge badge-secondary" role="button">
                   edit lightresidue
                 </a>
               </div>
