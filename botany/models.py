@@ -84,10 +84,9 @@ class LightResidue(models.Model):
         verbose_name_plural = "LightResidue"
 
 class Composition(models.Model):
-    fract_comp_id = models.AutoField(primary_key=True)
-    fraction_id = models.ForeignKey(LightResidue, db_column='fraction_id', on_delete = models.PROTECT)
+    composition_id = models.AutoField(primary_key=True)
+    lightresidue_id = models.ForeignKey(LightResidue, db_column='lightresidue_id', on_delete = models.PROTECT)
     material_type = models.CharField(max_length=50, default='')
-    lightresidue = models.CharField(max_length=50, default='')
     type_count = models.DecimalField(max_digits=15, decimal_places=4)
     whole_weight = models.DecimalField(max_digits=15, decimal_places=4)
     fragment_weight = models.DecimalField(max_digits=15, decimal_places=4)
@@ -102,15 +101,16 @@ class Composition(models.Model):
         verbose_name_plural = "Composition"
 
 class Fraction(models.Model):
-    id = models.AutoField(primary_key=True)
-    fraction = models.ForeignKey(LightResidue, db_column='fraction_id', on_delete = models.PROTECT)
+    fraction_id = models.AutoField(primary_key=True)
+    composition_id = models.ForeignKey(Composition, db_column='composition_id', on_delete = models.PROTECT)
+    fraction = models.CharField(max_length=20)
     whole_count = models.DecimalField(max_digits=10, decimal_places=3)
     weight_whole = models.DecimalField(max_digits=10, decimal_places=3)
     weight_fragment = models.DecimalField(max_digits=10, decimal_places=3)
     fragment_count = models.DecimalField(max_digits=10, decimal_places=3)
     seed = models.BooleanField()
     plant_part = models.BooleanField()
-    composition_id = models.IntegerField()
+
 
     def __str__(self):
         return str(self.fraction)
@@ -123,8 +123,8 @@ class Fraction(models.Model):
 
 
 class PlantPart(models.Model):
-    id = models.AutoField(primary_key=True)
-
+    plantpart_id = models.AutoField(primary_key=True)
+    fraction_id = models.ForeignKey(Fraction, db_column='fraction_id', on_delete = models.PROTECT)
     plant_part = models.CharField(max_length=50)
     part_count = models.DecimalField(max_digits=10, decimal_places=3)
     part_weight = models.DecimalField(max_digits=10, decimal_places=3)
