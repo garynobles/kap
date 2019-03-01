@@ -1,0 +1,98 @@
+{% extends 'flotation/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+{% include "flotation/menu2.html" %}
+<div class="container top">
+  <section>
+    <div class="">
+      <div>
+        <div class="btn-group">
+          <span class = "badge badge-info">Flotation id:</span> <span class = "badge badge-light"> {{ flotation.flotation_id }} </span>
+        </div>
+        <div class="btn-group">
+          <span class = "badge badge-info">Sample id:</span> <span class = "badge badge-light"> {{ flotation.sample_id }} </span>
+        </div>
+        <div class="btn-group">
+          <span class = "badge badge-info">Context Key:</span> <span class = "badge badge-light"> {{ flotation.area_easting }} </span>.<span class = "badge badge-light"> {{ flotation.area_northing }} </span>.<span class = "badge badge-light"> {{ flotation.context_number }} </span>.<span class = "badge badge-light"> {{ flotation.sample_number }} </span>
+        </div>
+        <div class="btn-group">
+          <span class = "badge badge-info">Entry Date:</span> <span class = "badge badge-light"> {{ flotation.entry_date }} </span>
+        </div>
+        <div class="btn-group">
+          <span class = "badge badge-info">Analysis Date:</span> <span class = "badge badge-light"> {{ flotation.flotation_date }} </span>
+        </div>
+        <div class="btn-group">
+          <span class = "badge badge-info">Analyst:</span> <span class = "badge badge-light"> {{ flotation.analyst_id }} </span>
+        </div>
+      </div>
+      <div class="btn-group">
+        <span class = "badge badge-info">Notes:</span> <span class = "badge badge-light"> {{ flotation.notes }} </span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h4 class="kap">
+      Light Residues
+    </h4>
+    <div class="table-responsive">
+      <table class="table-striped">
+        <thead>
+          <tr>
+            <th>LightResidue ID</th>
+            <th>Flotation ID</th>
+            <th>Proportion Analysed</th>
+            <th>Soil Volume</th>
+            <th>Sample Volume</th>
+            <th>Sample Weight</th>
+            <th>Sediment</th>
+            <th>Stone</th>
+            <th>Roots</th>
+            <th>Leaves</th>
+            <th>Insect Parts</th>
+            <th>Charred Dung</th>
+            <th>Bone</th>
+            <th>Shell</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for lightresidue in lightresidue.all %}
+          <tr>
+            <td>{{ lightresidue.lightresidue_id }}</td>
+            <td>{{ lightresidue.flotation_id }}</td>
+            <td>{{ lightresidue.proportion_analysed }}</td>
+            <td>{{ lightresidue.soil_volume }}</td>
+            <td>{{ lightresidue.sample_volume }}</td>
+            <td>{{ lightresidue.sample_weight }}</td>
+            <td>{{ lightresidue.sediment|yesno:"yes,no" }}</td>
+            <td>{{ lightresidue.stone|yesno:"yes,no" }}</td>
+            <td>{{ lightresidue.roots|yesno:"yes,no"  }}</td>
+            <td>{{ lightresidue.leaves|yesno:"yes,no"  }}</td>
+            <td>{{ lightresidue.insect_parts|yesno:"yes,no"  }}</td>
+            <td>{{ lightresidue.charred_dung|yesno:"yes,no"  }}</td>
+            <td>{{ lightresidue.bone|yesno:"yes,no"  }}</td>
+            <td>{{ lightresidue.shell|yesno:"yes,no"  }}</td>
+            <td class="">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="{% url 'addcomposition' fk=flotation.flotation_id pk=lightresidue.lightresidue_id %}" class="badge badge-primary" role="button">+ Composition</a>
+                <a href="{% url 'detaillightresidue' lightresidue.lightresidue_id  %}" class="badge badge-warning" role="button">detail</a>
+                <a href="{% url 'editlightresidue' fk=flotation.flotation_id pk=lightresidue.pk %}" class="badge badge-secondary" role="button">
+                  edit lightresidue
+                </a>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</section>
+
+</main>
+<div class="clearfix">
+
+</div>
+{% endblock %}

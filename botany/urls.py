@@ -32,10 +32,11 @@ urlpatterns = [
     re_path('flotation/edit/(?P<pk>\d+)/edit/', views.editflotation, name='editflotation'),
     re_path('flotation/(?P<fk>\d+)/lightresidue/edit/(?P<pk>\d+)/edit/', views.editlightresidue, name='editlightresidue'),
     re_path('flotation/(?P<fk>\d+)/lightresidue/edit/(?P<pk>\d+)/edit/', views.editfraction, name='editfraction'),
-
     re_path('lightresidue/(?P<fk>\d+)/composition/edit/(?P<pk>\d+)/edit/', views.editcomposition, name='editcomposition'),
 
     re_path('composition/(?P<fk>\d+)/fraction/edit/(?P<pk>\d+)/edit/', views.editfraction, name='editfraction'),
+
+    re_path('fraction/(?P<fk>\d+)/plantpart/edit/(?P<pk>\d+)/edit/', views.editplantpart, name='editplantpart'),
 
 
 
@@ -47,7 +48,9 @@ urlpatterns = [
 
     path('flotation/lightresidue/<int:lightresidue_id>/composition/<int:composition_id>/', views.detailcomposition, name='detailcomposition'),
 
-    
+    path('flotation/composition/<int:composition_id>/fraction/<int:fraction_id>/', views.detailfraction, name='detailfraction'),
+
+
 
 # path('addflotation/', views.addflotation, name='addflotation'),
 

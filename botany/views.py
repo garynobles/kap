@@ -184,6 +184,18 @@ def editfraction(request, pk, fk=''):
             form = FractionForm(instance=post)
         return render(request, 'fraction/create_fraction.html', {'form': form})
 
+def editplantpart(request, pk, fk=''):
+        post = get_object_or_404(PlantPart, pk=pk)
+        if request.method == "POST":
+            form = PlantPartForm(request.POST, instance=post)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.save()
+                return redirect('allflotation')
+        else:
+            form = PlantPartForm(instance=post)
+        return render(request, 'plantpart/create_plantpart.html', {'form': form})
+
 
 #### DETAIL ####
 
@@ -223,8 +235,17 @@ def detailcomposition(request, composition_id, lightresidue_id):
         'fraction':fraction,
     })
 
+def detailfraction(request, fraction_id, composition_id):
+    fraction = get_object_or_404(Fraction, pk=fraction_id)
+    plantpart = PlantPart.objects.filter(fraction_id__fraction_id=fraction_id)
+    return render(request, 'fraction/detailfraction.html',
+    {
+        'fraction':fraction,
+        'plantpart':plantpart,
+    })
 
 
+####
 
 def allbotany(request, sample_id=''):
     # number = Botany.objects..count()

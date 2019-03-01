@@ -66,7 +66,7 @@
             <td class="">
               <div class="btn-group" role="group" aria-label="Basic example">
                 <a href="{% url 'addplantpart' fk=composition.composition_id pk=fraction.fraction_id %}" class="badge badge-primary" role="button">+ Plant Part</a>
-                <a href="{ url 'detailfraction' composition.composition_id fraction.fraction_id  }" class="badge badge-warning" role="button">detail</a>
+                <a href="{% url 'detailfraction' composition.composition_id fraction.fraction_id  %}" class="badge badge-warning" role="button">+++detail</a>
                 <a href="{% url 'editfraction' fk=composition.composition_id pk=fraction.pk %}" class="badge badge-secondary" role="button">
                   edit fraction
                 </a>

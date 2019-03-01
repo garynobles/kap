@@ -1,84 +1,67 @@
-{% extends 'flotation/base.html' %}
+{% extends 'fraction/base.html' %}
 {% load widget_tweaks %}
 {% block content %}
-{% include "flotation/menu2.html" %}
+{% include "fraction/menu2.html" %}
 <div class="container top">
   <section>
     <div class="">
       <div>
         <div class="btn-group">
-          <span class = "badge badge-info">Flotation id:</span> <span class = "badge badge-light"> {{ flotation.flotation_id }} </span>
+          <span class = "badge badge-info">composition id:</span> <span class = "badge badge-light"> {{ composition.composition_id }} </span>
         </div>
         <div class="btn-group">
-          <span class = "badge badge-info">Sample id:</span> <span class = "badge badge-light"> {{ flotation.sample_id }} </span>
+          <span class = "badge badge-info">Sample id:</span> <span class = "badge badge-light"> {{ composition.sample_id }} </span>
         </div>
         <div class="btn-group">
-          <span class = "badge badge-info">Context Key:</span> <span class = "badge badge-light"> {{ flotation.area_easting }} </span>.<span class = "badge badge-light"> {{ flotation.area_northing }} </span>.<span class = "badge badge-light"> {{ flotation.context_number }} </span>.<span class = "badge badge-light"> {{ flotation.sample_number }} </span>
+          <span class = "badge badge-info">Context Key:</span> <span class = "badge badge-light"> {{ composition.area_easting }} </span>.<span class = "badge badge-light"> {{ composition.area_northing }} </span>.<span class = "badge badge-light"> {{ composition.context_number }} </span>.<span class = "badge badge-light"> {{ composition.sample_number }} </span>
         </div>
         <div class="btn-group">
-          <span class = "badge badge-info">Entry Date:</span> <span class = "badge badge-light"> {{ flotation.entry_date }} </span>
+          <span class = "badge badge-info">Entry Date:</span> <span class = "badge badge-light"> {{ composition.entry_date }} </span>
         </div>
         <div class="btn-group">
-          <span class = "badge badge-info">Analysis Date:</span> <span class = "badge badge-light"> {{ flotation.flotation_date }} </span>
+          <span class = "badge badge-info">Analysis Date:</span> <span class = "badge badge-light"> {{ composition.composition_date }} </span>
         </div>
         <div class="btn-group">
-          <span class = "badge badge-info">Analyst:</span> <span class = "badge badge-light"> {{ flotation.analyst_id }} </span>
+          <span class = "badge badge-info">Analyst:</span> <span class = "badge badge-light"> {{ composition.analyst_id }} </span>
         </div>
       </div>
       <div class="btn-group">
-        <span class = "badge badge-info">Notes:</span> <span class = "badge badge-light"> {{ flotation.notes }} </span>
+        <span class = "badge badge-info">Notes:</span> <span class = "badge badge-light"> {{ composition.notes }} </span>
       </div>
     </div>
   </section>
 
   <section>
     <h4 class="kap">
-      Light Residues
+      Plant Part
     </h4>
     <div class="table-responsive">
       <table class="table-striped">
         <thead>
           <tr>
-            <th>LightResidue ID</th>
-            <th>Flotation ID</th>
-            <th>Proportion Analysed</th>
-            <th>Soil Volume</th>
-            <th>Sample Volume</th>
-            <th>Sample Weight</th>
-            <th>Sediment</th>
-            <th>Stone</th>
-            <th>Roots</th>
-            <th>Leaves</th>
-            <th>Insect Parts</th>
-            <th>Charred Dung</th>
-            <th>Bone</th>
-            <th>Shell</th>
-
+            <th>Plant Part ID</th>
+            <th>Fraction ID</th>
+            <th>Plant Part</th>
+            <th>Count</th>
+            <th>Weight</th>
           </tr>
         </thead>
         <tbody>
-          {% for lightresidue in lightresidue.all %}
+          {% for plantpart in plantpart.all %}
           <tr>
-            <td>{{ lightresidue.lightresidue_id }}</td>
-            <td>{{ lightresidue.flotation_id }}</td>
-            <td>{{ lightresidue.proportion_analysed }}</td>
-            <td>{{ lightresidue.soil_volume }}</td>
-            <td>{{ lightresidue.sample_volume }}</td>
-            <td>{{ lightresidue.sample_weight }}</td>
-            <td>{{ lightresidue.sediment|yesno:"yes,no" }}</td>
-            <td>{{ lightresidue.stone|yesno:"yes,no" }}</td>
-            <td>{{ lightresidue.roots|yesno:"yes,no"  }}</td>
-            <td>{{ lightresidue.leaves|yesno:"yes,no"  }}</td>
-            <td>{{ lightresidue.insect_parts|yesno:"yes,no"  }}</td>
-            <td>{{ lightresidue.charred_dung|yesno:"yes,no"  }}</td>
-            <td>{{ lightresidue.bone|yesno:"yes,no"  }}</td>
-            <td>{{ lightresidue.shell|yesno:"yes,no"  }}</td>
+            <td>{{ plantpart.plantpart_id }}</td>
+            <td>{{ plantpart.fraction_id }}</td>
+            <td>{{ plantpart.plant_part }}</td>
+            <td>{{ plantpart.part_count }}</td>
+            <td>{{ plantpart.part_weight }}</td>
+
+
             <td class="">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <a href="{% url 'addcomposition' fk=flotation.flotation_id pk=lightresidue.lightresidue_id %}" class="badge badge-primary" role="button">+ Composition</a>
-                <a href="{% url 'detaillightresidue' lightresidue.lightresidue_id  %}" class="badge badge-warning" role="button">detail</a>
-                <a href="{% url 'editlightresidue' fk=flotation.flotation_id pk=lightresidue.pk %}" class="badge badge-secondary" role="button">
-                  edit lightresidue
+                <!-- <a href="{ url 'addplantpart' fk=composition.composition_id pk=fraction.fraction_id }" class="badge badge-primary" role="button">+ Plant Part</a> -->
+                <!-- <a href="{ url 'detailfraction' composition.composition_id fraction.fraction_id  }" class="badge badge-warning" role="button">detail</a> -->
+                <a href="{% url 'editplantpart' fk=fraction.fraction_id pk=plantpart.pk %}" class="badge badge-secondary" role="button">
+                  edit fraction
                 </a>
               </div>
             </td>
