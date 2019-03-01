@@ -8,18 +8,24 @@ from . import views
 
 urlpatterns = [
 
+
+# EDIT
+
+url(r'^storage/edit/(?P<pk>\d+)/edit/$', editstorage, name='editstorage'),
+url(r'^location/edit/(?P<pk>\d+)/edit/$', editlocation, name='editlocation'),
+
 #storage
 re_path(r'^storage/$', allstorage, name='allstorage'),
 path('storage/<int:store_id>/', detailstorage, name='detailstorage'),
 #
 url(r'^storage/createstorage/$', createstorage, name='createstorage'),
-url(r'^storage/edit/(?P<pk>\d+)/edit/$', editstorage, name='editstorage'),
+
 
 #locations
 url(r'^location/$', alllocation, name='alllocation'),
 path('location/<int:location_id>/', detaillocation, name='detaillocation'),
 url(r'^createlocation/$', createlocation, name='createlocation'),
-url(r'^location/edit/(?P<pk>\d+)/edit/$', editlocation, name='editlocation'),
+
 
 #container
 url(r'^container/$', views.allcontainer, name='allcontainer'),

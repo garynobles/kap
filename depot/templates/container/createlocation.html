@@ -3,22 +3,14 @@
 {% block content %}
 {% include "menu1.html" %}
 {% include "container/menu2.html" %}
-<div class="container">
+<div class="container top">
     <h1>container</h1>
     <div class="col-sm-3">
     <form method="POST" class="post-form">{% csrf_token %}
-
-
-        <!-- container Identifier{{ form.container_identifier|add_class:"form-control"}}<br /> -->
-        Store ID{{ form.store_id|add_class:"form-control"}}<br />
-
-        container Type{{ form.container_type|add_class:"form-control"}}<br />
-
-        <!-- Current container TMP{{ form.current_container_tmp|add_class:"form-control"}}<br /> -->
-        container Name{{ form.container_name|add_class:"form-control"}}<br />
-        Icon ID{{ form.icon_desc|add_class:"form-control"}}<br />
-
-
+        Store ID{{ form.store_id|add_class:""}}<br />
+        container Type{{ form.container_type|add_class:""}}<br />
+        container Name{{ form.container_name|add_class:""}}<br />
+        Icon ID{{ form.icon_desc|add_class:""}}<br />
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
   </div>

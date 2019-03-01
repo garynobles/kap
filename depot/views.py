@@ -41,45 +41,10 @@ def alldepotsample(request):
         # 'relcon': joinsamplecontainer,
     })
 
-#### DETAILS ####
 
-def detailstorage(request, store_id):
-    detailstorage = get_object_or_404(Storage, pk=store_id)
-    return render(request, 'storage/detailstorage.html', {'storage':detailstorage})
-
-def detaillocation(request):
-    pass
-
-def detailcontainer(request, container_id):
-    detailcontainer = get_object_or_404(Container, pk=container_id)
-    #samples = Samples.objects.filter(sample_id__container_id=container.pk)
-    #samples = JoinSampleContainer.objects.filter(sample_id__container_id=container.pk)
-    #joinsamplecontainer = JoinSampleContainer.objects.filter(container_id = 4)
-    #joinsamplecontainer = JoinSampleContainer.objects.filter(container_id = 4)
-    joinsamplecontainer = JoinSampleContainer.objects.filter(container_id__container_id=container_id)
-    #joinsamplecontainer = JoinSampleContainer.objects.filter(container__id = container_id)
-    #samples = Samples.objects.filter(container__pk=samples.pk)
-    # location = location.container_set.all()
-    return render(request, 'container/detailcontainer.html',
-    {'container':detailcontainer,
-    'joinsamplecontainer':joinsamplecontainer
-    })
-
-def detaildepotsample(request, sample_id):
-    pass
+#### ADD ####
 
 
-# def containercontentsdetail(request):
-#     # containercontentsdetail = Container.objects.all()
-#     # samplecontentdetail = Sample.objects.all()
-#     return render(request, 'container/containercontents.html',
-#     {
-#         'containercontentdetail':containercontentsdetail
-#     })
-
-
-
-#### CREATE ####
 
 def createstorage(request):
     if request.method == "POST":
@@ -154,29 +119,6 @@ def adddepotsample(request):
         form = DepotSampleForm()
     return render(request, 'depotsample/adddepotsample.html', {'form': form})
 
-
-# def assignsample(request):
-#     media = Container.objects.all()
-#     if request.method == "POST":
-#         form = AssignForm(request.POST)
-#         if form.is_valid():
-#             post = form.save(commit=False)
-#             #post.user = request.user
-#             #post.datetime = datetime.datetime.now()
-#
-#             post.save()
-#             return redirect('alldepotsamples')
-#     else:
-#         form = AssignForm()
-#     return render(request, 'depotsample/assignsample.html',
-#     {
-#         'form': form,
-#         'media': media
-#     })
-
-
-
-
 #### EDIT ####
 
 def editstorage(request, pk):
@@ -204,8 +146,8 @@ def editlocation(request, pk):
             #post.user = request.user
             #post.datetime = datetime.datetime.now()
             post.save()
-            return redirect('alllocation', pk=location.pk)
-            #, pk=post.pk)
+            return redirect('alllocation')
+            #, pk=location.pk
     else:
         form = LocationForm(instance=post)
     return render(request, 'location/createlocation.html', {'form': form})
@@ -254,6 +196,70 @@ def editdepotsample(request, pk):
     else:
         form = DepotSampleForm(instance=post)
     return render(request, 'depotsample/adddepotsample.html', {'form': form})
+
+
+#### DETAILS ####
+
+def detailstorage(request, store_id):
+    detailstorage = get_object_or_404(Storage, pk=store_id)
+    return render(request, 'storage/detailstorage.html', {'storage':detailstorage})
+
+def detaillocation(request):
+    pass
+
+def detailcontainer(request, container_id):
+    detailcontainer = get_object_or_404(Container, pk=container_id)
+    #samples = Samples.objects.filter(sample_id__container_id=container.pk)
+    #samples = JoinSampleContainer.objects.filter(sample_id__container_id=container.pk)
+    #joinsamplecontainer = JoinSampleContainer.objects.filter(container_id = 4)
+    #joinsamplecontainer = JoinSampleContainer.objects.filter(container_id = 4)
+    joinsamplecontainer = JoinSampleContainer.objects.filter(container_id__container_id=container_id)
+    #joinsamplecontainer = JoinSampleContainer.objects.filter(container__id = container_id)
+    #samples = Samples.objects.filter(container__pk=samples.pk)
+    # location = location.container_set.all()
+    return render(request, 'container/detailcontainer.html',
+    {'container':detailcontainer,
+    'joinsamplecontainer':joinsamplecontainer
+    })
+
+def detaildepotsample(request, sample_id):
+    pass
+
+
+# def containercontentsdetail(request):
+#     # containercontentsdetail = Container.objects.all()
+#     # samplecontentdetail = Sample.objects.all()
+#     return render(request, 'container/containercontents.html',
+#     {
+#         'containercontentdetail':containercontentsdetail
+#     })
+
+
+
+
+
+# def assignsample(request):
+#     media = Container.objects.all()
+#     if request.method == "POST":
+#         form = AssignForm(request.POST)
+#         if form.is_valid():
+#             post = form.save(commit=False)
+#             #post.user = request.user
+#             #post.datetime = datetime.datetime.now()
+#
+#             post.save()
+#             return redirect('alldepotsamples')
+#     else:
+#         form = AssignForm()
+#     return render(request, 'depotsample/assignsample.html',
+#     {
+#         'form': form,
+#         'media': media
+#     })
+
+
+
+
 
 def assignsample(request, pk, container=''):
     post = get_object_or_404(Sample, pk=pk)
