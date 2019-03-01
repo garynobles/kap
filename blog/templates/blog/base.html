@@ -12,6 +12,8 @@
   <link rel="icon" href="../../../../favicon.ico">
 
   <title>Gygaia AIS</title>
+  <link type="text/css" rel="stylesheet" href="{% static 'stylesheet/kap_styles.css' %}"/>
+
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
@@ -27,15 +29,12 @@
 
 </head>
 <body>
-
-  <main role="main">
-    <section class="jumbotron text-center">
-      <div class="container">
-
-      </div>
-    </section>
+<main role="main" style="width:100%; min-height:750px;">
+<div class="clearfix"></div>
     {% if user.is_authenticated %}
     {% block content %}
+
+
 
     {% endblock %}
     {% else%}
