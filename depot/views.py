@@ -52,8 +52,8 @@ def createstorage(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.created_by = request.user
-            post.modified_by = request.user
-            post.datetime = datetime.datetime.now()
+            # post.modified_by = request.user
+            # post.datetime = datetime.datetime.now()
             post.save()
             return redirect('allstorage')
     else:
