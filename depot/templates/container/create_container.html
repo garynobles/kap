@@ -3,22 +3,15 @@
 {% block content %}
 {% include "container/menu2.html" %}
 <div class="container top">
-    <h4 class="kap">Container</h4>
-    <form method="POST" class="post-form">{% csrf_token %}
-<div class="row mt-1">
-        <div class="col" style="color:white;">Container Name{{ form.container_name|add_class:""}}</div>
-        <div class="col" style="color:white;">Container Type{{ form.container_type|add_class:""}}</div>
-        <div class="col" style="color:white;">Location ID{{ form.location_id|add_class:""}}</div>
-        <div class="col" style="color:white;">Icon ID{{ form.icon_desc|add_class:""}}</div>
+  <h4 class="kap">Container</h4>
+  <form method="POST" class="post-form">{% csrf_token %}
+    <div class="row mt-1">
+      <div class="col" style="color:white;">Container Name{{ form.container_name|add_class:""}}</div>
+      <div class="col" style="color:white;">Container Type{{ form.container_type|add_class:""}}</div>
+      <div class="col" style="color:white;">Location ID{{ form.location_id|add_class:""}}</div>
+      <div class="col" style="color:white;">Icon ID{{ form.icon_desc|add_class:""}}</div>
+    </div>
+    <button type="submit" class="save btn btn-default">Save</button>
+  </form>
 </div>
-        <button type="submit" class="save btn btn-default">Save</button>
-    </form>
-  </div>
-</div>
-
-
-
 {% endblock %}
-
-
-<!--    |append_attr:"placeholder:Username"   -->

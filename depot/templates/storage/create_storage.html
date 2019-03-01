@@ -1,13 +1,9 @@
 {% extends 'storage/base.html' %}
 {% load widget_tweaks %}
-
-
-
 {% block content %}
-{% include "menu1.html" %}
 {% include "storage/menu2.html" %}
-<div class="container">
-    <h1>storage</h1>
+<div class="container top">
+  <h4 class="kap">Storage</h4>
     <div class="col-sm-3">
     <form method="POST" class="post-form">{% csrf_token %}
           {{ form.as_p }}
@@ -25,7 +21,5 @@
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
   </div>
-
-
 </div>
 {% endblock %}<!--    |append_attr:"placeholder:Username"   -->
