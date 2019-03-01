@@ -23,6 +23,7 @@ urlpatterns = [
     path('zooarch/',include('zooarch.urls')),
     #experimental
     path('experimental/', include('experimental.urls')),
+    path('models3d/', include('models3d.urls')),
 
     path('spatial3d/', include('spatial3d.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
