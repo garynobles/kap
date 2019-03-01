@@ -22,15 +22,10 @@ urlpatterns = [
     re_path(r'^sample/(?P<fk>\d+)/flotation/(?P<pk>\d+)/$', views.addlightresidue, name='addlightresidue'),
     re_path(r'^flotation/(?P<fk>\d+)/addcomposition/(?P<pk>\d+)/$', views.addcomposition, name='addcomposition'),
 
+
+
     re_path('lightresidue/(?P<fk>\d+)/composition/(?P<pk>\d+)/addfraction/', views.addfraction, name='addfraction'),
-
-    # details
-    path('sample/<int:sample_id>/', views.detailsample, name='detailsample'),
-    path('sample/flotation/<int:flotation_id>/', views.detailflotation, name='detailflotation'),
-    path('flotation/lightresidue/<int:lightresidue_id>/', views.detaillightresidue, name='detaillightresidue'),
-    # path('sample/flotation/lightresidue/<int:lightresidue_id>/', views.detaillightresidue, name='detaillightresidue'),
-
-    path('flotation/lightresidue/<int:lightresidue_id>/composition/<int:composition_id>/', views.detailcomposition, name='detailcomposition'),
+    re_path('composition/(?P<fk>\d+)/fraction/(?P<pk>\d+)/addplantpart/', views.addplantpart, name='addplantpart'),
 
     # edit
     re_path('sample/edit/(?P<pk>\d+)/edit/', views.editsample, name='editsample'),
@@ -40,7 +35,19 @@ urlpatterns = [
 
     re_path('lightresidue/(?P<fk>\d+)/composition/edit/(?P<pk>\d+)/edit/', views.editcomposition, name='editcomposition'),
 
+    re_path('composition/(?P<fk>\d+)/fraction/edit/(?P<pk>\d+)/edit/', views.editfraction, name='editfraction'),
 
+
+
+    # details
+    path('sample/<int:sample_id>/', views.detailsample, name='detailsample'),
+    path('sample/flotation/<int:flotation_id>/', views.detailflotation, name='detailflotation'),
+    path('flotation/lightresidue/<int:lightresidue_id>/', views.detaillightresidue, name='detaillightresidue'),
+    # path('sample/flotation/lightresidue/<int:lightresidue_id>/', views.detaillightresidue, name='detaillightresidue'),
+
+    path('flotation/lightresidue/<int:lightresidue_id>/composition/<int:composition_id>/', views.detailcomposition, name='detailcomposition'),
+
+    
 
 # path('addflotation/', views.addflotation, name='addflotation'),
 

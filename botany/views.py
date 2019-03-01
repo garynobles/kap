@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, render_to_response, redirect
-from botany.models import Flotation, LightResidue, Composition, Sample, Fraction, Book
+from botany.models import Flotation, LightResidue, Composition, Sample, Fraction, PlantPart, Book
 from django import forms
 
 from django.db.models import Count, Q
@@ -105,6 +105,20 @@ def addfraction(request, pk, fk=''):
     return render(request, 'fraction/create_fraction.html',
     {'form': form})
 
+def addplantpart(request, pk, fk=''):
+    if request.method == "POST":
+        form = PlantPartForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            fraction = get_object_or_404(Fraction, pk=pk)
+            post.fraction_id = fraction
+            post.save()
+            return redirect('allflotation')
+    else:
+        form = PlantPartForm()
+    return render(request, 'plantpart/create_plantpart.html',
+    {'form': form})
+
 
 #### EDIT ####
 
@@ -158,8 +172,18 @@ def editcomposition(request, pk, fk=''):
             form = CompositionForm(instance=post)
         return render(request, 'composition/create_composition.html', {'form': form})
 
-def editfraction(request):
-    pass
+def editfraction(request, pk, fk=''):
+        post = get_object_or_404(Fraction, pk=pk)
+        if request.method == "POST":
+            form = FractionForm(request.POST, instance=post)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.save()
+                return redirect('allflotation')
+        else:
+            form = FractionForm(instance=post)
+        return render(request, 'fraction/create_fraction.html', {'form': form})
+
 
 #### DETAIL ####
 
@@ -401,6 +425,14 @@ class FractionForm(forms.ModelForm):
         'plant_part',
         )
 
+class PlantPartForm(forms.ModelForm):
+    class Meta:
+        model = PlantPart
+        fields = (
+        'plant_part',
+        'part_count',
+        'part_weight',
+        )
 
 from django.views import generic
 import django_filters
