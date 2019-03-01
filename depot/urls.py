@@ -31,6 +31,7 @@ url(r'^container/edit/(?P<pk>\d+)/edit/$', views.editcontainer, name='editcontai
 
 # sample
 path('alldepotsample', views.alldepotsample, name='alldepotsample'),
+# path('alldepotsample/', views.SampleListView.as_view(), name='alldepotsample'),
 re_path('assignsample/edit/(?P<pk>\d+)/edit/', views.assignsample, name='assignsample'),
 path('sample/<int:sample_id>/', views.detaildepotsample, name='detaildepotsample'),
 re_path('depotsample/edit/(?P<pk>\d+)/edit/', views.editdepotsample, name='editdepotsample'),

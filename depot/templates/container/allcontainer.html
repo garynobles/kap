@@ -1,11 +1,13 @@
-
 {% extends 'container/base.html' %}
 {% block content%}
 {% include "menu1.html" %}
 {% include "container/menu2.html" %}
-<div class="container">
-  <table class="table table-bordered">
-    <thead>
+<div class="container top">
+  <section>
+    <h4 class="kap">Containers</h4>
+    <div class="table-responsive">
+      <table class="table-striped">
+        <thead>
       <tr>
         <th>container ID</th>
 
@@ -17,25 +19,15 @@
       </tr>
     </thead>
     <tbody>
-
-
       {% for container in container %}
-
-
       <tr>
-
         <td>{{ container.container_id }}</td>
         <!-- <td>{{ o.container_identifier}}</td> -->
         <td>{{ container.container_type}}</td>
-
         <!-- <td>{{ o.current_container_tmp}}</td> -->
         <td>{{ container.container_name}}</td>
-
-
-
         <td>
           <div class="btn-group" role="group" aria-label="Basic example">
-
             <a href="{% url 'editcontainer' pk=container.pk %}" class="btn btn-primary" role="button">edit</a>
             <a href="{% url 'containercontents' pk=container.pk %}" class="btn btn-primary" role="button">contents</a>
             <a href="{  url 'editcontainer' pk=o.pk  }" class="btn btn-secondary" role="button">take out</a>
@@ -52,4 +44,5 @@
     </tbody>
   </table>
 </div>
+</section>
   {% endblock %}

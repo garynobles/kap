@@ -374,7 +374,7 @@ class ContainerContentsForm(forms.ModelForm):
 
         'icon_desc',
 
-        'samples',
+        # 'samples',
         # 'sample_number'
         )
 
@@ -674,7 +674,7 @@ class AssignForm(forms.ModelForm):
         # 'recovery_method',
         # # 'taken_by',
         # 'comments',
-        'samples'
+        # 'samples'
 
 
         )
@@ -699,7 +699,7 @@ class AssignForm2(forms.ModelForm):
         # 'recovery_method',
         # # 'taken_by',
         # 'comments',
-        'samples'
+        # 'samples'
 
 
         )
@@ -739,3 +739,11 @@ class DepotSampleForm(forms.ModelForm):
 #     class Meta:
 #         model = Sample
 #         fields = ('sample_number',)
+#
+# from django.views import generic
+# import django_filters
+#
+# class SampleListView(generic.ListView):
+#     template_name = 'sample/sample_list.html'
+#     model = Sample
+#     paginate_by = 50

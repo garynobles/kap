@@ -3,6 +3,50 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from templates.choices import EASTING_CHOICES, NORTHING_CHOICES, RECOVERY_METHODS, MATERIALS
 
+# class Container(models.Model): #container
+#     container_name = models.CharField(max_length=50, blank=True, null=True)
+#     containers = models.ManyToManyField('Sample')
+#     # container_id = models.AutoField(primary_key=True)
+#     # # samples = models.IntegerField()
+#     # # samples = models.ManyToManyField(Sample, through='JoinSampleContainer', through_fields=('container_id', 'sample_id'), related_name='containers')
+#     # samples = models.ManyToManyField(Sample, related_name='containers')
+#     # location_id = models.ForeignKey(Location, db_column='location_id', on_delete = models.PROTECT)
+#     # icon_desc = models.ForeignKey(Icon, db_column='icon_desc', null=True, blank=True, default='Box',on_delete = models.PROTECT)
+#     # container_name = models.CharField(max_length=50, blank=True, null=True)
+#     container_type = models.CharField(max_length=50, blank=True, null=True)
+#
+#     def __str__(self):
+#         return self.container_name
+#
+#     class Meta:
+#         db_table = 'kap\".\"container'
+#         verbose_name_plural = "container"
+#
+#
+# class Sample(models.Model): #sample
+#     sample_id = models.AutoField(primary_key=True)
+#     # topping_name = models.CharField(max_length=30, default='None')
+#     sample_number = models.IntegerField()
+#
+#     def __str__(self):
+#         return str(self.sample_number)
+#
+#     class Meta:
+#         db_table = 'kap\".\"sample'
+#         verbose_name_plural = "samplex"
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Icon(models.Model):
     icon_desc = models.CharField(primary_key=True,max_length=50)
     icon = models.ImageField(upload_to='images/icons/')
@@ -71,10 +115,6 @@ class Sample(models.Model):
     # taken_by = models.ForeignKey(settings.AUTH_USER_MODEL, db_column='taken_by', on_delete = models.PROTECT)
     # taken_by = models.ForeignKey(public.auth_user, db_column='taken_by', on_delete = models.PROTECT)
     comments = models.CharField(max_length=1000, default='', blank=True, null=True)
-    #
- 	# sample_type          varchar   ,
-	# description          text   ,
-
 
     def __str__(self):
         # return self.taken_by.first_name
@@ -91,11 +131,16 @@ class Sample(models.Model):
 
 class Container(models.Model):
     container_id = models.AutoField(primary_key=True)
-    samples = models.ManyToManyField(Sample, through='JoinSampleContainer', through_fields=('container_id', 'sample_id'), related_name='containers')
-    location_id = models.ForeignKey(Location, db_column='location_id', on_delete = models.PROTECT)
-    icon_desc = models.ForeignKey(Icon, db_column='icon_desc', null=True, blank=True, default='Box',on_delete = models.PROTECT)
+    # samples = models.IntegerField()
+    # samples = models.ManyToManyField(Sample, through='JoinSampleContainer', through_fields=('container_id', 'sample_id'), related_name='containers')
+    # samples = models.ManyToManyField(Sample, related_name='containers')
     container_name = models.CharField(max_length=50, blank=True, null=True)
     container_type = models.CharField(max_length=50, blank=True, null=True)
+    location_id = models.ForeignKey(Location, db_column='location_id', on_delete = models.PROTECT)
+
+    samples = models.ManyToManyField('Sample')
+    icon_desc = models.ForeignKey(Icon, db_column='icon_desc', null=True, blank=True, default='Box',on_delete = models.PROTECT)
+
 
     def __str__(self):
         return self.container_name
@@ -104,7 +149,7 @@ class Container(models.Model):
         managed=True
         db_table = 'kap\".\"container'
         # ordering = ["container_type"]
-        verbose_name_plural = "containers"
+        # verbose_name_plural = "containers"
         #unique_together = [('area_easting', 'area_northing', 'context_number', 'sample_number'),]
 
 class JoinSampleContainer(models.Model):
@@ -121,7 +166,11 @@ class JoinSampleContainer(models.Model):
         ordering = ["container_id","id"]
         #verbose_name_plural = "Sample Container Join"
         #unique_together = [('area_easting', 'area_northing', 'context_number', 'sample_number'),]
-#
+
+
+
+
+
 # class Person(models.Model):
 #     name = models.CharField(max_length=128)
 #
