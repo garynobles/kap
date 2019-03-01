@@ -2,9 +2,7 @@
 {% load widget_tweaks %}
 <!doctype html>
 <html lang="en">
-
 <head>
-
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
@@ -12,6 +10,7 @@
   <link rel="icon" href="../../../../favicon.ico">
 
   <title>Gygaia AIS: store</title>
+  <link type="text/css" rel="stylesheet" href="{% static 'stylesheet/kap_styles.css' %}"/>
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
@@ -46,12 +45,10 @@
 </head>
 <body>
 
-  <main role="main">
-    <section class="jumbotron text-center">
-      <div class="container">
+<main role="main" style="width:100%; min-height:750px;">
 
-      </div>
-    </section>
+
+<div class="clearfix"></div>
     {% if user.is_authenticated %}
     {% block content %}
 
@@ -67,17 +64,11 @@ to access the Gygaia Archaeological Information System.
 </div>
     {% endif %}
   </main>
-  <footer class="text-muted text-center">
-
-    {% for o in dataset2.all %}
-    <p>
-    {{ o.roots }}
-    </p>
-    {% endfor %}
-
-    <div class="container">
-      <p>&copy; Gary Nobles & Gygaia Projects {% now "Y" %}</p>
-    </div>
+  <footer class="text-muted text-center" style=" position:absolute;
+  bottom:0; width:100%;">
+  <div class="container">
+    <p style="color:white;">&copy; Gary Nobles & Gygaia Projects {% now "Y" %}</p>
+  </div>
   </footer>
 
   <!-- Bootstrap core JavaScript
