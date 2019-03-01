@@ -1,27 +1,25 @@
 {% extends 'sample/base.html' %}
 {% load widget_tweaks %}
-
 {% block content %}
-
 {% include "sample/menu2.html" %}
-<div class="container" style="margin-top:150px; margin-botton:200px;">
-  <h1 style="color:white;">Sample</h1>
+<div class="container top">
+  <h4 class="kap">Sample</h4>
   <form method="POST" class="post-form">{% csrf_token %}
     <div class="row mt-1">
-      <div class="col" style="color:white;">Area Easting{{ form.area_easting|add_class:"form-control"}}</div>
-      <div class="col" style="color:white;">Area Northing{{ form.area_northing|add_class:"form-control"}}</div>
-      <div class="col" style="color:white;">Context Number{{ form.context_number|add_class:"form-control"}}</div>
-      <div class="col" style="color:white;">Sample Number{{ form.sample_number|add_class:"form-control"}}</div>
+      <div class="col" style="color:white;">{{ form.area_easting}}</div>
+      <div class="col" style="color:white;">{{ form.area_northing}}</div>
+      <div class="col" style="color:white;">{{ form.context_number|append_attr:"placeholder:Context Number"}}</div>
+      <div class="col" style="color:white;">{{ form.sample_number|append_attr:"placeholder:Sample Number"}}</div>
     </div>
     <div class="row mt-1">
-      <div class="col-3" style="color:white;">Sample Type {{ form.sample_type|add_class:"form-control"}}</div>
-      <div class="col-3" style="color:white;">Weight (Kg) {{ form.weight|add_class:"form-control"}}</div>
-      <div class="col-6" style="color:white;">Description {{ form.description|add_class:"form-control"}}</div>
+      <div class="col-3" style="color:white;">{{ form.sample_type|append_attr:"placeholder:Sample Type"}}</div>
+      <div class="col-3" style="color:white;">{{ form.weight|append_attr:"placeholder:Weight (kg)"}}</div>
+      <div class="col-6" style="color:white;">{{ form.description|append_attr:"placeholder:Description"}}</div>
     </div>
     <div class="row mt-1">
-      <div class="col-3" style="color:white;">Recovery Method {{ form.recovery_method|add_class:"form-control"}}</div>
-      <div class="col-3" style="color:white;">Taken by{{ form.taken_by|add_class:"form-control"}}</div>
-      <div class="col-6" style="color:white;">Comments {{ form.comments|add_class:"form-control"}}</div>
+      <div class="col-3" style="color:white;">{{ form.recovery_method|append_attr:"placeholder:Recovery Method"}}</div>
+      <div class="col-3" style="color:white;">{{ form.taken_by|append_attr:"placeholder:Taken By"}}<br /> Taken by</div>
+      <div class="col-6" style="color:white;">{{ form.comments|append_attr:"placeholder:Comments"}}</div>
     </div>
     <button type="submit" class="save btn btn-default mt-3">Save</button>
   </form>
