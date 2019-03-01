@@ -1,134 +1,88 @@
 {% extends 'composition/base.html' %}
 {% load widget_tweaks %}
-
-
-
 {% block content %}
-{% include "menu1.html" %}
 {% include "composition/menu2.html" %}
-<section>
-  <div class="float-right col-sm-1">
-    <div class="pt-3">
-      <a class="btn btn-default" href="% url 'editbotany' pk=botany.pk %"><span class="glyphicon glyphicon-pencil">
-        <button type="button" class="btn btn-primary">edit</button>
-      </span></a>
-    </div>
-  </div>
-</section>
-<div class="container">
-
+<div class="container top">
   <section>
-    <div class="float-right col-sm-6">
-
-
-      <div class="container">
-        <div class="row">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4>
-                  detailcomposition
-                </h4>
-              </div>
-
-            </div>
+    <div class="">
+      <div>
+        <div class="btn-group">
+          <span class = "badge badge-info">composition id:</span> <span class = "badge badge-light"> {{ composition.composition_id }} </span>
+        </div>
+        <div class="btn-group">
+          <span class = "badge badge-info">Sample id:</span> <span class = "badge badge-light"> {{ composition.sample_id }} </span>
+        </div>
+        <div class="btn-group">
+          <span class = "badge badge-info">Context Key:</span> <span class = "badge badge-light"> {{ composition.area_easting }} </span>.<span class = "badge badge-light"> {{ composition.area_northing }} </span>.<span class = "badge badge-light"> {{ composition.context_number }} </span>.<span class = "badge badge-light"> {{ composition.sample_number }} </span>
+        </div>
+        <div class="btn-group">
+          <span class = "badge badge-info">Entry Date:</span> <span class = "badge badge-light"> {{ composition.entry_date }} </span>
+        </div>
+        <div class="btn-group">
+          <span class = "badge badge-info">Analysis Date:</span> <span class = "badge badge-light"> {{ composition.composition_date }} </span>
+        </div>
+        <div class="btn-group">
+          <span class = "badge badge-info">Analyst:</span> <span class = "badge badge-light"> {{ composition.analyst_id }} </span>
         </div>
       </div>
-
-
+      <div class="btn-group">
+        <span class = "badge badge-info">Notes:</span> <span class = "badge badge-light"> {{ composition.notes }} </span>
+      </div>
     </div>
   </section>
 
-
-
-
-
   <section>
-    <h4>
-      LightResidue composition
+    <h4 class="kap">
+      Fraction
     </h4>
-    <form class="form-inline" action="">
-      <div >
-        <div class="form-group">
-          <label for="store_id" class="col-sm-3 control-label">Botany Id</label>
-          <div class="col-sm-10">
-            <input class="form-control" id="store_id" type="text" placeholder="{{ botany.flotation_id }}" disabled>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="store_name" class="col-sm-3 control-label">Sample ID</label>
-          <div class="col-sm-10">
-            <input class="form-control" id="store_name" type="text" placeholder="{{ botany.sample_id }}" disabled>
-          </div>
-          <div class="col-sm-5">
-            <hr class=""/>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="area_northing" class="col-sm-3 control-label">Contextkey</label>
-          <div class="col-sm-10">
-            <input class="form-control" id="area_northing" type="text" placeholder="{{ botany.area_easting }}.{{ botany.area_northing }}.{{ botany.context_number }}.{{ botany.sample_number }}" disabled>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="store_id" class="col-sm-3 control-label">Entry Date</label>
-          <div class="col-sm-10">
-            <input class="form-control" id="store_id" type="text" placeholder="{{ botany.entry_date }}" disabled>
-          </div>
-        </div>
+    <div class="table-responsive">
+      <table class="table-striped">
+        <thead>
+          <tr>
+            <th>fraction ID</th>
+            <th>composition ID</th>
+            <th>Fraction</th>
+            <th>Whole Count</th>
+            <th>Whole Weight</th>
+            <th>Fragment Count</th>
+            <th>Fragment Weight</th>
+            <th>Seed</th>
+            <th>Plant Part</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for fraction in fraction.all %}
+          <tr>
+            <td>{{ fraction.fraction_id }}</td>
+            <td>{{ fraction.composition_id }}</td>
+            <td>{{ fraction.fraction }}</td>
+            <td>{{ fraction.whole_count }}</td>
+            <td>{{ fraction.weight_whole }}</td>
+            <td>{{ fraction.fragment_count }}</td>
+            <td>{{ fraction.weight_fragment }}</td>
+            <td>{{ fraction.seed|yesno:"yes,no" }}</td>
+            <td>{{ fraction.plant_part|yesno:"yes,no"  }}</td>
 
-        <div class="form-group">
-          <label for="store_id" class="col-sm-3 control-label">Date of Analysis</label>
-          <div class="col-sm-10">
-            <input class="form-control" id="store_id" type="text" placeholder="{{ botany.analysis_date }}" disabled>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="store_id" class="col-sm-3 control-label">Analyst</label>
-          <div class="col-sm-10">
-            <input class="form-control" id="store_id" type="text" placeholder="{{ botany.analyst }}" disabled>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="store_id" class="col-sm-3 control-label">Notes</label>
-          <div class="col-sm-10">
-            <input class="form-control" id="store_id" type="text" placeholder="{{ botany.notes }}" disabled>
-          </div>
-        </div>
-
-
-
-
-        <!--div class="form-group">
-        <label for="area_northing" class="col-sm-3 control-label">Country</label>
-        <div class="col-sm-10">
-        <select class="input-medium bfh-countries" data-country="US"></select>
-      </div-->
-      <div class="col-sm-5">
-        <!--p>Last updated by {{ store.user }}  {{ store.datestamp }}</p-->
-
-        <hr class=""/>
-      </div>
-
-
-
+            <td class="">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="{ url 'addcomposition' fk=composition.composition_id pk=fraction.fraction_id }" class="badge badge-primary" role="button">+ Composition</a>
+                <a href="{ url 'detailfraction' composition.composition_id fraction.fraction_id  }" class="badge badge-warning" role="button">detail</a>
+                <a href="{ url 'editfraction' fk=composition.composition_id pk=fraction.pk }" class="badge badge-secondary" role="button">
+                  edit fraction
+                </a>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
-    <!--button type="submit" class="btn btn-default">Submit</button-->
-  </form>
+  </div>
+</div>
 </section>
 
-
-
-
-
-
-
-
-
-</div>
-</div>
-
-
-
 </main>
+<div class="clearfix">
 
+</div>
 {% endblock %}

@@ -92,7 +92,7 @@ class Composition(models.Model):
     fragment_weight = models.DecimalField(max_digits=15, decimal_places=4)
 
     def __str__(self):
-        return str(self.fract_comp_id)
+        return str(self.material_type)
 
     class Meta():
         managed=False
@@ -110,8 +110,6 @@ class Fraction(models.Model):
     fragment_count = models.DecimalField(max_digits=10, decimal_places=3)
     seed = models.BooleanField()
     plant_part = models.BooleanField()
-
-
     def __str__(self):
         return str(self.fraction)
 
@@ -120,6 +118,10 @@ class Fraction(models.Model):
         db_table = 'kap\".\"fraction'
         #ordering = ["orderby"]
         verbose_name_plural = "Fraction"
+
+
+
+
 
 
 class PlantPart(models.Model):

@@ -137,60 +137,26 @@
     </div>
 
 
-<div class="navbar navbar-custom navbar-inverse navbar-static-top navbar-dark bg-dark" id="nav2">
-  <!-- <div class="navbar-inner"> -->
-
-<div class="float-left">
-  <a href="{% url 'allbotany' %}">
-    <button  type="button" class="btn btn-outline-info float-left mr-1">Botany</button>
-  </a>
-
-  <a  href="{% url 'samplelist' %}">
-    <button  type="button" class="btn btn-info float-left mr-1">Sample</button>
-  </a>
-
-    <a  href="{% url 'allflotation' %}">
-      <button  type="button" class="btn btn-info float-left">Flotation</button>
-    </a>
-
-</div>
-
-<div>
-
-    <!-- <a href="{ url 'addflotation' }">
-      <button  type="button" class="btn btn-success float-right mr-1">Add Flotation</button>
-    </a> -->
-
-
-    <!-- <a href="{ url 'addlightresidue' }">
-      <button  type="button" class="btn btn-success">Add new LightResidue</button>
-    </a> -->
-
-    <!-- <a href="{ url 'create_composition' }">
-      <button  type="button" class="btn btn-success">Add new LightResidue Composition</button>
-    </a>
-
-    <a href="{ url 'create_lightresiduematerialpresent' }">
-      <button  type="button" class="btn btn-success">Add new LightResidue Material</button>
-    </a> -->
-
-    <!-- <a href="{ url 'allfraction' }">
-      <button  type="button" class="btn btn-info">Fractions</button>
-    </a>
-    <a href="{ url 'allcomposition' }">
-      <button  type="button" class="btn btn-info">LightResidue Composition</button>
-    </a>
-    <a href="{ url 'allfractionmaterialpresent' }">
-      <button  type="button" class="btn btn-info">LightResidue Material Present</button>
-    </a> -->
-  <!-- </div> -->
-</div>
-</div>
-<div class="clearfix"></div>
-<!-- -ms-transform: matrix(1, 0, 0, 0.5, 0, -12.5); /* IE 9 */
--webkit-transform: matrix(1, 0, 0, 0.5, 0, -12.5); /* Safari */
-transform: matrix(1, 0, 0, 0.5, 0, -12.5); /* Standard syntax */ -->
-<div id="time_test" style="height: 20px; min-width: 310px;"></div>
-<!-- <div id="lifeline" style="min-width: 310px; height: 50px; margin: 0 auto; "></div> -->
+    <div class="navbar navbar-custom navbar-inverse navbar-static-top navbar-dark bg-dark" id="nav2">
+      <div class="float-left">
+        <a href="{% url 'allbotany' %}">
+          <button  type="button" class="btn btn-info float-left mr-1">Botany</button>
+        </a>
+        <a  href="{% url 'samplelist' %}">
+          <button  type="button" class="btn btn-outline-info float-left mr-1">Sample</button>
+        </a>
+        <a  href="{% url 'allflotation' %}">
+          <button  type="button" class="btn btn-info float-left">Flotation</button>
+        </a>
+      </div>
+      <div>
+        <a href="{% url 'addsample' %}">
+          <button  type="button" class="btn btn-success float-right mr-1">Add Sample</button>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- <div id="lifeline" style="min-width: 310px; height: 50px; margin: 0 auto; "></div> -->
 </header>
-<!-- <div class='clearfix'></div> -->
+
+<div class="clearfix"></div>

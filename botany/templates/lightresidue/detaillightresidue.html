@@ -72,10 +72,10 @@
                 <td>{{ composition.fragment_weight }}</td>
                 <td>
                   <div class="btn-group" role="group" aria-label="Basic example">
-                  <a href="{ url 'addfraction' fk=lightresidue.lightresidue_id pk=composition.composition_id }" class="badge badge-primary" role="button">+ Fraction</a>
-                  <a href="{ url 'detaillightresidue' lightresidue.lightresidue_id lightresidue.lightresidue_id }" class="badge badge-warning" role="button">detail</a>
-                  <a href="{ url 'editlightresidue' fk=lightresidue.lightresidue_id pk=lightresidue.pk }" class="badge badge-secondary" role="button">
-                   edit lightresidue
+                  <a href="{% url 'addfraction' fk=lightresidue.lightresidue_id pk=composition.composition_id %}" class="badge badge-primary" role="button">+ Fraction</a>
+                  <a href="{% url 'detailcomposition' lightresidue.lightresidue_id composition.composition_id %}" class="badge badge-warning" role="button">++ detail</a>
+                  <a href="{% url 'editcomposition' fk=lightresidue.lightresidue_id pk=composition.pk %}" class="badge badge-secondary" role="button">
+                   edit composition
                  </a>
                   </div>
                   </td>

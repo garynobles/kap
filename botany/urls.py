@@ -22,17 +22,23 @@ urlpatterns = [
     re_path(r'^sample/(?P<fk>\d+)/flotation/(?P<pk>\d+)/$', views.addlightresidue, name='addlightresidue'),
     re_path(r'^flotation/(?P<fk>\d+)/addcomposition/(?P<pk>\d+)/$', views.addcomposition, name='addcomposition'),
 
+    re_path('lightresidue/(?P<fk>\d+)/composition/(?P<pk>\d+)/addfraction/', views.addfraction, name='addfraction'),
+
     # details
     path('sample/<int:sample_id>/', views.detailsample, name='detailsample'),
     path('sample/flotation/<int:flotation_id>/', views.detailflotation, name='detailflotation'),
     path('flotation/lightresidue/<int:lightresidue_id>/', views.detaillightresidue, name='detaillightresidue'),
     # path('sample/flotation/lightresidue/<int:lightresidue_id>/', views.detaillightresidue, name='detaillightresidue'),
 
+    path('flotation/lightresidue/<int:lightresidue_id>/composition/<int:composition_id>/', views.detailcomposition, name='detailcomposition'),
+
     # edit
     re_path('sample/edit/(?P<pk>\d+)/edit/', views.editsample, name='editsample'),
     re_path('flotation/edit/(?P<pk>\d+)/edit/', views.editflotation, name='editflotation'),
     re_path('flotation/(?P<fk>\d+)/lightresidue/edit/(?P<pk>\d+)/edit/', views.editlightresidue, name='editlightresidue'),
     re_path('flotation/(?P<fk>\d+)/lightresidue/edit/(?P<pk>\d+)/edit/', views.editfraction, name='editfraction'),
+
+    re_path('lightresidue/(?P<fk>\d+)/composition/edit/(?P<pk>\d+)/edit/', views.editcomposition, name='editcomposition'),
 
 
 

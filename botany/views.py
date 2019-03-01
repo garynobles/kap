@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, render_to_response, redirect
-from botany.models import Flotation, LightResidue, Composition, Sample, Book
+from botany.models import Flotation, LightResidue, Composition, Sample, Fraction, Book
 from django import forms
 
 from django.db.models import Count, Q
@@ -80,35 +80,34 @@ def addlightresidue(request, pk, fk=''):
 
 def addcomposition(request, pk, fk):
     if request.method == "POST":
-    #if request.method == "GET":
         form = CompositionForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             lightresidue = get_object_or_404(LightResidue, pk=pk)
             post.lightresidue_id = lightresidue
             post.save()
-            #return redirect('allfraction')
             return redirect('allflotation')
     else:
-        #import pdb; pdb.set_trace()
         form = CompositionForm()
     return render(request, 'composition/create_composition.html', {'form': form})
 
-#### EDIT ####
-def editlightresidue(request, pk, fk=''):
-        post = get_object_or_404(LightResidue, pk=pk)
-        if request.method == "POST":
-            form = LightResidueForm(request.POST, instance=post)
-            if form.is_valid():
-                post = form.save(commit=False)
-                post.save()
-                return redirect('allflotation')
-        else:
-            form = LightResidueForm(instance=post)
-        return render(request, 'lightresidue/create_lightresidue.html', {'form': form})
+def addfraction(request, pk, fk=''):
+    if request.method == "POST":
+        form = FractionForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            composition = get_object_or_404(Composition, pk=pk)
+            post.composition_id = composition
+            post.save()
+            return redirect('allflotation')
+    else:
+        form = FractionForm()
+    return render(request, 'fraction/create_fraction.html',
+    {'form': form})
 
-def editfraction(request):
-    pass
+
+#### EDIT ####
+
 
 def editflotation(request, pk):
         post = get_object_or_404(Flotation, pk=pk)
@@ -135,7 +134,32 @@ def editsample(request, pk):
             form = SampleForm(instance=post)
         return render(request, 'sample/createsample.html', {'form': form})
 
+def editlightresidue(request, pk, fk=''):
+        post = get_object_or_404(LightResidue, pk=pk)
+        if request.method == "POST":
+            form = LightResidueForm(request.POST, instance=post)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.save()
+                return redirect('allflotation')
+        else:
+            form = LightResidueForm(instance=post)
+        return render(request, 'lightresidue/create_lightresidue.html', {'form': form})
 
+def editcomposition(request, pk, fk=''):
+        post = get_object_or_404(Composition, pk=pk)
+        if request.method == "POST":
+            form = CompositionForm(request.POST, instance=post)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.save()
+                return redirect('allflotation')
+        else:
+            form = CompositionForm(instance=post)
+        return render(request, 'composition/create_composition.html', {'form': form})
+
+def editfraction(request):
+    pass
 
 #### DETAIL ####
 
@@ -158,12 +182,21 @@ def detailflotation(request, flotation_id):
     })
 
 def detaillightresidue(request, lightresidue_id):
-    detaillightresidue = get_object_or_404(LightResidue, pk=lightresidue_id)
+    lightresidue = get_object_or_404(LightResidue, pk=lightresidue_id)
     composition = Composition.objects.filter(lightresidue_id__lightresidue_id=lightresidue_id)
     return render(request, 'lightresidue/detaillightresidue.html',
     {
-        'lightresidue':detaillightresidue,
+        'lightresidue':lightresidue,
         'composition':composition,
+    })
+
+def detailcomposition(request, composition_id, lightresidue_id):
+    composition = get_object_or_404(Composition, pk=composition_id)
+    fraction = Fraction.objects.filter(composition_id__composition_id=composition_id)
+    return render(request, 'composition/detailcomposition.html',
+    {
+        'composition':composition,
+        'fraction':fraction,
     })
 
 
@@ -355,7 +388,18 @@ class CompositionForm(forms.ModelForm):
         )
 
 
-
+class FractionForm(forms.ModelForm):
+    class Meta:
+        model = Fraction
+        fields = (
+        'fraction',
+        'whole_count',
+        'weight_whole',
+        'weight_fragment',
+        'fragment_count',
+        'seed',
+        'plant_part',
+        )
 
 
 from django.views import generic
