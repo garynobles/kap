@@ -2,6 +2,17 @@
 {% load widget_tweaks %}
 {% block content %}
 {% include "sample/menu2.html" %}
+
+<script type="text/javascript">
+
+  jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+      window.location = $(this).data("href");
+    });
+  });
+
+</script>
+
 <div class="container top">
   <section>
     <h4 class="kap">Sample List</h4>
@@ -24,7 +35,7 @@
       <tbody>
         {% if sample_list %}
         {% for sample in sample_list %}
-        <tr>
+        <tr class='clickable-row' data-href="{% url 'detailsample' sample.sample_id %}">
           <td>{{ sample.sample_id }}</td>
           <td>{{ sample.area_easting }}.{{ sample.area_northing }}.{{ sample.context_number }}</td>
           <!-- <td>{{ sample.sample_id }}</td> -->

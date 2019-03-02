@@ -24,14 +24,14 @@ class Sample(models.Model):
 
     def __str__(self):
         # return self.taken_by.first_name
-        return str(self.sample_number)
+        return str(self.sample_id)
         # return str(self.firstname)+ '-' +str(self.lastname)
         # return u'%s %s' % (self.first_name, self.last_name)
 
 
     class Meta:
         db_table = 'kap\".\"sample'
-        #ordering = ["sample_id"]
+        #ordering = ["sample_id"]\
         managed = False
         #verbose_name_plural = "samples"
 
@@ -92,7 +92,7 @@ class Composition(models.Model):
     fragment_weight = models.DecimalField(max_digits=15, decimal_places=4)
 
     def __str__(self):
-        return str(self.material_type)
+        return str(self.composition_id)
 
     class Meta():
         managed=False

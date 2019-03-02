@@ -8,6 +8,9 @@ urlpatterns = [
     path('', views.allbotany, name='allbotany'),
     path('sample/', views.allsample, name='allsample'),
 
+    # path('botany', views.botanyview, name='botanyview'),
+    path('botanyoverview/<int:flotation_id>/<int:sample_id>', views.botanyoverview, name='botanyoverview'),
+
     path('sample/flotation/', views.allflotation, name='allflotation'),
     path('flotation/<int:flotation_id>', views.allflotation, name='allflotation'),
 

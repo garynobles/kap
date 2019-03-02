@@ -247,6 +247,60 @@ def detailfraction(request, fraction_id, composition_id):
 
 ####
 
+# def botanyoverview(request, flotation_id=''):
+#     flotation = get_object_or_404(Flotation, pk=flotation_id)
+#     return render(request, 'dashboard/botanyview.html',
+#     {
+#         # 'fraction':fraction,
+#         # 'plantpart':plantpart,
+#     })
+
+from itertools import chain
+
+def botanyoverview(request, flotation_id, sample_id=''):
+    sample = Sample.objects.filter(sample_id = sample_id)
+    flotation = get_object_or_404(Flotation, pk=flotation_id)
+    # sample = Sample.objects.filter(sample_id__sample_id=sample_id)
+    lightresidue = LightResidue.objects.filter(flotation_id__flotation_id=flotation_id)
+    # composition = Composition.objects.filter(lightresidue_id=lightresidue.lightresidue_id)
+    # composition = Composition.objects.filter(lightresidue_id=17)
+
+    queryset = []
+    for i in lightresidue:
+        queryset += Composition.objects.filter(lightresidue_id = i.lightresidue_id)
+    composition = queryset
+
+    queryset = []
+    for i in composition:
+        queryset += Fraction.objects.filter(composition_id = i.composition_id)
+    fraction = queryset
+
+    queryset = []
+    for i in fraction:
+        queryset += PlantPart.objects.filter(fraction_id = i.fraction_id)
+    plantpart = queryset
+    # composition = chain.from_iterable(queryset)
+
+    # report = list(chain(ledger, journal))
+    # composition = list(queryset)
+
+    # queryset = []
+    # for i in flotation:
+    # queryset = Sample.objects.filter(sample_id = flotation.sample_id)
+    # sample = Sample.objects.filter(sample_id = flotation.sample_id)
+        # queryset += Sample.objects.filter(sample_id = i.sample_id)
+    # sample = queryset
+
+    return render(request, 'dashboard/botanyoverview.html',
+    {
+        'flotation':flotation,
+        'sample':sample,
+        'lightresidue':lightresidue,
+        'composition':composition,
+        'fraction':fraction,
+        'plantpart':plantpart,
+    })
+
 def allbotany(request, sample_id=''):
     # number = Botany.objects..count()
     number = Flotation.objects.all().count()

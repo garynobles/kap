@@ -85,6 +85,14 @@
                    edit flotation
                  </a>
                   </div>
+
+                  <div class="">
+                    <a href="{% url 'botanyoverview' flotation.flotation_id sample.sample_id%}"
+                    style="padding: 0px 0px 0px 10px;">
+                    <span class="badge badge-warning">
+                      Detail<br/ > View
+                    </span></a>
+                  </div>
                   </td>
                 </tr>
                 {% endfor %}
