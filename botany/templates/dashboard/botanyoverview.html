@@ -36,6 +36,7 @@
           {% if sample %}
           {% for sample in sample.all %}
           <tr class='clickable-row' data-href="{% url 'editsample' pk=sample.sample_id %}">
+            <td>{{ sample.sample_id }}</td>
             <td>{{ sample.area_easting}}</td>
             <td>{{ sample.area_northing}}</td>
             <td>{{ sample.context_number}}</td>
@@ -85,6 +86,7 @@
             <td>{{ flotation.entry_date }}</td>
             <td>{{ flotation.analyst_id }}</td>
             <td>{{ flotation.notes }}</td>
+            <td><a href="{% url 'addlightresidue' fk=flotation.sample_id pk=flotation.flotation_id %}" class="badge badge-primary" role="button">Add LightResidue</a></td>
           </tr>
         </tbody>
       </table>
@@ -128,6 +130,7 @@
             <td>{{ lightresidue.leaves }} </td>
             <td>{{ lightresidue.insect_parts }} </td>
             <td>{{ lightresidue.charred_dung }} </td>
+            <td><a href="{% url 'addcomposition' fk=flotation.flotation_id pk=lightresidue.lightresidue_id %}" class="badge badge-primary" role="button">+ Composition</a></td>
           </tr>
           {% endfor %}
 {% else %}
@@ -159,6 +162,7 @@
             <td>{{ composition.type_count}}</td>
             <td>{{ composition.whole_weight}}</td>
             <td>{{ composition.fragment_weight}}</td>
+            <td><a href="{% url 'addfraction' fk=composition.lightresidue_id pk=composition.composition_id %}" class="badge badge-primary" role="button">+ Fraction</a></td>
           </tr>
           {% endfor %}
 {% else %}
@@ -196,6 +200,7 @@
             <td>{{ fraction.fragment_count}}</td>
             <td>{{ fraction.seed}}</td>
             <td>{{ fraction.plant_part}}</td>
+            <td><a href="{% url 'addplantpart' fk=fraction.composition_id pk=fraction.fraction_id %}" class="badge badge-primary" role="button">+ Plant Part</a></td>
           </tr>
           {% endfor %}
 {% else %}
@@ -229,7 +234,7 @@
           {% endfor %}
 {% else %}
 <td>There are no samples to display.</td>
-<td><a href="{ url 'addplantpart' fk=composition.composition_id pk=fraction.fraction_id }" class="badge badge-primary" role="button">+ Plant Part</a></td>
+
 {% endif %}
         </tbody>
       </table>

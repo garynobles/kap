@@ -105,7 +105,7 @@ def addfraction(request, pk, fk=''):
     return render(request, 'fraction/create_fraction.html',
     {'form': form})
 
-def addplantpart(request, pk, fk=''):
+def addplantpart(request, pk, fk):
     if request.method == "POST":
         form = PlantPartForm(request.POST)
         if form.is_valid():
@@ -258,7 +258,11 @@ def detailfraction(request, fraction_id, composition_id):
 from itertools import chain
 
 def botanyoverview(request, flotation_id, sample_id=''):
+    # global sample_glb
+
     sample = Sample.objects.filter(sample_id = sample_id)
+    # make sample_id global
+    # sample_glb = sample
     flotation = get_object_or_404(Flotation, pk=flotation_id)
     # sample = Sample.objects.filter(sample_id__sample_id=sample_id)
     lightresidue = LightResidue.objects.filter(flotation_id__flotation_id=flotation_id)
@@ -279,17 +283,6 @@ def botanyoverview(request, flotation_id, sample_id=''):
     for i in fraction:
         queryset += PlantPart.objects.filter(fraction_id = i.fraction_id)
     plantpart = queryset
-    # composition = chain.from_iterable(queryset)
-
-    # report = list(chain(ledger, journal))
-    # composition = list(queryset)
-
-    # queryset = []
-    # for i in flotation:
-    # queryset = Sample.objects.filter(sample_id = flotation.sample_id)
-    # sample = Sample.objects.filter(sample_id = flotation.sample_id)
-        # queryset += Sample.objects.filter(sample_id = i.sample_id)
-    # sample = queryset
 
     return render(request, 'dashboard/botanyoverview.html',
     {
@@ -405,9 +398,6 @@ def allbotany(request, sample_id=''):
 
 
 
-
-
-
 class DateInput(forms.DateInput):
     input_type = 'date'
 
@@ -491,6 +481,7 @@ class FractionForm(forms.ModelForm):
     class Meta:
         model = Fraction
         fields = (
+        # 'fraction_id',
         'fraction',
         'whole_count',
         'weight_whole',
@@ -504,6 +495,7 @@ class PlantPartForm(forms.ModelForm):
     class Meta:
         model = PlantPart
         fields = (
+        # 'plantpart_id',
         'plant_part',
         'part_count',
         'part_weight',
@@ -512,12 +504,32 @@ class PlantPartForm(forms.ModelForm):
 from django.views import generic
 import django_filters
 
+from django.db import connection
+
+def count_new_rows():
+    with connection.cursor() as cursor:
+        cursor.execute("""
+        SELECT count(*)
+        FROM samples.samples a
+        FULL OUTER JOIN kap.sample b
+        ON a.area_easting = b.area_easting AND a.area_northing = b.area_northing AND a.sample_number = b.sample_number AND a.context_number = b.context_number
+        WHERE
+        (a.area_easting IS  NULL AND a.area_northing IS  NULL AND a.sample_number IS   NULL AND a.context_number IS  NULL)
+        OR
+        (b.area_easting IS  NULL AND b.area_northing IS  NULL AND b.sample_number IS  NULL AND b.context_number IS  NULL)
+        """)
+        count = cursor.fetchall()
+
+        return count
 
 class SampleListView(generic.ListView):
     template_name = 'sample/sample_list.html'
     model = Sample
     paginate_by = 50
     queryset = Sample.objects.filter(sample_type='Organic')
+    data = count_new_rows()
+
+
 
 
     # context_object_name = 'sample'  # Default: object_list

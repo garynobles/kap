@@ -111,7 +111,7 @@ class Fraction(models.Model):
     seed = models.BooleanField()
     plant_part = models.BooleanField()
     def __str__(self):
-        return str(self.fraction)
+        return str(self.fraction_id)
 
     class Meta():
         managed=False
@@ -133,7 +133,7 @@ class PlantPart(models.Model):
 
 
     def __str__(self):
-        return str(self.plant_part)
+        return str(self.plantpart_id)
 
     class Meta():
         managed=False

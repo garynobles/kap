@@ -14,6 +14,9 @@
 </script>
 
 <div class="container top">
+
+
+
   <section>
     <h4 class="kap">Sample List</h4>
     <div class="table-responsive">
@@ -33,8 +36,10 @@
         </tr>
       </thead>
       <tbody>
+
         {% if sample_list %}
         {% for sample in sample_list %}
+        {{ sample.data }}
         <tr class='clickable-row' data-href="{% url 'detailsample' sample.sample_id %}">
           <td>{{ sample.sample_id }}</td>
           <td>{{ sample.area_easting }}.{{ sample.area_northing }}.{{ sample.context_number }}</td>
