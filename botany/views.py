@@ -522,8 +522,9 @@ def count_new_rows():
         (b.area_easting IS  NULL AND b.area_northing IS  NULL AND b.sample_number IS  NULL AND b.context_number IS  NULL)
         """)
         count = cursor.fetchall()
-
         return count
+
+
 
 class SampleListView(generic.ListView):
     template_name = 'sample/sample_list.html'
@@ -531,13 +532,13 @@ class SampleListView(generic.ListView):
     paginate_by = 50
     queryset = Sample.objects.filter(sample_type='Organic')
     # data = count_new_rows()
-    #
+
     # def get_context_data(**kwargs):
     #     context = super().get_context_data(**kwargs)
-    #
     #     context['new_rows'] = count_new_rows()
-    #
     #     return context
+
+
 
 
 
