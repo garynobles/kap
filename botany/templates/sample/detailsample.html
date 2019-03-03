@@ -3,8 +3,18 @@
 {% block content %}
 { include "menu1.html" }
 {% include "sample/menu2.html" %}
+<script type="text/javascript">
+
+  jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+      window.location = $(this).data("href");
+    });
+  });
+
+</script>
+
 <div class="container top">
-  <section>
+  <!-- <section>
     <div class="">
       <div>
       <div class="btn-group">
@@ -37,19 +47,21 @@
         <span class = "badge badge-info">Comments:</span> <span class = "badge badge-light"> {{ sample.comments }} </span>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <section>
     <h4 class="kap">
       Flotation
     </h4>
+{% if flotation %}
+
     <div class="table-responsive">
       <table class="table-striped">
         <thead>
                 <tr>
                   <th>Flotation ID</th>
                   <th>Sample ID</th>
-                  <th>Key ENC</th>
+                  <!-- <th>Key ENC</th> -->
                   <th>Sample Number</th>
                   <th>Entry Date</th>
                   <th>Flotation Date</th>
@@ -59,10 +71,10 @@
               </thead>
               <tbody>
               {% for flotation in flotation.all %}
-                <tr>
+                <tr class='clickable-row' data-href="{% url 'botanyoverview' flotation.flotation_id sample.sample_id%}">
                   <td>{{ flotation.flotation_id }}</td>
                   <td>{{ flotation.sample_id }}</td>
-                  <td>{{ flotation.area_easting }}.{{ flotation.area_northing }}.{{ flotation.context_number}}</td>
+                  <!-- <td>{{ flotation.area_easting }}.{{ flotation.area_northing }}.{{ flotation.context_number}}</td> -->
                   <td>{{ flotation.sample_number }}</td>
                   <td>{{ flotation.entry_date }}</td>
                   <td>{{ flotation.flotation_date }}</td>
@@ -72,34 +84,40 @@
                   <td class="borderless">
                   <div class="btn-group" role="group" aria-label="Basic example">
                   <!-- <a href="{% url 'addlightresidue' fk=sample.sample_id pk=flotation.flotation_id %}" class="badge badge-primary" role="button">+ LightResidue A</a> -->
-                  <a href="{% url 'addlightresidue' fk=sample.sample_id pk=flotation.flotation_id %}" class="badge badge-primary" role="button">+ LightResidue A</a>
+                  <!-- <a href="{ url 'addlightresidue' fk=sample.sample_id pk=flotation.flotation_id }" class="badge badge-primary" role="button">+ LightResidue A</a> -->
 
 
 
 
                   <!-- <a href="{ url 'addmaterialpresent' fk=botany.flotation_id pk=lightresidue.fraction_id }" class="badge badge-primary" role="button">Material</a> -->
-                  <a href="{% url 'detailflotation' flotation.flotation_id %}" class="badge badge-warning" role="button">detail</a>
+                  <!-- <a href="{ url 'detailflotation' flotation.flotation_id }" class="badge badge-warning" role="button">detail</a> -->
                     <!-- <a href="{ url 'detaillightresidue' pk=flotation_id }" class="badge badge-warning" role="button">detail++</a> -->
-                  <a href="{% url 'editflotation' pk=flotation.pk %}"
+                  <!-- <a href="{% url 'editflotation' pk=flotation.pk %}"
                    class="badge badge-secondary" role="button">
                    edit flotation
-                 </a>
-                  </div>
+                 </a> -->
 
-                  <div class="">
-                    <a href="{% url 'botanyoverview' flotation.flotation_id sample.sample_id%}"
-                    style="padding: 0px 0px 0px 10px;">
-                    <span class="badge badge-warning">
-                      Detail<br/ > View
-                    </span></a>
-                  </div>
+
+
+                    <!-- <a href="{% url 'botanyoverview' flotation.flotation_id sample.sample_id %}" class="detail" title="detail">
+                    <i class="far fa-address-card detail"></i>
+                    </a> -->
+
+                    <a href="{% url 'editflotation' pk=flotation.pk %}" class="edit" title="edit">
+                    <i class="far fa-edit edit"></i>
+                    </a>
+                </div>
                   </td>
                 </tr>
                 {% endfor %}
               </tbody>
             </table>
 
+            {% else %}
 
+            <p>There are no flotations associated with Sample ID: {{ sample.sample_id }}, key:{{ sample.area_easting }}.{{ sample.area_northing }}.{{ sample.context_number }}.{{ sample.sample_number }}</p>
+<p><a href="{% url 'addflotation' pk=sample.sample_id %}" class="detail">Add Flotation</a></p>
+            {% endif %}
           </div>
         </div>
       </div>

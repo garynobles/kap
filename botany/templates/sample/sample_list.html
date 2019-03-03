@@ -32,7 +32,7 @@
           <th>Recovery Method</th>
           <th>Taken by</th>
           <th>Comments</th>
-          <th class="borderless" style="color:white; border: 1px solid transparent;">Action</th>
+          
         </tr>
       </thead>
       <tbody>
@@ -56,26 +56,20 @@
           <td class="borderless" style="border: 1px solid transparent">
             <div class="btn-group" role="group" aria-label="Basic example">
 
-              <a href="{% url 'addflotation' pk=sample.sample_id %}" class="detail">
-
-                <span class="badge badge-primary">
-                  Add Flotation
-                  <br />
-                  <span class="badge badge-light">
-                    {{ count }}
-                  </span>
-                </span>
+              <a href="{% url 'addflotation' pk=sample.sample_id %}" class="add" title="Add Flotation">
+                <i class="fas fa-plus add" ></i>
               </a>
-              <a href="{% url 'detailsample' sample.sample_id %}"
-              style="padding: 0px 0px 0px 10px;">
-              <span class="badge badge-warning">
-                Detail<br/ > View
-              </span></a>
-              <a href="{% url 'editsample' pk=sample.pk %}"
-              style="padding: 0px 0px 0px 10px;">
-              <span class="badge badge-secondary">
-                edit <br /> here samples <br />
-              </span></a>
+              <a href="{% url 'detailsample' sample.sample_id %}" class="detail" title="Sample Detail">
+              <i class="far fa-address-card detail"></i>
+            </a>
+              <a href="{% url 'editsample' pk=sample.pk %}" class="edit" title="edit">
+              <i class="far fa-edit edit"></i>
+            </a>
+
+
+<a href="" class="delete" title="delete">
+              <i class="fas fa-trash-alt delete"></i>
+              </a>
             </div>
           </td>
           {% endfor %}

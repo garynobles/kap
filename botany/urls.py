@@ -9,7 +9,7 @@ urlpatterns = [
     path('sample/', views.allsample, name='allsample'),
 
     # path('botany', views.botanyview, name='botanyview'),
-    path('botanyoverview/<int:flotation_id>/<int:sample_id>', views.botanyoverview, name='botanyoverview'),
+    path('botanyoverview/flotation/<int:flotation_id>/sample/<int:sample_id>', views.botanyoverview, name='botanyoverview'),
 
     path('sample/flotation/', views.allflotation, name='allflotation'),
     path('flotation/<int:flotation_id>', views.allflotation, name='allflotation'),
@@ -39,7 +39,7 @@ urlpatterns = [
 
     re_path('composition/(?P<fk>\d+)/fraction/edit/(?P<pk>\d+)/edit/', views.editfraction, name='editfraction'),
 
-    re_path('fraction/(?P<fk>\d+)/plantpart/edit/(?P<pk>\d+)/edit/', views.editplantpart, name='editplantpart'),
+    re_path('flotation/(?P<fl>\d+)/sample/(?P<sp>\d+)/fraction/(?P<fk>\d+)/plantpart/edit/(?P<pk>\d+)/edit/', views.editplantpart, name='editplantpart'),
 
 
 

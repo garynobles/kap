@@ -1,55 +1,22 @@
-<style>
-  .munsell {
-    float: left;
-    width: 20px;
-    height: 20px;
-    margin: 5px;
-    border: 1px solid rgba(0, 0, 0, .2);
-  }
-
-  .M2_5Y-7-2 {background: #BFA99F ;}
-
-  .M2_5YR-6-2	 {background: #A68F85 ;}
-
-
-  .M7_5YR-6-4 {background: #B08D6D ;}
-
-  .M5YR-1-4 {background: ;}
-  .M5YR-2-4 {background: ;}
-  .M5YR-3-4 {background: ;}
-  .M5YR-4-4 {background: ;}
-
-  .M5YR-5-4 {background: #92744F;}
-  .M5YR-6-4 {background: #AC8F67;}
-
-  .M5YR-7-4 {background: ;}
-  .M5YR-8-4 {background: ;}
-  .M5YR-9-4 {background: ;}
-  .M5YR-10-4 {background: ;}
-
-
-
-  .M7_5YR-7-2	{background: #BEAA99 ;}
-
-
-  .M7_5YR-6-2 {background: #A49080 ;}
-
-  .M10YR-6-2 {background: #A1917D ;}
-
-  .M10YR-7-2 {background: #BCAB96 ;}
-
-</style>
-
 {% extends "depotsample/base.html" %}
 {% load widget_tweaks %}
 {% block content %}
 {% include "depotsample/menu2.html" %}
+<script type="text/javascript">
+
+  jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+      window.location = $(this).data("href");
+    });
+  });
+
+</script>
 
 <div class="container top">
   <section>
     <h4 class="kap">Sample List</h4>
     <div class="table-responsive">
-      <table class="table-striped">
+      <table class="table-stripedx">
         <thead>
     <tr>
       <th>contextkey (N.E.C)</th>
@@ -61,13 +28,13 @@
       <th>Recovery Method</th>
       <th>Taken By</th>
       <th>Comments</th>
-      <th>Actions</th>
+      <!-- <th>Actions</th> -->
     </tr>
   </thead>
   <tbody>
     {% for sample in alldepotsample %}
-    <tr>
-      <td><a href="{% url 'editdepotsample' pk=sample.pk %}">{{ sample.area_easting }}.{{ sample.area_northing }}.{{ sample.context_number }}</a></td>
+    <tr class='clickable-row' data-href="{% url 'editdepotsample' pk=sample.sample_id %}">
+      <td>{{ sample.area_easting }}.{{ sample.area_northing }}.{{ sample.context_number }}</td>
       <td>{{ sample.sample_number }}</td>
       <td>{{ sample.sample_type}}</td>
       <td>{{ sample.weight}}</td>
@@ -76,13 +43,13 @@
       <td>{{ sample.taken_by}}</td>
       <td>{{ sample.comments}}</td>
       <td>
-        <div class="btn-group" role="group" aria-label="Basic example">
+        <!-- <div class="btn-group" role="group" aria-label="Basic example"> -->
 
-          <a href="{% url 'editdepotsample' pk=sample.pk %}" class="btn btn-primary" role="button">edit</a>
-            <a href="{% url 'assignsample' pk=sample.pk %}" class="btn btn-primary" role="button">assign</a>
-          <a href="% url 'editcontainersearch' pk=sample.pk %" class="btn btn-secondary" role="button">take out</a>
-          <a href="% url 'editcontainersearch' pk=sample.pk %" class="btn btn-secondary" role="button">request</a>
-        </div>
+
+            <!-- <a href="{ url 'assignsample' pk=sample.pk }" class="btn btn-primary" role="button">assign</a> -->
+          <!-- <a href="% url 'editcontainersearch' pk=sample.pk %" class="btn btn-secondary" role="button">take out</a> -->
+          <!-- <a href="% url 'editcontainersearch' pk=sample.pk %" class="btn btn-secondary" role="button">request</a> -->
+        <!-- </div> -->
       </td>
     </tr>
     {% empty %}
@@ -93,8 +60,5 @@
   </tbody>
 </table>
 </section>
-
-
-
 
 {% endblock %}

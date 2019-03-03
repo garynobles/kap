@@ -2,6 +2,15 @@
 {% load widget_tweaks %}
 {% block content %}
 {% include "flotation/menu2.html" %}
+<script type="text/javascript">
+
+  jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+      window.location = $(this).data("href");
+    });
+  });
+
+</script>
 <div class="container top">
   <section>
     <h4 class="kap">Flotation</h4>
@@ -22,7 +31,7 @@
         </thead>
         <tbody>
           {% for flotation in flotation.all %}
-          <tr>
+          <tr class='clickable-row' data-href="{% url 'editflotation' pk=flotation.pk %}">
             <td>{{ flotation.sample_id }}</td>
             <td>{{ flotation.area_easting }}.{{ flotation.area_northing }}.{{ flotation.context_number }}</td>
             <td>{{ flotation.flotation_id }}</td>
@@ -39,9 +48,9 @@
                 <a href="{% url 'detailflotation' flotation.flotation_id %}" class="detail" title="more detail">
                   <i class="far fa-address-card detail"></i>
                 </a>
-                <a href="{% url 'editflotation' pk=flotation.pk %}" class="edit" title="edit">
+                <!-- <a href="{ url 'editflotation' pk=flotation.pk }" class="edit" title="edit">
                   <i class="far fa-edit edit"></i>
-                </a>
+                </a> -->
                 <a href="{% url 'editflotation' pk=flotation.pk %}" class="delete" title="delete">
                   <i class="fas fa-trash-alt delete"></i>
                 </a>

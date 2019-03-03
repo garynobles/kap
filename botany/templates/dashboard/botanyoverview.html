@@ -63,7 +63,7 @@
         <thead>
           <tr>
 
-            <th>Sample ID</th>
+            <th>Flotation ID</th>
             <th>Easting</th>
             <th>Northing</th>
             <th>Context</th>
@@ -77,7 +77,7 @@
         </thead>
         <tbody>
           <tr class='clickable-row' data-href="{% url 'editflotation' pk=flotation.pk %}">
-            <td>{{ flotation.sample_id }}</td>
+            <td>{{ flotation.flotation_id }}</td>
             <td>{{ flotation.area_easting }}</td>
             <td>{{ flotation.area_northing }}</td>
             <td>{{ flotation.context_number }}</td>
@@ -93,6 +93,7 @@
     </div>
   </section>
 
+          {% if lightresidue %}
   <section>
     <div class="table-responsive">
       <table class="table-striped">
@@ -114,7 +115,7 @@
           </tr>
         </thead>
         <tbody>
-          {% if lightresidue %}
+
           {% for lightresidue in lightresidue.all %}
           <tr class='clickable-row' data-href="{% url 'editlightresidue' fk=flotation.flotation_id pk=lightresidue.lightresidue_id %}">
             <td>{{ lightresidue.lightresidue_id}}</td>
@@ -133,14 +134,17 @@
             <td><a href="{% url 'addcomposition' fk=flotation.flotation_id pk=lightresidue.lightresidue_id %}" class="badge badge-primary" role="button">+ Composition</a></td>
           </tr>
           {% endfor %}
-{% else %}
-<td>There are no samples to display.</td>
-{% endif %}
+
         </tbody>
       </table>
     </div>
   </section>
 
+  {% else %}
+  <p>There are no light residues to display.</p>
+  {% endif %}
+
+          {% if composition %}
   <section>
     <div class="table-responsive">
       <table class="table-striped">
@@ -154,7 +158,7 @@
           </tr>
         </thead>
         <tbody>
-          {% if composition %}
+
           {% for composition in composition %}
           <tr class='clickable-row' data-href="{% url 'editcomposition' fk=composition.lightresidue_id pk=composition.composition_id %}">
             <td>{{ composition.composition_id}}</td>
@@ -165,14 +169,16 @@
             <td><a href="{% url 'addfraction' fk=composition.lightresidue_id pk=composition.composition_id %}" class="badge badge-primary" role="button">+ Fraction</a></td>
           </tr>
           {% endfor %}
-{% else %}
-<td>There are no samples to display.</td>
-{% endif %}
+
         </tbody>
       </table>
     </div>
   </section>
+  {% else %}
+  <p>There are no compositions to display.</p>
+  {% endif %}
 
+{% if fraction %}
   <section>
     <div class="table-responsive">
       <table class="table-striped">
@@ -189,7 +195,7 @@
           </tr>
         </thead>
         <tbody>
-          {% if fraction %}
+
           {% for fraction in fraction %}
           <tr class='clickable-row' data-href="{% url 'editfraction' fk=fraction.composition_id pk=fraction.fraction_id %}">
             <td>{{ fraction.fraction_id}}</td>
@@ -203,14 +209,16 @@
             <td><a href="{% url 'addplantpart' fk=fraction.composition_id pk=fraction.fraction_id %}" class="badge badge-primary" role="button">+ Plant Part</a></td>
           </tr>
           {% endfor %}
-{% else %}
-<td>There are no samples to display.</td>
-{% endif %}
+
         </tbody>
       </table>
     </div>
   </section>
+  {% else %}
+  <p>There are no fractions to display.</p>
+  {% endif %}
 
+            {% if plantpart %}
   <section>
     <div class="table-responsive">
       <table class="table-striped">
@@ -223,22 +231,24 @@
           </tr>
         </thead>
         <tbody>
-          {% if plantpart %}
+
           {% for plantpart in plantpart %}
-          <tr class='clickable-row' data-href="{% url 'editplantpart' fk=plantpart.fraction_id pk=plantpart.plantpart_id %}">
+          <tr class='clickable-row' data-href="{% url 'editplantpart' fk=plantpart.fraction_id pk=plantpart.plantpart_id fl=flotation.flotation_id sp=flotation.sample_id  %}">
             <td>{{ plantpart.plantpart_id}}</td>
             <td>{{ plantpart.plant_part}}</td>
             <td>{{ plantpart.part_count}}</td>
             <td>{{ plantpart.part_weight}}</td>
           </tr>
           {% endfor %}
-{% else %}
-<td>There are no samples to display.</td>
 
-{% endif %}
         </tbody>
       </table>
     </div>
   </section>
+
+  {% else %}
+  <td>There are no plant parts to display.</td>
+
+  {% endif %}
 
   {% endblock %}

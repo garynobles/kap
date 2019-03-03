@@ -1,3 +1,27 @@
+/* https://ethanschoonover.com/solarized/
+$base03:    #002b36;
+$base02:    #073642;
+$base01:    #586e75;
+$base00:    #657b83;
+$base0:     #839496;
+$base1:     #93a1a1;
+$base2:     #eee8d5;
+$base3:     #fdf6e3;
+$yellow:    #b58900;
+$orange:    #cb4b16;
+$red:       #dc322f;
+$magenta:   #d33682;
+$violet:    #6c71c4;
+$blue:      #268bd2;
+$cyan:      #2aa198;
+$green:     #859900;
+*/
+
+.kap-dark{
+background-color::#657b83;
+
+}
+
 body{
   background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),
   linear-gradient(to bottom, rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%),
@@ -23,21 +47,32 @@ table {
   transition: box-shadow .5s ease;
 }
 
-th {
+thead {
   padding-right:20px;
+  color:#93a1a1;
+  box-shadow: inset 0 -5px 45px rgba(0,0,0,0.8), 0 1px 1px rgba(0,0,0,0.8);
 }
 
 td {
   padding-right:20px;
+  color:#586e75;
 }
+
+#link {
+  color:#6c71c4;
+}
+
+tr:hover {
+  text-shadow: 1px 1px 1px #839496;
+  box-shadow: inset 0 -5px 45px rgba(0,0,0,0.8), 0 1px 1px rgba(0,0,0,0.8);
+}
+tr.clickable-row { cursor: pointer; }
 
 h4.kap {
-  color:white;
+  /* color:white; */
+  color: #93a1a1;
 }
 
-div.kap {
-  color:white;
-}
 
 
 input {
@@ -92,19 +127,19 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 }
 
 i.add{
-  color: #14a76c;
+  color: #859900;
 }
 
 i.detail{
-  color: #ffffff;
+  color: #6c71c4;
 }
 
 i.edit{
-  color: #ff652f;
+  color: #b58900;
 }
 
 i.delete{
-  color:#c1423b;
+  color: #dc322f;
 }
 
 a.add{

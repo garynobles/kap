@@ -143,7 +143,7 @@ def editsample(request, pk):
             if form.is_valid():
                 post = form.save(commit=False)
                 post.save()
-                return redirect('allsample')
+                return redirect('samplelist')
         else:
             form = SampleForm(instance=post)
         return render(request, 'sample/createsample.html', {'form': form})
@@ -184,14 +184,17 @@ def editfraction(request, pk, fk=''):
             form = FractionForm(instance=post)
         return render(request, 'fraction/create_fraction.html', {'form': form})
 
-def editplantpart(request, pk, fk=''):
+def editplantpart(request, pk, fk='', sp='', fl=''):
         post = get_object_or_404(PlantPart, pk=pk)
         if request.method == "POST":
             form = PlantPartForm(request.POST, instance=post)
             if form.is_valid():
                 post = form.save(commit=False)
+                sample_id=sp
+                flotation_id=fl
                 post.save()
-                return redirect('allflotation')
+                return redirect('botanyoverview', {  'flotation_id': flotation_id, 'sample_id':sample_id,})
+
         else:
             form = PlantPartForm(instance=post)
         return render(request, 'plantpart/create_plantpart.html', {'form': form})
@@ -527,8 +530,14 @@ class SampleListView(generic.ListView):
     model = Sample
     paginate_by = 50
     queryset = Sample.objects.filter(sample_type='Organic')
-    data = count_new_rows()
-
+    # data = count_new_rows()
+    #
+    # def get_context_data(**kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #
+    #     context['new_rows'] = count_new_rows()
+    #
+    #     return context
 
 
 
