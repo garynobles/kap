@@ -121,6 +121,17 @@ def addplantpart(request, pk, fk):
 
 
 #### EDIT ####
+def editsample(request, pk):
+        post = get_object_or_404(Sample, pk=pk)
+        if request.method == "POST":
+            form = SampleForm(request.POST, instance=post)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.save()
+                return redirect('samplelist')
+        else:
+            form = SampleForm(instance=post)
+        return render(request, 'sample/createsample.html', {'form': form})
 
 
 def editflotation(request, pk):
@@ -135,18 +146,20 @@ def editflotation(request, pk):
             form = FlotationForm(instance=post)
         return render(request, 'flotation/createflotation.html', {'form': form})
 
-
-def editsample(request, pk):
-        post = get_object_or_404(Sample, pk=pk)
+def editflotationform(request, pk, fk):
+        post = get_object_or_404(Flotation, pk=pk)
         if request.method == "POST":
-            form = SampleForm(request.POST, instance=post)
+            form = FlotationForm(request.POST, instance=post)
             if form.is_valid():
                 post = form.save(commit=False)
                 post.save()
-                return redirect('samplelist')
+                return redirect('botanyoverview', flotation_id=pk, sample_id=fk)
         else:
-            form = SampleForm(instance=post)
-        return render(request, 'sample/createsample.html', {'form': form})
+            form = FlotationForm(instance=post)
+        return render(request, 'flotation/createflotation.html', {'form': form})
+
+
+
 
 def editlightresidue(request, pk, fk, sp):
         post = get_object_or_404(LightResidue, pk=pk)
@@ -173,29 +186,27 @@ def editcomposition(request, pk, fk, sp, fl):
             form = CompositionForm(instance=post)
         return render(request, 'composition/create_composition.html', {'form': form})
 
-def editfraction(request, pk, fk=''):
+def editfraction(request, pk, fk, sp, fl):
         post = get_object_or_404(Fraction, pk=pk)
         if request.method == "POST":
             form = FractionForm(request.POST, instance=post)
             if form.is_valid():
                 post = form.save(commit=False)
                 post.save()
-                return redirect('allflotation')
+                return redirect('botanyoverview', flotation_id=fl, sample_id=sp)
+
         else:
             form = FractionForm(instance=post)
         return render(request, 'fraction/create_fraction.html', {'form': form})
 
-def editplantpart(request, pk, fk='', sp='', fl=''):
+def editplantpart(request, pk, fk, sp, fl):
         post = get_object_or_404(PlantPart, pk=pk)
         if request.method == "POST":
             form = PlantPartForm(request.POST, instance=post)
             if form.is_valid():
                 post = form.save(commit=False)
-                sample_id=sp
-                flotation_id=fl
                 post.save()
-                return redirect('botanyoverview', {  'flotation_id': flotation_id, 'sample_id':sample_id,})
-
+                return redirect('botanyoverview', flotation_id=fl, sample_id=sp)
         else:
             form = PlantPartForm(instance=post)
         return render(request, 'plantpart/create_plantpart.html', {'form': form})

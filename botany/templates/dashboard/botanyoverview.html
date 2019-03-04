@@ -76,7 +76,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr class='clickable-row' data-href="{% url 'editflotation' pk=flotation.pk %}">
+          <tr class='clickable-row' data-href="{% url 'editflotationform' fk=flotation.sample_id pk=flotation.pk %}">
             <td>{{ flotation.flotation_id }}</td>
             <td>{{ flotation.area_easting }}</td>
             <td>{{ flotation.area_northing }}</td>
@@ -197,7 +197,7 @@
         <tbody>
 
           {% for fraction in fraction %}
-          <tr class='clickable-row' data-href="{% url 'editfraction' fk=fraction.composition_id pk=fraction.fraction_id %}">
+          <tr class='clickable-row' data-href="{% url 'editfraction' sp=flotation.sample_id fl=flotation.flotation_id fk=fraction.composition_id pk=fraction.fraction_id %}">
             <td>{{ fraction.fraction_id}}</td>
             <td>{{ fraction.fraction}}</td>
             <td>{{ fraction.whole_count}}</td>
@@ -233,7 +233,7 @@
         <tbody>
 
           {% for plantpart in plantpart %}
-          <tr class='clickable-row' data-href="{% url 'editplantpart' fk=plantpart.fraction_id pk=plantpart.plantpart_id fl=flotation.flotation_id sp=flotation.sample_id  %}">
+          <tr class='clickable-row' data-href="{% url 'editplantpart' sp=flotation.sample_id fl=flotation.flotation_id fk=plantpart.fraction_id pk=plantpart.plantpart_id  %}">
             <td>{{ plantpart.plantpart_id}}</td>
             <td>{{ plantpart.plant_part}}</td>
             <td>{{ plantpart.part_count}}</td>
