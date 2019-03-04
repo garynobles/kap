@@ -71,7 +71,7 @@
               </thead>
               <tbody>
               {% for flotation in flotation.all %}
-                <tr class='clickable-row' data-href="{% url 'botanyoverview' flotation.flotation_id sample.sample_id%}">
+                <tr class='clickable-row' data-href="{% url 'botanyoverview' sample.sample_id flotation.flotation_id %}">
                   <td>{{ flotation.flotation_id }}</td>
                   <td>{{ flotation.sample_id }}</td>
                   <!-- <td>{{ flotation.area_easting }}.{{ flotation.area_northing }}.{{ flotation.context_number}}</td> -->

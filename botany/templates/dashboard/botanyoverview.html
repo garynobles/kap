@@ -117,7 +117,7 @@
         <tbody>
 
           {% for lightresidue in lightresidue.all %}
-          <tr class='clickable-row' data-href="{% url 'editlightresidue' fk=flotation.flotation_id pk=lightresidue.lightresidue_id %}">
+          <tr class='clickable-row' data-href="{% url 'editlightresidue' sp=flotation.sample_id fk=flotation.flotation_id pk=lightresidue.lightresidue_id %}">
             <td>{{ lightresidue.lightresidue_id}}</td>
             <td>{{ lightresidue.proportion_analysed}}</td>
             <td>{{ lightresidue.soil_volume}}</td>
@@ -160,7 +160,7 @@
         <tbody>
 
           {% for composition in composition %}
-          <tr class='clickable-row' data-href="{% url 'editcomposition' fk=composition.lightresidue_id pk=composition.composition_id %}">
+          <tr class='clickable-row' data-href="{% url 'editcomposition' sp=flotation.sample_id fl=flotation.flotation_id fk=composition.lightresidue_id pk=composition.composition_id %}">
             <td>{{ composition.composition_id}}</td>
             <td>{{ composition.material_type}}</td>
             <td>{{ composition.type_count}}</td>

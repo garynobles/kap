@@ -148,26 +148,27 @@ def editsample(request, pk):
             form = SampleForm(instance=post)
         return render(request, 'sample/createsample.html', {'form': form})
 
-def editlightresidue(request, pk, fk=''):
+def editlightresidue(request, pk, fk, sp):
         post = get_object_or_404(LightResidue, pk=pk)
         if request.method == "POST":
             form = LightResidueForm(request.POST, instance=post)
             if form.is_valid():
                 post = form.save(commit=False)
                 post.save()
-                return redirect('allflotation')
+                return redirect('botanyoverview', flotation_id=fk, sample_id=sp)
         else:
             form = LightResidueForm(instance=post)
         return render(request, 'lightresidue/create_lightresidue.html', {'form': form})
 
-def editcomposition(request, pk, fk=''):
+def editcomposition(request, pk, fk, sp, fl):
         post = get_object_or_404(Composition, pk=pk)
         if request.method == "POST":
             form = CompositionForm(request.POST, instance=post)
             if form.is_valid():
                 post = form.save(commit=False)
                 post.save()
-                return redirect('allflotation')
+                return redirect('botanyoverview', flotation_id=fl, sample_id=sp)
+
         else:
             form = CompositionForm(instance=post)
         return render(request, 'composition/create_composition.html', {'form': form})
