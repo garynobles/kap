@@ -32,7 +32,7 @@ urlpatterns = [
 
     # edit
     re_path('sample/edit/(?P<pk>\d+)/edit/', views.editsample, name='editsample'),
-
+    
     re_path('flotation/edit/(?P<pk>\d+)/edit/', views.editflotation, name='editflotation'),
     re_path('sample/(?P<fk>\d+)/flotationform/edit/(?P<pk>\d+)/edit/', views.editflotationform, name='editflotationform'),
 

@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from botany.choices import EASTING_CHOICES, NORTHING_CHOICES, RECOVERY_METHODS, MATERIALS
 
+
+
 class Book(models.Model):
     name = models.CharField(max_length=100)
     author_name = models.CharField(max_length=100)
@@ -39,10 +41,10 @@ class Sample(models.Model):
 class Flotation(models.Model):
     flotation_id = models.AutoField(primary_key=True)
     sample_id = models.ForeignKey(Sample, db_column='sample_id', on_delete = models.PROTECT)
-    area_easting = models.IntegerField(choices = EASTING_CHOICES)
-    area_northing = models.IntegerField(choices = NORTHING_CHOICES)
-    context_number = models.IntegerField(blank=True, null=True)
-    sample_number = models.IntegerField(blank=True, null=True)
+    # area_easting = models.IntegerField(choices = EASTING_CHOICES)
+    # area_northing = models.IntegerField(choices = NORTHING_CHOICES)
+    # context_number = models.IntegerField(blank=True, null=True)
+    # sample_number = models.IntegerField(blank=True, null=True)
     flotation_date = models.DateTimeField(auto_now=False)
     entry_date = models.DateTimeField(auto_now_add=False)
     analyst_id = models.ForeignKey(settings.AUTH_USER_MODEL, db_column='analyst_id', on_delete = models.PROTECT)

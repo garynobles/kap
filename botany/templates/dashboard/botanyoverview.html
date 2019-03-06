@@ -1,5 +1,8 @@
 {% extends "flotation/base.html" %}
 {% load widget_tweaks %}
+{% load has_group %}
+{% load new_rows %}
+
 {% block content %}
 {% include "flotation/menu2.html" %}
 <script type="text/javascript">
@@ -13,6 +16,13 @@
 </script>
 
 <div class="container top">
+
+  {% if count_new_rows == '0' %}
+<p style="color:#859900;">Samples to Import: {% count_new_rows %}</p>
+{% else %}
+<p style="color:#b58900;">Samples to Import: {% count_new_rows %}</p>
+{% endif %}
+
   <section>
     <h4 class="kap">Botanical Overview (Flotation)</h4>
     <div class="table-responsive">
@@ -64,10 +74,10 @@
           <tr>
 
             <th>Flotation ID</th>
-            <th>Easting</th>
+            <!-- <th>Easting</th>
             <th>Northing</th>
             <th>Context</th>
-            <th>Sample</th>
+            <th>Sample</th> -->
             <th>Flotation Date</th>
             <th>Entry date</th>
             <th>Analyst</th>
@@ -78,15 +88,22 @@
         <tbody>
           <tr class='clickable-row' data-href="{% url 'editflotationform' fk=flotation.sample_id pk=flotation.pk %}">
             <td>{{ flotation.flotation_id }}</td>
-            <td>{{ flotation.area_easting }}</td>
+            <!-- <td>{{ flotation.area_easting }}</td>
             <td>{{ flotation.area_northing }}</td>
             <td>{{ flotation.context_number }}</td>
-            <td>{{ flotation.sample_number }}</td>
+            <td>{{ flotation.sample_number }}</td> -->
             <td>{{ flotation.flotation_date}}</td>
             <td>{{ flotation.entry_date }}</td>
             <td>{{ flotation.analyst_id }}</td>
             <td>{{ flotation.notes }}</td>
-            <td><a href="{% url 'addlightresidue' fk=flotation.sample_id pk=flotation.flotation_id %}" class="badge badge-primary" role="button">Add LightResidue</a></td>
+            <td><a href="{% url 'addlightresidue' fk=flotation.sample_id pk=flotation.flotation_id %}">
+              <i class="fab fa-pagelines"></i>
+              <i class="fas fa-atom"></i>
+              <i class="fas fa-biohazard"></i>
+              <i class="fab fa-react"></i>
+
+
+              Add LightResidue</a></td>
           </tr>
         </tbody>
       </table>
@@ -131,7 +148,7 @@
             <td>{{ lightresidue.leaves }} </td>
             <td>{{ lightresidue.insect_parts }} </td>
             <td>{{ lightresidue.charred_dung }} </td>
-            <td><a href="{% url 'addcomposition' fk=flotation.flotation_id pk=lightresidue.lightresidue_id %}" class="badge badge-primary" role="button">+ Composition</a></td>
+            <td><a href="{% url 'addcomposition' fk=flotation.flotation_id pk=lightresidue.lightresidue_id %}" >+ Composition</a></td>
           </tr>
           {% endfor %}
 
@@ -206,7 +223,19 @@
             <td>{{ fraction.fragment_count}}</td>
             <td>{{ fraction.seed}}</td>
             <td>{{ fraction.plant_part}}</td>
-            <td><a href="{% url 'addplantpart' fk=fraction.composition_id pk=fraction.fraction_id %}" class="badge badge-primary" role="button">+ Plant Part</a></td>
+
+
+
+            {% if fraction.plant_part %}
+
+
+
+
+            <td><a href="{% url 'addplantpart' fk=fraction.composition_id pk=fraction.fraction_id %} title='Add plant part'"><i class="fab fa-pagelines add "></i></a></td>
+
+            {% else %}
+
+            {% endif %}
           </tr>
           {% endfor %}
 

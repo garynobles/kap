@@ -1,5 +1,7 @@
 {% load staticfiles %}
 
+{% load new_rows %}
+
 <header>
   <div  class="fixed-top">
     <div class="navbar navbar-inverse navbar-static-top navbar-expand-lg navbar-dark bg-dark" id="topNav">
@@ -150,6 +152,8 @@
         </a>
       </div>
       <div>
+
+
         <a href="{% url 'addsample' %}">
           <button  type="button" class="btn btn-success float-right mr-1">Add Sample</button>
         </a>

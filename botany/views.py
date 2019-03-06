@@ -47,6 +47,7 @@ def addsample(request):
         form = SampleForm()
     return render(request, 'sample/createsample.html', {'form': form})
 
+
 def addflotation(request, pk, fk=''):
         if request.method == "POST":
             form = FlotationForm(request.POST)
@@ -132,7 +133,6 @@ def editsample(request, pk):
         else:
             form = SampleForm(instance=post)
         return render(request, 'sample/createsample.html', {'form': form})
-
 
 def editflotation(request, pk):
         post = get_object_or_404(Flotation, pk=pk)
@@ -314,9 +314,10 @@ def allbotany(request, sample_id=''):
     number = Flotation.objects.all().count()
     lightresidue = LightResidue.objects.all()
     composition = Composition.objects.all()
+
     # fractionmaterialspresent = FractionMaterialsPresent.objects.all()
 
-    dataset = Flotation.objects \
+    dataset = Sample.objects \
         .values('context_number') \
         .order_by('context_number')
 
@@ -412,29 +413,11 @@ def allbotany(request, sample_id=''):
 
 
 
+#### Forms ####
+
 
 class DateInput(forms.DateInput):
     input_type = 'date'
-
-class FlotationForm(forms.ModelForm):
-    class Meta:
-        model = Flotation
-        fields = (
-
-        'area_easting',
-        'area_northing',
-        'context_number',
-        'sample_number',
-        'flotation_date',
-        'entry_date',
-        'analyst_id',
-        'notes',
-        )
-
-        widgets = {
-            'entry_date': DateInput(attrs={'type': 'date'}),
-            'flotation_date': DateInput(attrs={'type': 'date'}),
-        }
 
 class SampleForm(forms.ModelForm):
     class Meta:
@@ -458,6 +441,28 @@ class SampleForm(forms.ModelForm):
         widgets = {
             'entry_date': DateInput(attrs={'type': 'date'}),
         }
+
+
+class FlotationForm(forms.ModelForm):
+    class Meta:
+        model = Flotation
+        fields = (
+
+        # 'area_easting',
+        # 'area_northing',
+        # 'context_number',
+        # 'sample_number',
+        'flotation_date',
+        'entry_date',
+        'analyst_id',
+        'notes',
+        )
+
+        widgets = {
+            'entry_date': DateInput(attrs={'type': 'date'}),
+            'flotation_date': DateInput(attrs={'type': 'date'}),
+        }
+
 
 
 
@@ -534,6 +539,7 @@ def count_new_rows():
         (b.area_easting IS  NULL AND b.area_northing IS  NULL AND b.sample_number IS  NULL AND b.context_number IS  NULL)
         """)
         count = cursor.fetchall()
+
         return count
 
 
