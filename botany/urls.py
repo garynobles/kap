@@ -23,16 +23,16 @@ urlpatterns = [
     re_path(r'^sample/addflotation/(?P<pk>\d+)/$', views.addflotation, name='addflotation'),
     re_path(r'^flotation/(?P<pk>\d+)/$', views.addlightresidue, name='addlightresidue'),
     re_path(r'^sample/(?P<fk>\d+)/flotation/(?P<pk>\d+)/$', views.addlightresidue, name='addlightresidue'),
-    re_path(r'^flotation/(?P<fk>\d+)/addcomposition/(?P<pk>\d+)/$', views.addcomposition, name='addcomposition'),
+    re_path(r'^sample/(?P<sp>\d+)/flotation/(?P<fk>\d+)/addcomposition/(?P<pk>\d+)/$', views.addcomposition, name='addcomposition'),
 
 
 
-    re_path('lightresidue/(?P<fk>\d+)/composition/(?P<pk>\d+)/addfraction/', views.addfraction, name='addfraction'),
-    re_path('composition/(?P<fk>\d+)/fraction/(?P<pk>\d+)/addplantpart/', views.addplantpart, name='addplantpart'),
+    re_path('sample/(?P<sp>\d+)/flotation/(?P<fl>\d+)/lightresidue/(?P<fk>\d+)/composition/(?P<pk>\d+)/addfraction/', views.addfraction, name='addfraction'),
+    re_path('sample/(?P<sp>\d+)/flotation/(?P<fl>\d+)/composition/(?P<fk>\d+)/fraction/(?P<pk>\d+)/addplantpart/', views.addplantpart, name='addplantpart'),
 
     # edit
     re_path('sample/edit/(?P<pk>\d+)/edit/', views.editsample, name='editsample'),
-    
+
     re_path('flotation/edit/(?P<pk>\d+)/edit/', views.editflotation, name='editflotation'),
     re_path('sample/(?P<fk>\d+)/flotationform/edit/(?P<pk>\d+)/edit/', views.editflotationform, name='editflotationform'),
 

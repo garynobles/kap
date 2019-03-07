@@ -148,7 +148,7 @@
             <td>{{ lightresidue.leaves }} </td>
             <td>{{ lightresidue.insect_parts }} </td>
             <td>{{ lightresidue.charred_dung }} </td>
-            <td><a href="{% url 'addcomposition' fk=flotation.flotation_id pk=lightresidue.lightresidue_id %}" >+ Composition</a></td>
+            <td><a href="{% url 'addcomposition' fk=flotation.flotation_id pk=lightresidue.lightresidue_id sp=flotation.sample_id %}" >+ Composition</a></td>
           </tr>
           {% endfor %}
 
@@ -183,7 +183,7 @@
             <td>{{ composition.type_count}}</td>
             <td>{{ composition.whole_weight}}</td>
             <td>{{ composition.fragment_weight}}</td>
-            <td><a href="{% url 'addfraction' fk=composition.lightresidue_id pk=composition.composition_id %}" class="badge badge-primary" role="button">+ Fraction</a></td>
+            <td><a href="{% url 'addfraction' fk=composition.lightresidue_id pk=composition.composition_id sp=flotation.sample_id fl=flotation.flotation_id %}" class="badge badge-primary" role="button">+ Fraction</a></td>
           </tr>
           {% endfor %}
 
@@ -231,7 +231,7 @@
 
 
 
-            <td><a href="{% url 'addplantpart' fk=fraction.composition_id pk=fraction.fraction_id %} title='Add plant part'"><i class="fab fa-pagelines add "></i></a></td>
+            <td><a href="{% url 'addplantpart' fk=fraction.composition_id pk=fraction.fraction_id sp=flotation.sample_id fl=flotation.flotation_id %} title='Add plant part'"><i class="fab fa-pagelines add "></i></a></td>
 
             {% else %}
 

@@ -22,7 +22,7 @@ def allflotation(request, sample_id='', flotation_id=''):
     lightresidue = LightResidue.objects.all()
     count = LightResidue.objects.all().count()
     composition = Composition.objects.all()
-    return render(request, 'flotation/allflotation.html',
+    return render(request, 'sample/detailsample.html',
     {
     'flotation':flotation,
     'lightresidue':lightresidue,
@@ -48,7 +48,7 @@ def addsample(request):
     return render(request, 'sample/createsample.html', {'form': form})
 
 
-def addflotation(request, pk, fk=''):
+def addflotation(request, pk):
         if request.method == "POST":
             form = FlotationForm(request.POST)
             if form.is_valid():
@@ -56,7 +56,7 @@ def addflotation(request, pk, fk=''):
                 sample = get_object_or_404(Sample, pk=pk)
                 post.sample_id = sample
                 post.save()
-                return redirect('allflotation')
+                return redirect('detailsample', sample_id=pk)
         else:
             form = FlotationForm()
         return render(request, 'flotation/createflotation.html',
@@ -73,13 +73,13 @@ def addlightresidue(request, pk, fk=''):
             post.flotation_id = flotation
             post.save()
             #return redirect('allfraction')
-            return redirect('allflotation')
+            return redirect('botanyoverview', flotation_id=pk, sample_id=fk)
     else:
         form = LightResidueForm()
     return render(request, 'lightresidue/create_lightresidue.html',
     {'form': form})
 
-def addcomposition(request, pk, fk):
+def addcomposition(request, pk, fk, sp):
     if request.method == "POST":
         form = CompositionForm(request.POST)
         if form.is_valid():
@@ -87,12 +87,12 @@ def addcomposition(request, pk, fk):
             lightresidue = get_object_or_404(LightResidue, pk=pk)
             post.lightresidue_id = lightresidue
             post.save()
-            return redirect('allflotation')
+            return redirect('botanyoverview', flotation_id=fk, sample_id=sp)
     else:
         form = CompositionForm()
     return render(request, 'composition/create_composition.html', {'form': form})
 
-def addfraction(request, pk, fk=''):
+def addfraction(request, pk, fk, sp, fl):
     if request.method == "POST":
         form = FractionForm(request.POST)
         if form.is_valid():
@@ -100,13 +100,13 @@ def addfraction(request, pk, fk=''):
             composition = get_object_or_404(Composition, pk=pk)
             post.composition_id = composition
             post.save()
-            return redirect('allflotation')
+            return redirect('botanyoverview', flotation_id=fl, sample_id=sp)
     else:
         form = FractionForm()
     return render(request, 'fraction/create_fraction.html',
     {'form': form})
 
-def addplantpart(request, pk, fk):
+def addplantpart(request, pk, fk, sp, fl):
     if request.method == "POST":
         form = PlantPartForm(request.POST)
         if form.is_valid():
@@ -114,7 +114,7 @@ def addplantpart(request, pk, fk):
             fraction = get_object_or_404(Fraction, pk=pk)
             post.fraction_id = fraction
             post.save()
-            return redirect('allflotation')
+            return redirect('botanyoverview', flotation_id=fl, sample_id=sp)
     else:
         form = PlantPartForm()
     return render(request, 'plantpart/create_plantpart.html',

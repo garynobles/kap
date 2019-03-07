@@ -5,7 +5,7 @@
 {% block content %}
 {% include "sample/menu2.html" %}
 <!-- This automatically imports any new samples from the old database -->
-{ update_new_rows }
+{% update_new_rows %}
 
 <script type="text/javascript">
 
@@ -30,9 +30,71 @@ $(document).ready(function() {
 });
 </script>
 
+<script type = "text/javascript" language = "javascript">
+$(document).ready(function() {
+  $("#show").click(function(){
+    $(".target").show( "blind", {direction: "horizontal"}, 1000 );
+  });
+
+  $("#hide").click(function(){
+    $(".target").hide( "blind", {direction: "horizontal"}, 1000 );
+  });
+
+});
+</script>
+
+
 <div class="container top">
+  <button id = "show" class="ml-3">Filter</button>
+  <div class = "target position-absolute ml-5" style="box-shadow: 20px  20px 8px 0 rgba(0, 0, 0, 0.5); display:none;">
+    <div class="card bg-light pb-3" style="">
+      <div class="card-header">Filter
+      <div class="float-right">    <button id = "hide" >x</button> </div>
+      </div>
+      <div class="card-body">
+        <!--h5 class="card-title"></h5>
+        <p class="card-text"></p-->
+      </div>
+
+
+      {% if filter.form %}
+      <form method="get">
+        <div class="well container">
+          <!--h4 style="margin-top: 0">Filter Page Depot2!</h4-->
+          <div class="row px-3">
+            {{ filter.sample.as_table }}
+          </div>
+        </div>
+        <div class="float-right pr-3">
+        <button type="submit" class="btn btn-primary">
+          <span class="glyphicon glyphicon-search"></span> Search
+        </button>
+        <a href="{% url 'containersearch' %}">
+          <button type="submit" class="btn btn-secondary">
+            <span class="glyphicon glyphicon-search"></span> Reset
+          </button>
+        </a>
+      </div>
+
+        <!-- {% for field in filter.form %}
+        {{ field }}
+        {% endfor %} -->
+
+      </form>
+      {% endif %}
+
+    </div>
+
+  </div>
+
+
+
+
   <section>
     <h4 class="kap">Sample List</h4>
+
+
+
     <div class="table-responsive">
       <table class="table-striped">
         <thead>
