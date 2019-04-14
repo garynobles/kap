@@ -30,6 +30,9 @@ url(r'^createlocation/$', createlocation, name='createlocation'),
 #container
 url(r'^container/$', views.allcontainer, name='allcontainer'),
 path('container/<int:container_id>/', views.detailcontainer, name='detailcontainer'),
+path('container/contents/<int:container_id>/', views.containercontents, name='containercontents'),
+re_path(r'^editcontainercontents/edit/(?P<pk>\d+)/edit/$', views.editcontainercontents, name='editcontainercontents'),
+
 re_path(r'^container/createcontainer/$', views.createcontainer, name='createcontainer'),
 url(r'^container/edit/(?P<pk>\d+)/edit/$', views.editcontainer, name='editcontainer'),
 # url(r'^container/search/edit/(?P<pk>\d+)/edit/$', views.editcontainersearch, name='editcontainersearch'),
@@ -48,7 +51,7 @@ path('adddepotsample/', views.adddepotsample, name='adddepotsample'),
 
 
 # path('containercontentsdetail', views.containercontentsdetail, name='containercontentsdetail'),
-re_path(r'^containercontents/edit/(?P<pk>\d+)/edit/$', views.containercontents, name='containercontents'),
+
 # path('containerre_path(r'^containercontents/edit/(?P<pk>\d+)/edit/$', views.containercontents, name='containercontents'),contents/<int:pk>/', views.containercontents, name='containercontents'),
 
 

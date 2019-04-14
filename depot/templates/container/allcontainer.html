@@ -29,8 +29,8 @@
         <td>
           <div class="btn-group" role="group" aria-label="Basic example">
             <a href="{% url 'editcontainer' pk=container.pk %}" class="btn btn-primary" role="button">edit</a>
-            <a href="{% url 'containercontents' pk=container.pk %}" class="btn btn-primary" role="button">contents</a>
-            <a href="{  url 'editcontainer' pk=o.pk  }" class="btn btn-secondary" role="button">take out</a>
+            <a href="{ url 'containercontents' pk=container.pk }" class="btn btn-primary" role="button">contents</a>
+            <a href="{% url 'detailcontainer' container.container_id  %}" class="btn btn-primary" role="button">contents</a>
             <a href="{  url 'editcontainer' pk=o.pk  }" class="btn btn-secondary" role="button">request</a>
           </div>
         </td>

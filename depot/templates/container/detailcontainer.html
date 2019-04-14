@@ -1,0 +1,88 @@
+{% extends 'sample/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+{% include "container/menu2.html" %}
+
+
+<div class="container top">
+  <section>
+    <div class="float-right col-sm-1">
+      <div class="pt-3">
+        <a class="btn btn-default" href="{% url 'assignsample' pk=container.container_id %}"><span class="glyphicon glyphicon-pencil">
+          <button type="button" class="btn btn-primary">Add sample to container</button>
+        </span></a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="">
+      <div>
+        <div class="btn-group">
+          <span class = "badge badge-info">Container id:</span> <span class = "badge badge-light"> {{ container.container_id }} </span>
+        </div>
+        <div class="btn-group">
+          <span class = "badge badge-info">Context Key:</span> <span class = "badge badge-light"> {{ container.container_name }} </span>.<span class = "badge badge-light"> {{ sample.area_northing }} </span>.<span class = "badge badge-light"> {{ sample.context_number }} </span>.<span class = "badge badge-light"> {{ sample.sample_number }} </span>
+        </div>
+        <div class="btn-group">
+          <span class = "badge badge-info">Sample Type:</span> <span class = "badge badge-light"> {{ sample.sample_type }} </span>
+        </div>
+        <div class="btn-group">
+          <span class = "badge badge-info">Weight:</span> <span class = "badge badge-light"> {{ sample.weight }} </span>
+        </div>
+        <div class="btn-group">
+          <span class = "badge badge-info">Description:</span> <span class = "badge badge-light"> {{ sample.description }} </span>
+        </div>
+
+        <div class="btn-group">
+          <span class = "badge badge-info">Recovery Method:</span> <span class = "badge badge-light"> {{ sample.recovery_method }} </span>
+        </div>
+
+        <div class="btn-group">
+          <span class = "badge badge-info">Taken By:</span> <span class = "badge badge-light"> {{ sample.taken_by }} </span>
+        </div>
+
+      </div>
+      <div class="btn-group">
+        <span class = "badge badge-info">Comments:</span> <span class = "badge badge-light"> {{ sample.comments }} </span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h4 class="kap">Samples in Container</h4>
+    <div class="table-responsive">
+      <table class="table-striped">
+        <thead>
+          <tr>
+            <th>Sample ID</th>
+            <th>Key ENC</th>
+            <th>Sample Number</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for sample in container.samples.all %}
+          <tr>
+            <td>{{ container.container_id }}</td>
+            <td>{{ sample.sample_id }}</td>
+            <td>{{ sample.area_easting }}.{{ sample.area_northing }}.{{ sample.context_number}}.{{ sample.sample_number }}</td>
+            <td>{{ sample.sample_number }}</td>
+            <td>
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="{ url 'addfraction' fk=sample.sample_id pk=flotation.botany_i}" class="badge badge-primary" role="button">Remove from Container</a>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<div class="clearfix"></div>
+{% endblock %}

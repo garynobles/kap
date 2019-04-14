@@ -88,22 +88,7 @@ def createcontainer(request):
         form = ContainerForm()
     return render(request, 'container/create_container.html', {'form': form})
 
-def create_join_sample_container(request):
-    if request.method == "POST":
-
-        form = JoinSampleContainerForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            #post.user = request.user
-            #post.datetime = datetime.datetime.now()
-
-            post.save()
-            return redirect('all_sample_container_joins')
-    else:
-        form = JoinSampleContainerForm()
-    return render(request, 'join_sample_container/create_join_sample_container.html', {'form': form})
-
-
+# add
 def adddepotsample(request):
     if request.method == "POST":
         form = DepotSampleForm(request.POST)
@@ -167,21 +152,6 @@ def editcontainer(request, pk):
         form = ContainerForm(instance=post)
     return render(request, 'container/create_container.html', {'form': form})
 
-def edit_join_sample_container(request, pk):
-    post = get_object_or_404(JoinSampleContainer, pk=pk)
-    if request.method == "POST":
-        form = JoinSampleContainerForm(request.POST, instance=post)
-        if form.is_valid():
-            post = form.save(commit=False)
-            #post.user = request.user
-            #post.datetime = datetime.datetime.now()
-            post.save()
-            return redirect('all_sample_container_joins')
-            #, pk=post.pk)
-    else:
-        form = JoinSampleContainerForm(instance=post)
-    return render(request, 'join_sample_container/create_join_sample_container.html', {'form': form})
-
 def editdepotsample(request, pk):
     post = get_object_or_404(Sample, pk=pk)
     if request.method == "POST":
@@ -207,58 +177,29 @@ def detailstorage(request, store_id):
 def detaillocation(request):
     pass
 
+# def detail(request, place_id):
+#     place = Place.objects.get(pk=place_id)
+#     areas = place.area.all()
+
 def detailcontainer(request, container_id):
-    detailcontainer = get_object_or_404(Container, pk=container_id)
-    #samples = Samples.objects.filter(sample_id__container_id=container.pk)
+    container = get_object_or_404(Container, pk=container_id)
+    samples = container.samples.all()
+    # samples = Sample.objects.filter(sample_id__container_id=container.pk)
     #samples = JoinSampleContainer.objects.filter(sample_id__container_id=container.pk)
     #joinsamplecontainer = JoinSampleContainer.objects.filter(container_id = 4)
     #joinsamplecontainer = JoinSampleContainer.objects.filter(container_id = 4)
-    joinsamplecontainer = JoinSampleContainer.objects.filter(container_id__container_id=container_id)
+    # samples = Container.objects.filter(container_id__container_id=container_id)
     #joinsamplecontainer = JoinSampleContainer.objects.filter(container__id = container_id)
-    #samples = Samples.objects.filter(container__pk=samples.pk)
+    # samples = Samples.objects.filter(container__pk=samples.pk)
     # location = location.container_set.all()
+    # samples = Container.objects.filter(container_id__container_id=container_id)
     return render(request, 'container/detailcontainer.html',
-    {'container':detailcontainer,
-    'joinsamplecontainer':joinsamplecontainer
+    {'container':container,
+    'samples':samples
     })
 
 def detaildepotsample(request, sample_id):
     pass
-
-
-# def containercontentsdetail(request):
-#     # containercontentsdetail = Container.objects.all()
-#     # samplecontentdetail = Sample.objects.all()
-#     return render(request, 'container/containercontents.html',
-#     {
-#         'containercontentdetail':containercontentsdetail
-#     })
-
-
-
-
-
-# def assignsample(request):
-#     media = Container.objects.all()
-#     if request.method == "POST":
-#         form = AssignForm(request.POST)
-#         if form.is_valid():
-#             post = form.save(commit=False)
-#             #post.user = request.user
-#             #post.datetime = datetime.datetime.now()
-#
-#             post.save()
-#             return redirect('alldepotsamples')
-#     else:
-#         form = AssignForm()
-#     return render(request, 'depotsample/assignsample.html',
-#     {
-#         'form': form,
-#         'media': media
-#     })
-
-
-
 
 
 def assignsample(request, pk, container=''):
@@ -287,71 +228,18 @@ def assignsample(request, pk, container=''):
         'media': media
     })
 
-# def containercontents(request, pk):
-#     post = get_object_or_404(Container, pk=pk)
-#         # objects = Container.samples.all()
-#     if request.method == "POST":
-#         form = ContainerContentsForm(request.POST, instance=post)
-#         if form.is_valid():
-#             post = form.save(commit=False)
-#             #post.user = request.user
-#             #post.datetime = datetime.datetime.now()
-#             post.save()
-#             return redirect('allcontainer')
-#             #, pk=post.pk)
-#     else:
-#         form = ContainerContentsForm(instance=post)
-#     return render(request, 'container/containercontents.html', {'form': form})
+def containercontents(request, container_id):
+    container = get_object_or_404(Container, pk=container_id)
+    samples = container.samples.all()
+    return render(request, 'container/containercontents.html',
+    {'container':container,
+    'samples':samples
+    })
 
 
-# def containercontents(request, pk):
-#     post = get_object_or_404(Container, pk=pk)
-#     if request.method == "POST":
-#         form = ContainerContentsForm(request.POST, instance=post)
-#         if form.is_valid():
-#             post = form.save(commit=False)
-#             #post.user = request.user
-#             #post.datetime = datetime.datetime.now()
-#             post.save()
-#             return redirect('allcontainer')
-#             #, pk=post.pk)
-#     else:
-#         form = ContainerContentsForm(instance=post)
-#     return render(request, 'container/containercontents.html', {'form': form})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# def containercontents(request, pk):
-#     containercontents = get_object_or_404(Container, pk=pk)
-#     # samples = Sample.containers
-#
-#     samples = forms.ModelMultipleChoiceField(
-#         queryset = Sample.objects.all()
-#         )
-#         # filter(...)
-#     if request.method == "POST":
-#         form = ContainerContentsForm(request.POST, instance=post)
-#
-#     return render(request, 'container/containercontents.html',
-#     {
-#         'containercontents':containercontents,
-#         'samples':samples,
-#     })
-
-
-def containercontents(request, pk):
+def editcontainercontents(request, pk):
     post = get_object_or_404(Container, pk=pk)
+    # containersamples = Container.objects.filter(container_id=pk)
     if request.method == "POST":
         form = ContainerContentsForm(request.POST, instance=post)
         if form.is_valid():
@@ -363,11 +251,15 @@ def containercontents(request, pk):
             #, pk=post.pk)
     else:
         form = ContainerContentsForm(instance=post)
-    return render(request, 'container/containercontents.html', {'form': form})
+    return render(request, 'container/containercontents.html',
+     {
+        'form': form,
+        # 'containersamples': containersamples
+    })
 
 
 
-
+#### Forms.py
 
 class ContainerContentsForm(forms.ModelForm):
     class Meta:
@@ -385,167 +277,6 @@ class ContainerContentsForm(forms.ModelForm):
         )
 
 
-# class ContainerContentsForm(forms.ModelForm):
-#     containers = forms.ModelChoiceField(queryset=Sample.objects.all())
-#
-#     class Meta:
-#         model = Container
-#         fields = [
-#         'container_name',
-#
-#         ]
-
-# def containercontents(request, pk):
-#     containercontents = get_object_or_404(Container, pk=pk)
-#     samples = forms.ModelMultipleChoiceField(
-#         queryset = Sample.objects.all()
-#         )
-#     # samples = Sample.objects.all()
-#
-#     return render(request, 'container/containercontents.html',
-#     {
-#         'containercontents':containercontents,
-#         'samples':samples,
-#     })
-
-
-# class ContainerContentsForm(forms.ModelForm):
-#     class Meta:
-#         # same code here
-#
-#     samples = forms.ModelMultipleChoiceField(
-#         queryset = Sample.objects.all()
-#     )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#### DETAILS ####
-
-
-
-# def alllocation_grid(request):
-#     alllocation = Location.objects
-#     return render(request, 'location/alllocation_grid.html', {'location':alllocation_grid})
-
-
-
-#
-
-#
-#
-#
-#
-#
-
-#
-#
-#
-# def checked_out(request, container_id):
-#     post = get_object_or_404(Container, pk=pk)
-#     if request.method == "POST":
-#         form = ContainerForm(request.POST, instance=post)
-#         if form.is_valid():
-#             post = form.save(commit=False)
-#             #post.user = request.user
-#             #post.datetime = datetime.datetime.now()
-#             post.save()
-#             return redirect('allcontainer', pk=container.pk)
-#             #, pk=post.pk)
-#     else:
-#         form = ContainerForm(instance=post)
-#     return render(request, 'container/create_container.html', {'form': form})
-#
-#
-#
-#
-#
-#
-#
-#
-#
-
-#
-#
-#
-#
-#
-#
-#
-# # def allstorage(request):
-# #     store = Store.objects
-# #     return render(request, 'store/allstorage.html', {'store':store})
-#
-
-#
-
-
-#
-#
-#
-#
-#
-#
-#
-#
-#
-# def samplesearch(request):
-#     pass
-#
-# def containerpage(request):
-#     pass
-#
-# def listing(request):
-#     pass
-#
-# #def alldepotsamples(request):
-# #    return render(request,'samples/alldepotsamples.html',{})
-#
-
-#
-#
-#
-#
-#
-#
-# def containersearch(request):
-#     container_list = Container.objects.all()
-#     container_filter = ContainerFilter(request.GET, queryset=container_list)
-#     return render(request, 'search/container_filter.html', {'filter': container_filter})
-#
-#
-#
-# def editcontainersearch(request, pk):
-#     post = get_object_or_404(Container, pk=pk)
-#     if request.method == "POST":
-#         form = ContainerForm(request.POST, instance=post)
-#         if form.is_valid():
-#             post = form.save(commit=False)
-#             #post.user = request.user
-#             #post.datetime = datetime.datetime.now()
-#             post.save()
-#             return redirect('containersearch')
-#             #, pk=post.pk)
-#     else:
-#         form = ContainerForm(instance=post)
-#     return render(request, 'container/create_container.html', {'form': form})
-#
-#
-#
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -595,36 +326,6 @@ class ContainerForm(forms.ModelForm):
         'icon_desc'
         )
 
-# class ContainerContentsForm(forms.ModelForm):
-#     class Meta:
-#         model = Container
-#         fields = (
-#         # 'container_id',
-#         'location_id',
-#         'container_name',
-#         'container_type',
-#
-#         'icon_desc',
-#
-#         'samples',
-#         # 'sample_number'
-#         )
-
-# class ContainerContentsForm(forms.ModelForm):
-#     class Meta:
-#         # same code here
-#
-#         samples = forms.ModelMultipleChoiceField(
-#         queryset = sample.objects.filter(sample_id)
-#         )
-
-# class ProductForm(forms.ModelForm):
-#     materials = forms.ModelMultipleChoiceField(Material.objects.all(), required=False)
-#
-#     class Meta:
-#         model = Product
-#         fields = ('product_field_1', 'product_field_2',...)
-
 class JoinSampleContainerForm(forms.ModelForm):
 
     class Meta:
@@ -640,79 +341,7 @@ class JoinSampleContainerForm(forms.ModelForm):
         'container_id',
 
         )
-#
-# class SampleDepotForm(forms.ModelForm):
-#     class Meta:
-#         model = Sample
-#         fields = (
-#         # 'botany_id',
-#         'sample_id',
-#         'area_easting',
-#         'area_northing',
-#         'context_number',
-#         'sample_number',
-#         'sample_type',
-#         'weight',
-#         'description',
-#         'recovery_method',
-#         'taken_by',
-#         'comments'
-#
-#         )
-#
-#         widgets = {
-#             'entry_date': DateInput(attrs={'type': 'date'}),
-#         }
 
-class AssignForm(forms.ModelForm):
-    class Meta:
-        model = Container
-        fields = (
-        # 'botany_id',
-        'container_id',
-        # 'area_easting',
-        # 'area_northing',
-        # 'context_number',
-        # 'sample_number',
-        # 'material_type',
-        # 'weight',
-        # 'description',
-        # 'recovery_method',
-        # # 'taken_by',
-        # 'comments',
-        # 'samples'
-
-
-        )
-
-        widgets = {
-            'entry_date': DateInput(attrs={'type': 'date'}),
-        }
-
-class AssignForm2(forms.ModelForm):
-    class Meta:
-        model = Container
-        fields = (
-        # 'botany_id',
-        'container_id',
-        # 'area_easting',
-        # 'area_northing',
-        # 'context_number',
-        # 'sample_number',
-        # 'material_type',
-        # 'weight',
-        # 'description',
-        # 'recovery_method',
-        # # 'taken_by',
-        # 'comments',
-        # 'samples'
-
-
-        )
-
-        widgets = {
-            'entry_date': DateInput(attrs={'type': 'date'}),
-        }
 
 
 class DepotSampleForm(forms.ModelForm):
@@ -737,19 +366,3 @@ class DepotSampleForm(forms.ModelForm):
         widgets = {
             'entry_date': DateInput(attrs={'type': 'date'}),
         }
-
-
-# class MultipleSampleForm(forms.ModelForm):
-#     samples = forms.ModelMultipleChoiceField(Sample.objects.all(), required=False)
-#
-#     class Meta:
-#         model = Sample
-#         fields = ('sample_number',)
-#
-# from django.views import generic
-# import django_filters
-#
-# class SampleListView(generic.ListView):
-#     template_name = 'sample/sample_list.html'
-#     model = Sample
-#     paginate_by = 50
