@@ -15,10 +15,10 @@
           <div class="dropdown show">
             <a class="btn btn-secondary dropdown-toggle mr-2" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Depot</a>
             <div class="dropdown-menu " aria-labelledby="storage">
-              <a class="dropdown-item" href="{% url 'alldepotsample' %}">Samples</a>
-              <a class="dropdown-item" href="{% url 'allcontainer' %}">Containers</a>
-              <a class="dropdown-item" href="{% url 'alllocation' %}">Locations</a>
-              <a class="dropdown-item" href="{% url 'allstorage' %}">Depots</a>
+              <a class="dropdown-item" href="{% url 'depot:alldepotsample' %}">Samples</a>
+              <a class="dropdown-item" href="{% url 'depot:allcontainer' %}">Containers</a>
+              <a class="dropdown-item" href="{% url 'depot:alllocation' %}">Locations</a>
+              <a class="dropdown-item" href="{% url 'depot:allstorage' %}">Depots</a>
               <!-- <a class="dropdown-item" href="#">Faunal</a>
               <a class="dropdown-item" href="#">Conservation</a>
               <a class="dropdown-item" href="#">Ceramics</a>
@@ -141,22 +141,22 @@
 
 <div class="navbar navbar-custom navbar-inverse navbar-static-top navbar-dark bg-dark" id="nav2">
   <div class="navbar-inner">
-    <a href="{% url 'adddepotsample' %}">
+    <a href="{% url 'depot:adddepotsample' %}">
       <button  type="button" class="btn btn-secondary">Add new Sample</button>
     </a>
-    <a href="{% url 'alldepotsample' %}">
+    <a href="{% url 'depot:alldepotsample' %}">
       <button  type="button" class="btn btn-info">Samplesx</button>
     </a>
     <!-- <a href="{ url 'create_join_sample_container' }">
       <button  type="button" class="btn btn-warning"><-join-></button>
     </a> -->
-    <a href="{% url 'allcontainer' %}">
+    <a href="{% url 'depot:allcontainer' %}">
       <button  type="button" class="btn btn-info">Containers</button>
     </a>
-    <a href="{% url 'alllocation' %}">
+    <a href="{% url 'depot:alllocation' %}">
       <button  type="button" class="btn btn-info">Locations</button>
     </a>
-    <a href="{% url 'allstorage' %}">
+    <a href="{% url 'depot:allstorage' %}">
       <button  type="button" class="btn btn-info">Depots</button>
     </a>
   </div>

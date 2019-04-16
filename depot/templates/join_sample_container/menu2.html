@@ -5,19 +5,19 @@
           <a href="{% url 'create_join_sample_container' %}">
             <button  type="button" class="btn btn-success">Associate a Sample to a Container</button>
           </a>
-          <a href="{% url 'alldepotsample' %}">
+          <a href="{% url 'depot:alldepotsample' %}">
             <button  type="button" class="btn btn-info">Samples</button>
           </a>
           <a href="{ url 'all_sample_container_joins' }">
             <button  type="button" class="btn btn-outline-warning"><-join-></button>
           </a>
-          <a href="{% url 'allcontainer' %}">
+          <a href="{% url 'depot:allcontainer' %}">
             <button  type="button" class="btn btn-info">Containers</button>
           </a>
-          <a href="{% url 'alllocation' %}">
+          <a href="{% url 'depot:alllocation' %}">
             <button  type="button" class="btn btn-info">Locations</button>
           </a>
-          <a href="{% url 'allstorage' %}">
+          <a href="{% url 'depot:allstorage' %}">
             <button  type="button" class="btn btn-info">Depots</button>
           </a>
         </div>

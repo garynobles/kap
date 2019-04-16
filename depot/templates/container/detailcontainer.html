@@ -89,7 +89,7 @@
 
 
 <section >
-  <div class="float-left" style="width:500px;">
+  <div class="float-left" style="width:300px;">
   <h4 class="kap">Samples</h4>
   <div class="table-responsive">
     <table class="table-striped">
@@ -110,7 +110,7 @@
             <!-- container=container.container_id -->
             <!-- container=container.container_id -->
             <!-- <button type="button" class="btn btn-success">add</button> -->
-            add
+            >>
           </a></td>
           {% endif %}
         </tr>
@@ -121,7 +121,7 @@
 <!-- </div>
 </div> -->
 </div>
-<div class="float-left" style="width:500px;">
+<div class="float-left" style="width:300px;">
   <h4 class="kap">Container Contents</h4>
   <div class="table-responsive">
     <table class="table-striped">
@@ -135,11 +135,12 @@
 
 <tr>
   {% for friend in friends %}
-  <td>{{ friend.username }}</td>
+
   <td><a href="{% url 'depot:change_friends'  operation='remove' pk=friend.pk %}" class="badge badge-primary" role="button">
     <!-- <button type="button" class="btn btn-default">remove</button> -->
-    remove
+    <<
   </a></td>
+    <td>{{ friend.username }}</td>
 </tr>
 
 

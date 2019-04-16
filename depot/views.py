@@ -197,9 +197,13 @@ def detailcontainer(request, container_id):
     container = get_object_or_404(Container, pk=container_id)
     samples = container.samples.all()
 
-    users = User.objects.exclude(id=request.user.id)
+    users = User.objects.exclude(id=request.user.id).order_by('-id')
+    # users = users[:5]
+    # users = users.objects.filter()
+    # .order_by('-id')[:2]
     friend = Friend.objects.get(current_user=request.user)
-    friends = friend.users.all()
+    friends = friend.users.all().order_by('-id')
+
 
     # samples = Sample.objects.filter(sample_id__container_id=container.pk)
     #samples = JoinSampleContainer.objects.filter(sample_id__container_id=container.pk)

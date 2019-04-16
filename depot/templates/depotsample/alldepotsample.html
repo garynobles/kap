@@ -33,7 +33,7 @@
   </thead>
   <tbody>
     {% for sample in alldepotsample %}
-    <tr class='clickable-row' data-href="{% url 'editdepotsample' pk=sample.sample_id %}">
+    <tr class='clickable-row' data-href="{% url 'depot:editdepotsample' pk=sample.sample_id %}">
       <td>{{ sample.area_easting }}.{{ sample.area_northing }}.{{ sample.context_number }}</td>
       <td>{{ sample.sample_number }}</td>
       <td>{{ sample.sample_type}}</td>
