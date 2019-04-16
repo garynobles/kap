@@ -8,6 +8,8 @@ from . import views
 
 urlpatterns = [
 
+url(r'^container/(?P<operation>.*)/(?P<pk>\d+)/$', views.change_friends, name='change_friends'),
+# url(r'^containerx/<int:container_id>/(?P<operation>.*)/(?P<pk>\d+)/$', views.change_friends, name='change_friends'),
 
 # EDIT
 
@@ -30,7 +32,7 @@ url(r'^createlocation/$', createlocation, name='createlocation'),
 #container
 url(r'^container/$', views.allcontainer, name='allcontainer'),
 path('container/<int:container_id>/', views.detailcontainer, name='detailcontainer'),
-path('container/contents/<int:container_id>/', views.containercontents, name='containercontents'),
+# path('container/contents/<int:container_id>/', views.containercontents, name='containercontents'),
 re_path(r'^editcontainercontents/edit/(?P<pk>\d+)/edit/$', views.editcontainercontents, name='editcontainercontents'),
 
 re_path(r'^container/createcontainer/$', views.createcontainer, name='createcontainer'),

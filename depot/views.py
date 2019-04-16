@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, render_to_response, redirect
 from django import forms
+from django.contrib.auth.models import User
 # from django.utils.translation import ugettext
 # import django_filters
 # from django_filters.filterset import ORDER_BY_FIELD
@@ -7,7 +8,18 @@ from django import forms
 # from .forms import SwitchForm
 # Create your views here.
 
-from depot.models import Sample, Container, Location, Storage, JoinSampleContainer
+from depot.models import Sample, Container, Location, Storage, JoinSampleContainer, Friend
+
+def change_friends(request, operation, pk, container=''):
+    friend = User.objects.get(pk=pk)
+    if operation == 'add':
+        Friend.make_friend(request.user, friend)
+    elif operation == 'remove':
+        Friend.lose_friend(request.user, friend)
+
+
+    return redirect('depot:allcontainer')
+
 
 #### ALL RECORDS ####
 def allstorage(request):
@@ -83,7 +95,7 @@ def createcontainer(request):
             #post.datetime = datetime.datetime.now()
 
             post.save()
-            return redirect('allcontainer')
+            return redirect('depot:allcontainer')
     else:
         form = ContainerForm()
     return render(request, 'container/create_container.html', {'form': form})
@@ -146,7 +158,7 @@ def editcontainer(request, pk):
             #post.user = request.user
             #post.datetime = datetime.datetime.now()
             post.save()
-            return redirect('allcontainer')
+            return redirect('depot:allcontainer')
             #, pk=post.pk)
     else:
         form = ContainerForm(instance=post)
@@ -184,6 +196,11 @@ def detaillocation(request):
 def detailcontainer(request, container_id):
     container = get_object_or_404(Container, pk=container_id)
     samples = container.samples.all()
+
+    users = User.objects.exclude(id=request.user.id)
+    friend = Friend.objects.get(current_user=request.user)
+    friends = friend.users.all()
+
     # samples = Sample.objects.filter(sample_id__container_id=container.pk)
     #samples = JoinSampleContainer.objects.filter(sample_id__container_id=container.pk)
     #joinsamplecontainer = JoinSampleContainer.objects.filter(container_id = 4)
@@ -195,7 +212,11 @@ def detailcontainer(request, container_id):
     # samples = Container.objects.filter(container_id__container_id=container_id)
     return render(request, 'container/detailcontainer.html',
     {'container':container,
-    'samples':samples
+    'samples':samples,
+
+    'users': users,
+    'friends': friends,
+
     })
 
 def detaildepotsample(request, sample_id):
@@ -247,7 +268,7 @@ def editcontainercontents(request, pk):
             #post.user = request.user
             #post.datetime = datetime.datetime.now()
             post.save()
-            return redirect('allcontainer')
+            return redirect('depot:allcontainer')
             #, pk=post.pk)
     else:
         form = ContainerContentsForm(instance=post)
@@ -257,7 +278,8 @@ def editcontainercontents(request, pk):
         # 'containersamples': containersamples
     })
 
-
+def removefromcontainer(request, pk):
+    pass
 
 #### Forms.py
 

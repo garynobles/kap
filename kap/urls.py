@@ -18,7 +18,7 @@ urlpatterns = [
 
     path('botany/', include('botany.urls')),
 
-    path('depot/',include('depot.urls')),
+    path('depot/',include(('depot.urls', 'depot'), namespace='depot')),
     #Zooarch
     path('zooarch/',include('zooarch.urls')),
     #experimental

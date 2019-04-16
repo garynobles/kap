@@ -3,6 +3,12 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from templates.choices import EASTING_CHOICES, NORTHING_CHOICES, RECOVERY_METHODS, MATERIALS
 
+
+
+
+
+
+
 # class Container(models.Model): #container
 #     container_name = models.CharField(max_length=50, blank=True, null=True)
 #     containers = models.ManyToManyField('Sample')
@@ -99,7 +105,8 @@ class Location(models.Model):
         ordering = ["orderby"]
         verbose_name_plural = "locations"
 
-class Sample(models.Model):
+class Sample(models.Model): #like a user
+
     sample_id = models.AutoField(primary_key=True)
     # containers = models.ManyToManyField(Container, through='JoinSampleContainer', through_fields=('sample_id', 'container_id'), related_name='sample')
     area_easting = models.IntegerField(choices = EASTING_CHOICES)
@@ -129,7 +136,7 @@ class Sample(models.Model):
         managed = True
         #verbose_name_plural = "samples"
 
-class Container(models.Model):
+class Container(models.Model): #like a friend
     container_id = models.AutoField(primary_key=True)
     # samples = models.IntegerField()
     # samples = models.ManyToManyField(Sample, through='JoinSampleContainer', through_fields=('container_id', 'sample_id'), related_name='containers')
@@ -137,10 +144,8 @@ class Container(models.Model):
     container_name = models.CharField(max_length=50, blank=True, null=True)
     container_type = models.CharField(max_length=50, blank=True, null=True)
     location_id = models.ForeignKey(Location, db_column='location_id', on_delete = models.PROTECT)
-
-    samples = models.ManyToManyField('Sample')
     icon_desc = models.ForeignKey(Icon, db_column='icon_desc', null=True, blank=True, default='Box',on_delete = models.PROTECT)
-
+    samples = models.ManyToManyField('Sample')
 
     def __str__(self):
         return self.container_name
@@ -248,3 +253,26 @@ class JoinSampleContainer(models.Model):
     #     managed = False
     #     #verbose_name_plural = "samples"
     #     #unique_together = (('area_easting', 'area_northing', 'context_number', 'sample_number'),)
+
+
+
+
+# m2m test
+class Friend(models.Model):
+    users = models.ManyToManyField(User)
+    current_user = models.ForeignKey(User, related_name='owner', null=True, on_delete = models.PROTECT)
+    
+
+    @classmethod
+    def make_friend(cls, current_user, new_friend):
+        friend, created = cls.objects.get_or_create(
+            current_user=current_user
+        )
+        friend.users.add(new_friend)
+
+    @classmethod
+    def lose_friend(cls, current_user, new_friend):
+        friend, created = cls.objects.get_or_create(
+            current_user=current_user
+        )
+        friend.users.remove(new_friend)
