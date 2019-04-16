@@ -147,6 +147,26 @@ class Container(models.Model): #like a friend
     icon_desc = models.ForeignKey(Icon, db_column='icon_desc', null=True, blank=True, default='Box',on_delete = models.PROTECT)
     samples = models.ManyToManyField('Sample')
 
+    # users = models.ManyToManyField(User)
+    # current_user = models.ForeignKey(User, related_name='owner', null=True, on_delete = models.PROTECT)
+
+
+    @classmethod
+    def add_to_container(cls, current_container, new_sample):
+        sample, created = cls.objects.get_or_create(
+            current_container=current_container
+        )
+        sample.add(new_sample)
+
+    @classmethod
+    def remove_from_container(cls, current_container, new_sample):
+        sample, created = cls.objects.get_or_create(
+            current_container=current_container
+        )
+        sample.remove(new_sample)
+
+
+
     def __str__(self):
         return self.container_name
 

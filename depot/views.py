@@ -20,6 +20,19 @@ def change_friends(request, operation, pk, container=''):
 
     return redirect('depot:allcontainer')
 
+def change_container(request, operation, pk, fk='', sample_id=''):
+    container = Container.objects.get(pk=pk)
+    sample = Container.objects.get(samples=fk)
+    # sample = Container.objects.get(container.sample_id=sample_id)
+    if operation == 'add':
+        Container.add_to_container(request.container, container)
+    elif operation == 'remove':
+        Container.remove_from_container(samples, sample)
+
+
+
+    return redirect('depot:allcontainer')
+
 
 #### ALL RECORDS ####
 def allstorage(request):
@@ -204,6 +217,11 @@ def detailcontainer(request, container_id):
     friend = Friend.objects.get(current_user=request.user)
     friends = friend.users.all().order_by('-id')
 
+    # returns the container
+    # container_contents = Container.objects.get(container_id=container.container_id)
+    container_contents = samples = container.samples.all()
+    # related_samples_list = container_contents.samples.all()
+    # unrelated_samples_list = related_samples_list.samples.all()
 
     # samples = Sample.objects.filter(sample_id__container_id=container.pk)
     #samples = JoinSampleContainer.objects.filter(sample_id__container_id=container.pk)
@@ -220,6 +238,10 @@ def detailcontainer(request, container_id):
 
     'users': users,
     'friends': friends,
+
+    # 'related_sample_list': related_samples_list,
+    'container_contents': container_contents,
+    # 'unrelated_sample_list': unrelated_samples_list,
 
     })
 
