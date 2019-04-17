@@ -78,8 +78,8 @@
         </tbody>
       </table>
     </div>
-  <!-- </div>
-</div> -->
+    <!-- </div>
+  </div> -->
 </section>
 
 
@@ -90,36 +90,36 @@
 
 <section >
   <div class="float-left" style="width:300px;">
-  <h4 class="kap">Samples</h4>
-  <div class="table-responsive">
-    <table class="table-striped">
-      <thead>
-        <tr>
-          <th>Sample List</th>
+    <h4 class="kap">Samples</h4>
+    <div class="table-responsive">
+      <table class="table-striped">
+        <thead>
+          <tr>
+            <th>Sample List</th>
 
-        </tr>
-      </thead>
-      <tbody>
-        {% for user in users %}
-        <tr>
-          {% if user not in friends %}
-          <!-- we will want to add an if stmt list if not in unassigned - need to think how to do this -->
-          <td>{{ container.container_id }}</td>
-          <td>{{ user.username }}</td>
-          <td>  <a href="{% url 'depot:change_friends' operation='add' pk=user.pk %}"  class="badge badge-primary" role="button">
-            <!-- container=container.container_id -->
-            <!-- container=container.container_id -->
-            <!-- <button type="button" class="btn btn-success">add</button> -->
-            >>
-          </a></td>
-          {% endif %}
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-<!-- </div>
-</div> -->
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          <tr>
+            {% if user not in friends %}
+            <!-- we will want to add an if stmt list if not in unassigned - need to think how to do this -->
+            <td>{{ container.container_id }}</td>
+            <td>{{ user.username }}</td>
+            <td>  <a href="{% url 'depot:change_friends' operation='add' pk=user.pk %}"  class="badge badge-primary" role="button">
+              <!-- container=container.container_id -->
+              <!-- container=container.container_id -->
+              <!-- <button type="button" class="btn btn-success">add</button> -->
+              >>
+            </a></td>
+            {% endif %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <!-- </div>
+  </div> -->
 </div>
 <div class="float-left" style="width:300px;">
   <h4 class="kap">Container Contents</h4>
@@ -132,21 +132,18 @@
         </tr>
       </thead>
       <tbody>
-
-<tr>
-  {% for friend in friends %}
-
-  <td><a href="{% url 'depot:change_friends'  operation='remove' pk=friend.pk %}" class="badge badge-primary" role="button">
-    <!-- <button type="button" class="btn btn-default">remove</button> -->
-    <<
-  </a></td>
-    <td>{{ friend.username }}</td>
-</tr>
+      <tr>
+          {% for friend in friends %}
+          <td><a href="{% url 'depot:change_friends'  operation='remove' pk=friend.pk %}" class="badge badge-primary" role="button">
+            <<
+          </a></td>
+          <td>{{ friend.username }}</td>
+        </tr>
         {% endfor %}
       </tbody>
     </table>
   </div>
-<!-- </div>
+  <!-- </div>
 </div> -->
 </section>
 
@@ -161,76 +158,76 @@
 
 <section >
   <div class="float-left" style="width:300px;">
-  <h4 class="kap">Samples</h4>
-  <div class="table-responsive">
-    <table class="table-striped">
-      <thead>
-        <tr>
-          <th>Unrelated Sample List</th>
+    <h4 class="kap">Unassigned Samples</h4>
+    <div class="table-responsive">
+      <table class="table-striped">
+        <thead>
+          <tr>
+            <th>E.N.C.S</th>
+            <th>Sample ID</th>
 
-        </tr>
-      </thead>
-      <tbody>
-        {% for x in container_contents %}
-        <tr>
-          <!-- { if user not in friends } -->
-          <!-- we will want to add an if stmt list if not in unassigned - need to think how to do this -->
-          <td>{{ x.container_id }}</td>
-            <td>{{ x.container_name }}</td>
-          <td>{{ x.sample_id }}</td>
-          <td></td>
-          <td>  <a href="{ url 'depot:change_friends' operation='add' pk=user.pk }"  class="badge badge-primary" role="button">
-            <!-- container=container.container_id -->
-            <!-- container=container.container_id -->
-            <!-- <button type="button" class="btn btn-success">add</button> -->
-            >>
-          </a></td>
-          <!-- { endif } -->
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+          </tr>
+        </thead>
+        <tbody>
+          {% for unassigned in container_contents %}
+          <tr>
+            <!-- { if user not in friends } -->
+            <!-- we will want to add an if stmt list if not in unassigned - need to think how to do this -->
+            <td>{{ unassigned.area_easting }}.
+              {{ unassigned.area_northing }}.
+              {{ unassigned.context_number }}.
+              {{ unassigned.sample_number }}</td>
+              <td>{{ unassigned.sample_id }}</td>
+              <td></td>
+              <td>  <a href="{ url 'depot:change_friends' operation='add' pk=user.pk }"  class="badge badge-primary" role="button">
+                <!-- container=container.container_id -->
+                <!-- container=container.container_id -->
+                <!-- <button type="button" class="btn btn-success">add</button> -->
+                >>
+              </a></td>
+
+              <!-- { endif } -->
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <!-- </div>
+    </div> -->
   </div>
-<!-- </div>
-</div> -->
-</div>
-<div class="float-left" style="width:300px;">
-  <h4 class="kap">Container Contents</h4>
-  <div class="table-responsive">
-    <table class="table-striped">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Sample Id</th>
-          <th>E.N.C.S</th>
+  <div class="float-left" style="width:300px;">
+    <h4 class="kap">Container Contents</h4>
+    <div class="table-responsive">
+      <table class="table-striped">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Sample Id</th>
+            <th>E.N.C.S</th>
 
 
-        </tr>
-      </thead>
-      <tbody>
-
-<tr>
-  {% for contents in container_contents %}
-
-  <td><a href="{% url 'depot:change_container'  operation='remove' pk=container.pk fk=29287618 %}" class="badge badge-primary" role="button">
-    <!-- <button type="button" class="btn btn-default">remove</button> -->
-    <<
-  </a></td>
-
-  <td>{{ contents.sample_id }}</td>
-    <td>{{ contents.area_easting }}.
-    {{ contents.area_northing }}.
-  {{ contents.context_number }}.
-{{ contents.sample_number }}</td>
-
-</tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-<!-- </div>
-</div> -->
-</section>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {% for contents in container_contents %}
+            <td><a href="{% url 'depot:change_container'  operation='remove' pk=container.container_id fk=contents.sample_id  %}" class="badge badge-primary" role="button">
+              <!-- <button type="button" class="btn btn-default">remove</button> -->
+              <<
+            </a></td>
+            <td>{{ contents.sample_id }}</td>
+            <td>{{ contents.area_easting }}.
+              {{ contents.area_northing }}.
+              {{ contents.context_number }}.
+              {{ contents.sample_number }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <!-- </div>
+    </div> -->
+  </section>
 
 
 

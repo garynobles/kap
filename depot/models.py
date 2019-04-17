@@ -151,19 +151,19 @@ class Container(models.Model): #like a friend
     # current_user = models.ForeignKey(User, related_name='owner', null=True, on_delete = models.PROTECT)
 
 
-    @classmethod
-    def add_to_container(cls, current_container, new_sample):
-        sample, created = cls.objects.get_or_create(
-            current_container=current_container
-        )
-        sample.add(new_sample)
-
-    @classmethod
-    def remove_from_container(cls, current_container, new_sample):
-        sample, created = cls.objects.get_or_create(
-            current_container=current_container
-        )
-        sample.remove(new_sample)
+    # @classmethod
+    # def add_to_container(cls, current_container, new_sample):
+    #     sample, created = cls.objects.get_or_create(
+    #         current_container=current_container
+    #     )
+    #     sample.add(new_sample)
+    #
+    # @classmethod
+    # def remove_from_container(cls, current_container, new_sample):
+    #     sample, created = cls.objects.get_or_create(
+    #         current_container=current_container
+    #     )
+    #     sample.remove(new_sample)
 
 
 
@@ -176,6 +176,10 @@ class Container(models.Model): #like a friend
         # ordering = ["container_type"]
         # verbose_name_plural = "containers"
         #unique_together = [('area_easting', 'area_northing', 'context_number', 'sample_number'),]
+
+
+
+
 
 class JoinSampleContainer(models.Model):
     id = models.AutoField(primary_key=True)
@@ -296,3 +300,24 @@ class Friend(models.Model):
             current_user=current_user
         )
         friend.users.remove(new_friend)
+
+class ContainerContents(models.Model):
+        sample = models.ManyToManyField('Sample')
+        current_container = models.ForeignKey(Container, null=True, on_delete = models.PROTECT)
+
+        # users = models.ManyToManyField(User)
+        # current_user = models.ForeignKey(User, related_name='owner', null=True, on_delete = models.PROTECT)
+
+        @classmethod
+        def add_to_container(cls, current_container, new_sample):
+            container, created = cls.objects.get_or_create(
+                current_container=current_container
+            )
+            container.sample.add(new_sample)
+
+        @classmethod
+        def remove_from_container(cls, current_container, new_sample):
+            container, created = cls.objects.get_or_create(
+                current_container=current_container
+            )
+            container.sample.remove(new_sample)

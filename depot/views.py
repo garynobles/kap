@@ -8,28 +8,25 @@ from django.contrib.auth.models import User
 # from .forms import SwitchForm
 # Create your views here.
 
-from depot.models import Sample, Container, Location, Storage, JoinSampleContainer, Friend
+from depot.models import Sample, Container, Location, Storage, JoinSampleContainer, Friend, ContainerContents
 
-def change_friends(request, operation, pk, container=''):
+def change_friends(request, operation, pk):
     friend = User.objects.get(pk=pk)
     if operation == 'add':
         Friend.make_friend(request.user, friend)
     elif operation == 'remove':
         Friend.lose_friend(request.user, friend)
 
-
     return redirect('depot:allcontainer')
 
 def change_container(request, operation, pk, fk='', sample_id=''):
     container = Container.objects.get(pk=pk)
-    sample = Container.objects.get(samples=fk)
+    sample = Sample.objects.get(pk=fk)
     # sample = Container.objects.get(container.sample_id=sample_id)
     if operation == 'add':
-        Container.add_to_container(request.container, container)
+        ContainerContents.add_to_container(container, sample)
     elif operation == 'remove':
-        Container.remove_from_container(samples, sample)
-
-
+        ContainerContents.remove_from_container(container, sample)
 
     return redirect('depot:allcontainer')
 
@@ -211,27 +208,12 @@ def detailcontainer(request, container_id):
     samples = container.samples.all()
 
     users = User.objects.exclude(id=request.user.id).order_by('-id')
-    # users = users[:5]
-    # users = users.objects.filter()
-    # .order_by('-id')[:2]
     friend = Friend.objects.get(current_user=request.user)
     friends = friend.users.all().order_by('-id')
 
-    # returns the container
-    # container_contents = Container.objects.get(container_id=container.container_id)
-    container_contents = samples = container.samples.all()
-    # related_samples_list = container_contents.samples.all()
-    # unrelated_samples_list = related_samples_list.samples.all()
+    container_contents = container.samples.all()
+    # container_contents = Container.objects.get(current_container=samples)
 
-    # samples = Sample.objects.filter(sample_id__container_id=container.pk)
-    #samples = JoinSampleContainer.objects.filter(sample_id__container_id=container.pk)
-    #joinsamplecontainer = JoinSampleContainer.objects.filter(container_id = 4)
-    #joinsamplecontainer = JoinSampleContainer.objects.filter(container_id = 4)
-    # samples = Container.objects.filter(container_id__container_id=container_id)
-    #joinsamplecontainer = JoinSampleContainer.objects.filter(container__id = container_id)
-    # samples = Samples.objects.filter(container__pk=samples.pk)
-    # location = location.container_set.all()
-    # samples = Container.objects.filter(container_id__container_id=container_id)
     return render(request, 'container/detailcontainer.html',
     {'container':container,
     'samples':samples,
@@ -244,6 +226,22 @@ def detailcontainer(request, container_id):
     # 'unrelated_sample_list': unrelated_samples_list,
 
     })
+    # returns the container
+    # container_contents = Container.objects.get(container_id=container.container_id)
+
+    # related_samples_list = container_contents.samples.all()
+    # unrelated_samples_list = related_samples_list.samples.all()
+
+    # samples = Sample.objects.filter(sample_id__container_id=container.pk)
+    #samples = JoinSampleContainer.objects.filter(sample_id__container_id=container.pk)
+    #joinsamplecontainer = JoinSampleContainer.objects.filter(container_id = 4)
+    #joinsamplecontainer = JoinSampleContainer.objects.filter(container_id = 4)
+    # samples = Container.objects.filter(container_id__container_id=container_id)
+    #joinsamplecontainer = JoinSampleContainer.objects.filter(container__id = container_id)
+    # samples = Samples.objects.filter(container__pk=samples.pk)
+    # location = location.container_set.all()
+    # samples = Container.objects.filter(container_id__container_id=container_id)
+
 
 def detaildepotsample(request, sample_id):
     pass
