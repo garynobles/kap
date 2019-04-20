@@ -89,7 +89,7 @@
 
 
 <section >
-  <div class="float-left" style="width:300px;">
+  <div class="float-left" style="width:400px;">
     <h4 class="kap">Samples</h4>
     <div class="table-responsive">
       <table class="table-striped">
@@ -121,7 +121,7 @@
     <!-- </div>
   </div> -->
 </div>
-<div class="float-left" style="width:300px;">
+<div class="float-left" style="width:400px;">
   <h4 class="kap">Container Contents</h4>
   <div class="table-responsive">
     <table class="table-striped">
@@ -157,7 +157,7 @@
 
 
 <section >
-  <div class="float-left" style="width:300px;">
+  <div class="float-left" style="width:400px;">
     <h4 class="kap">Unassigned Samples</h4>
     <div class="table-responsive">
       <table class="table-striped">
@@ -165,28 +165,27 @@
           <tr>
             <th>E.N.C.S</th>
             <th>Sample ID</th>
+            <th>Container ID</th>
 
           </tr>
         </thead>
         <tbody>
-          {% for unassigned in container_contents %}
+          {% for unassigned in unassigned_samples %}
           <tr>
-            <!-- { if user not in friends } -->
+            {% if unassigned not in container_contents %}
             <!-- we will want to add an if stmt list if not in unassigned - need to think how to do this -->
-            <td>{{ unassigned.area_easting }}.
-              {{ unassigned.area_northing }}.
-              {{ unassigned.context_number }}.
-              {{ unassigned.sample_number }}</td>
+            <td>{{ unassigned.area_easting }}.{{ unassigned.area_northing }}.{{ unassigned.context_number }}.{{ unassigned.sample_number }}</td>
               <td>{{ unassigned.sample_id }}</td>
+              <td>{{ container.container_id }}</td>
               <td></td>
-              <td>  <a href="{ url 'depot:change_friends' operation='add' pk=user.pk }"  class="badge badge-primary" role="button">
+              <td><a href="{% url 'depot:change_container'  operation='add' pk=container.container_id fk=unassigned.sample_id  %}" class="badge badge-primary" role="button">
                 <!-- container=container.container_id -->
                 <!-- container=container.container_id -->
                 <!-- <button type="button" class="btn btn-success">add</button> -->
                 >>
               </a></td>
 
-              <!-- { endif } -->
+              {% endif %}
             </tr>
             {% endfor %}
           </tbody>
@@ -195,7 +194,7 @@
       <!-- </div>
     </div> -->
   </div>
-  <div class="float-left" style="width:300px;">
+  <div class="float-left" style="width:400px;">
     <h4 class="kap">Container Contents</h4>
     <div class="table-responsive">
       <table class="table-striped">
@@ -228,7 +227,6 @@
       <!-- </div>
     </div> -->
   </section>
-
 
 
 

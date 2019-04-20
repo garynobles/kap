@@ -3,12 +3,6 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from templates.choices import EASTING_CHOICES, NORTHING_CHOICES, RECOVERY_METHODS, MATERIALS
 
-
-
-
-
-
-
 # class Container(models.Model): #container
 #     container_name = models.CharField(max_length=50, blank=True, null=True)
 #     containers = models.ManyToManyField('Sample')
@@ -125,7 +119,8 @@ class Sample(models.Model): #like a user
 
     def __str__(self):
         # return self.taken_by.first_name
-        return str(self.sample_number)
+        # return str(self.sample_number)
+        return str(self.sample_id)
         # return str(self.firstname)+ '-' +str(self.lastname)
         # return u'%s %s' % (self.first_name, self.last_name)
 
@@ -145,7 +140,7 @@ class Container(models.Model): #like a friend
     container_type = models.CharField(max_length=50, blank=True, null=True)
     location_id = models.ForeignKey(Location, db_column='location_id', on_delete = models.PROTECT)
     icon_desc = models.ForeignKey(Icon, db_column='icon_desc', null=True, blank=True, default='Box',on_delete = models.PROTECT)
-    samples = models.ManyToManyField('Sample')
+    samples = models.ManyToManyField('Sample', through='ContainerSamples')
 
     # users = models.ManyToManyField(User)
     # current_user = models.ForeignKey(User, related_name='owner', null=True, on_delete = models.PROTECT)
@@ -278,6 +273,52 @@ class JoinSampleContainer(models.Model):
     #     #verbose_name_plural = "samples"
     #     #unique_together = (('area_easting', 'area_northing', 'context_number', 'sample_number'),)
 
+class ContainerSamples(models.Model):
+    id = models.AutoField(primary_key=True)
+    container = models.ForeignKey(Container, on_delete=models.CASCADE)
+    sample = models.ForeignKey(Sample, on_delete=models.CASCADE)
+
+    @classmethod
+    def add_to_container(cls, container, sample):
+
+        # container, created = cls.objects.get_or_create(
+        #     container=container
+        # )
+        # sample, created = cls.objects.get_or_create(
+        #     sample=sample
+        # )
+        container, created = cls.objects.get_or_create(
+            sample=sample,
+            container=container
+        )
+        # container.sample.add(sample)
+
+    def remove_from_container(cls, container, sample):
+
+        # container, created = cls.objects.get_or_create(
+        #     container=container
+        # )
+        # sample, created = cls.objects.get_or_create(
+        #     sample=sample
+        # )
+        sample, created = cls.objects.get_or_create(
+            sample=sample,
+            container=container
+        )
+        # container.sample.remove(sample)
+
+    def __int__(self):
+        return self.id
+
+    class Meta():
+        managed=False
+        db_table = 'kap\".\"container_samples'
+        # ordering = ["container_id","id"]
+        #verbose_name_plural = "Sample Container Join"
+        #unique_together = [('area_easting', 'area_northing', 'context_number', 'sample_number'),]
+
+
+
 
 
 
@@ -301,23 +342,20 @@ class Friend(models.Model):
         )
         friend.users.remove(new_friend)
 
-class ContainerContents(models.Model):
-        sample = models.ManyToManyField('Sample')
-        current_container = models.ForeignKey(Container, null=True, on_delete = models.PROTECT)
-
-        # users = models.ManyToManyField(User)
-        # current_user = models.ForeignKey(User, related_name='owner', null=True, on_delete = models.PROTECT)
-
-        @classmethod
-        def add_to_container(cls, current_container, new_sample):
-            container, created = cls.objects.get_or_create(
-                current_container=current_container
-            )
-            container.sample.add(new_sample)
-
-        @classmethod
-        def remove_from_container(cls, current_container, new_sample):
-            container, created = cls.objects.get_or_create(
-                current_container=current_container
-            )
-            container.sample.remove(new_sample)
+# class ContainerContents(models.Model):
+#         sample = models.ManyToManyField('Sample')
+#         current_container = models.ForeignKey(Container, null=True, on_delete = models.PROTECT)
+#
+#         @classmethod
+#         def add_to_container(cls, current_container, sample):
+#             container, created = cls.objects.get_or_create(
+#                 current_container=current_container
+#             )
+#             container.sample.add(sample)
+#
+#         @classmethod
+#         def remove_from_container(cls, current_container, sample):
+#             container, created = cls.objects.get_or_create(
+#                 current_container=current_container
+#             )
+#             container.sample.remove(sample)

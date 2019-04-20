@@ -8,7 +8,8 @@ from django.contrib.auth.models import User
 # from .forms import SwitchForm
 # Create your views here.
 
-from depot.models import Sample, Container, Location, Storage, JoinSampleContainer, Friend, ContainerContents
+from depot.models import Sample, Container, Location, Storage, JoinSampleContainer, Friend, ContainerSamples
+
 
 def change_friends(request, operation, pk):
     friend = User.objects.get(pk=pk)
@@ -19,16 +20,22 @@ def change_friends(request, operation, pk):
 
     return redirect('depot:allcontainer')
 
-def change_container(request, operation, pk, fk='', sample_id=''):
+def change_container(request, operation, pk='', fk=''):
+    # pk = 12
     container = Container.objects.get(pk=pk)
+    # sample_id=29265881
     sample = Sample.objects.get(pk=fk)
+    # sample = sample.sample_id
+
     # sample = Container.objects.get(container.sample_id=sample_id)
     if operation == 'add':
-        ContainerContents.add_to_container(container, sample)
+        ContainerSamples.add_to_container(container, sample)
     elif operation == 'remove':
-        ContainerContents.remove_from_container(container, sample)
+        ContainerSamples.remove_from_container(sample, container)
 
     return redirect('depot:allcontainer')
+
+    # return redirect('depot:detailcontainer')
 
 
 #### ALL RECORDS ####
@@ -206,26 +213,46 @@ def detaillocation(request):
 def detailcontainer(request, container_id):
     container = get_object_or_404(Container, pk=container_id)
     samples = container.samples.all()
-
+    # allsamples = container.samples.exclude(sample_id=samples.sample_id)
+    # allsamples = container.samples.all()
     users = User.objects.exclude(id=request.user.id).order_by('-id')
     friend = Friend.objects.get(current_user=request.user)
     friends = friend.users.all().order_by('-id')
-
-    container_contents = container.samples.all()
     # container_contents = Container.objects.get(current_container=samples)
+    container_contents = container.samples.all()
+    unassigned_samples = Sample.objects.all()[:10]
 
     return render(request, 'container/detailcontainer.html',
     {'container':container,
-    'samples':samples,
-
+    # 'samples':samples,
     'users': users,
     'friends': friends,
-
-    # 'related_sample_list': related_samples_list,
+    # 'allsamples': allsamples,
     'container_contents': container_contents,
-    # 'unrelated_sample_list': unrelated_samples_list,
+    'unassigned_samples': unassigned_samples
 
     })
+
+# def containercontents(request, container_id):
+#     container = get_object_or_404(Container, pk=container_id)
+#     samples = container.samples.all()
+#
+#     container_contents = container.samples.all()[:20]
+#
+#     unassigned = Sample.objects.all()[:5]
+#     return render(request, 'container/containercontents.html',
+#     {'container':container,
+#     'samples': samples,
+#
+#     'container_contents': container_contents,
+#     'unassigned': unassigned
+#     })
+
+    # 'related_sample_list': related_samples_list,
+
+    # 'unrelated_sample_list': unrelated_samples_list,
+
+
     # returns the container
     # container_contents = Container.objects.get(container_id=container.container_id)
 
@@ -273,13 +300,7 @@ def assignsample(request, pk, container=''):
         'media': media
     })
 
-def containercontents(request, container_id):
-    container = get_object_or_404(Container, pk=container_id)
-    samples = container.samples.all()
-    return render(request, 'container/containercontents.html',
-    {'container':container,
-    'samples':samples
-    })
+
 
 
 def editcontainercontents(request, pk):
@@ -302,8 +323,7 @@ def editcontainercontents(request, pk):
         # 'containersamples': containersamples
     })
 
-def removefromcontainer(request, pk):
-    pass
+
 
 #### Forms.py
 
