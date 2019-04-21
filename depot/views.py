@@ -23,6 +23,7 @@ def change_friends(request, operation, pk):
 def change_container(request, operation, pk='', fk=''):
     # pk = 12
     container = Container.objects.get(pk=pk)
+    # container = Container.objects.all().filter(container_id=container.pk)
     # sample_id=29265881
     sample = Sample.objects.get(pk=fk)
 
@@ -33,7 +34,7 @@ def change_container(request, operation, pk='', fk=''):
     if operation == 'add':
         ContainerSamples.add_to_container(container, sample)
     elif operation == 'remove':
-        ContainerSamples.remove_from_container(sample, container)
+        ContainerSamples.remove_from_container(container, sample)
     return redirect('depot:allcontainer')
 
     # return redirect('depot:detailcontainer')
