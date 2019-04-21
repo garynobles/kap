@@ -293,6 +293,8 @@ class ContainerSamples(models.Model):
         )
         # container.sample.add(sample)
 
+# ContainerSamples.remove_from_container(sample=s2, container=13)
+    @classmethod
     def remove_from_container(cls, container, sample):
 
         # container, created = cls.objects.get_or_create(
@@ -301,11 +303,11 @@ class ContainerSamples(models.Model):
         # sample, created = cls.objects.get_or_create(
         #     sample=sample
         # )
-        sample, created = cls.objects.get_or_create(
+        sample, created = cls.objects.get(
             sample=sample,
             container=container
         )
-        # container.sample.remove(sample)
+        container.samples.remove(sample)
 
     def __int__(self):
         return self.id

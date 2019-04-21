@@ -25,6 +25,8 @@ def change_container(request, operation, pk='', fk=''):
     container = Container.objects.get(pk=pk)
     # sample_id=29265881
     sample = Sample.objects.get(pk=fk)
+
+    samplex = ContainerSamples.objects.all().filter(container_id=pk, sample_id=fk)
     # sample = sample.sample_id
 
     # sample = Container.objects.get(container.sample_id=sample_id)
@@ -32,7 +34,6 @@ def change_container(request, operation, pk='', fk=''):
         ContainerSamples.add_to_container(container, sample)
     elif operation == 'remove':
         ContainerSamples.remove_from_container(sample, container)
-
     return redirect('depot:allcontainer')
 
     # return redirect('depot:detailcontainer')
@@ -220,7 +221,10 @@ def detailcontainer(request, container_id):
     friends = friend.users.all().order_by('-id')
     # container_contents = Container.objects.get(current_container=samples)
     container_contents = container.samples.all()
+    # sample = ContainerSamples.objects.get(sample_id=s)
+    # s = ContainerSamples.objects.all().filter(sample_id=29265877, container_id=13)
     unassigned_samples = Sample.objects.all()[:10]
+
 
     return render(request, 'container/detailcontainer.html',
     {'container':container,
