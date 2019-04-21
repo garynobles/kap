@@ -6,17 +6,18 @@
 
 
 <div class="container top">
-  <section>
+
+  <!-- <section>
     <div class="float-right col-sm-1">
       <div class="pt-3">
-        <a class="btn btn-default" href="{% url 'depot:assignsample' pk=container.container_id %}"><span class="glyphicon glyphicon-pencil">
+        <a class="btn btn-default" href="{ url 'depot:assignsample' pk=container.container_id }"><span class="glyphicon glyphicon-pencil">
           <button type="button" class="btn btn-primary">Add sample to container</button>
         </span></a>
       </div>
     </div>
-  </section>
+  </section> -->
 
-  <section>
+  <!-- <section>
     <div class="">
       <div>
         <div class="btn-group">
@@ -48,54 +49,96 @@
         <span class = "badge badge-info">Comments:</span> <span class = "badge badge-light"> {{ sample.comments }} </span>
       </div>
     </div>
-  </section>
+  </section> -->
 
-  <section>
-    <h4 class="kap">Samples in Container</h4>
-    <div class="table-responsive">
-      <table class="table-striped">
-        <thead>
-          <tr>
-            <th>Sample ID</th>
-            <th>Key ENC</th>
-            <th>Sample Number</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for sample in container.samples.all %}
-          <tr>
-            <td>{{ container.container_id }}</td>
-            <td>{{ sample.sample_id }}</td>
-            <td>{{ sample.area_easting }}.{{ sample.area_northing }}.{{ sample.context_number}}.{{ sample.sample_number }}</td>
-            <td>{{ sample.sample_number }}</td>
-            <td>
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <a href="{ url 'addfraction' fk=sample.sample_id pk=flotation.botany_i}" class="badge badge-primary" role="button">Remove from Container</a>
+
+
+
+  <section >
+
+    <div class="float-left" style="width:500px;">
+      <h4 class="kap">Container Contents</h4>
+      <div class="table-responsive">
+        <table class="table-striped">
+          <thead>
+            <tr>
+              <th>Sample Id</th>
+              <th>E.N.C.S</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {% for contents in container_contents %}
+
+              <td>{{ contents.sample_id }}</td>
+              <td>{{ contents.area_easting }}.
+                {{ contents.area_northing }}.
+                {{ contents.context_number }}.
+                {{ contents.sample_number }}</td>
+
+                <td><a href="{% url 'depot:change_container'  operation='remove' pk=container.container_id fk=contents.sample_id  %}" class="badge badge-primary" role="button">
+                    >>
+                </a></td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td>
+                  <p>This container is empty</p>
+                  <p>Add a sample using the <span class="badge badge-primary">>></span> button</p>
+                </td>
+                <td></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
               </div>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-    <!-- </div>
-  </div> -->
+                  </div>
+
+
+    <div class="float-left" style="width:500px;">
+      <h4 class="kap">Unassigned Samples</h4>
+      <div class="table-responsive">
+        <table class="table-striped">
+          <thead>
+            <tr>
+              <th>E.N.C.S</th>
+              <th>Sample ID</th>
+              <th>Container ID</th>
+              <th>Container name</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for unassigned in unassigned_samples %}
+            <tr>
+              {% if unassigned not in container_contents %}
+              <!-- we will want to add an if stmt list if not in unassigned - need to think how to do this -->
+              <td><a href="{% url 'depot:change_container'  operation='add' pk=container.container_id fk=unassigned.sample_id  %}" class="badge badge-primary" role="button">
+                <<
+              </a></td>
+              <td>{{ unassigned.area_easting }}.{{ unassigned.area_northing }}.{{ unassigned.context_number }}.{{ unassigned.sample_number }}</td>
+              <td>{{ unassigned.sample_id }}</td>
+              <td>{{ container.container_id }}</td>
+              <td>{{ container.container_name }}</td>
+
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+  </div>
 </section>
 
+<div class="clearfix" style="padding-top:100px;"></div>
 
-
-
-
-
-
-<section >
+<section class="float-left">
   <div class="float-left" style="width:400px;">
     <h4 class="kap">Samples</h4>
     <div class="table-responsive">
       <table class="table-striped">
         <thead>
           <tr>
-            <th>Sample List</th>
+            <th>User List</th>
 
           </tr>
         </thead>
@@ -122,7 +165,7 @@
   </div> -->
 </div>
 <div class="float-left" style="width:400px;">
-  <h4 class="kap">Container Contents</h4>
+  <h4 class="kap">Associated Users</h4>
   <div class="table-responsive">
     <table class="table-striped">
       <thead>
@@ -132,7 +175,7 @@
         </tr>
       </thead>
       <tbody>
-      <tr>
+        <tr>
           {% for friend in friends %}
           <td><a href="{% url 'depot:change_friends'  operation='remove' pk=friend.pk %}" class="badge badge-primary" role="button">
             <<
@@ -146,88 +189,6 @@
   <!-- </div>
 </div> -->
 </section>
-
-
-
-
-
-<div class="clearfix"></div>
-
-
-
-
-<section >
-  <div class="float-left" style="width:400px;">
-    <h4 class="kap">Unassigned Samples</h4>
-    <div class="table-responsive">
-      <table class="table-striped">
-        <thead>
-          <tr>
-            <th>E.N.C.S</th>
-            <th>Sample ID</th>
-            <th>Container ID</th>
-
-          </tr>
-        </thead>
-        <tbody>
-          {% for unassigned in unassigned_samples %}
-          <tr>
-            {% if unassigned not in container_contents %}
-            <!-- we will want to add an if stmt list if not in unassigned - need to think how to do this -->
-            <td>{{ unassigned.area_easting }}.{{ unassigned.area_northing }}.{{ unassigned.context_number }}.{{ unassigned.sample_number }}</td>
-              <td>{{ unassigned.sample_id }}</td>
-              <td>{{ container.container_id }}</td>
-              <td></td>
-              <td><a href="{% url 'depot:change_container'  operation='add' pk=container.container_id fk=unassigned.sample_id  %}" class="badge badge-primary" role="button">
-                <!-- container=container.container_id -->
-                <!-- container=container.container_id -->
-                <!-- <button type="button" class="btn btn-success">add</button> -->
-                >>
-              </a></td>
-
-              {% endif %}
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-      <!-- </div>
-    </div> -->
-  </div>
-  <div class="float-left" style="width:400px;">
-    <h4 class="kap">Container Contents</h4>
-    <div class="table-responsive">
-      <table class="table-striped">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Sample Id</th>
-            <th>E.N.C.S</th>
-
-
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            {% for contents in container_contents %}
-            <td><a href="{% url 'depot:change_container'  operation='remove' pk=container.container_id fk=contents.sample_id  %}" class="badge badge-primary" role="button">
-              <!-- <button type="button" class="btn btn-default">remove</button> -->
-              <<
-            </a></td>
-            <td>{{ contents.sample_id }}</td>
-            <td>{{ contents.area_easting }}.
-              {{ contents.area_northing }}.
-              {{ contents.context_number }}.
-              {{ contents.sample_number }}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-      <!-- </div>
-    </div> -->
-  </section>
-
 
 
 

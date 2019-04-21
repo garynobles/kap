@@ -3,50 +3,6 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from templates.choices import EASTING_CHOICES, NORTHING_CHOICES, RECOVERY_METHODS, MATERIALS
 
-# class Container(models.Model): #container
-#     container_name = models.CharField(max_length=50, blank=True, null=True)
-#     containers = models.ManyToManyField('Sample')
-#     # container_id = models.AutoField(primary_key=True)
-#     # # samples = models.IntegerField()
-#     # # samples = models.ManyToManyField(Sample, through='JoinSampleContainer', through_fields=('container_id', 'sample_id'), related_name='containers')
-#     # samples = models.ManyToManyField(Sample, related_name='containers')
-#     # location_id = models.ForeignKey(Location, db_column='location_id', on_delete = models.PROTECT)
-#     # icon_desc = models.ForeignKey(Icon, db_column='icon_desc', null=True, blank=True, default='Box',on_delete = models.PROTECT)
-#     # container_name = models.CharField(max_length=50, blank=True, null=True)
-#     container_type = models.CharField(max_length=50, blank=True, null=True)
-#
-#     def __str__(self):
-#         return self.container_name
-#
-#     class Meta:
-#         db_table = 'kap\".\"container'
-#         verbose_name_plural = "container"
-#
-#
-# class Sample(models.Model): #sample
-#     sample_id = models.AutoField(primary_key=True)
-#     # topping_name = models.CharField(max_length=30, default='None')
-#     sample_number = models.IntegerField()
-#
-#     def __str__(self):
-#         return str(self.sample_number)
-#
-#     class Meta:
-#         db_table = 'kap\".\"sample'
-#         verbose_name_plural = "samplex"
-
-
-
-
-
-
-
-
-
-
-
-
-
 class Icon(models.Model):
     icon_desc = models.CharField(primary_key=True,max_length=50)
     icon = models.ImageField(upload_to='images/icons/')
@@ -133,34 +89,11 @@ class Sample(models.Model): #like a user
 
 class Container(models.Model): #like a friend
     container_id = models.AutoField(primary_key=True)
-    # samples = models.IntegerField()
-    # samples = models.ManyToManyField(Sample, through='JoinSampleContainer', through_fields=('container_id', 'sample_id'), related_name='containers')
-    # samples = models.ManyToManyField(Sample, related_name='containers')
     container_name = models.CharField(max_length=50, blank=True, null=True)
     container_type = models.CharField(max_length=50, blank=True, null=True)
     location_id = models.ForeignKey(Location, db_column='location_id', on_delete = models.PROTECT)
     icon_desc = models.ForeignKey(Icon, db_column='icon_desc', null=True, blank=True, default='Box',on_delete = models.PROTECT)
     samples = models.ManyToManyField('Sample', through='ContainerSamples')
-
-    # users = models.ManyToManyField(User)
-    # current_user = models.ForeignKey(User, related_name='owner', null=True, on_delete = models.PROTECT)
-
-
-    # @classmethod
-    # def add_to_container(cls, current_container, new_sample):
-    #     sample, created = cls.objects.get_or_create(
-    #         current_container=current_container
-    #     )
-    #     sample.add(new_sample)
-    #
-    # @classmethod
-    # def remove_from_container(cls, current_container, new_sample):
-    #     sample, created = cls.objects.get_or_create(
-    #         current_container=current_container
-    #     )
-    #     sample.remove(new_sample)
-
-
 
     def __str__(self):
         return self.container_name
@@ -280,38 +213,15 @@ class ContainerSamples(models.Model):
 
     @classmethod
     def add_to_container(cls, container, sample):
-
-        # container, created = cls.objects.get_or_create(
-        #     container=container
-        # )
-        # sample, created = cls.objects.get_or_create(
-        #     sample=sample
-        # )
         container, created = cls.objects.get_or_create(
             sample=sample,
             container=container
         )
-        # container.sample.add(sample)
 
-# ContainerSamples.remove_from_container(sample=s2, container=13)
-    # @classmethod
-    # def remove_from_container(cls, container, sample):
-    #     sample, created = cls.objects.get_or_create(
-    #         sample=sample,
-    #         container=container
-    #     )
-    #     container.samples.remove(sample)
     @classmethod
     def remove_from_container(cls, container, sample):
          c_sample = ContainerSamples.objects.get(container=container, sample=sample)
          c_sample.delete()
-
-    # @classmethod
-    # def remove_from_container(cls, current_container, new_sample):
-    #      from app_name.models import ContainerSample
-    #
-    #      c_sample = ContainerSample.objects.get(container=current_container, sample=new_sample)
-    #      c_sample.delete()
 
     def __int__(self):
         return self.id
@@ -319,13 +229,6 @@ class ContainerSamples(models.Model):
     class Meta():
         managed=False
         db_table = 'kap\".\"container_samples'
-        # ordering = ["container_id","id"]
-        #verbose_name_plural = "Sample Container Join"
-        #unique_together = [('area_easting', 'area_northing', 'context_number', 'sample_number'),]
-
-
-
-
 
 
 # m2m test
