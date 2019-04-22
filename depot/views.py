@@ -8,6 +8,11 @@ from django.contrib.auth.models import User
 # from .forms import SwitchForm
 # Create your views here.
 
+from django_tables2 import RequestConfig
+from django.shortcuts import render
+from django_tables2 import SingleTableView
+
+
 from depot.models import Sample, Container, Location, Storage, JoinSampleContainer, Friend, ContainerSamples
 
 
@@ -212,31 +217,41 @@ def detaillocation(request):
 #     place = Place.objects.get(pk=place_id)
 #     areas = place.area.all()
 
-def detailcontainer(request, container_id):
-    container = get_object_or_404(Container, pk=container_id)
-    samples = container.samples.all()
-    # allsamples = container.samples.exclude(sample_id=samples.sample_id)
-    # allsamples = container.samples.all()
-    users = User.objects.exclude(id=request.user.id).order_by('-id')
-    friend = Friend.objects.get(current_user=request.user)
-    friends = friend.users.all().order_by('-id')
-    # container_contents = Container.objects.get(current_container=samples)
-    container_contents = container.samples.all()
-    # sample = ContainerSamples.objects.get(sample_id=s)
-    # s = ContainerSamples.objects.all().filter(sample_id=29265877, container_id=13)
-    unassigned_samples = Sample.objects.all()[:10]
+# def detailcontainer(request, container_id):
+#     container = get_object_or_404(Container, pk=container_id)
+#     samples = container.samples.all()
+#     # allsamples = container.samples.exclude(sample_id=samples.sample_id)
+#     # allsamples = container.samples.all()
+#     users = User.objects.exclude(id=request.user.id).order_by('-id')
+#     friend = Friend.objects.get(current_user=request.user)
+#     friends = friend.users.all().order_by('-id')
+#     # container_contents = Container.objects.get(current_container=samples)
+#     container_contents = container.samples.all()
+#     # sample = ContainerSamples.objects.get(sample_id=s)
+#     # s = ContainerSamples.objects.all().filter(sample_id=29265877, container_id=13)
+#     unassigned_samples = Sample.objects.all()[:10]
+#
+#     # table  = container.samples.all()
+#     # table.paginate(page=request.GET.get('page', 1), per_page=25)
+#     # RequestConfig(request, paginate={'per_page': 25}).configure(table)
+#     # RequestConfig(request).configure(table)
+#     # table.paginate(page=request.GET.get('page', 1), per_page=25)
+#
+#     return render(request, 'container/detailcontainer.html',
+#     {'container':container,
+#     # 'samples':samples,
+#     'users': users,
+#     'friends': friends,
+#     # 'allsamples': allsamples,
+#     'container_contents': container_contents,
+#     # 'table':table,
+#     'unassigned_samples': unassigned_samples
+#
+#     })
 
 
-    return render(request, 'container/detailcontainer.html',
-    {'container':container,
-    # 'samples':samples,
-    'users': users,
-    'friends': friends,
-    # 'allsamples': allsamples,
-    'container_contents': container_contents,
-    'unassigned_samples': unassigned_samples
 
-    })
+
 
 # def containercontents(request, container_id):
 #     container = get_object_or_404(Container, pk=container_id)
@@ -437,3 +452,60 @@ class DepotSampleForm(forms.ModelForm):
         widgets = {
             'entry_date': DateInput(attrs={'type': 'date'}),
         }
+
+from django.shortcuts import render
+from django_tables2 import RequestConfig
+from .models import Container, Sample
+from .tables import ContainerTable, SampleTable
+from django_filters.views import FilterView
+from django_tables2.views import SingleTableMixin
+
+def detailcontainer(request, container_id):
+    container = get_object_or_404(Container, pk=container_id)
+    samples = container.samples.all()
+    # allsamples = container.samples.exclude(sample_id=samples.sample_id)
+    # allsamples = container.samples.all()
+    # users = User.objects.exclude(id=request.user.id).order_by('-id')
+    # friend = Friend.objects.get(current_user=request.user)
+    # friends = friend.users.all().order_by('-id')
+    # container_contents = Container.objects.get(current_container=samples)
+    container_contents = container.samples.all()
+    # sample = ContainerSamples.objects.get(sample_id=s)
+    # s = ContainerSamples.objects.all().filter(sample_id=29265877, container_id=13)
+    unassigned_samples = Sample.objects.all()[:10]
+    unassigned_samples2 = Sample.objects.all()
+
+
+    # table = ContainerTable(Container.objects.all())
+    table = SampleTable(unassigned_samples2)
+    RequestConfig(request, paginate={'per_page': 25}).configure(table)
+
+
+
+    # table = Container.objects.all()
+
+    # table  = container.samples.all()
+    # table.paginate(page=request.GET.get('page', 1), per_page=25)
+    # RequestConfig(request, paginate={'per_page': 25}).configure(table)
+    # RequestConfig(request).configure(table)
+    # table.paginate(page=request.GET.get('page', 1), per_page=25)
+
+    return render(request, 'container/detailcontainer.html',
+    {'container':container,
+    # 'samples':samples,
+    'users': users,
+    'friends': friends,
+    # 'allsamples': allsamples,
+    'container_contents': container_contents,
+    'table':table,
+    'unassigned_samples': unassigned_samples
+
+    })
+
+
+# class FilteredPersonListView(SingleTableMixin, FilterView):
+#     table_class = SampleTable
+#     model = Sample
+#     template_name = 'template.html'
+
+    # filterset_class = SampleFilter
