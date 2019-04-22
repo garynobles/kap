@@ -91,7 +91,7 @@ def createstorage(request):
             # post.modified_by = request.user
             # post.datetime = datetime.datetime.now()
             post.save()
-            return redirect('allstorage')
+            return redirect('depot:allstorage')
     else:
         form = StorageForm()
     return render(request, 'storage/create_storage.html', {'form': form})
@@ -105,7 +105,7 @@ def createlocation(request):
             #post.datetime = datetime.datetime.now()
 
             post.save()
-            return redirect('alllocation')
+            return redirect('depot:alllocation')
     else:
         form = LocationForm()
     return render(request, 'location/createlocation.html', {'form': form})
@@ -135,7 +135,7 @@ def adddepotsample(request):
             #post.datetime = datetime.datetime.now()
 
             post.save()
-            return redirect('alldepotsample')
+            return redirect('depot:alldepotsample')
     else:
         form = DepotSampleForm()
     return render(request, 'depotsample/adddepotsample.html', {'form': form})
@@ -151,7 +151,7 @@ def editstorage(request, pk):
             #post.user = request.user
             #post.datetime = datetime.datetime.now()
             post.save()
-            return redirect('allstorage')
+            return redirect('depot:allstorage')
             #, pk=post.pk)
     else:
         form = StorageForm(instance=post)
@@ -167,7 +167,7 @@ def editlocation(request, pk):
             #post.user = request.user
             #post.datetime = datetime.datetime.now()
             post.save()
-            return redirect('alllocation')
+            return redirect('depot:alllocation')
             #, pk=location.pk
     else:
         form = LocationForm(instance=post)
@@ -197,7 +197,7 @@ def editdepotsample(request, pk):
             #post.user = request.user
             #post.datetime = datetime.datetime.now()
             post.save()
-            return redirect('alldepotsample')
+            return redirect('depot:alldepotsample')
             #, pk=post.pk)
     else:
         form = DepotSampleForm(instance=post)
@@ -309,7 +309,7 @@ def assignsample(request, pk, container=''):
             #post.user = request.user
             #post.datetime = datetime.datetime.now()
 
-            return redirect('alldepotsamples')
+            return redirect('depot:alldepotsamples')
             #, pk=post.pk)
     else:
         form = MultipleSampleForm(instance=post)
