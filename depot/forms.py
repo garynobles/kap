@@ -15,7 +15,17 @@ from django.contrib.admin.widgets import FilteredSelectMultiple
 from django import forms
 
 
+class SamplesForm(forms.ModelForm):
 
+    class Meta:
+        model = Samples
+        fields = (
+        'sample_id',
+        'area_easting',
+        'area_northing',
+        'context_number',
+        'sample_number',
+        )
 
 # class SwitchForm(forms.Form):
 #
