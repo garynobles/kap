@@ -8,91 +8,91 @@
 <div class="container top">
 
   <!-- <section>
-    <div class="float-right col-sm-1">
-      <div class="pt-3">
-        <a class="btn btn-default" href="{ url 'depot:assignsample' pk=container.container_id }"><span class="glyphicon glyphicon-pencil">
-          <button type="button" class="btn btn-primary">Add sample to container</button>
-        </span></a>
-      </div>
-    </div>
-  </section> -->
+  <div class="float-right col-sm-1">
+  <div class="pt-3">
+  <a class="btn btn-default" href="{ url 'depot:assignsample' pk=container.container_id }"><span class="glyphicon glyphicon-pencil">
+  <button type="button" class="btn btn-primary">Add sample to container</button>
+</span></a>
+</div>
+</div>
+</section> -->
 
-  <!-- <section>
-    <div class="">
-      <div>
-        <div class="btn-group">
-          <span class = "badge badge-info">Container id:</span> <span class = "badge badge-light"> {{ container.container_id }} </span>
-        </div>
-        <div class="btn-group">
-          <span class = "badge badge-info">Context Key:</span> <span class = "badge badge-light"> {{ container.container_name }} </span>.<span class = "badge badge-light"> {{ sample.area_northing }} </span>.<span class = "badge badge-light"> {{ sample.context_number }} </span>.<span class = "badge badge-light"> {{ sample.sample_number }} </span>
-        </div>
-        <div class="btn-group">
-          <span class = "badge badge-info">Sample Type:</span> <span class = "badge badge-light"> {{ sample.sample_type }} </span>
-        </div>
-        <div class="btn-group">
-          <span class = "badge badge-info">Weight:</span> <span class = "badge badge-light"> {{ sample.weight }} </span>
-        </div>
-        <div class="btn-group">
-          <span class = "badge badge-info">Description:</span> <span class = "badge badge-light"> {{ sample.description }} </span>
-        </div>
+<!-- <section>
+<div class="">
+<div>
+<div class="btn-group">
+<span class = "badge badge-info">Container id:</span> <span class = "badge badge-light"> {{ container.container_id }} </span>
+</div>
+<div class="btn-group">
+<span class = "badge badge-info">Context Key:</span> <span class = "badge badge-light"> {{ container.container_name }} </span>.<span class = "badge badge-light"> {{ sample.area_northing }} </span>.<span class = "badge badge-light"> {{ sample.context_number }} </span>.<span class = "badge badge-light"> {{ sample.sample_number }} </span>
+</div>
+<div class="btn-group">
+<span class = "badge badge-info">Sample Type:</span> <span class = "badge badge-light"> {{ sample.sample_type }} </span>
+</div>
+<div class="btn-group">
+<span class = "badge badge-info">Weight:</span> <span class = "badge badge-light"> {{ sample.weight }} </span>
+</div>
+<div class="btn-group">
+<span class = "badge badge-info">Description:</span> <span class = "badge badge-light"> {{ sample.description }} </span>
+</div>
 
-        <div class="btn-group">
-          <span class = "badge badge-info">Recovery Method:</span> <span class = "badge badge-light"> {{ sample.recovery_method }} </span>
-        </div>
+<div class="btn-group">
+<span class = "badge badge-info">Recovery Method:</span> <span class = "badge badge-light"> {{ sample.recovery_method }} </span>
+</div>
 
-        <div class="btn-group">
-          <span class = "badge badge-info">Taken By:</span> <span class = "badge badge-light"> {{ sample.taken_by }} </span>
-        </div>
+<div class="btn-group">
+<span class = "badge badge-info">Taken By:</span> <span class = "badge badge-light"> {{ sample.taken_by }} </span>
+</div>
 
-      </div>
-      <div class="btn-group">
-        <span class = "badge badge-info">Comments:</span> <span class = "badge badge-light"> {{ sample.comments }} </span>
-      </div>
-    </div>
-  </section> -->
-
-
+</div>
+<div class="btn-group">
+<span class = "badge badge-info">Comments:</span> <span class = "badge badge-light"> {{ sample.comments }} </span>
+</div>
+</div>
+</section> -->
 
 
-  <section >
 
-    <div class="float-left" style="width:500px;">
-      <h4 class="kap">Container Contents</h4>
-      <div class="table-responsive">
-        <table class="table-striped">
-          <thead>
-            <tr>
-              <th>Sample Id</th>
-              <th>E.N.C.S</th>
+
+<section >
+
+  <div class="float-left" style="width:500px;">
+    <h4 class="kap">Container Contents</h4>
+    <div class="table-responsive">
+      <table class="table-striped">
+        <thead>
+          <tr>
+            <th>Sample Id</th>
+            <th>E.N.C.S</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {% for contents in container_contents %}
+
+            <td>{{ contents.sample_id }}</td>
+            <td>{{ contents.area_easting }}.
+              {{ contents.area_northing }}.
+              {{ contents.context_number }}.
+              {{ contents.sample_number }}</td>
+
+              <td><a href="{% url 'depot:change_container'  operation='remove' pk=container.container_id fk=contents.sample_id  %}" class="badge badge-primary" role="button">
+                >>
+              </a></td>
             </tr>
-          </thead>
-          <tbody>
+            {% empty %}
             <tr>
-              {% for contents in container_contents %}
-
-              <td>{{ contents.sample_id }}</td>
-              <td>{{ contents.area_easting }}.
-                {{ contents.area_northing }}.
-                {{ contents.context_number }}.
-                {{ contents.sample_number }}</td>
-
-                <td><a href="{% url 'depot:change_container'  operation='remove' pk=container.container_id fk=contents.sample_id  %}" class="badge badge-primary" role="button">
-                    >>
-                </a></td>
-              </tr>
-              {% empty %}
-              <tr>
-                <td>
-                  <p>This container is empty</p>
-                  <p>Add a sample using the <span class="badge badge-primary">>></span> button</p>
-                </td>
-                <td></td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-              </div>
-                  </div>
+              <td>
+                <p>This container is empty</p>
+                <p>Add a sample using the <span class="badge badge-primary"><<</span> button</p>
+              </td>
+              <td></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
 
 
     <div class="float-left" style="width:500px;">
@@ -119,84 +119,106 @@
               <td>{{ unassigned.sample_id }}</td>
               <td>{{ container.container_id }}</td>
               <td>{{ container.container_name }}</td>
+                </tr>
 
+
+{% endif %}
+
+              {% empty %}
+              <tr>
+                <td>
+                  <p>There are no unassigned samples</p>
+                  <p>looks like you'll have to wait for more to come in!
+                    <i class="fas fa-star" style="color:yellow;"></i>
+                    <i class="fas fa-star" style="color:yellow;"></i>
+                    <i class="fas fa-star" style="color:yellow;"></i>
+                  </p>
+                </td>
+                <td></td>
+              </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <div class="clearfix" style="padding-top:100px;"></div>
+
+
+
+  <section>
+    <h4 class="kap">Filtering Goes here!</h4>
+    <h4 class="kap">All samples below + link to associate with the container</h4>
+
+    {% load render_table from django_tables2 %}
+
+
+
+
+            {% render_table table %}
+
+
+
+
+
+  </section>
+
+
+
+
+
+  <section class="float-left">
+    <div class="float-left" style="width:400px;">
+      <h4 class="kap">Samples</h4>
+      <div class="table-responsive">
+        <table class="table-striped">
+          <thead>
+            <tr>
+              <th>User List</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in users %}
+            <tr>
+              {% if user not in friends %}
+              <td>{{ container.container_id }}</td>
+              <td>{{ user.username }}</td>
+              <td>  <a href="{% url 'depot:change_friends' operation='add' pk=user.pk %}"  class="badge badge-primary" role="button">
+                >>
+              </a></td>
               {% endif %}
             </tr>
             {% endfor %}
           </tbody>
         </table>
       </div>
-  </div>
-</section>
-
-<div class="clearfix" style="padding-top:100px;"></div>
-
-<section class="float-left">
-  <div class="float-left" style="width:400px;">
-    <h4 class="kap">Samples</h4>
-    <div class="table-responsive">
-      <table class="table-striped">
-        <thead>
-          <tr>
-            <th>User List</th>
-
-          </tr>
-        </thead>
-        <tbody>
-          {% for user in users %}
-          <tr>
-            {% if user not in friends %}
-            <!-- we will want to add an if stmt list if not in unassigned - need to think how to do this -->
-            <td>{{ container.container_id }}</td>
-            <td>{{ user.username }}</td>
-            <td>  <a href="{% url 'depot:change_friends' operation='add' pk=user.pk %}"  class="badge badge-primary" role="button">
-              <!-- container=container.container_id -->
-              <!-- container=container.container_id -->
-              <!-- <button type="button" class="btn btn-success">add</button> -->
-              >>
-            </a></td>
-            {% endif %}
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
     </div>
-    <!-- </div>
-  </div> -->
-</div>
-<div class="float-left" style="width:400px;">
-  <h4 class="kap">Associated Users</h4>
-  <div class="table-responsive">
-    <table class="table-striped">
-      <thead>
-        <tr>
-          <th>Samples</th>
-
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          {% for friend in friends %}
-          <td><a href="{% url 'depot:change_friends'  operation='remove' pk=friend.pk %}" class="badge badge-primary" role="button">
-            <<
-          </a></td>
-          <td>{{ friend.username }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <div class="float-left" style="width:400px;">
+      <h4 class="kap">Associated Users</h4>
+      <div class="table-responsive">
+        <table class="table-striped">
+          <thead>
+            <tr>
+              <th>Samples</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {% for friend in friends %}
+              <td><a href="{% url 'depot:change_friends'  operation='remove' pk=friend.pk %}" class="badge badge-primary" role="button">
+                <<
+              </a></td>
+              <td>{{ friend.username }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
   </div>
-  <!-- </div>
-</div> -->
-</section>
-
-
-
-
-
-
-
-</div>
 
 
 </div>

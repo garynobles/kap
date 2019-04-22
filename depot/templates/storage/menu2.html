@@ -1,5 +1,4 @@
 {% load staticfiles %}
-
 <header>
   <div  class="fixed-top">
     <div class="navbar navbar-inverse navbar-static-top navbar-expand-lg navbar-dark bg-dark" id="topNav">
@@ -77,9 +76,6 @@
               <a class="dropdown-item" href="{ url 'allsamples' }">Samples</a>
               <hr />
               <a class="dropdown-item" href="{ url 'allzooarch' }">Faunal</a>
-              <!-- <a class="dropdown-item" href="#">Conservation</a>
-              <a class="dropdown-item" href="#">Ceramics</a>
-              <a class="dropdown-item" href="#">Small Finds</a> -->
             </div>
           </div>
           <div class="dropdown show">
@@ -91,7 +87,6 @@
               <a class="dropdown-item" href="% url '' %">Questions</a>
             </div>
           </div>
-
           <div class="dropdown show">
             <a class="btn btn-secondary dropdown-toggle mr-2" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-envelope" style="color:grey;"></i> <span style="color:grey;">[0]</span></a>
 
@@ -100,19 +95,14 @@
               <hr />
               <a class="dropdown-item" href="% url '' %">Alerts</a>
               <a class="dropdown-item" href="% url '' %">Questions</a>
-
             </div>
           </div>
           <div class="dropdown show">
             <a class="btn btn-secondary dropdown-toggle mr-2" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-user pr-2"></i>
-              <!-- {{ user.get_username }} -->
               {{ user.get_full_name|default:user.username }}
             </a>
             <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
-              <!-- <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a> -->
               <a class="dropdown-item" href="{% url 'logout'%}?next={{request.path}}">Logout</a>
             </div>
           </div>
@@ -128,39 +118,54 @@
             <hr />
             <a class="dropdown-item" href="{ url 'allzooarch' }">Faunal</a>
             <a class="dropdown-item" href="{% url 'models3d' %}">3d models</a>
-            <!-- <a class="dropdown-item" href="#">Conservation</a>
-            <a class="dropdown-item" href="#">Ceramics</a>
-            <a class="dropdown-item" href="#">Small Finds</a> -->
           </div>
         </div>
       </div>
     </div>
-
-
-
-
-<div class="navbar navbar-custom navbar-inverse navbar-static-top navbar-dark bg-dark" id="nav2">
-  <div class="navbar-inner">
-    <a href="{% url 'depot:createstorage' %}">
-      <button  type="button" class="btn btn-success">Add new Depot</button>
-    </a>
-    <a href="{% url 'depot:alldepotsample' %}">
-      <button  type="button" class="btn btn-info">Samples</button>
-    </a>
-    <!-- <a href="{ url 'create_join_sample_container' }">
-      <button  type="button" class="btn btn-warning"><-join-></button>
-    </a> -->
-    <a href="{% url 'depot:allcontainer' %}">
-      <button  type="button" class="btn btn-info">Containers</button>
-    </a>
-    <a href="{% url 'depot:alllocation' %}">
-      <button  type="button" class="btn btn-info">Locations</button>
-    </a>
-    <a href="{% url 'depot:allstorage' %}">
-      <button  type="button" class="btn btn-outline-info">Depots</button>
-    </a>
+    <div class="navbar navbar-custom navbar-inverse navbar-static-top navbar-dark bg-dark" id="nav2">
+      <div class="navbar-inner">
+        <div class="float-left text-center" style="margin-right:10px;">
+          <a href="{% url 'depot:createcontainer' %}"  style="color:white;">
+            <button  type="button" class="btn btn-success"><img src="{% static 'icon_sets\box-open-solid.svg'%}" alt"" height="65" width="68" />
+              <br />
+              New Container
+            </button>
+          </a>
+        </div>
+        <div class="float-left text-center" style="margin-right:10px;">
+          <a href="{% url 'depot:alldepotsample' %}" style="color:white;">
+            <button  type="button" class="btn btn-info"><img src="{% static 'icon_sets\tag-solid.svg'%}" alt"" height="65" width="68" />
+              <br />
+              Samples
+            </button>
+          </a>
+        </div>
+      <div class="float-left text-center" style="margin-right:10px;">
+        <a href="{% url 'depot:allcontainer' %}" style="color:white;">
+          <button  type="button" class="btn btn-info"><img src="{% static 'icon_sets\box-solid.svg'%}" alt"" height="65" width="68" />
+            <br />
+            Containers
+          </button>
+        </a>
+      </div>
+      <div class="float-left text-center" style="margin-right:10px;">
+        <a href="{% url 'depot:alllocation' %}" style="color:white;">
+          <button  type="button" class="btn btn-info"><img src="{% static 'icon_sets\inventory-solid.svg'%}" alt"" height="65" width="68" />
+            <br />
+            Location
+          </button>
+        </a>
+      </div>
+      <div class="float-left text-center" style="margin-right:10px;">
+        <a href="{% url 'depot:allstorage' %}" style="color:white;">
+          <button  type="button" class="btn btn-outline-info"><img src="{% static 'icon_sets\depot-solid.svg'%}" alt"" height="65" width="68" />
+            <br/>
+            Storage
+          </button>
+        </a>
+      </div>
+    </div>
   </div>
-</div>
 </div>
 <div class="clearfix"></div>
 </header>
