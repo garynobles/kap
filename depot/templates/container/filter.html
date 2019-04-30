@@ -1,0 +1,89 @@
+{% extends 'container/base.html' %}
+{% block content%}
+{% include "menu1.html" %}
+{% include "container/menu2.html" %}
+<div class="container top">
+  <section>
+
+<h3>Filtering</h3>
+<form class="" action="." method="GET">
+
+  <div class="form-row">
+    <div class="form-group col-12">
+      <div class="input-group">
+        <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Easting" name="area_easting"/>
+        <span class="input-group-append">
+          <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
+        </span>
+
+        <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Northing" name="area_northing"/>
+        <span class="input-group-append">
+          <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
+        </span>
+
+        <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Context Number" name="context_number"/>
+        <span class="input-group-append">
+          <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
+        </span>
+
+        <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Sample Number" name="sample_number"/>
+        <span class="input-group-append">
+          <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
+        </span>
+
+        <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Sample Type" name="sample_type"/>
+        <span class="input-group-append">
+          <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
+        </span>
+      </div>
+    </div>
+  </div>
+
+
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+
+  <hr />
+
+
+
+</section>
+
+<section>
+  <h4 class="kap">Containers</h4>
+  <div class="table-responsive">
+    <table class="table-striped">
+      <thead>
+    <tr>
+      <th></th>
+      <th>E.N.C.S</th>
+      <th>Type</th>
+      <th>Taken By</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for sample in queryset %}
+    <tr>
+      <td><a href="{ url 'depot:change_container'  operation='add' pk=container.container_id fk=unassigned.sample_id }" class="badge badge-primary" role="button">
+        <<
+      </a></td>
+      <td>{{ sample.area_easting }}.{{ sample.area_northing }}.{{ sample.context_number }}.{{ sample.sample_number }}</td>
+
+      <td>
+{{ sample.sample_type }}
+      </td>
+
+      <td>{{ sample.taken_by }}</td>
+
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="5">No data</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+
+
+  {% endblock %}

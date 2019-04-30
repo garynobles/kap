@@ -1,12 +1,13 @@
 from django.urls import path, re_path
 from django.conf.urls import url
 
-from .views import detailstorage, allstorage, createstorage, editstorage, alllocation, detaillocation, createlocation, editlocation
+from .views import detailstorage, allstorage, createstorage, editstorage, alllocation, detaillocation, createlocation, editlocation, SampleFliterView
 from . import views
 
 # from depot.views import SamplesListView, ContainerListView, LocationListView, JoinSampleContainerListView
 
 urlpatterns = [
+path('', SampleFliterView, name='SampleFliterView'),
 
 url(r'^change_container/(?P<operation>.*)/(?P<pk>\d+)/sample/(?P<fk>\d+)$', views.change_container, name='change_container'),
 

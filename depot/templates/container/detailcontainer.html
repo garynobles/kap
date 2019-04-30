@@ -50,7 +50,48 @@
 </div>
 </div>
 </section> -->
+<section>
 
+
+  <form class="" action="." method="GET">
+
+    <div class="form-row">
+      <div class="form-group col-12">
+        <div class="input-group">
+          <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Easting" name="area_easting"/>
+          <span class="input-group-append">
+            <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
+          </span>
+
+          <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Northing" name="area_northing"/>
+          <span class="input-group-append">
+            <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
+          </span>
+
+          <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Context Number" name="context_number"/>
+          <span class="input-group-append">
+            <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
+          </span>
+
+          <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Sample Number" name="sample_number"/>
+          <span class="input-group-append">
+            <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
+          </span>
+
+          <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Sample Type" name="sample_type"/>
+          <span class="input-group-append">
+            <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+
+</section>
 
 
 
@@ -152,8 +193,8 @@
     <h4 class="kap">Filtering Goes here!</h4>
     <h4 class="kap">All samples below + link to associate with the container</h4>
 
-    {% load render_table from django_tables2 %}
-            {% render_table table %}
+    { load render_table from django_tables2 }
+            { render_table table }
   </section>
 
 

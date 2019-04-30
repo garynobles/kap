@@ -16,6 +16,31 @@ from django_tables2 import SingleTableView
 from depot.models import Sample, Container, Location, Storage, JoinSampleContainer, Friend, ContainerSamples
 
 
+def SampleFliterView(request):
+    qs = Sample.objects.all()
+    easting_query = request.GET.get('area_easting')
+    northing_query = request.GET.get('area_northing')
+    context_query = request.GET.get('context_number')
+    sample_number_query = request.GET.get('sample_number')
+    sample_type_query = request.GET.get('sample_type')
+
+    if easting_query != '' and easting_query is not None:
+        qs = qs.filter(area_easting__icontains=easting_query)
+    if northing_query != '' and northing_query is not None:
+        qs = qs.filter(area_northing__icontains=northing_query)
+    if context_query != '' and context_query is not None:
+        qs = qs.filter(context_number__icontains=context_query)
+    if sample_number_query != '' and sample_number_query is not None:
+        qs = qs.filter(sample_number__icontains=sample_number_query)
+    if sample_type_query != '' and sample_type_query is not None:
+        qs = qs.filter(sample_type__icontains=sample_type_query)
+
+    context = {
+        'queryset': qs
+    }
+    return render(request, "container/filter.html", context)
+
+
 def change_friends(request, operation, pk):
     friend = User.objects.get(pk=pk)
     if operation == 'add':
