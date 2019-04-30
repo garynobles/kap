@@ -10,11 +10,8 @@
         <thead>
       <tr>
         <th>container ID</th>
-
         <th>container_type</th>
-
         <th>container_name</th>
-
         <th>action</th>
       </tr>
     </thead>
@@ -22,16 +19,12 @@
       {% for container in container %}
       <tr>
         <td>{{ container.container_id }}</td>
-        <!-- <td>{{ o.container_identifier}}</td> -->
         <td>{{ container.container_type}}</td>
-        <!-- <td>{{ o.current_container_tmp}}</td> -->
         <td>{{ container.container_name}}</td>
         <td>
           <div class="btn-group" role="group" aria-label="Basic example">
             <a href="{% url 'depot:editcontainer' pk=container.pk %}" class="btn btn-primary" role="button">edit</a>
-            <a href="{ url 'containercontents' pk=container.pk }" class="btn btn-primary" role="button">something</a>
             <a href="{% url 'depot:detailcontainer' container.container_id  %}" class="btn btn-primary" role="button">contents</a>
-            <a href="{  url 'editcontainer' pk=o.pk  }" class="btn btn-secondary" role="button">request</a>
           </div>
         </td>
 

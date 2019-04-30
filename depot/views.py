@@ -40,9 +40,10 @@ def change_container(request, operation, pk='', fk=''):
         ContainerSamples.add_to_container(container, sample)
     elif operation == 'remove':
         ContainerSamples.remove_from_container(container, sample)
-    return redirect('depot:allcontainer')
+    # return redirect('depot:allcontainer')
 
-    # return redirect('depot:detailcontainer')
+    return redirect('depot:detailcontainer', container_id=pk)
+
 
 
 #### ALL RECORDS ####
