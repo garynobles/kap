@@ -187,10 +187,10 @@
       </tr>
     </thead>
     <tbody>
-    
+      container: {{ samples.container_id }}
       {% for sample in queryset %}
       <tr>
-        <td><a href="{% url 'depot:change_container'  operation='add' pk=container.container_id fk=sample.sample_id %}" class="badge badge-primary" role="button">
+        <td><a href="{ url 'depot:change_container'  operation='add' pk=sample.container.container_id fk=sample.sample_id }" class="badge badge-primary" role="button">
           <<
         </a></td>
         <td>{{ sample.sample_id }}</td>

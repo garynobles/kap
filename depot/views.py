@@ -51,16 +51,9 @@ def change_friends(request, operation, pk):
     return redirect('depot:allcontainer')
 
 def change_container(request, operation, pk='', fk=''):
-    # pk = 12
     container = Container.objects.get(pk=pk)
-    # container = Container.objects.all().filter(container_id=container.pk)
-    # sample_id=29265881
     sample = Sample.objects.get(pk=fk)
 
-    samplex = ContainerSamples.objects.all().filter(container_id=pk, sample_id=fk)
-    # sample = sample.sample_id
-
-    # sample = Container.objects.get(container.sample_id=sample_id)
     if operation == 'add':
         ContainerSamples.add_to_container(container, sample)
     elif operation == 'remove':
@@ -489,35 +482,12 @@ from django_tables2.views import SingleTableMixin
 def detailcontainer(request, container_id):
     container = get_object_or_404(Container, pk=container_id)
     samples = container.samples.all()
-    # allsamples = container.samples.exclude(sample_id=samples.sample_id)
-    # allsamples = container.samples.all()
-    # users = User.objects.exclude(id=request.user.id).order_by('-id')
-    # friend = Friend.objects.get(current_user=request.user)
-    # friends = friend.users.all().order_by('-id')
-    # container_contents = Container.objects.get(current_container=samples)
     container_contents = container.samples.all()
-    # sample = ContainerSamples.objects.get(sample_id=s)
-    # s = ContainerSamples.objects.all().filter(sample_id=29265877, container_id=13)
-    unassigned_samples = Sample.objects.all()[:10]
-    unassigned_samples2 = Sample.objects.all()
+    unassigned_samples = Sample.objects.all()
+    unassigned_samples2 = Sample.objects.all()[:10]
 
 
-    # table = ContainerTable(Container.objects.all())
-    # table = SampleTable(unassigned_samples2)
-    # RequestConfig(request, paginate={'per_page': 25}).configure(table)
-
-
-
-    # table = Container.objects.all()
-
-    # table  = container.samples.all()
-    # table.paginate(page=request.GET.get('page', 1), per_page=25)
-    # RequestConfig(request, paginate={'per_page': 25}).configure(table)
-    # RequestConfig(request).configure(table)
-    # table.paginate(page=request.GET.get('page', 1), per_page=25)
-
-
-    qs = Sample.objects.all()
+    qs = Sample.objects.all()[:20]
     easting_query = request.GET.get('area_easting')
     northing_query = request.GET.get('area_northing')
     context_query = request.GET.get('context_number')
@@ -525,15 +495,15 @@ def detailcontainer(request, container_id):
     sample_type_query = request.GET.get('sample_type')
 
     if easting_query != '' and easting_query is not None:
-        qs = qs.filter(area_easting__icontains=easting_query)
+        unassigned_samples = unassigned_samples.filter(area_easting__icontains=easting_query)
     if northing_query != '' and northing_query is not None:
-        qs = qs.filter(area_northing__icontains=northing_query)
+        unassigned_samples = unassigned_samples.filter(area_northing__icontains=northing_query)
     if context_query != '' and context_query is not None:
-        qs = qs.filter(context_number__icontains=context_query)
+        unassigned_samples = unassigned_samples.filter(context_number__icontains=context_query)
     if sample_number_query != '' and sample_number_query is not None:
-        qs = qs.filter(sample_number__icontains=sample_number_query)
+        unassigned_samples = unassigned_samples.filter(sample_number__icontains=sample_number_query)
     if sample_type_query != '' and sample_type_query is not None:
-        qs = qs.filter(sample_type__icontains=sample_type_query)
+        unassigned_samples = unassigned_samples.filter(sample_type__icontains=sample_type_query)
 
     qs = qs
 
