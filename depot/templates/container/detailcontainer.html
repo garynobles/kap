@@ -56,31 +56,15 @@
   <form class="" action="." method="GET">
 
     <div class="form-row">
-      <div class="form-group col-12">
+      <div class="form-group col-8">
         <div class="input-group">
-          <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Easting" name="area_easting"/>
-          <span class="input-group-append">
-            <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
-          </span>
-
+          <input class="form-control py-2 border-right-0 border" style="border-color:black;" type="text" value="" placeholder="Easting" name="area_easting"/>
           <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Northing" name="area_northing"/>
-          <span class="input-group-append">
-            <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
-          </span>
-
           <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Context Number" name="context_number"/>
-          <span class="input-group-append">
-            <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
-          </span>
-
           <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Sample Number" name="sample_number"/>
-          <span class="input-group-append">
-            <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
-          </span>
-
           <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Sample Type" name="sample_type"/>
           <span class="input-group-append">
-            <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
+            <div class="input-group-text bg-success" ><button type="submit" class="btn" style="padding:0pt; margin:0pt; background-color:transparent;"><i class="fa fa-search"></i></button></div>
           </span>
         </div>
       </div>
@@ -95,7 +79,7 @@
 
 
 
-<section >
+<section>
 
   <div class="float-left" style="width:500px;">
     <h4 class="kap">Container Contents</h4>
@@ -189,15 +173,52 @@
 
 
 
+
   <section>
-    <h4 class="kap">Filtering Goes here!</h4>
-    <h4 class="kap">All samples below + link to associate with the container</h4>
+    <h4 class="kap">Samples</h4>
+    <div class="table-responsive">
+      <table class="table-striped">
+        <thead>
+      <tr>
+        <th></th>
+        <th>E.N.C.S</th>
+        <th>Type</th>
+        <th>Taken By</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+      {% for sample in queryset %}
+      <tr>
+        <td><a href="{% url 'depot:change_container'  operation='add' pk=container.container_id fk=sample.sample_id %}" class="badge badge-primary" role="button">
+          <<
+        </a></td>
+        <td>{{ sample.sample_id }}</td>
+        <td>{{ sample.samples.container.container_id }}</td>
+        <td>{{ sample.area_easting }}.{{ sample.area_northing }}.{{ sample.context_number }}.{{ sample.sample_number }}</td>
+        <td>{{ container.container_id }}</td>
 
-    { load render_table from django_tables2 }
-            { render_table table }
+        <td>
+  {{ sample.sample_type }}
+        </td>
+
+        <td>{{ sample.taken_by }}</td>
+
+        <td>{{ sample.sample_id.container_id }}</td>
+
+
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="5">No data</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+
+
   </section>
-
-
 
 
 

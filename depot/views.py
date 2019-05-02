@@ -503,8 +503,8 @@ def detailcontainer(request, container_id):
 
 
     # table = ContainerTable(Container.objects.all())
-    table = SampleTable(unassigned_samples2)
-    RequestConfig(request, paginate={'per_page': 25}).configure(table)
+    # table = SampleTable(unassigned_samples2)
+    # RequestConfig(request, paginate={'per_page': 25}).configure(table)
 
 
 
@@ -516,17 +516,35 @@ def detailcontainer(request, container_id):
     # RequestConfig(request).configure(table)
     # table.paginate(page=request.GET.get('page', 1), per_page=25)
 
-    return render(request, 'container/detailcontainer.html',
-    {'container':container,
-    # 'samples':samples,
-    # 'users': users,
-    # 'friends': friends,
-    # 'allsamples': allsamples,
-    'container_contents': container_contents,
-    'table':table,
-    'unassigned_samples': unassigned_samples
 
-    })
+    qs = Sample.objects.all()
+    easting_query = request.GET.get('area_easting')
+    northing_query = request.GET.get('area_northing')
+    context_query = request.GET.get('context_number')
+    sample_number_query = request.GET.get('sample_number')
+    sample_type_query = request.GET.get('sample_type')
+
+    if easting_query != '' and easting_query is not None:
+        qs = qs.filter(area_easting__icontains=easting_query)
+    if northing_query != '' and northing_query is not None:
+        qs = qs.filter(area_northing__icontains=northing_query)
+    if context_query != '' and context_query is not None:
+        qs = qs.filter(context_number__icontains=context_query)
+    if sample_number_query != '' and sample_number_query is not None:
+        qs = qs.filter(sample_number__icontains=sample_number_query)
+    if sample_type_query != '' and sample_type_query is not None:
+        qs = qs.filter(sample_type__icontains=sample_type_query)
+
+    qs = qs
+
+    context = {
+        'queryset': qs,
+        'container':container,
+        'container_contents': container_contents,
+        'unassigned_samples': unassigned_samples,
+    }
+    return render(request, 'container/detailcontainer.html', context)
+
 
 
 # class FilteredPersonListView(SingleTableMixin, FilterView):
