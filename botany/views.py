@@ -2,6 +2,9 @@ from django.shortcuts import render, get_object_or_404, render_to_response, redi
 from botany.models import Flotation, LightResidue, Composition, Sample, Fraction, PlantPart, Book
 from django import forms
 
+# from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+
 from django.db.models import Count, Q
 from django.shortcuts import render
 
@@ -17,18 +20,25 @@ def allsample(request):
     'allsample':allsample,
     })
 
-def allflotation(request, sample_id='', flotation_id=''):
+def allflotation(request):
     flotation = Flotation.objects.all()
-    lightresidue = LightResidue.objects.all()
-    count = LightResidue.objects.all().count()
-    composition = Composition.objects.all()
-    return render(request, 'sample/detailsample.html',
+    return render(request, 'flotation/allflotation.html',
     {
     'flotation':flotation,
-    'lightresidue':lightresidue,
-    'count':count,
-    'composition':composition,
     })
+
+# def allflotation(request, sample_id='', flotation_id=''):
+#     flotation = Flotation.objects.all()
+#     lightresidue = LightResidue.objects.all()
+#     count = LightResidue.objects.all().count()
+#     composition = Composition.objects.all()
+#     return render(request, 'sample/detailsample.html',
+#     {
+#     'flotation':flotation,
+#     'lightresidue':lightresidue,
+#     'count':count,
+#     'composition':composition,
+#     })
 
 
 #### add ####

@@ -4,6 +4,11 @@ from . import views
 
 urlpatterns = [
     # Botany
+
+    # Filters
+    #url(r'^sample_search/', views.sample_search, name='sample_search'),
+    # see https://www.dev2qa.com/django-filter-and-pagination-example/
+
     # overviews
     path('', views.allbotany, name='allbotany'),
     path('sample/', views.allsample, name='allsample'),

@@ -2,7 +2,7 @@
 <header>
   <div  class="fixed-top">
     <div class="navbar navbar-inverse navbar-static-top navbar-expand-lg navbar-dark bg-dark" id="topNav">
-      <a class="navbar-brand" href="{% url 'home' %}">Gygaia V 0.1.6</a>
+      <a class="navbar-brand" href="{% url 'home' %}">Gygaia V 0.1.7</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -14,10 +14,10 @@
           <div class="dropdown show">
             <a class="btn btn-secondary dropdown-toggle mr-2" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Depot</a>
             <div class="dropdown-menu " aria-labelledby="storage">
-              <a class="dropdown-item" href="{% url 'alldepotsample' %}">Samples</a>
-              <a class="dropdown-item" href="{% url 'allcontainer' %}">Containers</a>
-              <a class="dropdown-item" href="{% url 'alllocation' %}">Locations</a>
-              <a class="dropdown-item" href="{% url 'allstorage' %}">Depots</a>
+              <a class="dropdown-item" href="{% url 'depot:alldepotsample' %}">Samples</a>
+              <a class="dropdown-item" href="{% url 'depot:allcontainer' %}">Containers</a>
+              <a class="dropdown-item" href="{% url 'depot:alllocation' %}">Locations</a>
+              <a class="dropdown-item" href="{% url 'depot:allstorage' %}">Depots</a>
               <!-- <a class="dropdown-item" href="#">Faunal</a>
               <a class="dropdown-item" href="#">Conservation</a>
               <a class="dropdown-item" href="#">Ceramics</a>
