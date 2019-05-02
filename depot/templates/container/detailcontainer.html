@@ -64,14 +64,14 @@
           <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Sample Number" name="sample_number"/>
           <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Sample Type" name="sample_type"/>
           <span class="input-group-append">
-            <div class="input-group-text bg-success" ><button type="submit" class="btn" style="padding:0pt; margin:0pt; background-color:transparent;"><i class="fa fa-search"></i></button></div>
+            <div class="input-group-text bg-success" ><button type="submit" class="btn" style="padding:5pt; margin:-5pt; background-color:transparent;"><i class="fa fa-search"></i></button></div>
           </span>
         </div>
       </div>
     </div>
 
 
-      <button type="submit" class="btn btn-primary">Search</button>
+
     </form>
 
 
@@ -82,7 +82,7 @@
 <section>
 
   <div class="float-left" style="width:500px;">
-    <h4 class="kap">Container Contents</h4>
+    <h4 class="kap">Container {{ container.container_name }} Contents</h4>
     <div class="table-responsive">
       <table class="table-striped">
         <thead>
@@ -143,7 +143,7 @@
               <td>{{ unassigned.area_easting }}.{{ unassigned.area_northing }}.{{ unassigned.context_number }}.{{ unassigned.sample_number }}</td>
               <td>{{ unassigned.sample_id }}</td>
               <td>{{ container.container_id }}</td>
-              <td>{{ container.container_name }}</td>
+              <!-- <td>{{ container.container_name }}</td> -->
                 </tr>
 
 
@@ -152,16 +152,14 @@
               {% empty %}
               <tr>
                 <td>
-                  <p>There are no unassigned samples</p>
-                  <p>looks like you'll have to wait for more to come in!
+                  <p>These are not the samples you are looking for!</p>
+                  <p>Use the above filter to search for a sample.
+                    <!-- <i class="fas fa-star" style="color:yellow;"></i>
                     <i class="fas fa-star" style="color:yellow;"></i>
-                    <i class="fas fa-star" style="color:yellow;"></i>
-                    <i class="fas fa-star" style="color:yellow;"></i>
+                    <i class="fas fa-star" style="color:yellow;"></i> -->
                   </p>
                 </td>
-                <td></td>
               </tr>
-
             {% endfor %}
           </tbody>
         </table>
@@ -173,52 +171,6 @@
 
 
 
-
-  <section>
-    <h4 class="kap">Samples</h4>
-    <div class="table-responsive">
-      <table class="table-striped">
-        <thead>
-      <tr>
-        <th></th>
-        <th>E.N.C.S</th>
-        <th>Type</th>
-        <th>Taken By</th>
-      </tr>
-    </thead>
-    <tbody>
-      container: {{ samples.container_id }}
-      {% for sample in queryset %}
-      <tr>
-        <td><a href="{ url 'depot:change_container'  operation='add' pk=sample.container.container_id fk=sample.sample_id }" class="badge badge-primary" role="button">
-          <<
-        </a></td>
-        <td>{{ sample.sample_id }}</td>
-        <td>{{ sample.samples.container.container_id }}</td>
-        <td>{{ sample.area_easting }}.{{ sample.area_northing }}.{{ sample.context_number }}.{{ sample.sample_number }}</td>
-        <td>{{ container.container_id }}</td>
-
-        <td>
-  {{ sample.sample_type }}
-        </td>
-
-        <td>{{ sample.taken_by }}</td>
-
-        <td>{{ sample.sample_id.container_id }}</td>
-
-
-      </tr>
-      {% empty %}
-      <tr>
-        <td colspan="5">No data</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  </div>
-
-
-  </section>
 
 
 

@@ -494,6 +494,17 @@ def detailcontainer(request, container_id):
     sample_number_query = request.GET.get('sample_number')
     sample_type_query = request.GET.get('sample_type')
 
+    if (
+     easting_query == '' or easting_query is None and
+     northing_query == '' or northing_query is None and
+     context_query == '' or context_query is None and
+     sample_number_query == '' or sample_number_query is None and 
+     sample_type_query == '' or sample_type_query is None
+     ):
+        unassigned_samples = unassigned_samples.none()
+
+
+
     if easting_query != '' and easting_query is not None:
         unassigned_samples = unassigned_samples.filter(area_easting__icontains=easting_query)
     if northing_query != '' and northing_query is not None:
@@ -505,6 +516,8 @@ def detailcontainer(request, container_id):
     if sample_type_query != '' and sample_type_query is not None:
         unassigned_samples = unassigned_samples.filter(sample_type__icontains=sample_type_query)
 
+
+
     qs = qs
 
     context = {
@@ -512,6 +525,13 @@ def detailcontainer(request, container_id):
         'container':container,
         'container_contents': container_contents,
         'unassigned_samples': unassigned_samples,
+
+        'easting_query': easting_query,
+        'northing_query': northing_query,
+        'context_query': context_query,
+        'sample_number_query': sample_number_query,
+        'sample_type_query': sample_type_query
+
     }
     return render(request, 'container/detailcontainer.html', context)
 
