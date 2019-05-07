@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load widget_tweaks %}
+{% load has_group %}
+{ include "menu1.html" }
+{% include "menu2.html" %}
+<div class="container top">
+  <section>
+    <h4 class="kap">Tickets</h4>
+    <a href="{% url 'createticket' %}"><i class="fas fa-ticket-alt"></i> Add ticket</a>
+    <div class="table-responsive">
+      <table class="table-striped">
+        <thead>
+      <tr>
+        <th>Ticket ID</th>
+        <th>Submitted By</th>
+        <th>Subject</th>
+        <th>category</th>
+        <th>department</th>
+        <th>Details</th>
+        <th>Timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ticket in alltickets %}
+      <a href="#">
+      <tr>
+        <td>{{ ticket.ticket_id }}</td>
+        <td>{{ ticket.submitted_by }}</td>
+        <td>{{ ticket.subject }}</td>
+        <td>{{ ticket.category }}</td>
+        <td>{{ ticket.department }}</td>
+        <td>{{ ticket.details }}</td>
+        <td>{{ ticket.assigned_to }}</td>
+        <td>{{ ticket.status }}</td>
+        <td>{{ ticket.datetime }}</td>
+
+        <td>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="{% url 'editticket' pk=ticket.pk %}"><i class="far fa-edit fa-2x edit" style="margin:10px; padding:10px;"></i></a>
+            <a href="{ url 'depot:detailcontainer' container.container_id }"><i class="fas fa-box-open fa-2x detail" style="margin:10px; padding:10px;"></i></a>
+            {% if request.user|has_group:"admin_ticket"%}
+            <a onclick="return confirm('Are you sure you want to delete this?\n This is a one time action which CANNOT be recovered!\n If you are unsure see/contact the database manager.')" href="{% url 'deleteticket' ticket.ticket_id %}"><i class="fas fa-archive fa-2x delete" style="margin:10px; padding:10px;"></i></a>
+            {% else %}
+            {% endif %}
+          </div>
+        </td>
+
+      </tr>
+        </a>
+      {% empty %}
+      <tr>
+        <td colspan="5">No data</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+</section>
+  {% endblock %}

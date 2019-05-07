@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+{% include "menu2.html" %}
+<div class="container top">
+  <h4 class="kap">New ticket</h4>
+    <div class="col-md-12">
+    <!-- <form method="POST" class="post-form">{% csrf_token %}
+          {{ form.as_p }}
+
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form> -->
+
+    <form method="POST" class="post-form">{% csrf_token %}
+      <div class="row">
+        <div class="col col-md-12 " style="color:white;">{{ form.subject|add_class:"col-md-12"|append_attr:"placeholder:Subject"}}</div>
+        <div class="col col-md-12" style="color:white;">{{ form.details|add_class:"col-md-12"|append_attr:"placeholder:Details"}}</div>
+        <div class="col" style="color:white;">Department{{ form.department|add_class:""}}</div>
+        <div class="col" style="color:white;">Category{{ form.category|add_class:""}}</div>
+      </div>
+      <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+  </div>
+</div>
+
+
+
+
+{% endblock %}<!--    |append_attr:"placeholder:Username"   -->
