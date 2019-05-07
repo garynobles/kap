@@ -27,5 +27,5 @@ class Ticket(models.Model):
     category = models.CharField(max_length=20, default='', choices = CAT_CHOICES)
     department = models.CharField(max_length=20, default='', choices = DEPT_CHOICES)
     assigned_to = models.ForeignKey(settings.AUTH_USER_MODEL, db_column='assigned_to', blank=True, null=True, on_delete = models.PROTECT, related_name='assigned')
-    status = models.CharField(max_length=20, default='', choices = TICKET_STATUS_CHOICES)
+    status = models.CharField(max_length=20, default='', blank=True, null=True, choices = TICKET_STATUS_CHOICES)
     datetime = models.DateTimeField(auto_now_add=True)
