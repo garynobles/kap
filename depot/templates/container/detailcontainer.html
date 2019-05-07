@@ -58,7 +58,7 @@
     <div class="form-row">
       <div class="form-group col-8">
         <div class="input-group">
-          <input class="form-control py-2 border-right-0 border" style="border-color:black;" type="text" value="" placeholder="Easting" name="area_easting"/>
+          <input class="form-control py-2 border-right-0 border " style="border-color:black;" type="text" value="" placeholder="Easting" name="area_easting"/>
           <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Northing" name="area_northing"/>
           <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Context Number" name="context_number"/>
           <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Sample Number" name="sample_number"/>
@@ -81,13 +81,13 @@
 
 <section>
 
-  <div class="float-left" style="width:500px;">
-    <h4 class="kap">Container {{ container.container_name }} Contents</h4>
+  <div class="float-left col-md-4">
+    <h4 class="kap">{{ container.container_name }} Contents</h4>
     <div class="table-responsive">
-      <table class="table-striped">
+      <table class="table-striped table-dark">
         <thead>
           <tr>
-            <th>Sample Id</th>
+            <!-- <th>Sample Id</th> -->
             <th>E.N.C.S</th>
           </tr>
         </thead>
@@ -95,14 +95,14 @@
           <tr>
             {% for contents in container_contents %}
 
-            <td>{{ contents.sample_id }}</td>
+            <!-- <td>{{ contents.sample_id }}</td> -->
             <td>{{ contents.area_easting }}.
               {{ contents.area_northing }}.
               {{ contents.context_number }}.
               {{ contents.sample_number }}</td>
 
-              <td><a href="{% url 'depot:change_container'  operation='remove' pk=container.container_id fk=contents.sample_id  %}" class="badge badge-primary" role="button">
-                >>
+              <td class="" style="margin:10px; padding:10px;"><a href="{% url 'depot:change_container'  operation='remove' pk=container.container_id fk=contents.sample_id  %}" class="badge badge-primary" role="button">
+                <i class="fas fa-arrow-right fa-2x" ></i>
               </a></td>
             </tr>
             {% empty %}
@@ -120,16 +120,19 @@
     </div>
 
 
-    <div class="float-left" style="width:500px;">
+    <div class="float-left col-md-4">
+
+
       <h4 class="kap">Unassigned Samples</h4>
       <div class="table-responsive">
-        <table class="table-striped">
+        <table class="table-striped table-dark">
           <thead>
             <tr>
+              <th></th>
               <th>E.N.C.S</th>
-              <th>Sample ID</th>
+              <!-- <th>Sample ID</th>
               <th>Container ID</th>
-              <th>Container name</th>
+              <th>Container name</th> -->
             </tr>
           </thead>
           <tbody>
@@ -137,12 +140,12 @@
             <tr>
               {% if unassigned not in container_contents %}
               <!-- we will want to add an if stmt list if not in unassigned - need to think how to do this -->
-              <td><a href="{% url 'depot:change_container'  operation='add' pk=container.container_id fk=unassigned.sample_id  %}" class="badge badge-primary" role="button">
-                <<
+              <td style="margin:10px; padding:10px;"><a href="{% url 'depot:change_container'  operation='add' pk=container.container_id fk=unassigned.sample_id  %}" class="badge badge-primary" role="button">
+                <i class="fas fa-arrow-left fa-2x"></i>
               </a></td>
               <td>{{ unassigned.area_easting }}.{{ unassigned.area_northing }}.{{ unassigned.context_number }}.{{ unassigned.sample_number }}</td>
-              <td>{{ unassigned.sample_id }}</td>
-              <td>{{ container.container_id }}</td>
+              <!-- <td>{{ unassigned.sample_id }}</td>
+              <td>{{ container.container_id }}</td> -->
               <!-- <td>{{ container.container_name }}</td> -->
                 </tr>
 

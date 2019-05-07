@@ -48,15 +48,18 @@ table {
 }
 
 thead {
-  padding-right:20px;
+  /* padding-right:20px; */
   color:#93a1a1;
   box-shadow: inset 0 -5px 45px rgba(0,0,0,0.8), 0 1px 1px rgba(0,0,0,0.8);
 }
 
-td {
+tbody, td, th {
   padding-right:20px;
   color:#586e75;
+  font-size: 20px;
 }
+
+
 
 #link {
   color:#6c71c4;

@@ -6,12 +6,12 @@
       <section>
         <div class="float-right col-sm-1">
           <div>
-              <a href="{% url 'createstorage' %}">
+              <a href="{% url 'depot:createstorage' %}">
               <button  type="button" class="btn btn-primary">Add new storage</button>
             </a>
               </div>
           <div class="pt-3">
-            <a class="btn btn-default" href="{% url 'editstorage' pk=storage.pk %}">
+            <a class="btn btn-default" href="{% url 'depot:editstorage' pk=storage.pk %}">
             <button type="button" class="btn btn-primary">edit</button>
             </a>
           </div>

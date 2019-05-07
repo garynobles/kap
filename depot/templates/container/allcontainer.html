@@ -1,5 +1,5 @@
 {% extends 'container/base.html' %}
-{% block content%}
+{% block content %}
 {% include "menu1.html" %}
 {% include "container/menu2.html" %}
 <div class="container top">
@@ -23,8 +23,8 @@
         <td>{{ container.container_name}}</td>
         <td>
           <div class="btn-group" role="group" aria-label="Basic example">
-            <a href="{% url 'depot:editcontainer' pk=container.pk %}" class="btn btn-primary" role="button">edit</a>
-            <a href="{% url 'depot:detailcontainer' container.container_id  %}" class="btn btn-primary" role="button">contents</a>
+            <a href="{% url 'depot:editcontainer' pk=container.pk %}"><i class="far fa-edit fa-2x edit" style="margin:10px; padding:10px;"></i></a>
+            <a href="{% url 'depot:detailcontainer' container.container_id  %}"><i class="fas fa-box-open fa-2x detail" style="margin:10px; padding:10px;"></i></a>
           </div>
         </td>
 
