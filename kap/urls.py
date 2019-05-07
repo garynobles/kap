@@ -26,4 +26,6 @@ urlpatterns = [
     path('models3d/', include('models3d.urls')),
 
     path('spatial3d/', include('spatial3d.urls')),
+
+    path('tickets/', include('tickets.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
