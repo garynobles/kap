@@ -4,7 +4,8 @@ from django.conf import settings
 
 CAT_CHOICES = (
     ("option","option"),
-    ("other","other")
+    ("other","other"),
+    ("general request","general request")
 )
 
 DEPT_CHOICES = (
@@ -21,7 +22,7 @@ TICKET_STATUS_CHOICES = (
 # Create your models here.
 class Ticket(models.Model):
     ticket_id = models.AutoField(primary_key=True)
-    submitted_by = models.ForeignKey(settings.AUTH_USER_MODEL, db_column='taken_by', on_delete = models.PROTECT)
+    submitted_by = models.ForeignKey(settings.AUTH_USER_MODEL, db_column='taken_by', blank=True, null=True, on_delete = models.PROTECT)
     subject = models.CharField(max_length=200, default='', blank=True, null=True)
     details = models.CharField(max_length=5000, default='', blank=True, null=True)
     category = models.CharField(max_length=20, default='', choices = CAT_CHOICES)
