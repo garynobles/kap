@@ -56,7 +56,7 @@ thead {
 tbody, td, th {
   padding-right:20px;
   color:#586e75;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 
@@ -71,6 +71,11 @@ tr:hover {
 }
 tr.clickable-row { cursor: pointer; }
 
+h1, h2, h3, h4{
+  /* color:white; */
+  color: #fdf6e3;
+}
+
 h4.kap {
   /* color:white; */
   color: #93a1a1;
@@ -78,7 +83,7 @@ h4.kap {
 
 
 
-input {
+textarea, input {
   /* width: 100%; */
   /* width: 250px */
   margin-bottom: 10px;
@@ -116,6 +121,8 @@ input[type=text], select {
   -ms-transition: box-shadow .5s ease;
   transition: box-shadow .5s ease;
 }
+
+
 
 input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
 
