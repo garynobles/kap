@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, render_to_response, redirect
-from botany.models import Flotation, LightResidue, Composition, Sample, Fraction, PlantPart, Book
+from botany.models import Flotation, LightResidue, Composition, Sample, Fraction, PlantPart, Seed, Species
 from django import forms
 
 # from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -18,6 +18,13 @@ def allsample(request):
     return render(request, 'sample/sample.html',
     {
     'allsample':allsample,
+    })
+
+def speciesmanager(request):
+    species = Species.objects.all()
+    return render(request, 'species/manager.html',
+    {
+    'species':species,
     })
 
 def allflotation(request):
@@ -56,6 +63,17 @@ def addsample(request):
     else:
         form = SampleForm()
     return render(request, 'sample/createsample.html', {'form': form})
+
+def addspecies(request):
+    if request.method == "POST":
+        form = SpeciesForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('speciesmanager')
+    else:
+        form = SpeciesForm()
+    return render(request, 'species/createspecies.html', {'form': form})
 
 
 def addflotation(request, pk):
@@ -128,6 +146,20 @@ def addplantpart(request, pk, fk, sp, fl):
     else:
         form = PlantPartForm()
     return render(request, 'plantpart/create_plantpart.html',
+    {'form': form})
+
+def addseed(request, pk, fk, sp, fl):
+    if request.method == "POST":
+        form = SeedForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            fraction = get_object_or_404(Fraction, pk=pk)
+            post.fraction_id = fraction
+            post.save()
+            return redirect('botanyoverview', flotation_id=fl, sample_id=sp)
+    else:
+        form = SeedForm()
+    return render(request, 'plantpart/create_seed.html',
     {'form': form})
 
 
@@ -221,6 +253,18 @@ def editplantpart(request, pk, fk, sp, fl):
             form = PlantPartForm(instance=post)
         return render(request, 'plantpart/create_plantpart.html', {'form': form})
 
+def editseed(request, pk, fk, sp, fl):
+        post = get_object_or_404(Seed, pk=pk)
+        if request.method == "POST":
+            form = SeedForm(request.POST, instance=post)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.save()
+                return redirect('botanyoverview', flotation_id=fl, sample_id=sp)
+        else:
+            form = SeedForm(instance=post)
+        return render(request, 'plantpart/create_seed.html', {'form': form})
+
 
 #### DETAIL ####
 
@@ -263,10 +307,13 @@ def detailcomposition(request, composition_id, lightresidue_id):
 def detailfraction(request, fraction_id, composition_id):
     fraction = get_object_or_404(Fraction, pk=fraction_id)
     plantpart = PlantPart.objects.filter(fraction_id__fraction_id=fraction_id)
+    seed = Seed.objects.filter(fraction_id__fraction_id=fraction_id)
+    # seed = Seed.objects.all()
     return render(request, 'fraction/detailfraction.html',
     {
         'fraction':fraction,
         'plantpart':plantpart,
+        'seed':seed,
     })
 
 
@@ -309,6 +356,11 @@ def botanyoverview(request, flotation_id, sample_id=''):
         queryset += PlantPart.objects.filter(fraction_id = i.fraction_id)
     plantpart = queryset
 
+    queryset = []
+    for i in fraction:
+        queryset += Seed.objects.filter(fraction_id = i.fraction_id)
+    seed = queryset
+
     return render(request, 'dashboard/botanyoverview.html',
     {
         'flotation':flotation,
@@ -317,6 +369,7 @@ def botanyoverview(request, flotation_id, sample_id=''):
         'composition':composition,
         'fraction':fraction,
         'plantpart':plantpart,
+        'seed':seed,
     })
 
 def allbotany(request, sample_id=''):
@@ -513,12 +566,12 @@ class FractionForm(forms.ModelForm):
         fields = (
         # 'fraction_id',
         'fraction',
-        'whole_count',
-        'weight_whole',
-        'weight_fragment',
-        'fragment_count',
-        'seed',
-        'plant_part',
+        # 'whole_count',
+        # 'weight_whole',
+        # 'weight_fragment',
+        # 'fragment_count',
+        # 'seed',
+        # 'plant_part',
         )
 
 class PlantPartForm(forms.ModelForm):
@@ -526,10 +579,42 @@ class PlantPartForm(forms.ModelForm):
         model = PlantPart
         fields = (
         # 'plantpart_id',
-        'plant_part',
-        'part_count',
-        'part_weight',
+        # 'fraction_id',
+        'species_id',
+        'part',
+        'quantity',
+        'weight',
         )
+
+class SeedForm(forms.ModelForm):
+    class Meta:
+        model = Seed
+        fields = (
+        # 'seed_id',
+        # 'fraction_id',
+        'species_id',
+        'quantity_type',
+        'quantity',
+        'weight_type',
+        'weight',
+        )
+
+class SpeciesForm(forms.ModelForm):
+    class Meta:
+        model = Species
+        fields = (
+        # 'species_id',
+        # 'taxon',
+        'species_id',
+        'common_name',
+        'species',
+        'genus',
+
+        )
+
+
+
+
 
 from django.views import generic
 import django_filters
@@ -559,23 +644,3 @@ class SampleListView(generic.ListView):
     model = Sample
     paginate_by = 50
     queryset = Sample.objects.filter(sample_type='Organic')
-    # data = count_new_rows()
-
-    # def get_context_data(**kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['new_rows'] = count_new_rows()
-    #     return context
-
-
-
-
-
-    # context_object_name = 'sample'  # Default: object_list
-    #
-    # queryset = sample.objects.all()  # Default: Model.objects.all()
-
-
-    #
-    # def get_queryset(self):
-    #     return LightResidue.objects.all().count()
-        # return LightResidue.objects.filter().count()

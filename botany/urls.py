@@ -13,6 +13,9 @@ urlpatterns = [
     path('', views.allbotany, name='allbotany'),
     path('sample/', views.allsample, name='allsample'),
 
+    path('species/manager', views.speciesmanager, name='speciesmanager'),
+    path('species/manager/create', views.addspecies, name='addspecies'),
+
     # path('botany', views.botanyview, name='botanyview'),
     path('botanyoverview/sample/<int:sample_id>/flotation/<int:flotation_id>', views.botanyoverview, name='botanyoverview'),
 
@@ -35,6 +38,8 @@ urlpatterns = [
     re_path('sample/(?P<sp>\d+)/flotation/(?P<fl>\d+)/lightresidue/(?P<fk>\d+)/composition/(?P<pk>\d+)/addfraction/', views.addfraction, name='addfraction'),
     re_path('sample/(?P<sp>\d+)/flotation/(?P<fl>\d+)/composition/(?P<fk>\d+)/fraction/(?P<pk>\d+)/addplantpart/', views.addplantpart, name='addplantpart'),
 
+    re_path('sample/(?P<sp>\d+)/flotation/(?P<fl>\d+)/composition/(?P<fk>\d+)/fraction/(?P<pk>\d+)/addseed/', views.addseed, name='addseed'),
+
     # edit
     re_path('sample/edit/(?P<pk>\d+)/edit/', views.editsample, name='editsample'),
 
@@ -52,6 +57,7 @@ urlpatterns = [
     re_path('sample/(?P<sp>\d+)/flotation/(?P<fl>\d+)/composition/(?P<fk>\d+)/fraction/edit/(?P<pk>\d+)/edit/', views.editfraction, name='editfraction'),
 
     re_path('sample/(?P<sp>\d+)/flotation/(?P<fl>\d+)/fraction/(?P<fk>\d+)/plantpart/edit/(?P<pk>\d+)/edit/', views.editplantpart, name='editplantpart'),
+    re_path('sample/(?P<sp>\d+)/flotation/(?P<fl>\d+)/fraction/(?P<fk>\d+)/seed/edit/(?P<pk>\d+)/edit/', views.editseed, name='editseed'),
 
 
 

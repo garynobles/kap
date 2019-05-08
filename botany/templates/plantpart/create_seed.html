@@ -1,0 +1,23 @@
+{% extends "plantpart/base.html" %}
+{% load widget_tweaks %}
+{% block content %}
+{% include "plantpart/menu2.html" %}
+<div class="container top">
+  <h4 class="kap">Seed</h4>
+  <form method="POST" class="post-form">{% csrf_token %}
+    <div class="row mt-1">
+
+
+
+<div class="" style="color:white; width:300px;">{{ form.species_id }}</div>
+<div class="" style="color:white; width:300px;">{{ form.fraction_id }}</div>
+      <div class="" style="color:white; width:300px;">{{ form.quantity|append_attr:"placeholder: Plant Count" }}</div>
+      <div class="" style="color:white; width:300px;">{{ form.quantity_type|append_attr:"placeholder: Count Type" }}</div>
+      <div class="" style="color:white; width:250px;">{{ form.weight_type|append_attr:"placeholder: Weight type" }}</div>
+      <div class="" style="color:white; width:250px;">{{ form.weight|append_attr:"placeholder: Seed Weight" }}</div>
+
+    </div>
+    <button type="submit" class="save btn btn-dark mt-3">Save</button>
+  </form>
+</div>
+{% endblock %}

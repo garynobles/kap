@@ -36,5 +36,10 @@ MATERIALS = (
     ("Botanical","Botanical"),
     ("Ceramic","Ceramic"),
     ("Organic","Organic"),
+)
 
+FRACTIONS = (
+    ("<1","<1"),
+    (">1",">1"),
+    (">2",">2")
 )

@@ -3,17 +3,11 @@
 {% block content %}
 {% include "fraction/menu2.html" %}
 <div class="container top">
-  <h4 class="kap">Flotation</h4>
+  <h4 class="kap">Fraction</h4>
   <form method="POST" class="post-form">{% csrf_token %}
     <div class="row mt-1">
       <div class="" style="color:white; width:300px;">{{ form.fraction|append_attr:"placeholder: Fraction" }}</div>
-      <div class="" style="color:white; width:300px;">{{ form.whole_count|append_attr:"placeholder: Whole Count" }}</div>
-      <div class="" style="color:white; width:250px;">{{ form.weight_whole|append_attr:"placeholder: Weight Whole" }}</div>
-      <div class="" style="color:white; width:250px;">{{ form.weight_fragment|append_attr:"placeholder: Weight Fragment" }}</div>
-      <div class="" style="color:white; width:250px;">{{ form.weight_fragment|append_attr:"placeholder: Fragment Count" }}</div>
-      <div class="" style="color:white; width:250px;">{{ form.fragment_count|append_attr:"placeholder:Seed" }}</div>
-      <div class="" style="color:white; width:250px;">Seed {{ form.seed|append_attr:"placeholder:Seed" }}</div>
-      <div class="" style="color:white; width:250px;">Plant Part {{ form.plant_part|append_attr:"placeholder:Plant Part" }}</div>
+
     </div>
     <button type="submit" class="save btn btn-dark mt-3">Save</button>
   </form>
