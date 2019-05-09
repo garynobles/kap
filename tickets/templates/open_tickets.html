@@ -15,7 +15,7 @@
 
 <div class="container top">
   <section>
-    <h4 class="kap">All Tickets</h4>
+    <h4 class="kap">Open Tickets</h4>
       <div class="table-responsive">
       <table class="table-striped">
         <thead>
@@ -33,7 +33,8 @@
       </tr>
     </thead>
     <tbody>
-      {% for ticket in alltickets %}
+      {% for ticket in open %}
+
       <tr class='clickable-row' data-href="{% url 'editticket' pk=ticket.pk %}">
 
         <!-- <td>{{ ticket.ticket_id }}</td> -->
@@ -41,7 +42,7 @@
         <td>{{ ticket.subject }}</td>
         <td>{{ ticket.category }}</td>
         <td>{{ ticket.department }}</td>
-        <td>{{ ticket.details|truncatewords:10 }}</td>
+        <td>{{ ticket.details|truncatewords:10  }}</td>
         <td>{{ ticket.assigned_to }}</td>
         <td>{{ ticket.status }}</td>
         <td>{{ ticket.priority }}</td>
@@ -62,8 +63,9 @@
 
       {% empty %}
       <tr>
-        <td colspan="5">No data</td>
+        <td colspan="5">All tickets are completed!</td>
       </tr>
+
       {% endfor %}
     </tbody>
   </table>

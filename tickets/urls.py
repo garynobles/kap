@@ -5,6 +5,8 @@ from . import views
 urlpatterns = [
 
 path('alltickets', views.alltickets, name='alltickets'),
+path('opentickets', views.opentickets, name='opentickets'),
+path('closedtickets', views.closedtickets, name='closedtickets'),
 path('newticket', views.createticket, name='createticket'),
 re_path(r'^deleteticket/(?P<pk>\d+)$', views.deleteticket, name='deleteticket'),
 re_path(r'^ticket/edit/(?P<pk>\d+)/edit/$', views.editticket, name='editticket'),

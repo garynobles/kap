@@ -8,6 +8,25 @@ def alltickets(request):
     return render(request, 'tickets_all.html',
     {
     'alltickets': alltickets,
+
+
+    })
+
+def opentickets(request):
+    open = Ticket.objects.all().exclude(status='completed')
+    return render(request, 'open_tickets.html',
+    {
+    'open':open
+
+    })
+
+def closedtickets(request):
+    alltickets = Ticket.objects.all()
+    archived = Ticket.objects.all().filter(status='completed')
+    open = Ticket.objects.all().filter(status='completed')
+    return render(request, 'archived_tickets.html',
+    {
+    'archived':archived,
     })
 
 def createticket(request):
@@ -19,7 +38,7 @@ def createticket(request):
             # post.modified_by = request.user
             # post.datetime = datetime.datetime.now()
             post.save()
-            return redirect('alltickets')
+            return redirect('opentickets')
     else:
         form = TicketForm()
     return render(request, 'create_ticket.html', {'form': form})
@@ -33,7 +52,7 @@ def editticket(request, pk):
             #post.user = request.user
             #post.datetime = datetime.datetime.now()
             post.save()
-            return redirect('alltickets')
+            return redirect('opentickets')
             #, pk=post.pk)
     else:
         form = TicketForm(instance=post)
@@ -57,8 +76,10 @@ class TicketForm(forms.ModelForm):
         'subject',
         'details',
         'department',
+        'system',
         'category',
         'assigned_to',
+        'priority',
         'status'
         )
 
