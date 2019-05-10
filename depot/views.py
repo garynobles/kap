@@ -487,7 +487,7 @@ def detailcontainer(request, container_id):
     unassigned_samples2 = Sample.objects.all()[:10]
 
 
-    qs = Sample.objects.all()[:20]
+    qs = Sample.objects.all()
     easting_query = request.GET.get('area_easting')
     northing_query = request.GET.get('area_northing')
     context_query = request.GET.get('context_number')
@@ -498,7 +498,7 @@ def detailcontainer(request, container_id):
      easting_query == '' or easting_query is None and
      northing_query == '' or northing_query is None and
      context_query == '' or context_query is None and
-     sample_number_query == '' or sample_number_query is None and 
+     sample_number_query == '' or sample_number_query is None and
      sample_type_query == '' or sample_type_query is None
      ):
         unassigned_samples = unassigned_samples.none()

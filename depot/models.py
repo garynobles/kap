@@ -91,9 +91,9 @@ class Container(models.Model): #like a friend
     container_id = models.AutoField(primary_key=True)
     container_name = models.CharField(max_length=50, blank=True, null=True)
     container_type = models.CharField(max_length=50, blank=True, null=True)
-    location_id = models.ForeignKey(Location, db_column='location_id', on_delete = models.PROTECT)
+    location_id = models.ForeignKey(Location, db_column='location_id', on_delete = models.PROTECT, related_name = 'location')
     icon_desc = models.ForeignKey(Icon, db_column='icon_desc', null=True, blank=True, default='Box',on_delete = models.PROTECT)
-    samples = models.ManyToManyField('Sample', through='ContainerSamples')
+    samples = models.ManyToManyField('Sample', through='ContainerSamples', related_name='containers')
 
     def __str__(self):
         return self.container_name

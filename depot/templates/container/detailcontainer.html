@@ -79,6 +79,7 @@
             <tr>
               <th></th>
               <th>E.N.C.S</th>
+              <th>Current Location</th>
               <!-- <th>Sample ID</th>
               <th>Container ID</th>
               <th>Container name</th> -->
@@ -93,6 +94,15 @@
                 <i class="fas fa-arrow-left fa-2x"></i>
               </a></td>
               <td>{{ unassigned.area_easting }}.{{ unassigned.area_northing }}.{{ unassigned.context_number }}.{{ unassigned.sample_number }}</td>
+
+              {% for container in unassigned.containers.all %}
+                              <td>{{ container.location_id }}.{{ container.container_name }}</td>
+
+                              {% empty %}
+                              <td>None</td>
+                            {% endfor %}
+
+
               <!-- <td>{{ unassigned.sample_id }}</td>
               <td>{{ container.container_id }}</td> -->
               <!-- <td>{{ container.container_name }}</td> -->
