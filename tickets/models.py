@@ -4,15 +4,18 @@ from django.conf import settings
 
 CAT_CHOICES = (
     ("option","option"),
-
     ("general request","general request"),
     ("other","other"),
 )
 
 DEPT_CHOICES = (
-    ("Zooarch","Zooarchaeology"),
     ("3D Spatial", "3D Spatial"),
-    ("other","other")
+    ("Botany","Botany"),
+    ("Ceramics","Ceramics"),
+    ("Conservation","Conservation"),
+    ("Excavation","Excavation"),
+    ("Zooarch","Zooarchaeology"),
+    ("Other",")ther")
 )
 
 TICKET_STATUS_CHOICES = (
@@ -24,6 +27,7 @@ TICKET_STATUS_CHOICES = (
 SYS_CHOICES = (
     ("MS Database","MS Database"),
     ("Website","Website"),
+    ("GIS","GIS"),
     ("other","other"),
 )
 
