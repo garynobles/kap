@@ -1,6 +1,13 @@
-
 blog/__pycache__/
 
+botany/migrations/
+botany/migrations/__pycache__/
+botany/__pycache__/
+
+depot/migrations/
+depot/__pycache__/
+
+jobs/migrations/
 jobs/__pycache__/
 
 kap/__pycache__/
@@ -9,26 +16,12 @@ kap/settings\.py
 
 media/images/
 
-botany/__pycache__/
-
-botany/__pycache__/
 
 spatial3d/migrations/
 
-zooarch/migrations/
-
-zooarch/__pycache__/
-
-botany/migrations/__pycache__/
-
-botany/migrations/
-
-jobs/migrations/
-
-depot/migrations/
 
 tickets/__pycache__/
-
 tickets/migrations/
 
-depot/__pycache__/
+zooarch/migrations/
+zooarch/__pycache__/
