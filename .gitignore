@@ -7,18 +7,21 @@ botany/__pycache__/
 depot/migrations/
 depot/__pycache__/
 
+experimental/migrations/
+experimental/__pycache__/
+
 jobs/migrations/
 jobs/__pycache__/
 
-kap/__pycache__/
-
 kap/settings\.py
+kap/__pycache__/
 
 media/images/
 
-
 spatial3d/migrations/
 
+templates/__pycache__/
+templates/migrations/
 
 tickets/__pycache__/
 tickets/migrations/
