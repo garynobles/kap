@@ -15,7 +15,7 @@ DEPT_CHOICES = (
     ("Conservation","Conservation"),
     ("Excavation","Excavation"),
     ("Zooarch","Zooarchaeology"),
-    ("Other",")ther")
+    ("Other","Other")
 )
 
 TICKET_STATUS_CHOICES = (
