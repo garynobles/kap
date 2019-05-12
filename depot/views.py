@@ -484,8 +484,6 @@ def detailcontainer(request, container_id):
     samples = container.samples.all()
     container_contents = container.samples.all()
     unassigned_samples = Sample.objects.all()
-    unassigned_samples2 = Sample.objects.all()[:10]
-
 
     qs = Sample.objects.all()
     easting_query = request.GET.get('area_easting')
@@ -493,6 +491,7 @@ def detailcontainer(request, container_id):
     context_query = request.GET.get('context_number')
     sample_number_query = request.GET.get('sample_number')
     sample_type_query = request.GET.get('sample_type')
+    current_container_query = request.GET.get('container_name')
 
     if (
      easting_query == '' or easting_query is None and
@@ -500,10 +499,10 @@ def detailcontainer(request, container_id):
      context_query == '' or context_query is None and
      sample_number_query == '' or sample_number_query is None and
      sample_type_query == '' or sample_type_query is None
+     # and
+     # current_container_query == '' or current_container_query is None
      ):
         unassigned_samples = unassigned_samples.none()
-
-
 
     if easting_query != '' and easting_query is not None:
         unassigned_samples = unassigned_samples.filter(area_easting__icontains=easting_query)
@@ -515,8 +514,10 @@ def detailcontainer(request, container_id):
         unassigned_samples = unassigned_samples.filter(sample_number__icontains=sample_number_query)
     if sample_type_query != '' and sample_type_query is not None:
         unassigned_samples = unassigned_samples.filter(sample_type__icontains=sample_type_query)
-
-
+    # if current_container_query != '' and current_container_query is not None:
+    #     a=1+1
+        # unassigned_samples = unassigned_samples.filter(container_set__container_name__icontains=current_container_query)
+        # unassigned_samples = unassigned_samples.filter(container__container_name__contains=1)
 
     qs = qs
 
@@ -530,8 +531,8 @@ def detailcontainer(request, container_id):
         'northing_query': northing_query,
         'context_query': context_query,
         'sample_number_query': sample_number_query,
-        'sample_type_query': sample_type_query
-
+        'sample_type_query': sample_type_query,
+        # 'current_container_query':current_container_query
     }
     return render(request, 'container/detailcontainer.html', context)
 

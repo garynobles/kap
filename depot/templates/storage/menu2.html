@@ -105,6 +105,7 @@
             <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
               <a class="dropdown-item" href="{% url 'logout'%}?next={{request.path}}">Logout</a>
               <a class="dropdown-item" href="{% url 'alltickets' %}">Tickets</a>
+<a class="dropdown-item" href="{% url 'alltickets' %}"><img src="{% static 'icon_sets\cogs-solid.svg'%}" alt"" height="20px" width="20px" /> Settings</a>
             </div>
           </div>
           {% else %}

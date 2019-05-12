@@ -4,139 +4,141 @@
 {% block content %}
 {% include "container/menu2.html" %}
 
+<script type="text/javascript">
+  function toggle(source) {
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    for (var i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i] != source)
+      checkboxes[i].checked = source.checked;
+    }
+  }
+
+</script>
 
 <div class="container top">
 
-<section>
-  <form class="" action="." method="GET">
-    <div class="form-row">
-      <div class="form-group col-8">
-        <div class="input-group">
-          <input class="form-control py-2 border-right-0 border " style="border-color:black;" type="text" value="" placeholder="Easting" name="area_easting"/>
-          <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Northing" name="area_northing"/>
-          <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Context Number" name="context_number"/>
-          <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Sample Number" name="sample_number"/>
-          <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Sample Type" name="sample_type"/>
-          <span class="input-group-append">
-            <div class="input-group-text bg-success" ><button type="submit" class="btn" style="padding:5pt; margin:-5pt; background-color:transparent;"><i class="fa fa-search"></i></button></div>
-          </span>
+  <section>
+    <form class="" action="." method="GET">
+{% csrf_token %}
+      <div class="form-row">
+        <div class="form-group col-8">
+          <div class="input-group">
+            <input class="form-control py-2 border-right-0 border " style="border-color:black;" type="text" value="" placeholder="Easting" name="area_easting"/>
+            <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Northing" name="area_northing"/>
+            <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Context Number" name="context_number"/>
+            <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Sample Number" name="sample_number"/>
+            <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Sample Type" name="sample_type"/>
+            <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Current Container" name="current_container"/>
+            <span class="input-group-append">
+              <div class="input-group-text bg-success" ><button type="submit" class="btn" style="padding:5pt; margin:-5pt; background-color:transparent;"><i class="fa fa-search"></i></button></div>
+            </span>
+          </div>
         </div>
       </div>
-    </div>
     </form>
-</section>
+  </section>
 
 
 
-<section>
-
-  <div class="float-left col-md-4">
-    <h4 class="kap">Shelf: {{ container.location_id }} Container:{{ container.container_name }} </h4>
-    <div class="table-responsive">
-      <table class="table-striped table-dark">
-        <thead>
-          <tr>
-            <!-- <th>Sample Id</th> -->
-            <th>E.N.C.S</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            {% for contents in container_contents %}
-
-            <!-- <td>{{ contents.sample_id }}</td> -->
-            <td>{{ contents.area_easting }}.
-              {{ contents.area_northing }}.
-              {{ contents.context_number }}.
-              {{ contents.sample_number }}</td>
-
-              <td class="" style="margin:10px; padding:10px;"><a href="{% url 'depot:change_container'  operation='remove' pk=container.container_id fk=contents.sample_id  %}" class="badge badge-primary" role="button">
-                <i class="fas fa-arrow-right fa-2x" ></i>
-              </a></td>
-            </tr>
-            {% empty %}
-            <tr>
-              <td>
-                <p>This container is empty</p>
-                <p>Add a sample using the <span class="badge badge-primary"><<</span> button</p>
-              </td>
-              <td></td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
-
+  <section>
 
     <div class="float-left col-md-4">
-
-
-      <h4 class="kap">Unassigned Samples</h4>
+      <h4 class="kap">Shelf: {{ container.location_id }} Container:{{ container.container_name }} </h4>
       <div class="table-responsive">
         <table class="table-striped table-dark">
           <thead>
             <tr>
-              <th></th>
+              <!-- <th>Sample Id</th> -->
+
               <th>E.N.C.S</th>
-              <th>Current Location</th>
-              <!-- <th>Sample ID</th>
-              <th>Container ID</th>
-              <th>Container name</th> -->
             </tr>
           </thead>
           <tbody>
-            {% for unassigned in unassigned_samples %}
             <tr>
-              {% if unassigned not in container_contents %}
-              <!-- we will want to add an if stmt list if not in unassigned - need to think how to do this -->
-              <td style="margin:10px; padding:10px;"><a href="{% url 'depot:change_container'  operation='add' pk=container.container_id fk=unassigned.sample_id  %}" class="badge badge-primary" role="button">
-                <i class="fas fa-arrow-left fa-2x"></i>
-              </a></td>
-              <td>{{ unassigned.area_easting }}.{{ unassigned.area_northing }}.{{ unassigned.context_number }}.{{ unassigned.sample_number }}</td>
+              {% for contents in container_contents %}
 
-              {% for container in unassigned.containers.all %}
-                              <td>{{ container.location_id }}.{{ container.container_name }}</td>
+              <!-- <td>{{ contents.sample_id }}</td> -->
+              <td>{{ contents.area_easting }}.
+                {{ contents.area_northing }}.
+                {{ contents.context_number }}.
+                {{ contents.sample_number }}</td>
 
-                              {% empty %}
-                              <td>None</td>
-                            {% endfor %}
-
-
-              <!-- <td>{{ unassigned.sample_id }}</td>
-              <td>{{ container.container_id }}</td> -->
-              <!-- <td>{{ container.container_name }}</td> -->
-                </tr>
-
-
-{% endif %}
-
+                <td class="" style="margin:10px; padding:10px;"><a href="{% url 'depot:change_container'  operation='remove' pk=container.container_id fk=contents.sample_id  %}" class="badge badge-primary" role="button">
+                  <i class="fas fa-arrow-right fa-2x" ></i>
+                </a></td>
+              </tr>
               {% empty %}
               <tr>
                 <td>
-                  <p>These are not the samples you are looking for!</p>
-                  <p>Use the above filter to search for a sample.
-                    <!-- <i class="fas fa-star" style="color:yellow;"></i>
-                    <i class="fas fa-star" style="color:yellow;"></i>
-                    <i class="fas fa-star" style="color:yellow;"></i> -->
-                  </p>
+                  <p>This container is empty</p>
+                  <p>Add a sample using the <span class="badge badge-primary"><<</span> button</p>
                 </td>
+                <td></td>
               </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-  </section>
-
-  <div class="clearfix" style="padding-top:100px;"></div>
 
 
+      <div class="float-left col-md-4">
+        <h4 class="kap">Samples</h4>
+        <div class="table-responsive">
+          <form class="" action="" method="POST">
+            {% csrf_token %}
+            <table class="table-striped table-dark">
+              <thead>
+                <tr>
+                  <th style="padding-left:5px;">
+                    <input type="checkbox" onclick="toggle(this);" />
+                  </th>
+                  <th></th>
+                  <th>E.N.C.S</th>
+                  <th>Current Location</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for unassigned in unassigned_samples %}
+                <tr>
+                  {% if unassigned not in container_contents %}
+                  <td style="padding-left:5px;"><input type="checkbox" /></td>
+                  <td style="margin:10px; padding:10px;"><a href="{% url 'depot:change_container'  operation='add' pk=container.container_id fk=unassigned.sample_id  %}" class="badge badge-primary" role="button">
+                    <i class="fas fa-arrow-left fa-2x"></i>
+                  </a></td>
+                  <td>{{ unassigned.area_easting }}.{{ unassigned.area_northing }}.{{ unassigned.context_number }}.{{ unassigned.sample_number }}</td>
+                    {% for container in unassigned.containers.all %}
+                  <td>{{ container.location_id }}.{{ container.container_name }}</td>
+                  {% empty %}
+                  <td>None</td>
+                  {% endfor %}
+                </tr>
+                {% endif %}
+                {% empty %}
+                <tr>
+                  <td>
+                    <p>These are not the samples you are looking for!</p>
+                    <p>Use the above filter to search for a sample.
+                    </p>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <button type="submit" class="save btn btn-default"><-- Move</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <div class="clearfix" style="padding-top:100px;"></div>
 
 
 
 
-</div>
+
+
+  </div>
 </div>
 </main>
 <div class="clearfix"></div>
