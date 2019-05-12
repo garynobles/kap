@@ -26,3 +26,9 @@ botany/migrations/
 jobs/migrations/
 
 depot/migrations/
+
+tickets/__pycache__/
+
+tickets/migrations/
+
+depot/__pycache__/
