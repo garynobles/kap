@@ -1,0 +1,41 @@
+<style>
+  .munsell {
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+    border: 1px solid rgba(0, 0, 0, .2);
+  }
+
+  .M2_5Y-7-2 {background: #BFA99F ;}
+
+  .M2_5YR-6-2	 {background: #A68F85 ;}
+
+
+  .M7_5YR-6-4 {background: #B08D6D ;}
+
+  .M5YR-1-4 {background: ;}
+  .M5YR-2-4 {background: ;}
+  .M5YR-3-4 {background: ;}
+  .M5YR-4-4 {background: ;}
+
+  .M5YR-5-4 {background: #92744F;}
+  .M5YR-6-4 {background: #AC8F67;}
+
+  .M5YR-7-4 {background: ;}
+  .M5YR-8-4 {background: ;}
+  .M5YR-9-4 {background: ;}
+  .M5YR-10-4 {background: ;}
+
+
+
+  .M7_5YR-7-2	{background: #BEAA99 ;}
+
+
+  .M7_5YR-6-2 {background: #A49080 ;}
+
+  .M10YR-6-2 {background: #A1917D ;}
+
+  .M10YR-7-2 {background: #BCAB96 ;}
+
+</style>

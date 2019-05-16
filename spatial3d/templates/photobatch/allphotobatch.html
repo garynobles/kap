@@ -125,6 +125,7 @@ $(document).ready(function() {
           {% if o.export_dem_geodatabase %}<td class="table-success">{% else %}<td class="table-danger">{% endif %}{{ o.export_dem_geodatabase|yesno:"yes,no"  }}</td>
           {% if o.folder_processed %}<td class="table-success">{% else %}<td class="table-danger">{% endif %}{{ o.folder_processed|yesno:"yes,no" }}</td>
 
+
           <td>
             <div class="btn-group" role="group" aria-label="Basic example">
               <a href="{% url 'editphotobatch' pk=o.pk %}" class="btn btn-primary" role="button">edit</a>

@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, render_to_response, redirect
+from django.contrib.auth.models import User
 from django import forms
 from tickets.models import Ticket
 # Create your views here.
@@ -13,7 +14,9 @@ def alltickets(request):
     })
 
 def opentickets(request):
+    # current_user = request.user.id
     open = Ticket.objects.all().exclude(status='completed')
+    # open = Ticket.objects.filter(submitted_by = current_user)
     return render(request, 'open_tickets.html',
     {
     'open':open

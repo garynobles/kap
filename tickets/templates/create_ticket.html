@@ -9,7 +9,7 @@
     <!-- <form method="POST" class="post-form">{% csrf_token %}
           {{ form.as_p }}
 
-        <button type="submit" class="save btn btn-default">Save</button>
+        <button type="submit" class="save btn btn-dark mt-3t">Save</button>
     </form> -->
 
     <form method="POST" class="post-form">{% csrf_token %}
@@ -18,7 +18,7 @@
         <div class="col col-md-12" style="color:white;">{{ form.details|add_class:"col-md-12"|append_attr:"placeholder:Details"}}</div>
         <div class="col" style="color:white;">Department<br />{{ form.department|add_class:""}}</div>
         <div class="col" style="color:white;">System<br />{{ form.system|add_class:""}}</div>
-        <div class="col" style="color:white;">Category<br />{{ form.category|add_class:""}}</div>
+        <div class="col" style="color:white;">Request type<br />{{ form.category|add_class:""}}</div>
         <div class="col" style="color:white;">Priority<br />{{ form.priority|add_class:""}}</div>
         {% if request.user|has_group:"admin_ticket"%}
         <div class="col" style="color:white;">Assigned To {{ form.assigned_to|add_class:""}}</div>

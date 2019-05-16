@@ -4,6 +4,9 @@ from django.conf import settings
 
 CAT_CHOICES = (
     ("option","option"),
+    ("menu change","menu change"),
+    ("new form","new form"),
+    ("form alteration","form alteration"),
     ("general request","general request"),
     ("other","other"),
 )
@@ -22,6 +25,7 @@ DEPT_CHOICES = (
 TICKET_STATUS_CHOICES = (
     ("awaiting assignment","awaiting assignment"),
     ("assigned","assigned"),
+    ("next migration","next migration"),
     ("completed","completed")
 )
 

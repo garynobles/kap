@@ -28,3 +28,5 @@ tickets/migrations/
 
 zooarch/migrations/
 zooarch/__pycache__/
+
+spatial3d/__pycache__/
