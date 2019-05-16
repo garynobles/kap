@@ -19,19 +19,12 @@
 
 
       {% for location in location %}
-
-
       <tr>
-
         <td>{{ location.location_id }}</td>
         <!-- <td>{{ o.location_identifier}}</td> -->
         <td>{{ location.location_type}}</td>
-
         <!-- <td>{{ o.current_location_tmp}}</td> -->
-        <td>{{ location.location_name}}</td>
-
-
-
+        <td>{{ location.location_name}}.{{ location.location_sub_name}}</td>
         <td>
           <div class="btn-group" role="group" aria-label="Basic example">
 

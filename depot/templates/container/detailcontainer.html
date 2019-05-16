@@ -1,4 +1,5 @@
 {% extends 'sample/base.html' %}
+{% load staticfiles %}
 {% load widget_tweaks %}
 
 {% block content %}
@@ -15,9 +16,13 @@
 
 </script>
 
+
 <div class="container top">
 
   <section>
+
+
+
     <form class="" action="." method="GET">
 {% csrf_token %}
       <div class="form-row">
@@ -91,7 +96,7 @@
               <thead>
                 <tr>
                   <th style="padding-left:5px;">
-                    <input type="checkbox" onclick="toggle(this);" />
+                    <input type="checkbox" name="checks[]" onclick="toggle(this);" />
                   </th>
                   <th></th>
                   <th>E.N.C.S</th>
@@ -102,10 +107,35 @@
                 {% for unassigned in unassigned_samples %}
                 <tr>
                   {% if unassigned not in container_contents %}
-                  <td style="padding-left:5px;"><input type="checkbox" /></td>
+
+
+                  {% for container in unassigned.containers.all %}
+
+
+                {% if container.container_name == '' %}
+                <td>Not assigned</td>
+
+                {% else  %}
+<td></td>
+                <td>Already Assigned</td>
+
+                {% endif %}
+
+                {% empty %}
+                <td style="padding-left:5px;"><input type="checkbox" /><input type="hidden" value="{% url 'depot:change_container'  operation='add' pk=container.container_id fk=unassigned.sample_id  %}"</td>
+                <td style="margin:10px; padding:10px;"><a href="{% url 'depot:change_container'  operation='add' pk=container.container_id fk=unassigned.sample_id  %}" class="badge badge-primary" role="button">
+                  <i class="fas fa-arrow-left fa-2x"></i>
+                </a></td>
+
+                {% endfor %}
+
+
+
+
+                  <!-- <td style="padding-left:5px;"><input type="checkbox" /><input type="hidden" value="{% url 'depot:change_container'  operation='add' pk=container.container_id fk=unassigned.sample_id  %}"</td>
                   <td style="margin:10px; padding:10px;"><a href="{% url 'depot:change_container'  operation='add' pk=container.container_id fk=unassigned.sample_id  %}" class="badge badge-primary" role="button">
                     <i class="fas fa-arrow-left fa-2x"></i>
-                  </a></td>
+                  </a></td> -->
                   <td>{{ unassigned.area_easting }}.{{ unassigned.area_northing }}.{{ unassigned.context_number }}.{{ unassigned.sample_number }}</td>
                     {% for container in unassigned.containers.all %}
                   <td>{{ container.location_id }}.{{ container.container_name }}</td>
@@ -125,16 +155,13 @@
                 {% endfor %}
               </tbody>
             </table>
-            <button type="submit" class="save btn btn-default"><-- Move</button>
+            <button type="submit" class="save btn btn-dark mt-3t"><-- Move</button>
           </form>
         </div>
       </div>
     </section>
 
     <div class="clearfix" style="padding-top:100px;"></div>
-
-
-
 
 
 

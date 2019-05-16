@@ -4,40 +4,96 @@
 {% include "container/menu2.html" %}
 <div class="container top">
   <section>
+    <form class="" action="." method="GET">
+      {% csrf_token %}
+      <div class="form-row">
+        <div class="form-group col-8">
+          <div class="input-group">
+            <input class="form-control py-2 border-right-0 border " style="border-color:black;" type="text" value="" placeholder="Container Type" name="type"/>
+
+            <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Rack" name="rack"/>
+            <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Shelf" name="shelf"/>
+            <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Container" name="name"/>
+
+            <span class="input-group-append">
+              <div class="input-group-text bg-success" ><button type="submit" class="btn" style="padding:5pt; margin:-5pt; background-color:transparent;"><i class="fa fa-search"></i></button></div>
+            </span>
+          </div>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <section>
     <h4 class="kap">Containers</h4>
     <div class="table-responsive">
       <table class="table-striped">
         <thead>
-      <tr>
-        <th>container ID</th>
-        <th>container_type</th>
-        <th>container_name</th>
-        <th>container location</th>
-        <th>action</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for container in container %}
-      <tr>
-        <td>{{ container.container_id }}</td>
-        <td>{{ container.container_type}}</td>
-        <td>{{ container.container_name}}</td>
-        <td>{{container.location_id.location_name}}.{{ container.container_name }}</td>
-        <td>
-          <div class="btn-group" role="group" aria-label="Basic example">
-            <a href="{% url 'depot:editcontainer' pk=container.pk %}"><i class="far fa-edit fa-2x edit" style="margin:10px; padding:10px;"></i></a>
-            <a href="{% url 'depot:detailcontainer' container.container_id  %}"><i class="fas fa-box-open fa-2x detail" style="margin:10px; padding:10px;"></i></a>
-          </div>
-        </td>
+          <tr>
+            <th>container ID</th>
+            <th>container_type</th>
+            <!-- <th>container_name</th> -->
+            <th>container location</th>
+            <th>action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for container in container %}
+          <tr>
+            <td>{{ container.container_id }}</td>
+            <td>{{ container.container_type}}</td>
+            <!-- <td>{{ container.container_name}}</td> -->
+            <td>{{container.location_id.location_name}}.{{container.location_id.location_sub_name}}.{{ container.container_name }}</td>
+            <td>
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="{% url 'depot:editcontainer' pk=container.pk %}"><i class="far fa-edit fa-1x edit" style="margin:10px; padding:10px;"></i></a>
+                <a href="{% url 'depot:detailcontainer' container.container_id  %}"><i class="fas fa-box-open fa-1x detail" style="margin:10px; padding:10px;"></i></a>
+              </div>
+            </td>
 
-      </tr>
-      {% empty %}
-      <tr>
-        <td colspan="5">No data</td>
-      </tr>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="5">No data</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
+    <section>
+
+      {% if pub.has_other_pages %}
+      <p>a</p>
+      {% if pub.has_previous %}
+      <p>b</p>
+      <a href="?page={{ pub.previous_page_number }}">previous</a>
+      <!-- </li> -->
+      {% else %}
+      <li class="disabled"><span>???</span></li>
+      {% endif %}
+      {% for i in pub.paginator.page_range %}
+      {% if pub.number == i %}
+      <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+      <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
       {% endfor %}
-    </tbody>
-  </table>
-</div>
-</section>
+      {% if pub.has_next %}
+      <li><a href="?page={{ pub.next_page_number }}">next</a></li>
+      {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+      {% endif %}
+
+      {% endif %}
+    </section>
+
+
+
+
+  </div>
+
+
   {% endblock %}

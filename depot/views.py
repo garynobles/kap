@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, render_to_response, redirect
 from django import forms
 from django.contrib.auth.models import User
+
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # from django.utils.translation import ugettext
 # import django_filters
 # from django_filters.filterset import ORDER_BY_FIELD
@@ -54,6 +56,9 @@ def change_container(request, operation, pk='', fk=''):
     container = Container.objects.get(pk=pk)
     sample = Sample.objects.get(pk=fk)
 
+    if request.method == 'POST': # this is my guess work
+        id_list = request.POST.getlist('') # this is my guess work
+
     if operation == 'add':
         ContainerSamples.add_to_container(container, sample)
     elif operation == 'remove':
@@ -81,10 +86,59 @@ def alllocation(request):
 
 def allcontainer(request):
     allcontainer = Container.objects.all()
-    return render(request, 'container/allcontainer.html',
-     {
-        'container':allcontainer
-    })
+    container_list = Container.objects.all()
+    user_list = User.objects.all()
+
+    type = request.GET.get('type')
+    name = request.GET.get('name')
+    rack = request.GET.get('rack')
+    shelf = request.GET.get('shelf')
+
+    if (
+    type =='' or type is None and
+    name =='' or name is None and
+    rack =='' or rack is None and
+    shelf =='' or shelf is None
+    ):
+        allcontainer = allcontainer
+
+    if type !='' and type is not None:
+        allcontainer = allcontainer.filter(container_type__iexact=type)
+    if name !='' and name is not None:
+        allcontainer = allcontainer.filter(container_name__iexact=name)
+    if rack !='' and rack is not None:
+        allcontainer = allcontainer.filter(location_id__location_name__iexact=rack)
+    if shelf !='' and shelf is not None:
+        allcontainer = allcontainer.filter(location_id__location_sub_name__iexact=shelf)
+
+
+
+    qs = allcontainer
+    paginator = Paginator(qs, 25)
+    page = request.GET.get('page')
+    try:
+        pub = paginator.page(page)
+    except PageNotAnInteger:
+        pub = paginator.page(1)
+    except EmptyPage:
+       pub = paginator.page(paginator.num_pages)
+    # url_filter = PublicationFilter(request.GET, queryset=qs)
+
+    context = {
+    'container':allcontainer,
+    'type': type,
+    'pub':pub,
+    # 'url_filter':url_filter
+    # name
+    # rack
+    # shelf
+    }
+
+    return render(request, 'container/allcontainer.html', context)
+    #  {
+    #     'container':allcontainer
+    #
+    # })
 
 def alldepotsample(request):
     alldepotsample = Sample.objects.all()
@@ -397,6 +451,7 @@ class LocationForm(forms.ModelForm):
         'icon_desc',
         'location_type',
         'location_name',
+        'location_sub_name',
         'orderby',
 
         )
@@ -505,27 +560,32 @@ def detailcontainer(request, container_id):
         unassigned_samples = unassigned_samples.none()
 
     if easting_query != '' and easting_query is not None:
-        unassigned_samples = unassigned_samples.filter(area_easting__icontains=easting_query)
+        unassigned_samples = unassigned_samples.filter(area_easting__iexact=easting_query)
     if northing_query != '' and northing_query is not None:
-        unassigned_samples = unassigned_samples.filter(area_northing__icontains=northing_query)
+        unassigned_samples = unassigned_samples.filter(area_northing__iexact=northing_query)
     if context_query != '' and context_query is not None:
-        unassigned_samples = unassigned_samples.filter(context_number__icontains=context_query)
+        unassigned_samples = unassigned_samples.filter(context_number__iexact=context_query)
     if sample_number_query != '' and sample_number_query is not None:
-        unassigned_samples = unassigned_samples.filter(sample_number__icontains=sample_number_query)
+        unassigned_samples = unassigned_samples.filter(sample_number__iexact=sample_number_query)
     if sample_type_query != '' and sample_type_query is not None:
-        unassigned_samples = unassigned_samples.filter(sample_type__icontains=sample_type_query)
+        unassigned_samples = unassigned_samples.filter(sample_type__iexact=sample_type_query)
     # if current_container_query != '' and current_container_query is not None:
     #     a=1+1
         # unassigned_samples = unassigned_samples.filter(container_set__container_name__icontains=current_container_query)
         # unassigned_samples = unassigned_samples.filter(container__container_name__contains=1)
 
-    qs = qs
+    # qs = qs
+
+
+
 
     context = {
-        'queryset': qs,
+        # 'queryset': qs,
         'container':container,
         'container_contents': container_contents,
         'unassigned_samples': unassigned_samples,
+
+        # 'users':users,
 
         'easting_query': easting_query,
         'northing_query': northing_query,
