@@ -115,6 +115,7 @@ class Species(models.Model):
     common_name = models.CharField(max_length=50, blank=True, null=True)
     species = models.CharField(max_length=50, blank=True, null=True)
     genus = models.CharField(max_length=50, blank=True, null=True)
+    # family_name = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
         return str(self.species)
@@ -122,14 +123,14 @@ class Species(models.Model):
     class Meta():
         managed=False
         db_table = 'kap\".\"plant_species'
-        #ordering = ["orderby"]
+        ordering = ["genus","species"]
         verbose_name_plural = "species"
 
 class PlantPart(models.Model):
     plantpart_id = models.AutoField(primary_key=True)
     fraction_id = models.ForeignKey(Fraction, db_column='fraction_id', on_delete = models.PROTECT)
     species_id = models.ForeignKey(Species, db_column='species_id', on_delete = models.PROTECT, related_name='plant_species', blank=True, null=True)
-    part = models.CharField(max_length=50)
+    part = models.CharField(max_length=100)
     weight = models.DecimalField(max_digits=10, decimal_places=3)
     quantity = models.DecimalField(max_digits=10, decimal_places=3)
 
@@ -159,5 +160,5 @@ class Seed(models.Model):
     class Meta():
         managed=False
         db_table = 'kap\".\"seed'
-        #ordering = ["orderby"]
+        ordering = ["species_id","fraction_id"]
         verbose_name_plural = "seeds"

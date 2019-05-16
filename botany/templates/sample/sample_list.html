@@ -45,7 +45,29 @@ $(document).ready(function() {
 
 
 <div class="container top">
-  <button id = "show" class="ml-3">Filter</button>
+  <!-- <button id = "show" class="ml-3">Filter</button> -->
+
+<br /><br />
+  <section>
+    <form class="float-right" action="." method="GET">
+      <div class=" float-right">
+        <div class="form-group col-8 float-right">
+          <div class="input-group float-right">
+            <input class="form-control py-2 border-right-0 border " style="border-color:black;" type="text" value="" placeholder="Easting" name="area_easting"/>
+            <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Northing" name="area_northing"/>
+            <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Context No." name="context_number"/>
+            <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Sample No." name="sample_number"/>
+            <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Sample Type" name="sample_type"/>
+            <span class="input-group-append">
+              <div class="input-group-text bg-success" ><button type="submit" class="btn" style="padding:5pt; margin:-5pt; background-color:transparent;"><i class="fa fa-search"></i></button></div>
+            </span>
+          </div>
+        </div>
+      </div>
+      </form>
+  </section>
+
+
   <div class = "target position-absolute ml-5" style="box-shadow: 20px  20px 8px 0 rgba(0, 0, 0, 0.5); display:none;">
     <div class="card bg-light pb-3" style="">
       <div class="card-header">Filter
