@@ -46,7 +46,7 @@ PRIORITY_CHOICES = (
 # Create your models here.
 class Ticket(models.Model):
     ticket_id = models.AutoField(primary_key=True)
-    submitted_by = models.ForeignKey(settings.AUTH_USER_MODEL, db_column='taken_by', on_delete = models.PROTECT)
+    submitted_by = models.ForeignKey(settings.AUTH_USER_MODEL, db_column='taken_by', on_delete = models.PROTECT, blank=True, null=True)
     subject = models.CharField(max_length=200, default='')
     details = models.CharField(max_length=5000, default='')
     category = models.CharField(max_length=20, default='', choices = CAT_CHOICES)
