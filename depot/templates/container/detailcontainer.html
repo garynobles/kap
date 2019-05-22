@@ -107,18 +107,12 @@
                 {% for unassigned in unassigned_samples %}
                 <tr>
                   {% if unassigned not in container_contents %}
-
-
                   {% for container in unassigned.containers.all %}
-
-
                 {% if container.container_name == '' %}
                 <td>Not assigned</td>
-
                 {% else  %}
-<td></td>
+                <td></td>
                 <td>Already Assigned</td>
-
                 {% endif %}
 
                 {% empty %}

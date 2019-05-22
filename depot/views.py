@@ -111,8 +111,6 @@ def allcontainer(request):
     if shelf !='' and shelf is not None:
         allcontainer = allcontainer.filter(location_id__location_sub_name__iexact=shelf)
 
-
-
     qs = allcontainer
     paginator = Paginator(qs, 25)
     page = request.GET.get('page')
@@ -135,10 +133,44 @@ def allcontainer(request):
     }
 
     return render(request, 'container/allcontainer.html', context)
-    #  {
-    #     'container':allcontainer
+
+
+    # def my_view(request):
+    # filtered_qs = filters.MyModelFilter(
+    #                   request.GET,
+    #                   queryset=MyModel.objects.all()
+    #               ).qs
+    # paginator = Paginator(filtered_qs, YOUR_PAGE_SIZE)
     #
-    # })
+    # page = request.GET.get('page')
+    # try:
+    #     response = paginator.page(page)
+    # except PageNotAnInteger:
+    #     response = paginator.page(1)
+    # except EmptyPage:
+    #     response = paginator.page(paginator.num_pages)
+    #
+    # return render(
+    #     request,
+    #     'your_template.html',
+    #     {'response': response}
+    # )
+
+
+
+    # Filtering solution?
+    # if 'results' in request.GET and request.GET['results']:
+    #         page = request.GET.get('page', 1)
+    #
+    #         results = request.GET['results']
+    #         word = words.objects.filter(title__icontains = results).order_by('title')
+    #         paginator = Paginator(word, 25) # Show 25 contacts per page
+    #         word = paginator.page(page)
+    #         return render_to_response('myapp/search.html',
+    #                  {'word': word, 'query': results })
+    #     else:
+    #     return render(request, 'myapp/search.html')
+
 
 def alldepotsample(request):
     alldepotsample = Sample.objects.all()
@@ -149,6 +181,41 @@ def alldepotsample(request):
         'alldepotsample':alldepotsample,
         # 'relcon': joinsamplecontainer,
     })
+
+
+    # def my_view(request):
+    # filtered_qs = filters.MyModelFilter(
+    #                   request.GET,
+    #                   queryset=MyModel.objects.all()
+    #               ).qs
+    # paginator = Paginator(filtered_qs, YOUR_PAGE_SIZE)
+    #
+    # page = request.GET.get('page')
+    # try:
+    #     response = paginator.page(page)
+    # except PageNotAnInteger:
+    #     response = paginator.page(1)
+    # except EmptyPage:
+    #     response = paginator.page(paginator.num_pages)
+    #
+    # return render(
+    #     request,
+    #     'your_template.html',
+    #     {'response': response}
+    # )
+
+    # Filtering solution?
+    # if 'results' in request.GET and request.GET['results']:
+    #         page = request.GET.get('page', 1)
+    #
+    #         results = request.GET['results']
+    #         word = words.objects.filter(title__icontains = results).order_by('title')
+    #         paginator = Paginator(word, 25) # Show 25 contacts per page
+    #         word = paginator.page(page)
+    #         return render_to_response('myapp/search.html',
+    #                  {'word': word, 'query': results })
+    #     else:
+    #     return render(request, 'myapp/search.html')
 
 
 #### ADD ####
@@ -285,83 +352,6 @@ def detailstorage(request, store_id):
 
 def detaillocation(request):
     pass
-
-# def detail(request, place_id):
-#     place = Place.objects.get(pk=place_id)
-#     areas = place.area.all()
-
-# def detailcontainer(request, container_id):
-#     container = get_object_or_404(Container, pk=container_id)
-#     samples = container.samples.all()
-#     # allsamples = container.samples.exclude(sample_id=samples.sample_id)
-#     # allsamples = container.samples.all()
-#     users = User.objects.exclude(id=request.user.id).order_by('-id')
-#     friend = Friend.objects.get(current_user=request.user)
-#     friends = friend.users.all().order_by('-id')
-#     # container_contents = Container.objects.get(current_container=samples)
-#     container_contents = container.samples.all()
-#     # sample = ContainerSamples.objects.get(sample_id=s)
-#     # s = ContainerSamples.objects.all().filter(sample_id=29265877, container_id=13)
-#     unassigned_samples = Sample.objects.all()[:10]
-#
-#     # table  = container.samples.all()
-#     # table.paginate(page=request.GET.get('page', 1), per_page=25)
-#     # RequestConfig(request, paginate={'per_page': 25}).configure(table)
-#     # RequestConfig(request).configure(table)
-#     # table.paginate(page=request.GET.get('page', 1), per_page=25)
-#
-#     return render(request, 'container/detailcontainer.html',
-#     {'container':container,
-#     # 'samples':samples,
-#     'users': users,
-#     'friends': friends,
-#     # 'allsamples': allsamples,
-#     'container_contents': container_contents,
-#     # 'table':table,
-#     'unassigned_samples': unassigned_samples
-#
-#     })
-
-
-
-
-
-# def containercontents(request, container_id):
-#     container = get_object_or_404(Container, pk=container_id)
-#     samples = container.samples.all()
-#
-#     container_contents = container.samples.all()[:20]
-#
-#     unassigned = Sample.objects.all()[:5]
-#     return render(request, 'container/containercontents.html',
-#     {'container':container,
-#     'samples': samples,
-#
-#     'container_contents': container_contents,
-#     'unassigned': unassigned
-#     })
-
-    # 'related_sample_list': related_samples_list,
-
-    # 'unrelated_sample_list': unrelated_samples_list,
-
-
-    # returns the container
-    # container_contents = Container.objects.get(container_id=container.container_id)
-
-    # related_samples_list = container_contents.samples.all()
-    # unrelated_samples_list = related_samples_list.samples.all()
-
-    # samples = Sample.objects.filter(sample_id__container_id=container.pk)
-    #samples = JoinSampleContainer.objects.filter(sample_id__container_id=container.pk)
-    #joinsamplecontainer = JoinSampleContainer.objects.filter(container_id = 4)
-    #joinsamplecontainer = JoinSampleContainer.objects.filter(container_id = 4)
-    # samples = Container.objects.filter(container_id__container_id=container_id)
-    #joinsamplecontainer = JoinSampleContainer.objects.filter(container__id = container_id)
-    # samples = Samples.objects.filter(container__pk=samples.pk)
-    # location = location.container_set.all()
-    # samples = Container.objects.filter(container_id__container_id=container_id)
-
 
 def detaildepotsample(request, sample_id):
     pass

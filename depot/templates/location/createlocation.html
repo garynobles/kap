@@ -6,19 +6,13 @@
     <h4 class="kap">Location</h4>
     <div class="col-sm-3">
     <form method="POST" class="post-form">{% csrf_token %}
-
-
-        <!-- Location Identifier{{ form.location_identifier|add_class:""}}<br /> -->
-        Store ID <br />{{ form.store_id|add_class:""}}<br />
-
-        Location Type <br />{{ form.location_type|add_class:""}}<br />
-
-        <!-- Current Location TMP{{ form.current_location_tmp|add_class:""}}<br /> -->
-        Rack <br />{{ form.location_name|add_class:""}}<br />
-        Shelf <br />{{ form.location_sub_name|add_class:""}}<br />
-        Icon ID <br />{{ form.icon_desc|add_class:""}}<br /><br />
-
-
+        <div class="row mt-1">
+          <div class="col" style="color:white;">Store ID <br />{{ form.store_id|add_class:""}}</div>
+          <div class="col" style="color:white;">Location Type <br />{{ form.location_type|add_class:""}}</div>
+          <div class="col" style="color:white;">Rack <br />{{ form.location_name|add_class:""}}</div>
+          <div class="col" style="color:white;">Shelf <br />{{ form.location_sub_name|add_class:""}}</div>
+          <div class="col" style="color:white;">Icon ID <br />{{ form.icon_desc|add_class:""}}</div>
+        </div>
         <button type="submit" class="save btn btn-dark mt-3t">Save</button>
     </form>
   </div>
