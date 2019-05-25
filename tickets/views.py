@@ -13,17 +13,31 @@ def alltickets(request):
 
     })
 
+def assignedtickets(request):
+    # current_user = request.user.id
+    open = Ticket.objects.all().exclude(status='completed')
+    current_user=request.user.id
+    open = Ticket.objects.filter(assigned_to = current_user)
+    # open = Ticket.objects.filter(submitted_by = current_user)
+    # open = Ticket.objects.filter(current_user)
+    return render(request, 'open_tickets.html',
+    {
+    'open':open
+    })
+
 def opentickets(request):
     # current_user = request.user.id
     open = Ticket.objects.all().exclude(status='completed')
-    current_user=request.user
-    # open = Ticket.objects.filter(submitted_by = current_user)
+    current_user=request.user.id
+    open = Ticket.objects.filter(submitted_by = current_user)
     # open = Ticket.objects.filter(current_user)
     return render(request, 'open_tickets.html',
     {
     'open':open
 
     })
+
+
 
 def closedtickets(request):
     alltickets = Ticket.objects.all()

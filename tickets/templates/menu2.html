@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load has_group %}
 
 <header>
   <div  class="fixed-top">
@@ -151,19 +152,35 @@
         </a>
 
 
-        <a href="{% url 'alltickets' %}" style="color:white;">
+
+
+        <a href="{% url 'opentickets' %}" style="color:white;">
           <button  type="button" class="btn btn-info"><img src="{% static 'icon_sets\ticket-alt-solid.svg' %}" alt"" height="65" width="68" />
             <br />
+            Your Requests
+          </button>
+        </a>
+        {% if request.user|has_group:"admin_ticket"%}
+
+        <a href="{% url 'alltickets' %}" style="color:white;">
+          <button  type="button" class="btn btn-info">
+            <img src="{% static 'icon_sets\ticket-alt-solid.svg' %}" alt"" height="65" width="68" />
+            <br>
             All Tickets
           </button>
         </a>
+        {% else %}
+        {% endif %}
 
-        <a  href="{% url 'opentickets' %}">
-          <button  type="button" class="btn btn-info"><img src="{% static 'icon_sets\folder-open-solid.svg' %}" alt"" height="65" width="68" />
+        <a href="{% url 'assignedtickets' %}" style="color:white;">
+          <button  type="button" class="btn btn-info"><img src="{% static 'icon_sets\ticket-alt-solid.svg' %}" alt"" height="65" width="68" />
             <br />
-            Open Tickets
+            For You
           </button>
         </a>
+
+
+
 
         <a  href="{% url 'closedtickets' %}">
           <button  type="button" class="btn btn-info"><img src="{% static 'icon_sets\archive-solid.svg' %}" alt"" height="65" width="68" />
@@ -171,6 +188,10 @@
             Archived
           </button>
         </a>
+
+
+
+
 
       </div>
 
