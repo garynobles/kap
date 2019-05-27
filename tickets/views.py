@@ -37,12 +37,18 @@ def opentickets(request):
 
     })
 
-
+# def closedtickets(request):
+#     alltickets = Ticket.objects.all()
+#     archived = Ticket.objects.all().filter(status='completed')
+#     return render(request, 'archived_tickets.html',
+#     {
+#     'archived':archived,
+#     })
 
 def closedtickets(request):
     alltickets = Ticket.objects.all()
-    archived = Ticket.objects.all().filter(status='completed')
-    open = Ticket.objects.all().filter(status='completed')
+    current_user=request.user.id
+    archived = Ticket.objects.filter(submitted_by = current_user).filter(status='completed')
     return render(request, 'archived_tickets.html',
     {
     'archived':archived,
