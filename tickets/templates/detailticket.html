@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load has_group %}
+{% block content %}
+{% include "menu2.html" %}
+<div class="container top">
+  <h4 class="kap">Ticket</h4>
+    <div class="col-md-12">
+        {% if request.user|has_group:"admin_ticket"%}
+        {% else %}
+        {% endif %}
+
+      <section>
+
+          <div class="row">
+            <div class="col col-md-12 " style="color:white;">{{ archived.subject}}</div>
+            <div class="col col-md-12" style="color:white;">{{ archived.details}}</div>
+            <div class="col" style="color:white;">Department<br />{{ archived.department}}</div>
+            <div class="col" style="color:white;">System<br />{{ archived.system}}</div>
+            <div class="col" style="color:white;">Request type<br />{{ archived.category}}</div>
+            <div class="col" style="color:white;">Priority<br />{{ archived.priority}}</div>
+            { if request.user|has_group:"admin_ticket"}
+            <div class="col" style="color:white;">Assigned To {{ archived.assigned_to}}</div>
+            <div class="col" style="color:white;">Status {{ archived.status}}</div>
+            <div class="col" style="color:white;">Submitted By <br />{{ archived.submitted_by}}</div>
+
+            { else }
+            { endif }
+
+          </div>
+          <br />
+
+
+      </section>
+
+
+
+  </div>
+</div>
+
+
+
+
+{% endblock %}<!--    |append_attr:"placeholder:Username"   -->

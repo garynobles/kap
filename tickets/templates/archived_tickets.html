@@ -34,9 +34,9 @@
     </thead>
     <tbody>
       {% for ticket in archived %}
-      <tr class='clickable-row' data-href="{% url 'editticket' pk=ticket.pk %}">
+      <tr class='clickable-row' data-href="{% url 'detailticket' pk=ticket.pk %}">
 
-        <!-- <td>{{ ticket.ticket_id }}</td> -->
+        <td>{{ ticket.ticket_id }}</td>
         <!-- <td>{{ ticket.submitted_by }}</td> -->
         <td>{{ ticket.subject }}</td>
         <td>{{ ticket.category }}</td>

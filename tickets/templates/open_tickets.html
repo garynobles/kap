@@ -20,8 +20,8 @@
       <table class="table-striped">
         <thead>
       <tr>
-        <!-- <th>Ticket ID</th>
-        <th>Submitted By</th> -->
+        <th>Request</th>
+        <!-- <th>Submitted By</th> -->
         <th>Subject</th>
         <th>Category</th>
         <th>Department</th>
@@ -37,7 +37,7 @@
 
       <tr class='clickable-row' data-href="{% url 'editticket' pk=ticket.pk %}">
 
-        <!-- <td>{{ ticket.ticket_id }}</td> -->
+        <td>#{{ ticket.ticket_id }}</td>
         <!-- <td>{{ ticket.submitted_by }}</td> -->
         <td>{{ ticket.subject }}</td>
         <td>{{ ticket.category }}</td>

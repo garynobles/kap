@@ -46,7 +46,7 @@ def opentickets(request):
 #     })
 
 def closedtickets(request):
-    alltickets = Ticket.objects.all()
+    # alltickets = Ticket.objects.all()
     current_user=request.user.id
     archived = Ticket.objects.filter(submitted_by = current_user).filter(status='completed')
     return render(request, 'archived_tickets.html',
@@ -84,15 +84,38 @@ def editticket(request, pk):
     return render(request, 'create_ticket.html', {'form': form})
 
 
+
+
+
 def deleteticket(request, pk):
     Ticket.objects.get(pk=pk).delete()
     return redirect('alltickets')
 
-def detailticket(request):
-    pass
-
+def detailticket(request, pk):
+    archived = get_object_or_404(Ticket, pk=pk)
+    return render(request, 'detailticket.html', {'archived':archived})
 
 class TicketForm(forms.ModelForm):
+    class Meta:
+        model = Ticket
+        fields = (
+        'ticket_id',
+        'submitted_by',
+        'subject',
+        'details',
+        'department',
+        'system',
+        'category',
+        'assigned_to',
+        'priority',
+        'status'
+        )
+
+        widgets = {
+          'details': forms.Textarea(attrs={'rows':8, 'cols':15}),
+        }
+
+class TicketFormView(forms.ModelForm):
     class Meta:
         model = Ticket
         fields = (
@@ -108,6 +131,6 @@ class TicketForm(forms.ModelForm):
         'status'
         )
 
-        widgets = {
-          'details': forms.Textarea(attrs={'rows':8, 'cols':15}),
-        }
+        # widgets = {
+        #   'details': forms.Textarea(attrs={'rows':8, 'cols':15}),
+        # }
