@@ -24,8 +24,8 @@
         <div class="col" style="color:white;">Assigned To {{ form.assigned_to|add_class:""}}</div>
         <div class="col" style="color:white;">Status {{ form.status|add_class:""}}</div>
         <div class="col" style="color:white;">Submitted By <br />{{ form.submitted_by|add_class:""}}</div>
-
         {% else %}
+        <div class="col" style="color:white;">To {{ form.assigned_to|add_class:""}}</div>
         {% endif %}
 
       </div>
