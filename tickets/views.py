@@ -14,12 +14,10 @@ def alltickets(request):
     })
 
 def assignedtickets(request):
-    # current_user = request.user.id
-    open = Ticket.objects.all().exclude(status='completed')
     current_user=request.user.id
     open = Ticket.objects.filter(assigned_to = current_user).exclude(status='completed')
-    # open = Ticket.objects.filter(submitted_by = current_user)
-    # open = Ticket.objects.filter(current_user)
+    order = ['Urgent', 'High', 'Medium', 'Low', 'None']
+    open = sorted(open, key=lambda x: order.index(x.priority))
     return render(request, 'open_tickets.html',
     {
     'open':open

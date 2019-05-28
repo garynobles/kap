@@ -56,3 +56,7 @@ class Ticket(models.Model):
     status = models.CharField(max_length=20, default='awaiting assignment', blank=True, null=True, choices = TICKET_STATUS_CHOICES)
     priority = models.CharField(max_length=20, default='', blank=True, null=True, choices = PRIORITY_CHOICES)
     datetime = models.DateTimeField(auto_now_add=True)
+
+
+    # class Meta:
+        # ordering = ["-priority"]
