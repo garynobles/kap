@@ -191,6 +191,20 @@
 
 
 
+        {% if request.user|has_group:"admin_ticket"%}
+
+        <a href="{% url 'allcompletedtickets' %}" style="color:white;">
+          <button  type="button" class="btn btn-info">
+            <img src="{% static 'icon_sets\ticket-alt-solid.svg' %}" alt"" height="65" width="68" />
+            <br>
+            Completed Tickets
+          </button>
+        </a>
+        {% else %}
+        {% endif %}
+
+
+
 
 
       </div>

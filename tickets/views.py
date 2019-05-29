@@ -53,6 +53,15 @@ def closedtickets(request):
     'archived':archived,
     })
 
+def allcompletedtickets(request):
+    # alltickets = Ticket.objects.all()
+    current_user=request.user.id
+    archived = Ticket.objects.filter(status='completed')
+    return render(request, 'completed_tickets.html',
+    {
+    'archived':archived,
+    })
+
 def createticket(request):
     if request.method == "POST":
         form = TicketForm(request.POST)

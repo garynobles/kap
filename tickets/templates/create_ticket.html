@@ -6,26 +6,33 @@
 <div class="container top">
   <h4 class="kap">Ticket</h4>
     <div class="col-md-12">
-    <!-- <form method="POST" class="post-form">{% csrf_token %}
-          {{ form.as_p }}
-
-        <button type="submit" class="save btn btn-dark mt-3t">Save</button>
-    </form> -->
-
+<h4 class="kap">To:</h4>
     <form method="POST" class="post-form">{% csrf_token %}
       <div class="row">
+
+        {% if request.user|has_group:"admin_ticket"%}
         <div class="col col-md-12 " style="color:white;">{{ form.subject|add_class:"col-md-12"|append_attr:"placeholder:Subject"}}</div>
+        {% else %}
+        <div class="col col-md-4" style="color:white;">{{ form.assigned_to|add_class:"col-md-12"|append_attr:"placeholder:To"}}</div>
+        <div class="col col-md-8" style="color:white;">{{ form.subject|add_class:"col-md-12"|append_attr:"placeholder:Subject"}}</div>
+        {% endif %}
+
+
+
+
+
         <div class="col col-md-12" style="color:white;">{{ form.details|add_class:"col-md-12"|append_attr:"placeholder:Details"}}</div>
         <div class="col" style="color:white;">Department<br />{{ form.department|add_class:""}}</div>
         <div class="col" style="color:white;">System<br />{{ form.system|add_class:""}}</div>
         <div class="col" style="color:white;">Request type<br />{{ form.category|add_class:""}}</div>
         <div class="col" style="color:white;">Priority<br />{{ form.priority|add_class:""}}</div>
+        <br />
         {% if request.user|has_group:"admin_ticket"%}
-        <div class="col" style="color:white;">Assigned To {{ form.assigned_to|add_class:""}}</div>
-        <div class="col" style="color:white;">Status {{ form.status|add_class:""}}</div>
+        <div class="col" style="color:white;">Assigned To <br />{{ form.assigned_to|add_class:""}}</div>
+        <div class="col" style="color:white;">Status <br />{{ form.status|add_class:""}}</div>
         <div class="col" style="color:white;">Submitted By <br />{{ form.submitted_by|add_class:""}}</div>
         {% else %}
-        <div class="col" style="color:white;">To {{ form.assigned_to|add_class:""}}</div>
+        <div class="col" style="color:white;">To <br />{{ form.assigned_to|add_class:""}}</div>
         {% endif %}
 
       </div>

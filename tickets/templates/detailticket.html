@@ -4,7 +4,7 @@
 {% block content %}
 {% include "menu2.html" %}
 <div class="container top">
-  <h4 class="kap">Ticket</h4>
+  <h4 class="kap">Ticket #{{ archived.ticket_id }} </h4>
     <div class="col-md-12">
         {% if request.user|has_group:"admin_ticket"%}
         {% else %}

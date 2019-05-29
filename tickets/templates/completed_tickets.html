@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load widget_tweaks %}
+{% load has_group %}
+{ include "menu1.html" }
+{% include "menu2.html" %}
+
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+      window.location = $(this).data("href");
+    });
+  });
+</script>
+
+<div class="container top">
+  <section>
+    <h4 class="kap">Archived Tickets</h4>
+      <div class="table-responsive">
+      <table class="table-striped">
+        <thead>
+      <tr>
+        <th>Request</th>
+        <!-- <th>Submitted By</th> -->
+        <th>Subject</th>
+        <th>Category</th>
+        <th>Department</th>
+        <th>Details</th>
+        <th>Contact</th>
+        <th>Status</th>
+        <th>Priority</th>
+        <!-- <th>Timestamp</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      {% for ticket in archived %}
+      <tr class='clickable-row' data-href="{% url 'detailticket' pk=ticket.pk %}">
+
+        <td># {{ ticket.ticket_id }}</td>
+        <!-- <td>{{ ticket.submitted_by }}</td> -->
+        <td>{{ ticket.subject }}</td>
+        <td>{{ ticket.category }}</td>
+        <td>{{ ticket.department }}</td>
+        <td>{{ ticket.details|truncatewords:10  }}</td>
+        <td>{{ ticket.assigned_to.get_full_name }}</td>
+        <td>{{ ticket.status }}</td>
+        <td>{{ ticket.priority }}</td>
+        <!-- <td>{{ ticket.datetime }}</td> -->
+      </tr>
+
+      {% empty %}
+      <tr>
+        <td colspan="5">No Archived Tickets</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+</section>
+  {% endblock %}
