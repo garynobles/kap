@@ -108,13 +108,13 @@ class TicketForm(forms.ModelForm):
         model = Ticket
         fields = (
         'ticket_id',
-        # 'submitted_by',
+        'submitted_by',
         'subject',
         'details',
         'department',
         'system',
         'category',
-        # 'assigned_to',
+        'assigned_to',
         'priority',
         'status'
         )
@@ -127,14 +127,14 @@ class TicketFormView(forms.ModelForm):
     class Meta:
         model = Ticket
         fields = (
-        # 'ticket_id',
-        # 'submitted_by',
+        'ticket_id',
+        'submitted_by',
         'subject',
         'details',
         'department',
         'system',
         'category',
-        # 'assigned_to',
+        'assigned_to',
         'priority',
         'status'
         )
