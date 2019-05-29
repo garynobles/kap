@@ -26,7 +26,8 @@ TICKET_STATUS_CHOICES = (
     ("awaiting assignment","awaiting assignment"),
     ("assigned","assigned"),
     ("next migration","next migration"),
-    ("completed","completed")
+    ("completed","completed"),
+    ("clarification requested","clarification requested")
 )
 
 SYS_CHOICES = (
