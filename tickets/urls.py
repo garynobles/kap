@@ -12,7 +12,5 @@ path('allcompletedtickets', views.allcompletedtickets, name='allcompletedtickets
 path('newticket', views.createticket, name='createticket'),
 re_path(r'^deleteticket/(?P<pk>\d+)$', views.deleteticket, name='deleteticket'),
 re_path(r'^ticket/edit/(?P<pk>\d+)/edit/$', views.editticket, name='editticket'),
-
-
 path('ticket/<int:pk>/', views.detailticket, name='detailticket'),
 ]

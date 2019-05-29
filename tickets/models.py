@@ -57,12 +57,17 @@ class Ticket(models.Model):
     priority = models.CharField(max_length=20, default='', blank=True, null=True, choices = PRIORITY_CHOICES)
     datetime = models.DateTimeField(auto_now_add=True)
 
+    # class Meta:
+    #     db_table = 'public\".\"tickets_ticket_old'
+    #     #ordering = ["sample_id"]
+    #     managed = False
+    #     #verbose_name_plural = "samples"
 
-    def __str__(self):
-        return '{} {}'.format(
-            self.assigned_to.first_name,
-            self.assigned_to.last_name
-        )
+    # def __str__(self):
+    #     return '{} {}'.format(
+    #         self.assigned_to.first_name,
+    #         self.assigned_to.last_name
+    #     )
 
     # def __str__(self):
         # return self.taken_by.first_name
