@@ -18,6 +18,7 @@ DEPT_CHOICES = (
     ("Conservation","Conservation"),
     ("Database","Database"),
     ("Excavation","Excavation"),
+    ("Website","Website"),
     ("Zooarch","Zooarchaeology"),
     ("Other","Other")
 )
@@ -34,6 +35,7 @@ SYS_CHOICES = (
     ("MS Database","MS Database"),
     ("Website","Website"),
     ("GIS","GIS"),
+    ("Non-system","Non-system"),
     ("other","other"),
 )
 
@@ -50,12 +52,12 @@ class Ticket(models.Model):
     submitted_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.PROTECT, blank=True, null=True)
     subject = models.CharField(max_length=200, default='')
     details = models.CharField(max_length=5000, default='')
-    category = models.CharField(max_length=20, default='', choices = CAT_CHOICES)
-    system = models.CharField(max_length=20, default='', choices = SYS_CHOICES)
-    department = models.CharField(max_length=20, default='', choices = DEPT_CHOICES, blank=True, null=True)
+    category = models.CharField(max_length=30, default='', choices = CAT_CHOICES)
+    system = models.CharField(max_length=30, default='', choices = SYS_CHOICES)
+    department = models.CharField(max_length=30, default='', choices = DEPT_CHOICES, blank=True, null=True)
     assigned_to = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.PROTECT, related_name='assigned')
-    status = models.CharField(max_length=20, default='awaiting assignment', blank=True, null=True, choices = TICKET_STATUS_CHOICES)
-    priority = models.CharField(max_length=20, default='', blank=True, null=True, choices = PRIORITY_CHOICES)
+    status = models.CharField(max_length=30, default='awaiting assignment', blank=True, null=True, choices = TICKET_STATUS_CHOICES)
+    priority = models.CharField(max_length=30, default='', blank=True, null=True, choices = PRIORITY_CHOICES)
     datetime = models.DateTimeField(auto_now_add=True)
 
     # class Meta:
