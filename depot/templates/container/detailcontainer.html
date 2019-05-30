@@ -1,9 +1,9 @@
 {% extends 'sample/base.html' %}
 {% load staticfiles %}
 {% load widget_tweaks %}
-
 {% block content %}
-{% include "container/menu2.html" %}
+{% include "mainheader.html" %}
+{% include "container/submenu.html" %}
 
 <script type="text/javascript">
   function toggle(source) {
@@ -13,18 +13,12 @@
       checkboxes[i].checked = source.checked;
     }
   }
-
 </script>
 
-
 <div class="container top">
-
   <section>
-
-
-
     <form class="" action="." method="GET">
-{% csrf_token %}
+      {% csrf_token %}
       <div class="form-row">
         <div class="form-group col-8">
           <div class="input-group">
@@ -43,10 +37,7 @@
     </form>
   </section>
 
-
-
   <section>
-
     <div class="float-left col-md-4">
       <h4 class="kap">Shelf: {{ container.location_id }} Container:{{ container.container_name }} </h4>
       <div class="table-responsive">
@@ -54,20 +45,16 @@
           <thead>
             <tr>
               <!-- <th>Sample Id</th> -->
-
               <th>E.N.C.S</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               {% for contents in container_contents %}
-
-              <!-- <td>{{ contents.sample_id }}</td> -->
               <td>{{ contents.area_easting }}.
                 {{ contents.area_northing }}.
                 {{ contents.context_number }}.
                 {{ contents.sample_number }}</td>
-
                 <td class="" style="margin:10px; padding:10px;"><a href="{% url 'depot:change_container'  operation='remove' pk=container.container_id fk=contents.sample_id  %}" class="badge badge-primary" role="button">
                   <i class="fas fa-arrow-right fa-2x" ></i>
                 </a></td>
@@ -85,7 +72,6 @@
           </table>
         </div>
       </div>
-
 
       <div class="float-left col-md-4">
         <h4 class="kap">Samples</h4>
@@ -108,58 +94,50 @@
                 <tr>
                   {% if unassigned not in container_contents %}
                   {% for container in unassigned.containers.all %}
-                {% if container.container_name == '' %}
-                <td>Not assigned</td>
-                {% else  %}
-                <td></td>
-                <td>Already Assigned</td>
-                {% endif %}
+                  {% if container.container_name == '' %}
+                  <td>Not assigned</td>
+                  {% else  %}
+                  <td></td>
+                  <td>Already Assigned</td>
+                  {% endif %}
 
-                {% empty %}
-                <td style="padding-left:5px;"><input type="checkbox" /><input type="hidden" value="{% url 'depot:change_container'  operation='add' pk=container.container_id fk=unassigned.sample_id  %}"</td>
-                <td style="margin:10px; padding:10px;"><a href="{% url 'depot:change_container'  operation='add' pk=container.container_id fk=unassigned.sample_id  %}" class="badge badge-primary" role="button">
-                  <i class="fas fa-arrow-left fa-2x"></i>
-                </a></td>
+                  {% empty %}
+                  <td style="padding-left:5px;"><input type="checkbox" /><input type="hidden" value="{% url 'depot:change_container'  operation='add' pk=container.container_id fk=unassigned.sample_id  %}"</td>
+                  <td style="margin:10px; padding:10px;"><a href="{% url 'depot:change_container'  operation='add' pk=container.container_id fk=unassigned.sample_id  %}" class="badge badge-primary" role="button">
+                    <i class="fas fa-arrow-left fa-2x"></i>
+                  </a></td>
 
-                {% endfor %}
-
-
-
+                  {% endfor %}
 
                   <!-- <td style="padding-left:5px;"><input type="checkbox" /><input type="hidden" value="{% url 'depot:change_container'  operation='add' pk=container.container_id fk=unassigned.sample_id  %}"</td>
                   <td style="margin:10px; padding:10px;"><a href="{% url 'depot:change_container'  operation='add' pk=container.container_id fk=unassigned.sample_id  %}" class="badge badge-primary" role="button">
-                    <i class="fas fa-arrow-left fa-2x"></i>
-                  </a></td> -->
-                  <td>{{ unassigned.area_easting }}.{{ unassigned.area_northing }}.{{ unassigned.context_number }}.{{ unassigned.sample_number }}</td>
-                    {% for container in unassigned.containers.all %}
-                  <td>{{ container.location_id }}.{{ container.container_name }}</td>
-                  {% empty %}
-                  <td>None</td>
-                  {% endfor %}
-                </tr>
-                {% endif %}
+                  <i class="fas fa-arrow-left fa-2x"></i>
+                </a></td> -->
+                <td>{{ unassigned.area_easting }}.{{ unassigned.area_northing }}.{{ unassigned.context_number }}.{{ unassigned.sample_number }}</td>
+                {% for container in unassigned.containers.all %}
+                <td>{{ container.location_id }}.{{ container.container_name }}</td>
                 {% empty %}
-                <tr>
-                  <td>
-                    <p>These are not the samples you are looking for!</p>
-                    <p>Use the above filter to search for a sample.
-                    </p>
-                  </td>
-                </tr>
+                <td>None</td>
                 {% endfor %}
-              </tbody>
-            </table>
-            <button type="submit" class="save btn btn-dark mt-3t"><-- Move</button>
-          </form>
-        </div>
+              </tr>
+              {% endif %}
+              {% empty %}
+              <tr>
+                <td>
+                  <p>These are not the samples you are looking for!</p>
+                  <p>Use the above filter to search for a sample.
+                  </p>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <button type="submit" class="save btn btn-dark mt-3t"><-- Move</button>
+        </form>
       </div>
-    </section>
-
-    <div class="clearfix" style="padding-top:100px;"></div>
-
-
-
-  </div>
+    </div>
+  </section>
+  <div class="clearfix" style="padding-top:100px;"></div>
 </div>
 </main>
 <div class="clearfix"></div>

@@ -1,11 +1,12 @@
 {% extends 'storage/base.html' %}
 {% load widget_tweaks %}
 {% block content%}
-{% include "storage/menu2.html" %}
+{% include "mainheader.html" %}
+{% include "storage/submenu.html" %}
 <div class="container top">
-    <div class="row">
-      {% for storage in storage.all %}
-      <a class="text-light" href="{% url 'depot:detailstorage' storage.store_id %}">
+  <div class="row">
+    {% for storage in storage.all %}
+    <a class="text-light" href="{% url 'depot:detailstorage' storage.store_id %}">
       <div class="col-md-4">
         <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
           <!--div class="card-header">{{ storage.store_name }}</div-->
@@ -17,8 +18,7 @@
         </div>
       </div>
     </a>
-      {% endfor %}
-    </div>
-
-  {% endblock %}
+    {% endfor %}
+  </div>
 </div>
+{% endblock %}
