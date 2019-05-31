@@ -1,7 +1,7 @@
 {% extends 'photobatch/base.html' %}
 {% load widget_tweaks %}
 {% block content %}
-{% include "container/submenu.html" %}
+{% include "photobatch/submenu.html" %}
 
 <style>
 path {
@@ -30,11 +30,11 @@ background-color:white; #!important
               {% render_field form.photobatch_id class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Prefix</label>
+              <label for="inputFirstname" style="color:white;">Prefix</label>
               {% render_field form.prefix class="form-control" %}
             </div>
 			<div class="">
-              <label for="inputFirstname">Processed By</label>
+              <label for="inputFirstname" style="color:white;">Processed By</label>
               {% render_field form.created_by class="form-control" %}
             </div>
 
@@ -44,15 +44,15 @@ background-color:white; #!important
         <div class="form-group row float-left">
           <div class="col-sm-10 border border-light rounded pb-2">
             <div class="">
-              <label for="inputFirstname">Area Easting</label>
+              <label for="inputFirstname" style="color:white;">Area Easting</label>
               {% render_field form.area_easting class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Area Northing</label>
+              <label for="inputFirstname" style="color:white;">Area Northing</label>
               {% render_field form.area_northing class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Context Number</label>
+              <label for="inputFirstname" style="color:white;">Context Number</label>
               {% render_field form.context_number class="form-control" %}
             </div>
           </div>
@@ -61,11 +61,11 @@ background-color:white; #!important
         <div class="form-group row float-left">
           <div class="col-sm-10 border border-light rounded pb-2">
             <div class="">
-              <label for="inputFirstname">Number Photos</label>
+              <label for="inputFirstname" style="color:white;">Number Photos</label>
               {% render_field form.number_of_photos class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Number Targets</label>
+              <label for="inputFirstname" style="color:white;">Number Targets</label>
               {% render_field form.number_targets class="form-control" %}
             </div>
           </div>
@@ -74,19 +74,19 @@ background-color:white; #!important
         <div class="form-group row float-left">
           <div class="col-sm-10 border border-light rounded pb-2">
             <div class="">
-              <label for="inputFirstname">Imported to Photoscan</label>
+              <label for="inputFirstname" style="color:white;">Imported to Photoscan</label>
               {% render_field form.imported_photoscan class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Processed on PC</label>
+              <label for="inputFirstname" style="color:white;">Processed on PC</label>
               {% render_field form.processed_on class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Processed By</label>
+              <label for="inputFirstname" style="color:white;">Processed By</label>
               {% render_field form.processed_by class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Camera Model</label>
+              <label for="inputFirstname" style="color:white;">Camera Model</label>
               {% render_field form.camera_model class="form-control" %}
             </div>
           </div>
@@ -95,23 +95,23 @@ background-color:white; #!important
         <div class="form-group row float-left">
           <div class="col-sm-10 border border-light rounded pb-2">
             <div class="">
-              <label for="inputFirstname">Aligned</label>
+              <label for="inputFirstname" style="color:white;">Aligned</label>
               {% render_field form.aligned class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Accuracy</label>
+              <label for="inputFirstname" style="color:white;">Accuracy</label>
               {% render_field form.align_accuracy class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Pair Selection</label>
+              <label for="inputFirstname" style="color:white;">Pair Selection</label>
               {% render_field form.align_pair_selection class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Keypoint Limit</label>
+              <label for="inputFirstname" style="color:white;">Keypoint Limit</label>
               {% render_field form.align_keypoint_limit class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Tiepoint Limit</label>
+              <label for="inputFirstname" style="color:white;">Tiepoint Limit</label>
               {% render_field form.align_tiepoint_limit class="form-control" %}
             </div>
           </div>
@@ -120,23 +120,23 @@ background-color:white; #!important
         <div class="form-group row float-left">
           <div class="col-sm-10 border border-light rounded pb-2">
             <div class="">
-              <label for="inputFirstname">Targets Detected</label>
+              <label for="inputFirstname" style="color:white;">Targets Detected</label>
               {% render_field form.detected_targets class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Target Type</label>
+              <label for="inputFirstname" style="color:white;">Target Type</label>
               {% render_field form.target_type class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Target Tollerance</label>
+              <label for="inputFirstname" style="color:white;">Target Tollerance</label>
               {% render_field form.target_tolerance class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Origional Error</label>
+              <label for="inputFirstname" style="color:white;">Origional Error</label>
               {% render_field form.target_origional_error class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Optimised Error</label>
+              <label for="inputFirstname" style="color:white;">Optimised Error</label>
               {% render_field form.target_optimised_error class="form-control" %}
             </div>
           </div>
@@ -145,23 +145,23 @@ background-color:white; #!important
         <div class="form-group row float-left">
           <div class="col-sm-10 border border-light rounded pb-2">
             <div class="">
-              <label for="inputFirstname">Dense Point Cloud</label>
+              <label for="inputFirstname" style="color:white;">Dense Point Cloud</label>
               {% render_field form.dense_pointcloud  class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Mesh</label>
+              <label for="inputFirstname" style="color:white;">Mesh</label>
               {% render_field form.mesh class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Type</label>
+              <label for="inputFirstname" style="color:white;">Type</label>
               {% render_field form.mesh_type class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Face Count</label>
+              <label for="inputFirstname" style="color:white;">Face Count</label>
               {% render_field form.mesh_face_count class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Interpolation</label>
+              <label for="inputFirstname" style="color:white;">Interpolation</label>
               {% render_field form.mesh_interpolation class="form-control" %}
             </div>
           </div>
@@ -170,27 +170,27 @@ background-color:white; #!important
         <div class="form-group row float-left">
           <div class="col-sm-10 border border-light rounded pb-2">
             <div class="">
-              <label for="inputFirstname">Texture</label>
+              <label for="inputFirstname" style="color:white;">Texture</label>
               {% render_field form.texture  class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Texture Defaults</label>
+              <label for="inputFirstname" style="color:white;">Texture Defaults</label>
               {% render_field form.texture_defaults class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">DEM</label>
+              <label for="inputFirstname" style="color:white;">DEM</label>
               {% render_field form.dem class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Coordinate System</label>
+              <label for="inputFirstname" style="color:white;">Coordinate System</label>
               {% render_field form.dem_coordinate_system class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Source Data</label>
+              <label for="inputFirstname" style="color:white;">Source Data</label>
               {% render_field form.dem_source_data class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Interpolation</label>
+              <label for="inputFirstname" style="color:white;">Interpolation</label>
               {% render_field form.dem_interpolation class="form-control" %}
             </div>
           </div>
@@ -199,15 +199,15 @@ background-color:white; #!important
         <div class="form-group row float-left">
           <div class="col-sm-10 border border-light rounded pb-2">
             <div class="">
-              <label for="inputFirstname">Orthomosaic</label>
+              <label for="inputFirstname" style="color:white;">Orthomosaic</label>
               {% render_field form.orthomosaic  class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Type</label>
+              <label for="inputFirstname" style="color:white;">Type</label>
               {% render_field form.orthomosaic_type class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Pixel Size</label>
+              <label for="inputFirstname" style="color:white;">Pixel Size</label>
               {% render_field form.orthomosaic_pixel_size class="form-control" %}
             </div>
           </div>
@@ -215,15 +215,15 @@ background-color:white; #!important
         <div class="form-group row float-left">
           <div class="col-sm-10 border border-light rounded pb-2">
             <div class="">
-              <label for="inputFirstname">Export Points</label>
+              <label for="inputFirstname" style="color:white;">Export Points</label>
               {% render_field form.export_points class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Filename</label>
+              <label for="inputFirstname" style="color:white;">Filename</label>
               {% render_field form.export_points_filename class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Offsets</label>
+              <label for="inputFirstname" style="color:white;">Offsets</label>
               {% render_field form.export_points_offsets class="form-control" %}
             </div>
           </div>
@@ -232,15 +232,15 @@ background-color:white; #!important
         <div class="form-group row float-left">
           <div class="col-sm-10 border border-light rounded pb-2">
             <div class="">
-              <label for="inputFirstname">Export DEM</label>
+              <label for="inputFirstname" style="color:white;">Export DEM</label>
               {% render_field form.export_dem class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Pixel Size</label>
+              <label for="inputFirstname" style="color:white;">Pixel Size</label>
               {% render_field form.export_dem_pixel_size class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Geodatabase</label>
+              <label for="inputFirstname" style="color:white;">Geodatabase</label>
               {% render_field form.export_dem_geodatabase class="form-control" %}
             </div>
           </div>
@@ -249,15 +249,15 @@ background-color:white; #!important
         <div class="form-group row float-left">
           <div class="col-sm-10 border border-light rounded pb-2">
             <div class="">
-              <label for="inputFirstname">PDF</label>
+              <label for="inputFirstname" style="color:white;">PDF</label>
               {% render_field form.export_report_pdf class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Orthophoto</label>
+              <label for="inputFirstname" style="color:white;">Orthophoto</label>
               {% render_field form.export_orthophoto class="form-control" %}
             </div>
             <div class="">
-              <label for="inputFirstname">Processed</label>
+              <label for="inputFirstname" style="color:white;">Processed</label>
               {% render_field form.folder_processed class="form-control" %}
             </div>
           </div>
@@ -267,7 +267,7 @@ background-color:white; #!important
         <div class="form-group row float-left">
           <div class=" border border-light rounded pb-2">
             <div class="">
-              <label for="inputFirstname">Processing Notes</label>
+              <label for="inputFirstname" style="color:white;">Processing Notes</label>
               {% render_field form.processing_notes class="form-control" %}
 
             </div>
