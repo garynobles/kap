@@ -38,12 +38,14 @@ NORTHING_CHOICES = (
 
 COMPUTER_CHOICES = (
     ("",""),
-    ("Struthas", "Struthas"),
-    ("Pissuthnes", "Pissuthnes"),
-    ("Harpagus","Harpagus"),
-    ("Tissaphernes","Tissaphernes"),
+    ("Artaphernes","Artaphernes"),
     ("Cyrus","Cyrus"),
-    ("Artaphernes","Artaphernes")
+    ("Harpagus","Harpagus"),
+    ("Pissuthnes", "Pissuthnes"),
+    ("Struthas", "Struthas"),
+    ("Tissaphernes","Tissaphernes"),
+
+
 )
 
 
