@@ -1,0 +1,25 @@
+{% extends 'storage/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+{% include "storage/menu2.html" %}
+<div class="container top">
+  <h4 class="kap">Storage</h4>
+    <div class="col-sm-3">
+    <form method="POST" class="post-form">{% csrf_token %}
+          {{ form.as_p }}
+
+        <!-- {{ form.store_id|add_class:"form-control"|append_attr:"placeholder:Storage Id"}}<br />
+        {{ form.store_name|add_class:"form-control"|append_attr:"placeholder:Store Name"}}<br />
+        {{ form.address_1|add_class:"form-control"|append_attr:"placeholder:address line 1"}}<br />
+        {{ form.address_2|add_class:"form-control"|append_attr:"placeholder:address line 2"}}<br />
+        {{ form.city|add_class:"form-control"|append_attr:"placeholder:City/Town"}}<br />
+        {{ form.region|add_class:"form-control"|append_attr:"placeholder:State/Province/Region"}}<br />
+        {{ form.country|add_class:"form-control"|append_attr:"placeholder:Country"}}<br />
+        {{ form.zip|add_class:"form-control"|append_attr:"placeholder:Zip Code"}}<br />
+        {{ form.image|add_class:"form-control"|append_attr:"placeholder:Country"}}<br />
+        Icon ID{{ form.icon_desc|add_class:"form-control"}}<br /> -->
+        <button type="submit" class="save btn btn-dark mt-3t">Save</button>
+    </form>
+  </div>
+</div>
+{% endblock %}<!--    |append_attr:"placeholder:Username"   -->

@@ -1,4 +1,5 @@
 {% load staticfiles %}
+
 <header>
   <div  class="fixed-top">
     <div class="navbar navbar-inverse navbar-static-top navbar-expand-lg navbar-dark bg-dark" id="topNav">
@@ -50,8 +51,9 @@
           <div class="dropdown show">
             <a class="btn btn-secondary dropdown-toggle mr-2" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Botany</a>
             <div class="dropdown-menu " aria-labelledby="botany">
-              <a class="dropdown-item" href="{% url 'allflotation' %}">Flotation</a>
+              <a class="dropdown-item" href="{% url 'samplelist' %}">Samples</a>
               <hr />
+              <a class="dropdown-item" href="{% url 'speciesmanager' %}">Taxon Manager</a>
               <!-- <a class="dropdown-item" href="#">Faunal</a>
               <a class="dropdown-item" href="#">Conservation</a>
               <a class="dropdown-item" href="#">Ceramics</a>
@@ -76,6 +78,9 @@
               <a class="dropdown-item" href="{ url 'allsamples' }">Samples</a>
               <hr />
               <a class="dropdown-item" href="{ url 'allzooarch' }">Faunal</a>
+              <!-- <a class="dropdown-item" href="#">Conservation</a>
+              <a class="dropdown-item" href="#">Ceramics</a>
+              <a class="dropdown-item" href="#">Small Finds</a> -->
             </div>
           </div>
           <div class="dropdown show">
@@ -87,6 +92,7 @@
               <a class="dropdown-item" href="% url '' %">Questions</a>
             </div>
           </div>
+
           <div class="dropdown show">
             <a class="btn btn-secondary dropdown-toggle mr-2" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-envelope" style="color:grey;"></i> <span style="color:grey;">[0]</span></a>
 
@@ -95,14 +101,19 @@
               <hr />
               <a class="dropdown-item" href="% url '' %">Alerts</a>
               <a class="dropdown-item" href="% url '' %">Questions</a>
+
             </div>
           </div>
           <div class="dropdown show">
             <a class="btn btn-secondary dropdown-toggle mr-2" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-user pr-2"></i>
+              <!-- {{ user.get_username }} -->
               {{ user.get_full_name|default:user.username }}
             </a>
             <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+              <!-- <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a> -->
               <a class="dropdown-item" href="{% url 'logout'%}?next={{request.path}}">Logout</a>
               <a class="dropdown-item" href="{% url 'alltickets' %}"><img src="{% static 'icon_sets\clipboard-list-solid.svg'%}" alt"" height="20px" width="20px" /> Tickets</a>
 <a class="dropdown-item" href="{% url 'overview' %}"><img src="{% static 'icon_sets\cogs-solid.svg'%}" alt"" height="20px" width="20px" /> Settings</a>
@@ -120,54 +131,94 @@
             <hr />
             <a class="dropdown-item" href="{ url 'allzooarch' }">Faunal</a>
             <a class="dropdown-item" href="{% url 'models3d' %}">3d models</a>
+            <!-- <a class="dropdown-item" href="#">Conservation</a>
+            <a class="dropdown-item" href="#">Ceramics</a>
+            <a class="dropdown-item" href="#">Small Finds</a> -->
           </div>
         </div>
       </div>
     </div>
+
+
     <div class="navbar navbar-custom navbar-inverse navbar-static-top navbar-dark bg-dark" id="nav2">
-      <div class="navbar-inner">
-        <div class="float-left text-center" style="margin-right:10px;">
-          <a href="{% url 'depot:createlocation' %}"  style="color:white;">
-            <button  type="button" class="btn btn-success"><img src="{% static 'icon_sets\location-solid-add.svg'%}" alt"" height="65" width="68" />
-              <br />
-              New Location
-            </button>
-          </a>
-        </div>
-        <div class="float-left text-center" style="margin-right:10px;">
-          <a href="{% url 'depot:alldepotsample' %}" style="color:white;">
-            <button  type="button" class="btn btn-info"><img src="{% static 'icon_sets\tag-solid.svg'%}" alt"" height="65" width="68" />
-              <br />
-              Samples
-            </button>
-          </a>
-        </div>
-      <div class="float-left text-center" style="margin-right:10px;">
-        <a href="{% url 'depot:allcontainer' %}" style="color:white;">
-          <button  type="button" class="btn btn-info"><img src="{% static 'icon_sets\box-solid.svg'%}" alt"" height="65" width="68" />
+      <div class="float-left">
+
+
+
+        <a href="{% url 'addspecies' %}" style="color:white;">
+          <button  type="button" class="btn btn-success"><img src="{% static 'icon_sets\seedling-solid-add.svg'%}" alt"" height="65" width="68" />
             <br />
-            Containers
+           Add Species
           </button>
         </a>
-      </div>
-      <div class="float-left text-center" style="margin-right:10px;">
-        <a href="{% url 'depot:alllocation' %}" style="color:white;">
-          <button  type="button" class="btn btn-outline-info"><img src="{% static 'icon_sets\inventory-solid.svg'%}" alt"" height="65" width="68" />
+
+        <a href="{% url 'allbotany' %}" style="color:white;">
+          <button  type="button" class="btn btn-info"><img src="{% static 'icon_sets\seedling-solid.svg'%}" alt"" height="65" width="68" />
             <br />
-            Location
+            Botany
           </button>
         </a>
-      </div>
-      <div class="float-left text-center" style="margin-right:10px;">
-        <a href="{% url 'depot:allstorage' %}" style="color:white;">
-          <button  type="button" class="btn btn-info"><img src="{% static 'icon_sets\depot-solid.svg'%}" alt"" height="65" width="68" />
-            <br/>
-            Storage
+
+
+        <a href="{% url 'samplelist' %}" style="color:white;">
+          <button  type="button" class="btn btn-info"><img src="{% static 'icon_sets\tag-solid.svg'%}" alt"" height="65" width="68" />
+            <br />
+            Samples
           </button>
         </a>
+
+        <a  href="{% url 'allflotation' %}">
+          <button  type="button" class="btn btn-info"><img src="{% static 'icon_sets\flotation-solid.svg'%}" alt"" height="65" width="68" />
+            <br />
+            Flotation
+          </button>
+        </a>
+
+        <a  href="{% url 'speciesmanager' %}">
+          <button  type="button" class="btn btn-outline-info"><img src="{% static 'icon_sets\plant-hand.svg'%}" alt"" height="65" width="68" />
+            <br />
+            Taxon Manager
+          </button>
+        </a>
+
       </div>
-    </div>
-  </div>
+
+      <div>
+
+        <!-- <a href="{ url 'addflotation' }">
+        <button  type="button" class="btn btn-success float-right mr-1">Add Flotation</button>
+      </a> -->
+
+
+      <!-- <a href="{ url 'addlightresidue' }">
+      <button  type="button" class="btn btn-success">Add new LightResidue</button>
+    </a> -->
+
+    <!-- <a href="{ url 'create_composition' }">
+    <button  type="button" class="btn btn-success">Add new LightResidue Composition</button>
+  </a>
+
+  <a href="{ url 'create_lightresiduematerialpresent' }">
+  <button  type="button" class="btn btn-success">Add new LightResidue Material</button>
+</a> -->
+
+<!-- <a href="{ url 'allfraction' }">
+<button  type="button" class="btn btn-info">Fractions</button>
+</a>
+<a href="{ url 'allcomposition' }">
+<button  type="button" class="btn btn-info">LightResidue Composition</button>
+</a>
+<a href="{ url 'allfractionmaterialpresent' }">
+<button  type="button" class="btn btn-info">LightResidue Material Present</button>
+</a> -->
+<!-- </div> -->
+</div>
 </div>
 <div class="clearfix"></div>
+<!-- -ms-transform: matrix(1, 0, 0, 0.5, 0, -12.5); /* IE 9 */
+-webkit-transform: matrix(1, 0, 0, 0.5, 0, -12.5); /* Safari */
+transform: matrix(1, 0, 0, 0.5, 0, -12.5); /* Standard syntax */ -->
+<div id="time_test" style="height: 20px; min-width: 310px;"></div>
+<!-- <div id="lifeline" style="min-width: 310px; height: 50px; margin: 0 auto; "></div> -->
 </header>
+<!-- <div class='clearfix'></div> -->
