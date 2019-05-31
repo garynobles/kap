@@ -1,13 +1,9 @@
-
-
-
-
 {% extends 'photobatch/base.html' %}
 {% load widget_tweaks %}
 {% block content %}
+{% include "container/submenu.html" %}
 
 <style>
-
 path {
   fill: none;
   stroke: #000;
@@ -15,28 +11,20 @@ path {
   stroke-linejoin: round;
   stroke-linecap: round;
 }
-
+white{
+background-color:white; #!important
+}
 </style>
+{% include "mainheader.html" %}
+{% include "photobatch/submenu.html" %}
 
-{% include "menu1.html" %}
-{% include "photobatch/menu2.html" %}
-
-<div class="container">
-  <h1>Photobatch</h1>
-
-
-
-
-
+<div class="container top white">
+  <h4 class = "kap">Photobatch</h4>
   <div class="row">
     <div class="col-md-10 mx-auto ">
       <form method="POST" class="post-form">{% csrf_token %}
-
-
-
         <div class="form-group row float-left ">
-          <div class="col-sm-10 border border-dark rounded pb-2">
-
+          <div class="col-sm-10 border border-light rounded pb-2">
             <div class="">
               <label for="inputFirstname">Photobatch</label>
               {% render_field form.photobatch_id class="form-control" %}
@@ -45,7 +33,6 @@ path {
               <label for="inputFirstname">Prefix</label>
               {% render_field form.prefix class="form-control" %}
             </div>
-
 			<div class="">
               <label for="inputFirstname">Processed By</label>
               {% render_field form.created_by class="form-control" %}
@@ -55,7 +42,7 @@ path {
         </div>
 
         <div class="form-group row float-left">
-          <div class="col-sm-10 border border-dark rounded pb-2">
+          <div class="col-sm-10 border border-light rounded pb-2">
             <div class="">
               <label for="inputFirstname">Area Easting</label>
               {% render_field form.area_easting class="form-control" %}
@@ -72,7 +59,7 @@ path {
         </div>
 
         <div class="form-group row float-left">
-          <div class="col-sm-10 border border-dark rounded pb-2">
+          <div class="col-sm-10 border border-light rounded pb-2">
             <div class="">
               <label for="inputFirstname">Number Photos</label>
               {% render_field form.number_of_photos class="form-control" %}
@@ -85,7 +72,7 @@ path {
         </div>
 
         <div class="form-group row float-left">
-          <div class="col-sm-10 border border-dark rounded pb-2">
+          <div class="col-sm-10 border border-light rounded pb-2">
             <div class="">
               <label for="inputFirstname">Imported to Photoscan</label>
               {% render_field form.imported_photoscan class="form-control" %}
@@ -106,7 +93,7 @@ path {
         </div>
 
         <div class="form-group row float-left">
-          <div class="col-sm-10 border border-dark rounded pb-2">
+          <div class="col-sm-10 border border-light rounded pb-2">
             <div class="">
               <label for="inputFirstname">Aligned</label>
               {% render_field form.aligned class="form-control" %}
@@ -131,7 +118,7 @@ path {
         </div>
 
         <div class="form-group row float-left">
-          <div class="col-sm-10 border border-dark rounded pb-2">
+          <div class="col-sm-10 border border-light rounded pb-2">
             <div class="">
               <label for="inputFirstname">Targets Detected</label>
               {% render_field form.detected_targets class="form-control" %}
@@ -156,7 +143,7 @@ path {
         </div>
 
         <div class="form-group row float-left">
-          <div class="col-sm-10 border border-dark rounded pb-2">
+          <div class="col-sm-10 border border-light rounded pb-2">
             <div class="">
               <label for="inputFirstname">Dense Point Cloud</label>
               {% render_field form.dense_pointcloud  class="form-control" %}
@@ -181,7 +168,7 @@ path {
         </div>
 
         <div class="form-group row float-left">
-          <div class="col-sm-10 border border-dark rounded pb-2">
+          <div class="col-sm-10 border border-light rounded pb-2">
             <div class="">
               <label for="inputFirstname">Texture</label>
               {% render_field form.texture  class="form-control" %}
@@ -210,7 +197,7 @@ path {
         </div>
 
         <div class="form-group row float-left">
-          <div class="col-sm-10 border border-dark rounded pb-2">
+          <div class="col-sm-10 border border-light rounded pb-2">
             <div class="">
               <label for="inputFirstname">Orthomosaic</label>
               {% render_field form.orthomosaic  class="form-control" %}
@@ -226,7 +213,7 @@ path {
           </div>
         </div>
         <div class="form-group row float-left">
-          <div class="col-sm-10 border border-dark rounded pb-2">
+          <div class="col-sm-10 border border-light rounded pb-2">
             <div class="">
               <label for="inputFirstname">Export Points</label>
               {% render_field form.export_points class="form-control" %}
@@ -243,7 +230,7 @@ path {
         </div>
 
         <div class="form-group row float-left">
-          <div class="col-sm-10 border border-dark rounded pb-2">
+          <div class="col-sm-10 border border-light rounded pb-2">
             <div class="">
               <label for="inputFirstname">Export DEM</label>
               {% render_field form.export_dem class="form-control" %}
@@ -260,7 +247,7 @@ path {
         </div>
 
         <div class="form-group row float-left">
-          <div class="col-sm-10 border border-dark rounded pb-2">
+          <div class="col-sm-10 border border-light rounded pb-2">
             <div class="">
               <label for="inputFirstname">PDF</label>
               {% render_field form.export_report_pdf class="form-control" %}
@@ -278,7 +265,7 @@ path {
       </div>
       <div class="col-md-10 mx-auto ">
         <div class="form-group row float-left">
-          <div class=" border border-dark rounded pb-2">
+          <div class=" border border-light rounded pb-2">
             <div class="">
               <label for="inputFirstname">Processing Notes</label>
               {% render_field form.processing_notes class="form-control" %}
@@ -289,7 +276,7 @@ path {
 
         </div>
 
-        <div class="border border-dark ml-3 float-right ">
+        <div class="border border-light ml-3 float-right ">
           <svg width="500" height="500">
             <rect fill="#fff" width="100%" height="100%"></rect>
           </svg>
