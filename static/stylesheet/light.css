@@ -20,11 +20,15 @@ $green:     #859900;
 
 body{
     /* background-color: #262626; */
-  background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),
+  /* background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),
   linear-gradient(to bottom, rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%),
-  linear-gradient(135deg, #670d10 0%,#092756 100%);
+  linear-gradient(135deg, #670d10 0%,#092756 100%); */
 
-  /* color: #fff; */
+ background: #eee8d5;
+
+}
+main{
+
 }
 
 table {
@@ -34,27 +38,32 @@ table {
   outline: none;
   padding: 20px;
   font-size: 15px;
-  color: #fff;
+  color: white;
   text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
   border: 1px solid rgba(0,0,0,0.3);
   border-radius: 4px;
   box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
-  -webkit-transition: box-shadow .5s ease;
-  -moz-transition: box-shadow .5s ease;
-  -o-transition: box-shadow .5s ease;
-  -ms-transition: box-shadow .5s ease;
-  transition: box-shadow .5s ease;
 }
 
 thead {
-  /* padding-right:20px; */
-  color:#93a1a1;
+  color:white;
   box-shadow: inset 0 -5px 45px rgba(0,0,0,0.8), 0 1px 1px rgba(0,0,0,0.8);
 }
 
-tbody, td, th {
+tbody{
   padding-right:20px;
-  color:#586e75;
+  color:white;
+  font-size: 15px;
+}
+
+td{
+  padding-right:20px;
+  color:white;
+  font-size: 15px;
+}
+th {
+  padding-right:20px;
+  color:white;
   font-size: 15px;
 }
 
@@ -68,6 +77,9 @@ tr:hover {
   text-shadow: 1px 1px 1px #839496;
   box-shadow: inset 0 -5px 45px rgba(0,0,0,0.8), 0 1px 1px rgba(0,0,0,0.8);
 }
+
+
+
 tr.clickable-row { cursor: pointer; }
 
 h1, h2, h3, h4{
@@ -76,20 +88,20 @@ h1, h2, h3, h4{
 }
 
 h1.kap {
-  color:white;
-  /* color: #93a1a1; */
+  /* color:white; */
+  color: #93a1a1;
 }
 h2.kap {
-  color:white;
-  /* color: #93a1a1; */
+  /* color:white; */
+  color: #93a1a1;
 }
 h3.kap {
-  color:white;
-  /* color: #93a1a1; */
+  /* color:white; */
+  color: #93a1a1;
 }
 h4.kap {
-  color:white;
-  /* color: #93a1a1; */
+  /* color:white; */
+  color: #93a1a1;
 }
 
 
@@ -98,21 +110,22 @@ textarea, input {
   /* width: 100%; */
   /* width: 250px */
   margin-bottom: 10px;
-  background: rgba(0,0,0,0.3);
+  background: rgba(255,0,0,1);
+  /* 0.3 */
   border: none;
   outline: none;
   padding: 10px;
   font-size: 13px;
   color: #fff;
   text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
-  border: 1px solid rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,0,0,0.3);
   border-radius: 4px;
-  box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
-  -webkit-transition: box-shadow .5s ease;
-  -moz-transition: box-shadow .5s ease;
-  -o-transition: box-shadow .5s ease;
-  -ms-transition: box-shadow .5s ease;
-  transition: box-shadow .5s ease;
+  box-shadow: inset 0 -5px 45px rgba(155,155,155,0.2), 0 1px 1px rgba(255,255,255,0.2);
+  -webkit-transition: box-shadow 0.5s ease;
+  -moz-transition: box-shadow 0.5s ease;
+  -o-transition: box-shadow 0.5s ease;
+  -ms-transition: box-shadow 0.5s ease;
+  transition: box-shadow 0.5s ease;
 }
 input[type=text], select {
   margin-bottom: 10px;
@@ -123,7 +136,7 @@ input[type=text], select {
   font-size: 13px;
   color: #fff;
   text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
-  border: 1px solid rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,0,0,0.3);
   border-radius: 4px;
   box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
   -webkit-transition: box-shadow .5s ease;
@@ -135,16 +148,10 @@ input[type=text], select {
 
 
 
-.navbar.navbar-static-top + .navbar.navbar-static-top {
-    margin-top: -20px;
-    z-index: auto;
-}
+
 
 input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
 
-div {
-  color:white;
-}
 
 div.top {
   margin-top:200px;
