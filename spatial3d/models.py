@@ -43,6 +43,7 @@ COMPUTER_CHOICES = (
     ("Harpagus","Harpagus"),
     ("Tissaphernes","Tissaphernes"),
     ("Cyrus","Cyrus"),
+    ("Artaphernes","Artaphernes")
 )
 
 
