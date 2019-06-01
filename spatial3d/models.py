@@ -41,11 +41,11 @@ COMPUTER_CHOICES = (
     ("Artaphernes","Artaphernes"),
     ("Cyrus","Cyrus"),
     ("Harpagus","Harpagus"),
+    ("Kubaba", "Kubaba"),
+    ("MSI", "MSI"),
     ("Pissuthnes", "Pissuthnes"),
     ("Struthas", "Struthas"),
     ("Tissaphernes","Tissaphernes"),
-
-
 )
 
 
