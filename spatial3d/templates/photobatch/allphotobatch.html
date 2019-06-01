@@ -22,49 +22,7 @@ $(document).ready(function() {
 
 <div class="container top" style="margin-left:0px;"
 
-<button id = "show" class="ml-3">Filter</button>
 
-
-<div class = "target position-absolute ml-5" style="box-shadow: 20px  20px 8px 0 rgba(0, 0, 0, 0.5); display:none;">
-  <div class="card bg-light pb-3" style="">
-    <div class="card-header">Filter
-    <div class="float-right">    <button id = "hide" >x</button> </div>
-    </div>
-    <div class="card-body">
-      <!--h5 class="card-title"></h5>
-      <p class="card-text"></p-->
-    </div>
-
-
-    {% if filter.form %}
-    <form method="get">
-      <div class="well container">
-        <!--h4 style="margin-top: 0">Filter Page Depot2!</h4-->
-        <div class="row px-3">
-          {{ filter.form.as_table }}
-        </div>
-      </div>
-      <div class="float-right pr-3">
-      <button type="submit" class="btn btn-primary">
-        <span class="glyphicon glyphicon-search"></span> Search
-      </button>
-      <a href="{% url 'containersearch' %}">
-        <button type="submit" class="btn btn-secondary">
-          <span class="glyphicon glyphicon-search"></span> Reset
-        </button>
-      </a>
-    </div>
-
-      <!-- {% for field in filter.form %}
-      {{ field }}
-      {% endfor %} -->
-
-    </form>
-    {% endif %}
-
-  </div>
-
-</div>
 
 <div class="container-fluid pt-3">
   <div class="pagination">
