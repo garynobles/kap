@@ -40,7 +40,7 @@ def SampleFliterView(request):
     context = {
         'queryset': qs
     }
-    return render(request, "container/filter.html", context)
+    return render(request, "depotsample/filter.html", context)
 
 
 def change_friends(request, operation, pk):

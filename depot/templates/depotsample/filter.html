@@ -1,0 +1,79 @@
+{% extends 'depotsample/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+{% include "mainheader.html" %}
+{% include "depotsample/submenu.html" %}
+<div class="container top">
+<section>
+
+<form class="" action="." method="GET">
+
+<div class="form-row">
+<div class="form-group col-12">
+<div class="input-group">
+<input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Easting" name="area_easting"/>
+<input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Northing" name="area_northing"/>
+<input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Context Number" name="context_number"/>
+<input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Sample Number" name="sample_number"/>
+
+
+<input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="Sample Type" name="sample_type"/>
+<input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="taken_by" name="taken_by"/>
+<span class="input-group-append">
+  <div class="input-group-text bg-transparent"></div>
+</span>
+</div>
+</div>
+</div>
+
+
+<button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<hr />
+
+
+
+</section>
+
+<section>
+<h4 class="kap">Samples</h4>
+<div class="table-responsive">
+<table class="table-striped">
+<thead>
+<tr>
+<th>Easting</th>
+<th>Northing</th>
+<th>Context</th>
+<th>Sample</th>
+<th>Type</th>
+<th>Recovery Method</th>
+<th>Taken By</th>
+</tr>
+</thead>
+<tbody>
+{% for sample in queryset %}
+<tr>
+
+<td>{{ sample.area_easting }}</td>
+<td>{{ sample.area_northing }}</td>
+<td>{{ sample.context_number }}</td>
+<td>{{ sample.sample_number }}</td>
+<td>{{ sample.sample_type }}</td>
+<td>{{ sample.recovery_method }}</td>
+<td>{{ sample.taken_by }}</td>
+
+</tr>
+{% empty %}
+<tr>
+<td colspan="5">Search to view results</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+
+
+</section>
+
+{% endblock %}

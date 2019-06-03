@@ -41,8 +41,8 @@ class Storage(models.Model):
 class Location(models.Model):
     location_id = models.AutoField(primary_key=True)
     store_id = models.ForeignKey(Storage, db_column='store_id', on_delete = models.PROTECT, default='Kaymakci Reseaerch Center')
-    icon_desc = models.ForeignKey(Icon, db_column='icon_desc', on_delete = models.PROTECT, null=True, blank=True)
-    location_type = models.CharField(max_length=100, blank=True, null=True)
+    icon_desc = models.ForeignKey(Icon, db_column='icon_desc', on_delete = models.PROTECT, null=True, blank=True, default='Box')
+    location_type = models.CharField(max_length=100, blank=True, null=True, default='Shelf')
     location_name = models.CharField(max_length=100, blank=True, null=True)
     location_sub_name = models.CharField(max_length=100, blank=True, null=True)
     orderby = models.IntegerField(blank=True, null=True)
@@ -54,7 +54,7 @@ class Location(models.Model):
     class Meta():
         managed=False
         db_table = 'kap\".\"location'
-        ordering = ["-location_name","location_sub_name"]
+        ordering = ["location_name","location_sub_name"]
         verbose_name_plural = "locations"
 
 class Sample(models.Model): #like a user
@@ -92,7 +92,7 @@ class Sample(models.Model): #like a user
 class Container(models.Model): #like a friend
     container_id = models.AutoField(primary_key=True)
     container_name = models.CharField(max_length=50, blank=True, null=True)
-    container_type = models.CharField(max_length=50, blank=True, null=True)
+    container_type = models.CharField(max_length=50, blank=True, null=True, default='Crate')
     location_id = models.ForeignKey(Location, db_column='location_id', on_delete = models.PROTECT, related_name = 'location')
     icon_desc = models.ForeignKey(Icon, db_column='icon_desc', null=True, blank=True, default='Box',on_delete = models.PROTECT)
     samples = models.ManyToManyField('Sample', through='ContainerSamples', related_name='containers')

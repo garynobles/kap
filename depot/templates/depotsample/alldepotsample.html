@@ -1,18 +1,40 @@
 {% extends "depotsample/base.html" %}
 {% load widget_tweaks %}
 {% block content %}
-{% include "depotsample/menu2.html" %}
+{% include "mainheader.html" %}
+{% include "depotsample/submenu.html" %}
 <script type="text/javascript">
-
   jQuery(document).ready(function($) {
     $(".clickable-row").click(function() {
       window.location = $(this).data("href");
     });
   });
-
 </script>
 
 <div class="container top">
+  <section>
+    <form class="" action="." method="GET">
+      {% csrf_token %}
+      <div class="form-row">
+        <div class="form-group col-8">
+          <div class="input-group">
+            <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="area_easting" name="area_easting"/>
+            <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="area_northing" name="area_northing"/>
+            <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="context_number" name="context_number"/>
+            <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="sample_number" name="sample_number"/>
+            <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="sample_type" name="sample_type"/>
+            <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="recovery_method" name="recovery_method"/>
+            <input class="form-control py-2 border-right-0 border " type="text" value="" placeholder="taken_by" name="taken_by"/>
+            <span class="input-group-append">
+              <div class="input-group-text bg-success" ><button type="submit" class="btn" style="padding:5pt; margin:-5pt; background-color:transparent;"><i class="fa fa-search"></i></button></div>
+            </span>
+          </div>
+        </div>
+      </div>
+    </form>
+  </section>
+
+
   <section>
     <h4 class="kap">Sample List</h4>
     <div class="table-responsive">
@@ -32,7 +54,7 @@
     </tr>
   </thead>
   <tbody>
-    {% for sample in alldepotsample %}
+    {% for sample in SampleFilterView %}
     <tr class='clickable-row' data-href="{% url 'depot:editdepotsample' pk=sample.sample_id %}">
       <td>{{ sample.area_easting }}.{{ sample.area_northing }}.{{ sample.context_number }}</td>
       <td>{{ sample.sample_number }}</td>
@@ -45,7 +67,7 @@
     </tr>
     {% empty %}
     <tr>
-      <td colspan="5">No data</td>
+      <td colspan="5">Search to view results</td>
     </tr>
     {% endfor %}
   </tbody>
