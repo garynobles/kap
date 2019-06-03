@@ -21,12 +21,12 @@ def updategygaiasamplerows(request):
 (area_easting, area_northing, context_number, sample_number, sample_type, weight, description, recovery_method )
 (
 	SELECT
-	--b.area_easting AS "NEW easting", b.area_northing AS "NEW northing", b.sample_number AS "NEW sample", b.context_number AS "NEW context",
+	
 	a.area_easting, a.area_northing, a.context_number, a.sample_number,
 	a.material, a.weight_kilograms, a.sample_description, a.recovery_type
 
 FROM samples.samples a
---FULL OUTER JOIN kap.sample b
+
 LEFT JOIN kap.sample b
 	ON a.area_easting = b.area_easting AND a.area_northing = b.area_northing AND a.sample_number = b.sample_number AND a.context_number = b.context_number
 WHERE
@@ -43,6 +43,25 @@ OR
         })
 
 
+
+#         INSERT INTO kap.sample
+# (area_easting, area_northing, context_number, sample_number, sample_type, weight, description, recovery_method )
+# (
+# 	SELECT
+# 	--b.area_easting AS "NEW easting", b.area_northing AS "NEW northing", b.sample_number AS "NEW sample", b.context_number AS "NEW context",
+# 	a.area_easting, a.area_northing, a.context_number, a.sample_number,
+# 	a.material, a.weight_kilograms, a.sample_description, a.recovery_type
+#
+# FROM samples.samples a
+# --FULL OUTER JOIN kap.sample b
+# LEFT JOIN kap.sample b
+# 	ON a.area_easting = b.area_easting AND a.area_northing = b.area_northing AND a.sample_number = b.sample_number AND a.context_number = b.context_number
+# WHERE
+# (a.area_easting IS  NULL AND a.area_northing IS  NULL AND a.sample_number IS   NULL AND a.context_number IS  NULL)
+# OR
+# (b.area_easting IS  NULL AND b.area_northing IS  NULL AND b.sample_number IS  NULL AND b.context_number IS  NULL)
+#
+# )
 
 
 

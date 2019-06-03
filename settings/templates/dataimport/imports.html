@@ -1,7 +1,8 @@
 {% extends 'storage/base.html' %}
 {% load staticfiles %}
 {% load widget_tweaks %}
-{% block content%}
+{% block content %}
+{% include "mainheader.html" %}
 {% include "storage/submenu.html" %}
 {% load has_group %}
 {% load new_rows %}
@@ -80,7 +81,7 @@
           <p class="card-text text-center">Records to Import: {% count_new_gygaia_rows %}</p>
           <div class="card-text  text-center">
             {% if request.user|has_group:"admin_botany" or request.user|has_group:"admin_zooarchaeology" or request.user|has_group:"admin_small_finds" %}
-            <form class="" action="." method="post">
+            <form class="" action="{% url 'updategygaiasamplerows' %}" method="post">
               {% csrf_token %}
               <button type="submit" class="save btn btn-dark mt-3t">Import {% count_new_gygaia_rows %} New rows</button>
             </form>
@@ -90,7 +91,7 @@
       </div>
       <div class="card text-white bg-dark mb-3 pt-3">
         <div class="card-body">
-          <h5 class="card-title text-center">Samples</h5>
+          <h5 class="card-title text-center">Samples Graph</h5>
           <p class="card-text text-center">Records to Import: {}</p>
           <div class="card-text text-center">
             {% if request.user|has_group:"admin_botany" or request.user|has_group:"admin_zooarchaeology" or request.user|has_group:"admin_small_finds" %}
@@ -105,249 +106,6 @@
     </div>
 
 
-
-  <div class="card-group">
-    <div class="card text-white bg-dark mb-3 pt-3">
-      <div class="card-body">
-        <h5 class="card-title text-center">Ceramics</h5>
-        <p class="card-text text-center">Records to Import: {% count_new_access_rows %}</p>
-        <div class="card-text text-center">
-          {% if request.user|has_group:"admin_botany" or request.user|has_group:"admin_zooarchaeology" or request.user|has_group:"admin_small_finds" %}
-          <form class="" action="." method="post">
-            {% csrf_token %}
-            <div class="text-center">
-              <button type="submit" class="save btn btn-dark mt-3t">Import {% count_new_access_rows %} New rows</button>
-            </div>
-          </form>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-    <div class="card text-white bg-dark mb-3 pt-3">
-      <div class="card-body">
-        <h5 class="card-title text-center">Ceramics</h5>
-        <p class="card-text text-center">Records to Import: {% count_new_gygaia_rows %}</p>
-        <div class="card-text  text-center">
-          {% if request.user|has_group:"admin_botany" or request.user|has_group:"admin_zooarchaeology" or request.user|has_group:"admin_small_finds" %}
-          <form class="" action="." method="post">
-            {% csrf_token %}
-            <button type="submit" class="save btn btn-dark mt-3t">Import {% count_new_gygaia_rows %} New rows</button>
-          </form>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-    <div class="card text-white bg-dark mb-3 pt-3">
-      <div class="card-body">
-        <h5 class="card-title text-center">Ceramics</h5>
-        <p class="card-text text-center">Records to Import: {}</p>
-        <div class="card-text text-center">
-          {% if request.user|has_group:"admin_botany" or request.user|has_group:"admin_zooarchaeology" or request.user|has_group:"admin_small_finds" %}
-          <form class="" action="{}" method="post">
-            {% csrf_token %}
-            <button type="submit" class="save btn btn-dark mt-3t">Import {} New rows</button>
-          </form>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-
-  <div class="card-group">
-    <div class="card text-white bg-dark mb-3 pt-3">
-      <div class="card-body">
-        <h5 class="card-title text-center">Conservation</h5>
-        <p class="card-text text-center">Records to Import: {% count_new_access_rows %}</p>
-        <div class="card-text text-center">
-          {% if request.user|has_group:"admin_botany" or request.user|has_group:"admin_zooarchaeology" or request.user|has_group:"admin_small_finds" %}
-          <form class="" action="." method="post">
-            {% csrf_token %}
-            <div class="text-center">
-              <button type="submit" class="save btn btn-dark mt-3t">Import {% count_new_access_rows %} New rows</button>
-            </div>
-          </form>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-    <div class="card text-white bg-dark mb-3 pt-3">
-      <div class="card-body">
-        <h5 class="card-title text-center">Conservation</h5>
-        <p class="card-text text-center">Records to Import: {% count_new_gygaia_rows %}</p>
-        <div class="card-text  text-center">
-          {% if request.user|has_group:"admin_botany" or request.user|has_group:"admin_zooarchaeology" or request.user|has_group:"admin_small_finds" %}
-          <form class="" action="." method="post">
-            {% csrf_token %}
-            <button type="submit" class="save btn btn-dark mt-3t">Import {% count_new_gygaia_rows %} New rows</button>
-          </form>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-    <div class="card text-white bg-dark mb-3 pt-3">
-      <div class="card-body">
-        <h5 class="card-title text-center">Conservation</h5>
-        <p class="card-text text-center">Records to Import: {}</p>
-        <div class="card-text text-center">
-          {% if request.user|has_group:"admin_botany" or request.user|has_group:"admin_zooarchaeology" or request.user|has_group:"admin_small_finds" %}
-          <form class="" action="{}" method="post">
-            {% csrf_token %}
-            <button type="submit" class="save btn btn-dark mt-3t">Import {} New rows</button>
-          </form>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-  <div class="card-group">
-    <div class="card text-white bg-dark mb-3 pt-3">
-      <div class="card-body">
-        <h5 class="card-title text-center">Zooarchaeology</h5>
-        <p class="card-text text-center">Records to Import: {% count_new_access_rows %}</p>
-        <div class="card-text text-center">
-          {% if request.user|has_group:"admin_botany" or request.user|has_group:"admin_zooarchaeology" or request.user|has_group:"admin_small_finds" %}
-          <form class="" action="." method="post">
-            {% csrf_token %}
-            <div class="text-center">
-              <button type="submit" class="save btn btn-dark mt-3t">Import {% count_new_access_rows %} New rows</button>
-            </div>
-          </form>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-    <div class="card text-white bg-dark mb-3 pt-3">
-      <div class="card-body">
-        <h5 class="card-title text-center">Zooarchaeology</h5>
-        <p class="card-text text-center">Records to Import: {% count_new_gygaia_rows %}</p>
-        <div class="card-text  text-center">
-          {% if request.user|has_group:"admin_botany" or request.user|has_group:"admin_zooarchaeology" or request.user|has_group:"admin_small_finds" %}
-          <form class="" action="." method="post">
-            {% csrf_token %}
-            <button type="submit" class="save btn btn-dark mt-3t">Import {% count_new_gygaia_rows %} New rows</button>
-          </form>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-    <div class="card text-white bg-dark mb-3 pt-3">
-      <div class="card-body">
-        <h5 class="card-title text-center">Zooarchaeology</h5>
-        <p class="card-text text-center">Records to Import: {}</p>
-        <div class="card-text text-center">
-          {% if request.user|has_group:"admin_botany" or request.user|has_group:"admin_zooarchaeology" or request.user|has_group:"admin_small_finds" %}
-          <form class="" action="{}" method="post">
-            {% csrf_token %}
-            <button type="submit" class="save btn btn-dark mt-3t">Import {} New rows</button>
-          </form>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-  <div class="card-group">
-    <div class="card text-white bg-dark mb-3 pt-3">
-      <div class="card-body">
-        <h5 class="card-title text-center">Excavation</h5>
-        <p class="card-text text-center">Records to Import: {% count_new_access_rows %}</p>
-        <div class="card-text text-center">
-          {% if request.user|has_group:"admin_botany" or request.user|has_group:"admin_zooarchaeology" or request.user|has_group:"admin_small_finds" %}
-          <form class="" action="." method="post">
-            {% csrf_token %}
-            <div class="text-center">
-              <button type="submit" class="save btn btn-dark mt-3t">Import {% count_new_access_rows %} New rows</button>
-            </div>
-          </form>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-    <div class="card text-white bg-dark mb-3 pt-3">
-      <div class="card-body">
-        <h5 class="card-title text-center">Excavation</h5>
-        <p class="card-text text-center">Records to Import: {% count_new_gygaia_rows %}</p>
-        <div class="card-text  text-center">
-          {% if request.user|has_group:"admin_botany" or request.user|has_group:"admin_zooarchaeology" or request.user|has_group:"admin_small_finds" %}
-          <form class="" action="." method="post">
-            {% csrf_token %}
-            <button type="submit" class="save btn btn-dark mt-3t">Import {% count_new_gygaia_rows %} New rows</button>
-          </form>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-    <div class="card text-white bg-dark mb-3 pt-3">
-      <div class="card-body">
-        <h5 class="card-title text-center">Excavation</h5>
-        <p class="card-text text-center">Records to Import: {}</p>
-        <div class="card-text text-center">
-          {% if request.user|has_group:"admin_botany" or request.user|has_group:"admin_zooarchaeology" or request.user|has_group:"admin_small_finds" %}
-          <form class="" action="{}" method="post">
-            {% csrf_token %}
-            <button type="submit" class="save btn btn-dark mt-3t">Import {} New rows</button>
-          </form>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-  <div class="card-group">
-    <div class="card text-white bg-dark mb-3 pt-3">
-      <div class="card-body">
-        <h5 class="card-title text-center">Botany</h5>
-        <p class="card-text text-center">Records to Import: {% count_new_access_rows %}</p>
-        <div class="card-text text-center">
-          {% if request.user|has_group:"admin_botany" or request.user|has_group:"admin_zooarchaeology" or request.user|has_group:"admin_small_finds" %}
-          <form class="" action="." method="post">
-            {% csrf_token %}
-            <div class="text-center">
-              <button type="submit" class="save btn btn-dark mt-3t">Import {% count_new_access_rows %} New rows</button>
-            </div>
-          </form>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-    <div class="card text-white bg-dark mb-3 pt-3">
-      <div class="card-body">
-        <h5 class="card-title text-center">Botany</h5>
-        <p class="card-text text-center">Records to Import: {% count_new_gygaia_rows %}</p>
-        <div class="card-text  text-center">
-          {% if request.user|has_group:"admin_botany" or request.user|has_group:"admin_zooarchaeology" or request.user|has_group:"admin_small_finds" %}
-          <form class="" action="." method="post">
-            {% csrf_token %}
-            <button type="submit" class="save btn btn-dark mt-3t">Import {% count_new_gygaia_rows %} New rows</button>
-          </form>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-    <div class="card text-white bg-dark mb-3 pt-3">
-      <div class="card-body">
-        <h5 class="card-title text-center">Botany</h5>
-        <p class="card-text text-center">Records to Import: {}</p>
-        <div class="card-text text-center">
-          {% if request.user|has_group:"admin_botany" or request.user|has_group:"admin_zooarchaeology" or request.user|has_group:"admin_small_finds" %}
-          <form class="" action="{}" method="post">
-            {% csrf_token %}
-            <button type="submit" class="save btn btn-dark mt-3t">Import {} New rows</button>
-          </form>
-          {% endif %}
-        </div>
-      </div>
-    </div>
   </div>
 
 
