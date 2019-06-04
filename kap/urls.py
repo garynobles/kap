@@ -16,17 +16,21 @@ urlpatterns = [
     path('', jobs.views.home, name='home'),
     path('blog/', include('blog.urls')),
 
+    path('sample/', include('sample.urls')),
     path('botany/', include('botany.urls')),
+	path('conservation/', include('conservation.urls')),
+	path('zooarch/',include('zooarch.urls')),
 
     path('depot/',include(('depot.urls', 'depot'), namespace='depot')),
-    #Zooarch
-    path('zooarch/',include('zooarch.urls')),
+
     #experimental
     path('experimental/', include('experimental.urls')),
     path('models3d/', include('models3d.urls')),
 
     path('spatial3d/', include('spatial3d.urls')),
 
+    path('documentation/', include('documentation.urls')),
+    path('teams/', include('teams.urls')),
     path('tickets/', include('tickets.urls')),
     path('settings/', include('settings.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

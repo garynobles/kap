@@ -10,7 +10,6 @@ EASTING_CHOICES = (
     (97,97),
     (98,98),
     (987,987),
-
 )
 
 NORTHING_CHOICES = (

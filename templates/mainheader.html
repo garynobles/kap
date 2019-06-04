@@ -16,7 +16,7 @@
           <div class="dropdown show">
             <a class="btn btn-secondary dropdown-toggle mr-2" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Samples</a>
             <div class="dropdown-menu " aria-labelledby="samplesdropdown">
-              <a class="dropdown-item" href="{ url 'allsamples' }">Samples</a>
+              <a class="dropdown-item" href="{% url 'sample' %}">Samples</a>
               <hr />
               <!-- get this to pass a filter so I only mees 1 url for sample lists -->
               <a class="dropdown-item" href="{% url 'samplelist' %}">Botany</a>
@@ -74,7 +74,7 @@
           <div class="dropdown show">
             <a class="btn btn-secondary dropdown-toggle mr-2" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Conservation</a>
             <div class="dropdown-menu " aria-labelledby="conservation">
-              <a class="dropdown-item" href="{ url 'allconservation' }">All Conservation</a>
+              <a class="dropdown-item" href="{% url 'allconservation' %}">All Conservation</a>
             </div>
           </div>
 
