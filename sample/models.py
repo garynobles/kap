@@ -1,7 +1,8 @@
 from django.db import models
-
+from django.contrib.auth.models import User
+from django.conf import settings
 # Create your models here.
-
+from templates.choices import EASTING_CHOICES, NORTHING_CHOICES, RECOVERY_METHODS, MATERIALS
 
 class Sample(models.Model):
     sample_id = models.AutoField(primary_key=True)
@@ -14,7 +15,7 @@ class Sample(models.Model):
     weight = models.DecimalField(max_digits=6, decimal_places=2)
     description = models.CharField(max_length=500, default='', blank=True, null=True)
     recovery_method = models.CharField(max_length=200, default='', blank=True, null=True, choices = RECOVERY_METHODS)
-    taken_by = models.ForeignKey(settings.AUTH_USER_MODEL, db_column='taken_by', on_delete = models.PROTECT)
+    taken_by = models.ForeignKey(settings.AUTH_USER_MODEL, db_column='taken_by', on_delete = models.PROTECT, related_name='sample_taken_by')
     # taken_by = models.ForeignKey(public.auth_user, db_column='taken_by', on_delete = models.PROTECT)
     comments = models.CharField(max_length=1000, default='', blank=True, null=True)
 

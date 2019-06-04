@@ -1,0 +1,30 @@
+{% extends "dashboard/base.html" %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load has_group %}
+{% load new_rows %}
+
+{% block content %}
+{% include "mainheader.html" %}
+{% include "dashboard/submenu.html" %}
+
+<div class="container top">
+  <section>
+    <h1 style="color:white;">Samples Dashboard</h1>
+    <hr />
+        <h2  style="color:white;">Graphical Overview</h2>
+    <div class="">
+      {% include "dashboard/charts/sample_bar.html" %}
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="">
+      <!-- <div id="container3" style="width:50%; min-width: 100px; height: 400px; margin: 0 auto; float: left; border-style:solid;"></div> -->
+      {% include "dashboard/charts/sample_pie.html" %}
+    </div>
+
+</section>
+
+
+
+{% endblock %}
