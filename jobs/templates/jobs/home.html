@@ -1,23 +1,38 @@
 {% extends 'jobs/base.html' %}
 {% load widget_tweaks %}
 {% block content %}
-{% include "jobs/menu2.html" %}
+{% include "mainheader.html" %}
 <div class="container top">
+
   <section>
-    <div class="row">
-      {% for job in jobs.all %}
+    <h4 class="kap">Quick Links</h4>
+    <div class="row col-md-6 float-left">
+      {% for job in jobs %}
       <div class="col-md-4">
-        <div class="card mb-4 box-shadow">
+        <div class="card mb-2 box-shadow">
           <a href="/{{ job.referenceurl }}/">
             <img class="card-img-top" src="{{ job.image.url }}" /></a>
             <div class="card-body">
-              <p class="card-text">{{ job.summary }}</p>
+              <p class="card-text" style="color:black;">{{ job.summary }}</p>
             </div>
           </div>
         </div>
         {% endfor %}
       </div>
   </section>
+
+
+  <section>
+    <h4 class="kap">Announcements</h4>
+    <div class="col-md-6 float-left">
+    {% for announcement in announcements %}
+    <h4>{{ announcement.title }}</h4>
+    <p>{{ announcement.content }}</p>
+    <p>{{ announcement.date }}</p>
+    {% endfor %}
+    </div>
+  </section>
+
     </div>
 
 
