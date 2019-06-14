@@ -1,11 +1,9 @@
-
-
-
-
-{% include "mainheader.html" %}
-{% include "qnisp/submenu.html" %}
+{% extends 'qnisp/base.html' %}
+{% load staticfiles %}
 {% load widget_tweaks %}
 {% block content %}
+{% include "mainheader.html" %}
+{% include "qnisp/submenu.html" %}
 <style>
 
 path {
@@ -18,8 +16,6 @@ path {
 
 </style>
 
-{% include "menu1.html" %}
-{% include "qnisp/menu2.html" %}
 
 <div class="container">
   <h1>Quick NISP</h1>
