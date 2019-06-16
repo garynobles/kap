@@ -1,14 +1,15 @@
-{% extends "plantpart/base.html" %}
+{% extends "species/base.html" %}
 {% load widget_tweaks %}
 {% block content %}
-{% include "species/menu2.html" %}
+{% include "mainheader.html" %}
+{% include "species/submenu.html" %}
 <div class="container top">
   <h4 class="kap">Create Species</h4>
   <form method="POST" class="post-form">{% csrf_token %}
     <div class="row mt-1">
 
       <div class="" style="color:white; width:300px;">{{ form.genus|append_attr:"placeholder: Genus" }}</div>
-      <div class="" style="color:white; width:300px;">{{ form.species|append_attr:"placeholder: Species" }}</div>
+      <div class="" style="color:white; width:300px;">{{ form.species|append_attr:"placeholder: Taxon" }}</div>
       <div class="" style="color:white; width:250px;">{{ form.common_name|append_attr:"placeholder: Common Name" }}</div>
 
     </div>

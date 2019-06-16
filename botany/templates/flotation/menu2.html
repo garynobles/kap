@@ -18,10 +18,6 @@
               <a class="dropdown-item" href="{% url 'depot:allcontainer' %}">Containers</a>
               <a class="dropdown-item" href="{% url 'depot:alllocation' %}">Locations</a>
               <a class="dropdown-item" href="{% url 'depot:allstorage' %}">Depots</a>
-              <!-- <a class="dropdown-item" href="#">Faunal</a>
-              <a class="dropdown-item" href="#">Conservation</a>
-              <a class="dropdown-item" href="#">Ceramics</a>
-              <a class="dropdown-item" href="#">Small Finds</a> -->
             </div>
           </div>
           <a class="nav-item nav-link" href="{ url 'contextpage' }">Excavation</a>
@@ -30,10 +26,6 @@
             <div class="dropdown-menu " aria-labelledby="gallery">
               <a class="dropdown-item" href="{ url 'allimages' }">Photos_1</a>
               <hr />
-              <!-- <a class="dropdown-item" href="#">Faunal</a>
-              <a class="dropdown-item" href="#">Conservation</a>
-              <a class="dropdown-item" href="#">Ceramics</a>
-              <a class="dropdown-item" href="#">Small Finds</a> -->
             </div>
           </div>
           <div class="dropdown show">
@@ -41,10 +33,6 @@
             <div class="dropdown-menu " aria-labelledby="spatial3d">
               <a class="dropdown-item" href="{% url 'allphotobatch' %}">Photobatch</a>
               <hr />
-              <!-- <a class="dropdown-item" href="#">Faunal</a>
-              <a class="dropdown-item" href="#">Conservation</a>
-              <a class="dropdown-item" href="#">Ceramics</a>
-              <a class="dropdown-item" href="#">Small Finds</a> -->
             </div>
           </div>
           <div class="dropdown show">
@@ -52,11 +40,7 @@
             <div class="dropdown-menu " aria-labelledby="botany">
               <a class="dropdown-item" href="{% url 'samplelist' %}">Samples</a>
               <hr />
-              <a class="dropdown-item" href="{% url 'speciesmanager' %}">Species Manager</a>
-              <!-- <a class="dropdown-item" href="#">Faunal</a>
-              <a class="dropdown-item" href="#">Conservation</a>
-              <a class="dropdown-item" href="#">Ceramics</a>
-              <a class="dropdown-item" href="#">Small Finds</a> -->
+              <a class="dropdown-item" href="{% url 'speciesmanager' %}">Taxon Manager</a>
             </div>
           </div>
           <div class="dropdown show">
@@ -65,10 +49,6 @@
               <a class="dropdown-item" href="{ url 'allzooarch' }">Samples</a>
               <hr />
               <a class="dropdown-item" href="{% url 'allqnisp' %}">Qnisp</a>
-              <!-- <a class="dropdown-item" href="{ url 'allzooarch' }">All Zooarch</a> -->
-              <!-- <a class="dropdown-item" href="#">Conservation</a>
-              <a class="dropdown-item" href="#">Ceramics</a>
-              <a class="dropdown-item" href="#">Small Finds</a> -->
             </div>
           </div>
           <div class="dropdown show">
@@ -77,9 +57,6 @@
               <a class="dropdown-item" href="{ url 'allsamples' }">Samples</a>
               <hr />
               <a class="dropdown-item" href="{ url 'allzooarch' }">Faunal</a>
-              <!-- <a class="dropdown-item" href="#">Conservation</a>
-              <a class="dropdown-item" href="#">Ceramics</a>
-              <a class="dropdown-item" href="#">Small Finds</a> -->
             </div>
           </div>
           <div class="dropdown show">
@@ -110,9 +87,6 @@
               {{ user.get_full_name|default:user.username }}
             </a>
             <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
-              <!-- <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a> -->
               <a class="dropdown-item" href="{% url 'logout'%}?next={{request.path}}">Logout</a>
               <a class="dropdown-item" href="{% url 'alltickets' %}"><img src="{% static 'icon_sets\clipboard-list-solid.svg'%}" alt"" height="20px" width="20px" /> Tickets</a>
 <a class="dropdown-item" href="{% url 'overview' %}"><img src="{% static 'icon_sets\cogs-solid.svg'%}" alt"" height="20px" width="20px" /> Settings</a>
@@ -130,16 +104,13 @@
             <hr />
             <a class="dropdown-item" href="{ url 'allzooarch' }">Faunal</a>
             <a class="dropdown-item" href="{% url 'models3d' %}">3d models</a>
-            <!-- <a class="dropdown-item" href="#">Conservation</a>
-            <a class="dropdown-item" href="#">Ceramics</a>
-            <a class="dropdown-item" href="#">Small Finds</a> -->
           </div>
         </div>
       </div>
     </div>
 
 
-
+<!--
 <div class="navbar navbar-custom navbar-inverse navbar-static-top navbar-dark bg-dark" id="nav2">
   <div class="float-left">
     <a href="{% url 'allbotany' %}" style="color:white;">
@@ -163,7 +134,7 @@
         Flotation
       </button>
     </a>
-  </div>
+  </div> -->
   <!-- <div>
     <a href="{ url 'addflotation' }">
       <button  type="button" class="btn btn-success float-right mr-1">Add Flotation</button>

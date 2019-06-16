@@ -12,7 +12,6 @@ from itertools import chain
 
 from dal import autocomplete
 
-
 def allsample(request):
     allsample = Sample.objects.all()
     return render(request, 'sample/sample.html',
@@ -643,4 +642,4 @@ class SampleListView(generic.ListView):
     template_name = 'sample/sample_list.html'
     model = Sample
     paginate_by = 50
-    queryset = Sample.objects.filter(sample_type='Organic')
+    queryset = Sample.objects.filter(sample_type='Soil')
