@@ -11,7 +11,7 @@ path('', SampleFliterView, name='SampleFliterView'),
 
 url(r'^change_container/(?P<operation>.*)/(?P<pk>\d+)/sample/(?P<fk>\d+)$', views.change_container, name='change_container'),
 
-url(r'^container/(?P<operation>.*)/(?P<pk>\d+)/$', views.change_friends, name='change_friends'),
+# url(r'^container/(?P<operation>.*)/(?P<pk>\d+)/$', views.change_friends, name='change_friends'),
 # url(r'^containerx/<int:container_id>/(?P<operation>.*)/(?P<pk>\d+)/$', views.change_friends, name='change_friends'),
 
 # EDIT

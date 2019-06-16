@@ -15,7 +15,7 @@ from django.shortcuts import render
 from django_tables2 import SingleTableView
 
 
-from depot.models import Sample, Container, Location, Storage, JoinSampleContainer, Friend, ContainerSamples
+from depot.models import Sample, Container, Location, Storage, JoinSampleContainer, ContainerSamples
 
 
 def SampleFliterView(request):
@@ -42,15 +42,15 @@ def SampleFliterView(request):
     }
     return render(request, "depotsample/filter.html", context)
 
-
-def change_friends(request, operation, pk):
-    friend = User.objects.get(pk=pk)
-    if operation == 'add':
-        Friend.make_friend(request.user, friend)
-    elif operation == 'remove':
-        Friend.lose_friend(request.user, friend)
-
-    return redirect('depot:allcontainer')
+#
+# def change_friends(request, operation, pk):
+#     friend = User.objects.get(pk=pk)
+#     if operation == 'add':
+#         Friend.make_friend(request.user, friend)
+#     elif operation == 'remove':
+#         Friend.lose_friend(request.user, friend)
+#
+#     return redirect('depot:allcontainer')
 
 def change_container(request, operation, pk='', fk=''):
     container = Container.objects.get(pk=pk)

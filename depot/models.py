@@ -233,25 +233,25 @@ class ContainerSamples(models.Model):
         db_table = 'kap\".\"container_samples'
 
 
-# m2m test
-class Friend(models.Model):
-    users = models.ManyToManyField(User)
-    current_user = models.ForeignKey(User, related_name='owner', null=True, on_delete = models.PROTECT)
-    # container_id = models.ForeignKey(Container, null=True, on_delete = models.PROTECT)
-
-    @classmethod
-    def make_friend(cls, current_user, new_friend):
-        friend, created = cls.objects.get_or_create(
-            current_user=current_user
-        )
-        friend.users.add(new_friend)
-
-    @classmethod
-    def lose_friend(cls, current_user, new_friend):
-        friend, created = cls.objects.get_or_create(
-            current_user=current_user
-        )
-        friend.users.remove(new_friend)
+# # m2m test
+# class Friend(models.Model):
+#     users = models.ManyToManyField(User)
+#     current_user = models.ForeignKey(User, related_name='owner', null=True, on_delete = models.PROTECT)
+#     # container_id = models.ForeignKey(Container, null=True, on_delete = models.PROTECT)
+#
+#     @classmethod
+#     def make_friend(cls, current_user, new_friend):
+#         friend, created = cls.objects.get_or_create(
+#             current_user=current_user
+#         )
+#         friend.users.add(new_friend)
+#
+#     @classmethod
+#     def lose_friend(cls, current_user, new_friend):
+#         friend, created = cls.objects.get_or_create(
+#             current_user=current_user
+#         )
+#         friend.users.remove(new_friend)
 
 # class ContainerContents(models.Model):
 #         sample = models.ManyToManyField('Sample')
