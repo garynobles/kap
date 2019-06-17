@@ -1,26 +1,22 @@
 {% extends "blog/base.html" %}
+{% load static %}
 {% load widget_tweaks %}
-
 {% block content %}
-{% include "menu1.html" %}
-{% include "blog/menu2.html" %}
-<div class="container">
-    <h1 class="text-center pt-3">Gygaia working blog</h1>
-    <br />
-
+{% include "mainheader.html" %}
+<!-- { include "blog/submenu.html" } -->
+<div class="container top-no-menu">
+  <h1 class="text-center pt-3">Gygaia working blog</h1>
+  <br />
     <h2>Latest posts</h2>
-<hr />
-
-{% for blog in blogs.all %}
-<a href="{% url 'detail' blog.id %}"><h3>{{blog.title}}</h3></a>
-{{ blog.pub_date_pretty }}
-<br />
-<img class="img-fluid" src="{{blog.image.url}}" height=200 width=200 />
-<br />
-<p>{{ blog.summary }}</p>
-{% endfor %}
-<br />
-
-  </div>
-
+  <hr />
+  {% for blog in blogs.all %}
+  <a href="{% url 'detail' blog.id %}"><h3>{{blog.title}}</h3></a>
+  {{ blog.pub_date_pretty }}
+  <br />
+  <img class="img-fluid" src="{{blog.image.url}}" height=200 width=200 />
+  <br />
+  <p>{{ blog.summary }}</p>
+  {% endfor %}
+  <br />
+</div>
 {% endblock %}
