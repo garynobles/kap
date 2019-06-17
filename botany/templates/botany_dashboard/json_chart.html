@@ -10,13 +10,13 @@
   <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
   <script type="text/javascript" src="{% static 'js/jquery-3.4.1.slim.min.js' %}"></script>
   <script>
-    $.ajax({
-      url: $("#container").attr("data-url"),
-      dataType: 'json',
-      success: function (data) {
-        Highcharts.chart("container", data);
-      }
-    });
+  $.ajax({
+    url: $("#container").attr("data-url"),
+    dataType: 'json',
+    success: function (data) {
+      Highcharts.chart("container", data);
+    }
+  });
   </script>
 </body>
 </html>

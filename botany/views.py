@@ -360,7 +360,7 @@ def botanyoverview(request, flotation_id, sample_id=''):
         queryset += Seed.objects.filter(fraction_id = i.fraction_id)
     seed = queryset
 
-    return render(request, 'dashboard/botanyoverview.html',
+    return render(request, 'botany_dashboard/botanyoverview.html',
     {
         'flotation':flotation,
         'sample':sample,
@@ -451,7 +451,7 @@ def allbotany(request, sample_id=''):
             # .order_by('soil_volume')
 
 
-    return render(request, 'dashboard/botanyhome.html',
+    return render(request, 'botany_dashboard/botanyhome.html',
     {
     # 'botany':botany,
     'number':number,

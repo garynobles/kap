@@ -1,0 +1,315 @@
+{% extends "botany_dashboard/base.html" %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load has_group %}
+{% load botany_new_rows %}
+{% block content %}
+{% include "mainheader.html" %}
+{% include "botany_dashboard/submenu.html" %}
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+      window.location = $(this).data("href");
+    });
+  });
+</script>
+<div class="container top">
+  {% if sample %}
+  {% for sample in sample.all %}
+  <div class="" style="margin-bottom:10px; margin-top:-20px;
+  border-radius: 15px 50px 30px 5px; background-color: green;
+  ">
+  <div class="float-left" style="padding:10px; color:#eee8d5;">
+    <i class="fas fa-map-marker-alt" style="color:#859900;"></i>
+    {{ sample.area_easting}}.{{ sample.area_northing}}
+  </div>
+  <div class="float-left" style="padding:10px; color:#eee8d5;">
+    <i class="fas fa-search" style="color:#6c71c4;"></i>
+    {{ sample.context_number}}
+  </div>
+  <div class="float-left" style="padding:10px; color:#eee8d5;">
+    <i class="fas fa-tag" style="color:#cb4b16;"></i>
+    {{ sample.sample_number}}
+  </div>
+  <div class="float-left" style="padding:10px; color:#eee8d5;">
+    <i class="fas fa-crosshairs" style="color:#b58900;"></i>
+    {{ sample.sample_type}}
+  </div>
+  <div class="float-left" style="padding:10px; color:#eee8d5;">
+    <!-- <i class="fas fa-weight-hanging" style="color:#268bd2;"></i> -->
+    <i class="fas fa-weight" style="color:#2aa198;"></i>
+    {{ sample.weight}}
+  </div>
+  <div class="float-left" style="padding:10px; color:#eee8d5;">
+    <i class="fas fa-info-circle" style="color:#268bd2;"></i>
+    {{ sample.description|truncatewords:10}}
+  </div>
+  <div class="float-left" style="padding:10px; color:#eee8d5;">
+    <i class="fas fa-hand-pointer" style="color:#93a1a1;"></i>
+    {{ sample.recovery_method }}
+  </div>
+  <div class="float-left" style="padding:10px; color:#eee8d5;">
+    <i class="fas fa-user-astronaut" style="color:#93a1a1;"></i>
+    {{ sample.taken_by}}
+  </div>
+  <div class="float-left" style="padding:10px; color:#eee8d5;">
+    <i class="fas fa-comment" style="color:#93a1a1;"></i>
+    {{ sample.comments|truncatewords:10}}
+  </div>
+</div>
+{% endfor %}
+{% endif %}
+<div class="clearfix">
+</div>
+<p style="color:#b58900;">Samples to Import: { count_new_rows }</p>
+<section>
+  <h4 class="kap">Botanical Overview (Flotation)</h4>
+  <div class="table-responsive">
+    <table class="table-striped">
+      <thead>
+        <tr>
+          <th>Sample ID</th>
+          <th>Easting</th>
+          <th>Northing</th>
+          <th>Context</th>
+          <th>Sample</th>
+          <th>Sample Type</th>
+          <th>Weight</th>
+          <th>Description</th>
+          <th>Recovery Method</th>
+          <th>Taken By</th>
+          <th>Comments</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if sample %}
+        {% for sample in sample.all %}
+        <tr class='clickable-row' data-href="{% url 'editsample' pk=sample.sample_id %}">
+          <td>{{ sample.sample_id }}</td>
+          <td>{{ sample.area_easting}}</td>
+          <td>{{ sample.area_northing}}</td>
+          <td>{{ sample.context_number}}</td>
+          <td>{{ sample.sample_number}}</td>
+          <td>{{ sample.sample_type}}</td>
+          <td>{{ sample.weight}}</td>
+          <td>{{ sample.description}}</td>
+          <td>{{ sample.recovery_method}}</td>
+          <td>{{ sample.taken_by}}</td>
+          <td>{{ sample.comments}}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <td>There are no samples to display.</td>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</section>
+<section>
+  <div class="table-responsive">
+    <table class="table-striped">
+      <thead>
+        <tr>
+          <th>Flotation ID</th>
+          <!-- <th>Easting</th>
+          <th>Northing</th>
+          <th>Context</th>
+          <th>Sample</th> -->
+          <th>Flotation Date</th>
+          <th>Entry date</th>
+          <th>Analyst</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='clickable-row' data-href="{% url 'editflotationform' fk=flotation.sample_id pk=flotation.pk %}">
+          <td>{{ flotation.flotation_id }}</td>
+          <!-- <td>{{ flotation.area_easting }}</td>
+          <td>{{ flotation.area_northing }}</td>
+          <td>{{ flotation.context_number }}</td>
+          <td>{{ flotation.sample_number }}</td> -->
+          <td>{{ flotation.flotation_date}}</td>
+          <td>{{ flotation.entry_date }}</td>
+          <td>{{ flotation.analyst_id }}</td>
+          <td>{{ flotation.notes }}</td>
+          <td><a href="{% url 'addlightresidue' fk=flotation.sample_id pk=flotation.flotation_id %}">
+            <i class="fab fa-pagelines"></i>
+            <i class="fas fa-atom"></i>
+            <i class="fas fa-biohazard"></i>
+            <i class="fab fa-react"></i>
+            Add LightResidue</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  {% if lightresidue %}
+  <section>
+    <div class="table-responsive">
+      <table class="table-striped">
+        <thead>
+          <tr>
+            <th>Light Residue ID</th>
+            <th>Proportion Analysed</th>
+            <th>Soil Volume</th>
+            <th>Sample Volume</th>
+            <th>Sample Weight</th>
+            <th>Stone</th>
+            <th>Roots</th>
+            <th>Bone</th>
+            <th>Shell</th>
+            <th>Sediment</th>
+            <th>Leaves</th>
+            <th>Insect Parts</th>
+            <th>Charred Dung</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for lightresidue in lightresidue.all %}
+          <tr class='clickable-row' data-href="{% url 'editlightresidue' sp=flotation.sample_id fk=flotation.flotation_id pk=lightresidue.lightresidue_id %}">
+            <td>{{ lightresidue.lightresidue_id}}</td>
+            <td>{{ lightresidue.proportion_analysed}}</td>
+            <td>{{ lightresidue.soil_volume}}</td>
+            <td>{{ lightresidue.sample_volume}}</td>
+            <td>{{ lightresidue.sample_weight}}</td>
+            <td>{{ lightresidue.stone }} </td>
+            <td>{{ lightresidue.roots }} </td>
+            <td>{{ lightresidue.bone }}  </td>
+            <td>{{ lightresidue.shell }}  </td>
+            <td>{{ lightresidue.sediment }}  </td>
+            <td>{{ lightresidue.leaves }} </td>
+            <td>{{ lightresidue.insect_parts }} </td>
+            <td>{{ lightresidue.charred_dung }} </td>
+            <td><a href="{% url 'addcomposition' fk=flotation.flotation_id pk=lightresidue.lightresidue_id sp=flotation.sample_id %}" >+ Composition</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  {% else %}
+  <p>There are no light residues to display.</p>
+  {% endif %}
+  {% if composition %}
+  <section>
+    <div class="table-responsive">
+      <table class="table-striped">
+        <thead>
+          <tr>
+            <th>Composition ID</th>
+            <th>Material Type</th>
+            <th>Count</th>
+            <th>Whole Weight</th>
+            <th>Fragment Weight</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for composition in composition %}
+          <tr class='clickable-row' data-href="{% url 'editcomposition' sp=flotation.sample_id fl=flotation.flotation_id fk=composition.lightresidue_id pk=composition.composition_id %}">
+            <td>{{ composition.composition_id}}</td>
+            <td>{{ composition.material_type}}</td>
+            <td>{{ composition.type_count}}</td>
+            <td>{{ composition.whole_weight}}</td>
+            <td>{{ composition.fragment_weight}}</td>
+            <td><a href="{% url 'addfraction' fk=composition.lightresidue_id pk=composition.composition_id sp=flotation.sample_id fl=flotation.flotation_id %}" class="badge badge-primary" role="button">+ Fraction</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  {% else %}
+  <p>There are no compositions to display.</p>
+  {% endif %}
+  {% if fraction %}
+  <section>
+    <div class="table-responsive">
+      <table class="table-striped">
+        <thead>
+          <tr>
+            <th>Fraction ID</th>
+            <th>Fraction</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for fraction in fraction %}
+          <tr class='clickable-row' data-href="{% url 'editfraction' sp=flotation.sample_id fl=flotation.flotation_id fk=fraction.composition_id pk=fraction.fraction_id %}">
+            <td>{{ fraction.fraction_id}}</td>
+            <td>{{ fraction.fraction}}</td>
+            <td><a href="{% url 'addplantpart' fk=fraction.composition_id pk=fraction.fraction_id sp=flotation.sample_id fl=flotation.flotation_id %} title='Add plant part'">
+              <i class="fab fa-pagelines add "></i></a></td>
+              <td><a href="{% url 'addseed' fk=fraction.composition_id pk=fraction.fraction_id sp=flotation.sample_id fl=flotation.flotation_id %} title='Add seed'">
+                <img class="float-left" src="{% static 'icon_sets\acorn.svg'%}" alt"" height="20" width="20" />
+              </a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+    {% else %}
+    <p>There are no fractions to display.</p>
+    {% endif %}
+    {% if plantpart %}
+    <section>
+      <div class="table-responsive">
+        <table class="table-striped">
+          <thead>
+            <tr>
+              <th>Plant Part ID</th>
+              <th>Taxon</th>
+              <th>Plant Part</th>
+              <th>Part Count</th>
+              <th>Part Weight</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for plantpart in plantpart %}
+            <tr class='clickable-row' data-href="{% url 'editplantpart' sp=flotation.sample_id fl=flotation.flotation_id fk=plantpart.fraction_id pk=plantpart.plantpart_id  %}">
+              <td>{{ plantpart.plantpart_id}}</td>
+              <td>{{ plantpart.species_id }}</td>
+              <td>{{ plantpart.part}}</td>
+              <td>{{ plantpart.quantity}}</td>
+              <td>{{ plantpart.weight}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+    {% else %}
+    <td>There are no plant parts to display.</td>
+    {% endif %}
+    {% if seed %}
+    <section>
+      <div class="table-responsive">
+        <table class="table-striped">
+          <thead>
+            <tr>
+              <th>Seed ID</th>
+              <th>Taxon</th>
+              <th>Weight Type</th>
+              <th>Weight</th>
+              <th>Quantity Type</th>
+              <th>Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for seed in seed %}
+            <tr class='clickable-row' data-href="{% url 'editseed' sp=flotation.sample_id fl=flotation.flotation_id fk=seed.fraction_id pk=seed.seed_id  %}">
+              <td>{{ seed.seed_id}}</td>
+              <td>{{ seed.species_id }}</td>
+              <td>{{ seed.weight_type}}</td>
+              <td>{{ seed.weight }}</td>
+              <td>{{ seed.quantity_type }}</td>
+              <td>{{ seed.quantity }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+    {% else %}
+    <td>There are no seeds to display.</td>
+    {% endif %}
+    {% endblock %}

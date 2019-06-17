@@ -1,38 +1,31 @@
-{% extends "dashboard/base.html" %}
-{% load widget_tweaks %}
+{% extends "botany_dashboard/base.html" %}
 {% load static %}
+{% load widget_tweaks %}
 {% block content %}
-
-{% include "flotation/menu2.html" %}
+{% include "mainheader.html" %}
+{% include "botany_dashboard/submenu.html" %}
 
 <div class="container top">
   <section>
     <h1 style="color:white;">Botany Dashboard</h1>
     <hr />
-        <h2  style="color:white;">Graphical Overview</h2>
-      <div id="container5" style="min-width: 310px; height: 200px; margin: 0 auto; border-style:solid;"></div>
-
+    <h2  style="color:white;">Graphical Overview</h2>
+    <div id="container5" style="min-width: 310px; height: 200px; margin: 0 auto; border-style:solid;"></div>
     <!-- SELECT EXTRACT(EPOCH FROM date_column) from my_table; -->
     <div class="">
       <!-- <div id="container1" style="width:50%; min-width: 100px; height: 400px; margin: 0 auto; float: left; border-style:solid;"></div> -->
       <!-- <div id="container2" style="width:50%; min-width: 100px; height: 400px; margin: 0 auto; float: left; border-style:solid;"></div> -->
-      {% include "dashboard/charts/botany_fraction_pie.html" %}
-      {% include "dashboard/charts/botany_bar.html" %}
-
+      {% include "botany_dashboard/charts/botany_fraction_pie.html" %}
+      {% include "botany_dashboard/charts/botany_bar.html" %}
     </div>
     <div class="clearfix"></div>
-
     <div class="">
       <!-- <div id="container3" style="width:50%; min-width: 100px; height: 400px; margin: 0 auto; float: left; border-style:solid;"></div> -->
-      {% include "dashboard/charts/wordcloud1.html" %}
-      {% include "dashboard/charts/botany_graph.html" %}
+      {% include "botany_dashboard/charts/wordcloud1.html" %}
+      {% include "botany_dashboard/charts/botany_graph.html" %}
     </div>
-
-</section>
-
-
+  </section>
   <div class="clearfix"></div>
-
   <div class="">
     <hr />
     <h2>Records Overview</h2>
@@ -43,7 +36,6 @@
         </h3>
       </a>
     </section>
-
     <section>
       <a href="{% url 'allflotation' %}">
         <h3>
@@ -52,21 +44,13 @@
       </a>
     </section>
   </div>
-
   <div class="clearfix"></div>
-
   <div class="container">
     <hr />
     <h1>Reporting Stats</h1>
     <a href=''>Generate Report</a>
   </div>
-
-
-
 </div>
-
-
-
 <!--
 <script type="text/javascript">
 

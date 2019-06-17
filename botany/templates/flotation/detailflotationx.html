@@ -1,7 +1,9 @@
 {% extends 'flotation/base.html' %}
+{% load static %}
 {% load widget_tweaks %}
 {% block content %}
-{% include "flotation/menu2.html" %}
+{% include "mainheader.html" %}
+{% include "flotation/submenu.html" %}
 <div class="container top">
   <section>
     <div class="">
@@ -30,7 +32,6 @@
       </div>
     </div>
   </section>
-
   <section>
     <h4 class="kap">
       Light Residues
@@ -53,7 +54,6 @@
             <th>Charred Dung</th>
             <th>Bone</th>
             <th>Shell</th>
-
           </tr>
         </thead>
         <tbody>
@@ -90,9 +90,7 @@
   </div>
 </div>
 </section>
-
 </main>
 <div class="clearfix">
-
 </div>
 {% endblock %}

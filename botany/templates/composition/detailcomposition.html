@@ -1,7 +1,9 @@
 {% extends 'composition/base.html' %}
+{% load static %}
 {% load widget_tweaks %}
 {% block content %}
-{% include "composition/menu2.html" %}
+{% include "mainheader.html" %}
+{% include "composition/submenu.html" %}
 <div class="container top">
   <section>
     <div class="">
@@ -30,7 +32,6 @@
       </div>
     </div>
   </section>
-
   <section>
     <h4 class="kap">
       Fraction
@@ -62,7 +63,6 @@
             <td>{{ fraction.weight_fragment }}</td>
             <td>{{ fraction.seed|yesno:"yes,no" }}</td>
             <td>{{ fraction.plant_part|yesno:"yes,no"  }}</td>
-
             <td class="">
               <div class="btn-group" role="group" aria-label="Basic example">
                 <a href="{% url 'addplantpart' fk=composition.composition_id pk=fraction.fraction_id %}" class="badge badge-primary" role="button">+ Plant Part</a>
@@ -80,9 +80,7 @@
   </div>
 </div>
 </section>
-
 </main>
 <div class="clearfix">
-
 </div>
 {% endblock %}

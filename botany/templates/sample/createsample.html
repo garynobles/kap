@@ -1,7 +1,9 @@
 {% extends 'sample/base.html' %}
+{% load static %}
 {% load widget_tweaks %}
 {% block content %}
-{% include "sample/menu2.html" %}
+{% include "mainheader.html" %}
+{% include "sample/submenu.html" %}
 <div class="container top">
   <h4 class="kap">Sample</h4>
   <form method="POST" class="post-form">{% csrf_token %}
@@ -24,7 +26,5 @@
     <button type="submit" class="save btn btn-dark mt-3t mt-3">Save</button>
   </form>
 </div>
-
 {% endblock %}
-
 <!--    |append_attr:"placeholder:Username"   -->

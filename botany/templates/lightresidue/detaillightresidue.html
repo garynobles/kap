@@ -1,8 +1,10 @@
 {% extends 'lightresidue/base.html' %}
+{% load static %}
 {% load widget_tweaks %}
 {% block content %}
-{% include "lightresidue/menu2.html" %}
-<div class="container" style="margin-top:150px;">
+{% include "mainheader.html" %}
+{% include "lightresidue/submenu.html" %}
+<div class="container top" style="margin-top:150px;">
   <section>
     <div class="">
       <div>
@@ -24,7 +26,6 @@
         <div class="btn-group">
           <span class = "badge badge-info">Sample Volume:</span> <span class = "badge badge-light"> {{ lightresidue.sample_volume }} </span>
         </div>
-
         <div class="btn-group">
           <span class = "badge badge-info">Sample Weight:</span> <span class = "badge badge-light"> {{ lightresidue.sample_weight }} </span>
         </div>
@@ -37,19 +38,18 @@
       </div>
     </div>
   </section>
-
   <section>
     <div class="float-left col-sm-9">
-        <div class="row">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 style="color:white;"">
-                          Compositions
-                        </h4>
-                      </div>
-                      <table class="table table-fixed">
-                        <thead>
-                          <tr>
+      <div class="row">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 style="color:white;"">
+              Compositions
+            </h4>
+          </div>
+          <table class="table table-fixed">
+            <thead>
+              <tr>
                 <th>Composition ID</th>
                 <th>LightResidue ID</th>
                 <th>Material Type</th>
@@ -72,14 +72,14 @@
                 <td>{{ composition.fragment_weight }}</td>
                 <td>
                   <div class="btn-group" role="group" aria-label="Basic example">
-                  <a href="{% url 'addfraction' fk=lightresidue.lightresidue_id pk=composition.composition_id %}" class="badge badge-primary" role="button">+ Fraction</a>
-                  <a href="{% url 'detailcomposition' lightresidue.lightresidue_id composition.composition_id %}" class="badge badge-warning" role="button">++ detail</a>
-                  <a href="{% url 'editcomposition' fk=lightresidue.lightresidue_id pk=composition.pk %}" class="badge badge-secondary" role="button">
-                   edit composition
-                 </a>
+                    <a href="{% url 'addfraction' fk=lightresidue.lightresidue_id pk=composition.composition_id %}" class="badge badge-primary" role="button">+ Fraction</a>
+                    <a href="{% url 'detailcomposition' lightresidue.lightresidue_id composition.composition_id %}" class="badge badge-warning" role="button">++ detail</a>
+                    <a href="{% url 'editcomposition' fk=lightresidue.lightresidue_id pk=composition.pk %}" class="badge badge-secondary" role="button">
+                      edit composition
+                    </a>
                   </div>
-                  </td>
-                </tr>
+                </td>
+              </tr>
               {% endfor %}
             </tbody>
           </table>

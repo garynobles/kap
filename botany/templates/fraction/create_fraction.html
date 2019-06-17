@@ -1,13 +1,14 @@
 {% extends "fraction/base.html" %}
+{% load static %}
 {% load widget_tweaks %}
 {% block content %}
-{% include "fraction/menu2.html" %}
+{% include "mainheader.html" %}
+{% include "fraction/submenu.html" %}
 <div class="container top">
   <h4 class="kap">Fraction</h4>
   <form method="POST" class="post-form">{% csrf_token %}
     <div class="row mt-1">
       <div class="" style="color:white; width:300px;">{{ form.fraction|append_attr:"placeholder: Fraction" }}</div>
-
     </div>
     <button type="submit" class="save btn btn-dark mt-3">Save</button>
   </form>

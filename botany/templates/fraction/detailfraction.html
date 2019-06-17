@@ -1,7 +1,9 @@
 {% extends 'fraction/base.html' %}
+{% load static %}
 {% load widget_tweaks %}
 {% block content %}
-{% include "fraction/menu2.html" %}
+{% include "mainheader.html" %}
+{% include "fraction/submenu.html" %}
 <div class="container top">
   <section>
     <div class="">
@@ -30,7 +32,6 @@
       </div>
     </div>
   </section>
-
   <section>
     <h4 class="kap">
       Plant Part
@@ -54,8 +55,6 @@
             <td>{{ plantpart.plant_part }}</td>
             <td>{{ plantpart.part_count }}</td>
             <td>{{ plantpart.part_weight }}</td>
-
-
             <td class="">
               <div class="btn-group" role="group" aria-label="Basic example">
                 <!-- <a href="{ url 'addplantpart' fk=composition.composition_id pk=fraction.fraction_id }" class="badge badge-primary" role="button">+ Plant Part</a> -->
@@ -73,9 +72,7 @@
   </div>
 </div>
 </section>
-
 </main>
 <div class="clearfix">
-
 </div>
 {% endblock %}

@@ -1,58 +1,39 @@
 {% extends "species/base.html" %}
+{% load static %}
 {% load widget_tweaks %}
 {% load has_group %}
-{% load new_rows %}
-
+{% load botany_new_rows %}
 {% block content %}
 {% include "mainheader.html" %}
 {% include "species/submenu.html" %}
-
 <script type="text/javascript">
-
   jQuery(document).ready(function($) {
     $(".clickable-row").click(function() {
       window.location = $(this).data("href");
     });
   });
-
 </script>
-
 <div class="container top">
-
-
-
-
-<h4 class="kap">Taxon Manager</h4>
-
-
-<table class="table-striped">
-  <thead>
-    <tr>
-      <!-- <th>ID</th> -->
-      <th>Genus</th>
-      <th>Species</th>
-      <th>Common Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for species in species %}
-    <tr>
-      <!-- <td>{{species.species_id}}</td> -->
-      <td>{{species.genus}}</td>
-      <td>{{species.species}}</td>
-      <td>{{species.common_name}}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-
-
-
-
-
-
-
-
-
+  <h4 class="kap">Taxon Manager</h4>
+  <table class="table-striped">
+    <thead>
+      <tr>
+        <!-- <th>ID</th> -->
+        <th>Genus</th>
+        <th>Species</th>
+        <th>Common Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for species in species %}
+      <tr>
+        <!-- <td>{{species.species_id}}</td> -->
+        <td>{{species.genus}}</td>
+        <td>{{species.species}}</td>
+        <td>{{species.common_name}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
-    {% endblock %}
+{% endblock %}

@@ -1,56 +1,50 @@
 {% extends 'flotation/base.html' %}
+{% load static %}
 {% load widget_tweaks %}
 {% block content %}
-{% include "flotation/menu2.html" %}
-  <div class="container top">
-    <h4 class="kap">Flotation</h4>
-
-    <form method="POST" class="post-form">{% csrf_token %}
-      <div class="row mt-1">
-        <div class="col" style="color:white;">Sample ID {{ form.sample_id|add_class:""}}</div>
-      </div>
-      <div class="row mt-1">
-        <div class="" style="color:white; width:150px;">{{ form.area_easting|add_class:""|append_attr:"placeholder:Area Easting"}}</div>
-        <div class="" style="color:white; width:150px;">{{ form.area_northing|add_class:""|append_attr:"placeholder:Area Northing"}}</div>
-        <div class="" style="color:white; width:210px;">{{ form.context_number|add_class:""|append_attr:"placeholder:Context Number"}}</div>
-        <div class="" style="color:white; width:250px;">{{ form.sample_number|add_class:""|append_attr:"placeholder:Sample Number" }}</div>
-</div>
-<div class="row mt-1">
-        <div class="" style="color:white; width:300px;">Flotation Date {{ form.flotation_date|add_class:""}}</div>
-        <div class="" style="color:white; width:300px;">Analysis Date {{ form.entry_date|add_class:""}}</div>
-        <div class="" style="color:white; width:250px;">Analyst {{ form.analyst_id|add_class:"input"}}</div>
-</div>
-<div class="row mt-1">
-        <div class="" style="color:white; width:150px;">{{ form.notes|add_class:""|append_attr:"placeholder:Notes"}}</div>
-      </div>
-      <button type="submit" class="save btn btn-dark mt-3">Save</button>
-    </form>
-  </div>
-
-
-
-
-
-<!-- <div class="container" style="margin-top:150px;">
-  <h1 style="color:white;">Flotation</h1>
+{% include mainheader %}
+{% include "flotation/submenu.html" %}
+<div class="container top">
+  <h4 class="kap">Flotation</h4>
   <form method="POST" class="post-form">{% csrf_token %}
     <div class="row mt-1">
-      <div class="col-3" style="color:white;">Sample ID{{ form.sample_id|add_class:"form-control"}}</div>
+      <div class="col" style="color:white;">Sample ID {{ form.sample_id|add_class:""}}</div>
     </div>
     <div class="row mt-1">
-      <div class="col-3" style="color:white;">Area Easting{{ form.area_easting|add_class:"input"}}</div>
-      <div class="col-3 input" style="color:white;">Area Northing{{ form.area_northing|add_class:"form-control"}}</div>
-      <div class="col-3" style="color:white;">Context Number{{ form.context_number|add_class:"form-control"}}</div>
-      <div class="col" style="color:white;">Sample Number{{ form.sample_number|add_class:"form-control"}}</div>
-      <div class="col" style="color:white;">Flotation Date{{ form.flotation_date|add_class:"form-control"}}</div>
-      <div class="col" style="color:white;">Analysis Date{{ form.entry_date|add_class:"form-control"}}</div>
-      <div class="col" style="color:white;">Sample by{{ form.analyst_id|add_class:"form-control"}}</div>
-      <div class="col" style="color:white;">Notes{{ form.notes|add_class:"form-control"}}</div>
+      <div class="" style="color:white; width:150px;">{{ form.area_easting|add_class:""|append_attr:"placeholder:Area Easting"}}</div>
+      <div class="" style="color:white; width:150px;">{{ form.area_northing|add_class:""|append_attr:"placeholder:Area Northing"}}</div>
+      <div class="" style="color:white; width:210px;">{{ form.context_number|add_class:""|append_attr:"placeholder:Context Number"}}</div>
+      <div class="" style="color:white; width:250px;">{{ form.sample_number|add_class:""|append_attr:"placeholder:Sample Number" }}</div>
     </div>
-    <button type="submit" class="save btn btn-dark mt-3t  mt-3">Save</button>
+    <div class="row mt-1">
+      <div class="" style="color:white; width:300px;">Flotation Date {{ form.flotation_date|add_class:""}}</div>
+      <div class="" style="color:white; width:300px;">Analysis Date {{ form.entry_date|add_class:""}}</div>
+      <div class="" style="color:white; width:250px;">Analyst {{ form.analyst_id|add_class:"input"}}</div>
+    </div>
+    <div class="row mt-1">
+      <div class="" style="color:white; width:150px;">{{ form.notes|add_class:""|append_attr:"placeholder:Notes"}}</div>
+    </div>
+    <button type="submit" class="save btn btn-dark mt-3">Save</button>
   </form>
+</div>
+<!-- <div class="container" style="margin-top:150px;">
+<h1 style="color:white;">Flotation</h1>
+<form method="POST" class="post-form">{% csrf_token %}
+<div class="row mt-1">
+<div class="col-3" style="color:white;">Sample ID{{ form.sample_id|add_class:"form-control"}}</div>
+</div>
+<div class="row mt-1">
+<div class="col-3" style="color:white;">Area Easting{{ form.area_easting|add_class:"input"}}</div>
+<div class="col-3 input" style="color:white;">Area Northing{{ form.area_northing|add_class:"form-control"}}</div>
+<div class="col-3" style="color:white;">Context Number{{ form.context_number|add_class:"form-control"}}</div>
+<div class="col" style="color:white;">Sample Number{{ form.sample_number|add_class:"form-control"}}</div>
+<div class="col" style="color:white;">Flotation Date{{ form.flotation_date|add_class:"form-control"}}</div>
+<div class="col" style="color:white;">Analysis Date{{ form.entry_date|add_class:"form-control"}}</div>
+<div class="col" style="color:white;">Sample by{{ form.analyst_id|add_class:"form-control"}}</div>
+<div class="col" style="color:white;">Notes{{ form.notes|add_class:"form-control"}}</div>
+</div>
+<button type="submit" class="save btn btn-dark mt-3t  mt-3">Save</button>
+</form>
 </div> -->
 {% endblock %}
-
-
 <!--    |append_attr:"placeholder:Username"   -->

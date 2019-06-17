@@ -1,7 +1,9 @@
 {% extends "plantpart/base.html" %}
+{% load static %}
 {% load widget_tweaks %}
 {% block content %}
-{% include "plantpart/menu2.html" %}
+{% include "mainheader.html" %}
+{% include "plantpart/submenu.html" %}
 <div class="container top">
   <h4 class="kap">Plant Part</h4>
   <form method="POST" class="post-form">{% csrf_token %}
@@ -10,7 +12,6 @@
       <div class="" style="color:white; width:300px;">{{ form.part|append_attr:"placeholder: Plant Part" }}</div>
       <div class="" style="color:white; width:300px;">{{ form.quantity|append_attr:"placeholder: Plant Count" }}</div>
       <div class="" style="color:white; width:250px;">{{ form.weight|append_attr:"placeholder: Part Weight" }}</div>
-
     </div>
     <button type="submit" class="save btn btn-dark mt-3">Save</button>
   </form>
