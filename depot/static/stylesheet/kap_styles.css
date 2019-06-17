@@ -150,6 +150,10 @@ div.top {
   margin-top:200px;
 }
 
+div.top-no-menu {
+  margin-top:100px;
+}
+
 .action{
   color:white;
   border: 1px solid transparent;
