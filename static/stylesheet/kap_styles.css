@@ -54,7 +54,7 @@ thead {
 
 tbody, td, th {
   padding-right:20px;
-  color:#586e75;
+  color:#fff;
   font-size: 15px;
 }
 
@@ -148,6 +148,10 @@ div {
 
 div.top {
   margin-top:200px;
+}
+
+div.top-no-menu {
+  margin-top:100px;
 }
 
 .action{
