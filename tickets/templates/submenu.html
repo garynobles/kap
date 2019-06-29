@@ -1,0 +1,25 @@
+{% load staticfiles %}
+{% load has_group %}
+<div  class="" style="margin-top:-150px; position: fixed; width:100%; z-index:1020;">
+  <div class="navbar navbar-inverse navbar-static-top navbar-expand-lg navbar-dark bg-dark" id="topNav">
+    <div class="navbar navbar-custom navbar-inverse navbar-static-top navbar-dark bg-dark" id="nav2" >
+      <div class="navbar-inner">
+       tickets
+        <div class="float-left text-center" style="margin-right:10px;"><a href="{% url 'createticket' %}" style="color:white;"><button  type="button" class="btn btn-success"><img src="{% static 'icon_sets\ticket-solid-add.svg'%}" alt"" height="65" width="68" /><br />New Ticket</button></a></div>
+        <div class="float-left text-center" style="margin-right:10px;"><a href="{% url 'opentickets' %}" style="color:white;"><button  type="button" class="btn btn-info"><img src="{% static 'icon_sets\ticket-alt-solid.svg' %}" alt"" height="65" width="68" /><br />Your Requests</button></a></div>
+        {% if request.user|has_group:"admin_ticket" %}
+        <div class="float-left text-center" style="margin-right:10px;"><a href="{% url 'alltickets' %}" style="color:white;"><button  type="button" class="btn btn-info"><img src="{% static 'icon_sets\ticket-alt-solid.svg' %}" alt"" height="65" width="68" /><br>All Tickets</button></a></div>
+        {% else %}
+        {% endif %}
+        <div class="float-left text-center" style="margin-right:10px;"><a href="{% url 'assignedtickets' %}" style="color:white;"><button  type="button" class="btn btn-info"><img src="{% static 'icon_sets\ticket-alt-solid.svg' %}" alt"" height="65" width="68" /><br />For You</button></a></div>
+        <div class="float-left text-center" style="margin-right:10px;"><a  href="{% url 'closedtickets' %}"><button  type="button" class="btn btn-info"><img src="{% static 'icon_sets\archive-solid.svg' %}" alt"" height="65" width="68" /><br />Archived</button></a></div>
+        {% if request.user|has_group:"admin_ticket"%}
+        <div class="float-left text-center" style="margin-right:10px;"><a href="{% url 'allcompletedtickets' %}" style="color:white;"> <button  type="button" class="btn btn-info"><img src="{% static 'icon_sets\ticket-alt-solid.svg' %}" alt"" height="65" width="68" /><br>Completed Tickets</button></a></div>
+        {% else %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="clearfix"></div>

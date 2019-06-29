@@ -18,9 +18,10 @@ DEPT_CHOICES = (
     ("Conservation","Conservation"),
     ("Database","Database"),
     ("Excavation","Excavation"),
+    ("Small Finds","Small Finds"),
     ("Website","Website"),
     ("Zooarch","Zooarchaeology"),
-    ("Other","Other")
+    ("Other","Other"),
 )
 
 TICKET_STATUS_CHOICES = (
@@ -28,12 +29,13 @@ TICKET_STATUS_CHOICES = (
     ("assigned","assigned"),
     ("next migration","next migration"),
     ("completed","completed"),
-    ("clarification requested","clarification requested")
+    ("clarification requested","clarification requested"),
 )
 
 SYS_CHOICES = (
     ("MS Database","MS Database"),
     ("Website","Website"),
+    ("Web Database","Web Database"),
     ("GIS","GIS"),
     ("Non-system","Non-system"),
     ("other","other"),
@@ -44,7 +46,7 @@ PRIORITY_CHOICES = (
     ("High","High (Day)"),
     ("Medium","Medium (Week)"),
     ("Low","Low (Season)"),
-    ("None","None")
+    ("None","None"),
 )
 # Create your models here.
 class Ticket(models.Model):

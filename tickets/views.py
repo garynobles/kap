@@ -9,8 +9,6 @@ def alltickets(request):
     return render(request, 'tickets_all.html',
     {
     'alltickets': alltickets,
-
-
     })
 
 def assignedtickets(request):
@@ -29,7 +27,6 @@ def opentickets(request):
     return render(request, 'open_tickets.html',
     {
     'open':open
-
     })
 
 # def closedtickets(request):
