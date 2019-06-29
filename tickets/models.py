@@ -8,6 +8,7 @@ CAT_CHOICES = (
     ("new form","new form"),
     ("form alteration","form alteration"),
     ("general request","general request"),
+    ("sample delete","sample delete"),
     ("other","other"),
 )
 
