@@ -1,0 +1,19 @@
+{% extends "botany/base.html" %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load has_group %}
+{% load botany_new_rows %}
+{% block content %}
+{% include "mainheader.html" %}
+{% include "zooarch/submenu.html" %}
+
+<div class="container top">
+Zooarchaeology
+
+<a href="{% url 'allqnisp' %}">QNISP</a>
+
+
+</div>
+
+
+{% endblock %}

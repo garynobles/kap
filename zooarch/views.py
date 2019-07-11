@@ -11,6 +11,16 @@ from zooarch.models import Qnisp
 
 
 # Create your views here.
+
+def allzooarch(request):
+    # qnisp = Qnisp.objects.all()
+    return render(request, 'zooarch/zooarch.html',
+    {
+        # 'zooarch':zooarch
+    }
+    )
+
+
 #########
 # qnisp #
 #########

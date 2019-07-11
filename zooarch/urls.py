@@ -18,6 +18,8 @@ urlpatterns = [
 #     path('zooarch/<int:sample_id>/', views.detailzooarch, name='detailzooarch'),
 #
     #qnisp
+    path('', views.allzooarch, name='allzooarch'),
+
     path('qnisp/', views.allqnisp, name='allqnisp'),
     url(r'^qnisp/createqnisp/$', views.createqnisp, name='createqnisp'),
 
