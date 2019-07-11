@@ -34,9 +34,9 @@ TICKET_STATUS_CHOICES = (
 )
 
 SYS_CHOICES = (
-    ("MS Database","MS Database"),
-    ("Website","Website"),
-    ("Web Database","Web Database"),
+    ("MS Access Forms","MS Access Forms"),
+    ("Web Aesthetics","Web Aesthetics"),
+    ("Web Functionality","Web Functionality"),
     ("GIS","GIS"),
     ("Non-system","Non-system"),
     ("other","other"),
