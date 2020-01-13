@@ -30,7 +30,7 @@ urlpatterns = [
     path('experimental/', include('experimental.urls')),
     path('models3d/', include('models3d.urls')),
 
-    path('mapping/', include('mapping.urls')),
+    # path('mapping/', include('mapping.urls')),
 
     path('spatial3d/', include('spatial3d.urls')),
 
