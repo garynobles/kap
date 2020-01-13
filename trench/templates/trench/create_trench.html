@@ -1,0 +1,20 @@
+{% extends 'trench/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+{% include "mainheader.html" %}
+{% include "trench/submenu.html" %}
+<div class="container top">
+    <h4 class="kap">Location</h4>
+    <div class="col-sm-3">
+    <form method="POST" class="post-form">{% csrf_token %}
+        <div class="row mt-1">
+          <div class="col" style="color:white;">Area Easting <br />{{ form.area_easting|add_class:""}}</div>
+          <div class="col" style="color:white;">Area Northing <br />{{ form.area_northing|add_class:""}}</div>
+          <div class="col" style="color:white;">Trench Name <br />{{ form.trench_name|add_class:""}}</div>
+
+        </div>
+        <button type="submit" class="save btn btn-dark mt-3t">Save</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

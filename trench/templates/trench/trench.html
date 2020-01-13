@@ -1,0 +1,25 @@
+{% extends 'trench/base.html' %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% block content%}
+{% include "mainheader.html" %}
+{% include "trench/submenu.html" %}
+<div class="container top">
+  <div class="row">
+    {% for trench in alltrenches.all %}
+    <a class="text-light" href="{% url 'detailtrench' trench.trench_id %}">
+      <div class="col-md-4">
+        <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+          <!--div class="card-header">{{ storage.store_name }}</div-->
+          <div class="card-body"  style="">
+            <h5 class="card-title text-center">Trench {{ trench.trench_name }}</h5>
+            <img class="card-img-top p-3" src="{{ storage.icon_desc.icon.url }}" /></a>
+            <p class="card-text" style = "font-size:0.7em;">{{ trench.trench_id }} {{ trench.area_easting }} {{ trench.area_northing }} {{ storage.region }} {{ storage.zip }} {{ storage.country }}</p>
+          </div>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

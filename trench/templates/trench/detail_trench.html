@@ -1,0 +1,34 @@
+{% extends 'trench/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+{% include "mainheader.html" %}
+{% include "trench/submenu.html" %}
+<div class="container top">
+  <section>
+    <div class="">
+      <div>
+        <div class="btn-group">
+          <span class = "badge badge-info">Trench id:</span> <span class = "badge badge-light"> {{ trench.trench_id }} </span>
+        </div>
+        <div class="btn-group">
+          <span class = "badge badge-info">Trench Name:</span> <span class = "badge badge-light"> {{ trench.trench_name }} </span>
+        </div>
+        <div class="btn-group">
+          <span class = "badge badge-info">Area Easting:</span> <span class = "badge badge-light"> {{ trench.area_easting }} </span>
+        <div class="btn-group">
+          <span class = "badge badge-info">Area Northing:</span> <span class = "badge badge-light"> {{ trench.area_northing }} </span>
+        </div>
+
+      </div>
+      <div class="">
+          <a href="{% url 'edittrench' pk=trench.pk %}" class="badge badge-secondary" role="button">Edit </a>
+      </div>
+    </div>
+  </section>
+
+
+</main>
+<div class="clearfix">
+</div>
+{% endblock %}
