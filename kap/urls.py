@@ -16,6 +16,9 @@ urlpatterns = [
     path('', jobs.views.home, name='home'),
     path('blog/', include('blog.urls')),
 
+    path('trench/', include('trench.urls')),
+
+
     path('sample/', include('sample.urls')),
     path('botany/', include('botany.urls')),
 	path('conservation/', include('conservation.urls')),
@@ -26,6 +29,8 @@ urlpatterns = [
     #experimental
     path('experimental/', include('experimental.urls')),
     path('models3d/', include('models3d.urls')),
+
+    path('mapping/', include('mapping.urls')),
 
     path('spatial3d/', include('spatial3d.urls')),
 
